@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(uniqueConstraints = {
 	@UniqueConstraint(columnNames = "ticker")
 })
-public class Procession extends DomainEntity {
+public class Parade extends DomainEntity {
 
 	private String				title;
 	private String				description;

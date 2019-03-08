@@ -20,14 +20,14 @@ import org.hibernate.validator.constraints.SafeHtml;
 @Table(indexes = @Index(columnList = "status"))
 public class Request extends DomainEntity {
 
-	private String		status;
-	private Integer		rowNumber;
-	private Integer		columnNumber;
-	private String		comment;
+	private String	status;
+	private Integer	rowNumber;
+	private Integer	columnNumber;
+	private String	comment;
 
 	//Relationships----------------------------------------
-	private Procession	procession;
-	private Member		member;
+	private Parade	parade;
+	private Member	member;
 
 
 	@NotBlank
@@ -73,12 +73,12 @@ public class Request extends DomainEntity {
 	//Relationships-------------------------------------
 	@ManyToOne(optional = false)
 	@NotNull
-	public Procession getProcession() {
-		return this.procession;
+	public Parade getParade() {
+		return this.parade;
 	}
 
-	public void setProcession(final Procession procession) {
-		this.procession = procession;
+	public void setParade(final Parade parade) {
+		this.parade = parade;
 	}
 
 	@ManyToOne(optional = false)
