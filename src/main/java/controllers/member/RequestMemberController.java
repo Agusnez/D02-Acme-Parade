@@ -13,11 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ConfigurationService;
 import services.MemberService;
-import services.ProcessionService;
+import services.ParadeService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Member;
-import domain.Procession;
+import domain.Parade;
 import domain.Request;
 
 @Controller
@@ -32,7 +32,7 @@ public class RequestMemberController extends AbstractController {
 	private MemberService			memberService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -61,21 +61,21 @@ public class RequestMemberController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/listProcessions", method = RequestMethod.GET)
-	public ModelAndView listProcessions() {
+	@RequestMapping(value = "/listParades", method = RequestMethod.GET)
+	public ModelAndView listParades() {
 		final ModelAndView result;
-		final Collection<Procession> processions;
+		final Collection<Parade> parades;
 		final Member m;
 
 		m = this.memberService.findByPrincipal();
 
-		processions = this.processionService.findMemberProcessions(m.getId());
+		parades = this.paradeService.findMemberParades(m.getId());
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("request/listProcessions");
-		result.addObject("processions", processions);
-		result.addObject("requestURI", "request/member/listProcessions.do");
+		result = new ModelAndView("request/listParades");
+		result.addObject("parades", parades);
+		result.addObject("requestURI", "request/member/listParades.do");
 		result.addObject("pagesize", 5);
 		result.addObject("banner", banner);
 		result.addObject("language", LocaleContextHolder.getLocale().getLanguage());
@@ -111,24 +111,24 @@ public class RequestMemberController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/march", method = RequestMethod.GET)
-	public ModelAndView march(@RequestParam final int processionId) {
+	public ModelAndView march(@RequestParam final int paradeId) {
 		ModelAndView result;
 		final Request request;
 		final Member owner;
-		if (!this.requestService.hasAcceptedOrPendingRequestsOfMemberIn(this.memberService.findByPrincipal().getId(), processionId))
+		if (!this.requestService.hasAcceptedOrPendingRequestsOfMemberIn(this.memberService.findByPrincipal().getId(), paradeId))
 			try {
 
 				owner = this.memberService.findByPrincipal();
-				final Procession procession = this.processionService.findOne(processionId);
+				final Parade parade = this.paradeService.findOne(paradeId);
 
-				final Collection<Procession> processions = this.processionService.findMemberProcessions(owner.getId());
+				final Collection<Parade> parades = this.paradeService.findMemberParades(owner.getId());
 
-				if (processions.contains(procession)) {
+				if (parades.contains(parade)) {
 
 					request = this.requestService.create();
 
 					request.setMember(owner);
-					request.setProcession(procession);
+					request.setParade(parade);
 					request.setStatus("PENDING");
 
 					this.requestService.save(request);

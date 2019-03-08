@@ -13,17 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
 import services.ConfigurationService;
-import services.ProcessionService;
+import services.ParadeService;
 import controllers.AbstractController;
 import domain.Brotherhood;
-import domain.Procession;
+import domain.Parade;
 
 @Controller
-@RequestMapping("/procession")
-public class ProcessionController extends AbstractController {
+@RequestMapping("/parade")
+public class ParadeController extends AbstractController {
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -44,14 +44,14 @@ public class ProcessionController extends AbstractController {
 			result.addObject("banner", banner);
 		} else {
 
-			final Collection<Procession> processions;
+			final Collection<Parade> parades;
 
-			processions = this.processionService.findProcessionCanBeSeenOfBrotherhoodId(brotherhoodId);
+			parades = this.paradeService.findParadeCanBeSeenOfBrotherhoodId(brotherhoodId);
 			final int finderResult = this.configurationService.findConfiguration().getFinderResult();
 
-			result = new ModelAndView("procession/listAnonimo");
-			result.addObject("processions", processions);
-			result.addObject("requestURI", "procession/list.do");
+			result = new ModelAndView("parade/listAnonimo");
+			result.addObject("parades", parades);
+			result.addObject("requestURI", "parade/list.do");
 			result.addObject("pagesize", finderResult);
 			result.addObject("AreInFinder", false);
 			result.addObject("banner", banner);

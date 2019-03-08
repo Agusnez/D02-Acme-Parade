@@ -18,13 +18,13 @@ import services.BoxService;
 import services.BrotherhoodService;
 import services.FloatService;
 import services.MessageService;
-import services.ProcessionService;
+import services.ParadeService;
 import services.SocialProfileService;
 import domain.Box;
 import domain.Brotherhood;
 import domain.Float;
 import domain.Message;
-import domain.Procession;
+import domain.Parade;
 import domain.SocialProfile;
 
 @Controller
@@ -42,7 +42,7 @@ public class DownloadDataBrotherhoodController {
 	@Autowired
 	private FloatService			floatService;
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class DownloadDataBrotherhoodController {
 		final Collection<Message> msgs = this.messageService.messagePerActor(m.getId());
 		final Collection<Box> bxs = this.boxService.findAllBoxByActor(m.getId());
 		final Collection<Float> fs = this.floatService.findFloatsByBrotherhoodId(m.getId());
-		final Collection<Procession> ens = this.processionService.findProcessionByBrotherhoodId(m.getId());
+		final Collection<Parade> ens = this.paradeService.findParadeByBrotherhoodId(m.getId());
 
 		myString += "\r\n\r\n";
 
@@ -77,9 +77,9 @@ public class DownloadDataBrotherhoodController {
 		for (final Float f : fs)
 			myString += "Title: " + f.getTitle() + " Description: " + f.getDescription() + " Pictures: " + Arrays.toString(f.getPictures().toArray()) + "\r\n";
 		myString += "\r\n\r\n";
-		myString += "Processions:\r\n\r\n";
-		for (final Procession r : ens)
-			myString += "Procession title: " + r.getTitle() + " Description: " + r.getDescription() + " Moment: " + r.getOrganisationMoment() + "\r\n";
+		myString += "Parades:\r\n\r\n";
+		for (final Parade r : ens)
+			myString += "Parade title: " + r.getTitle() + " Description: " + r.getDescription() + " Moment: " + r.getOrganisationMoment() + "\r\n";
 
 		response.setContentType("text/plain");
 		response.setHeader("Content-Disposition", "attachment;filename=my_data_as_brotherhood.txt");

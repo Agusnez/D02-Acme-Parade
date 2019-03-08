@@ -12,7 +12,7 @@
 
 <display:table name="requests" id="row" requestURI="${requestURI }" pagesize="5">
 
-	<acme:column property="procession.title" titleKey="request.procession" value= "${row.procession}: "/>
+	<acme:column property="parade.title" titleKey="request.parade" value= "${row.parade}: "/>
 	
 	<acme:column property="member.name" titleKey="request.member.name" value= "${row.member}: "/>
 	

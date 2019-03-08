@@ -19,7 +19,7 @@
 	
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
-	<acme:url href="float/brotherhood/floatAddProcessionPost.do?floatId=${row.id }&processionId=${processionId }" code="float.add" />
+	<acme:url href="float/brotherhood/floatAddParadePost.do?floatId=${row.id }&paradeId=${paradeId }" code="float.add" />
 	</security:authorize>
 	
 

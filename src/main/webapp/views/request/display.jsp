@@ -11,7 +11,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<acme:display code="request.procession" property="${request.procession.title}" />
+<acme:display code="request.parade" property="${request.parade.title}" />
 
 <acme:display code="request.status" property="${request.status}" />
 

@@ -42,8 +42,8 @@
 		<bean class="converters.PositionToStringConverter"/>
 		<bean class="converters.StringToPositionConverter"/>
 		
-		<bean class="converters.ProcessionToStringConverter"/>
-		<bean class="converters.StringToProcessionConverter"/>
+		<bean class="converters.ParadeToStringConverter"/>
+		<bean class="converters.StringToParadeConverter"/>
 		
 		<bean class="converters.AreaToStringConverter"/>
 		<bean class="converters.StringToAreaConverter"/>

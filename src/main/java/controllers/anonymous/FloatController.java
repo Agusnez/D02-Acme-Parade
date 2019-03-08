@@ -14,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.FloatService;
-import services.ProcessionService;
+import services.ParadeService;
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Float;
-import domain.Procession;
+import domain.Parade;
 
 @Controller
 @RequestMapping("/float")
@@ -31,7 +31,7 @@ public class FloatController extends AbstractController {
 	private ConfigurationService	configurationService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
@@ -67,25 +67,25 @@ public class FloatController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/procession/list", method = RequestMethod.GET)
-	public ModelAndView listByProcession(@RequestParam final int processionId) {
+	@RequestMapping(value = "/parade/list", method = RequestMethod.GET)
+	public ModelAndView listByParade(@RequestParam final int paradeId) {
 
 		final ModelAndView result;
 		final Collection<Float> floats;
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		final Procession procession = this.processionService.findOne(processionId);
+		final Parade parade = this.paradeService.findOne(paradeId);
 
-		if (procession == null) {
+		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
 
-			floats = procession.getFloats();
+			floats = parade.getFloats();
 
 			result = new ModelAndView("float/listAnonimo");
 			result.addObject("floats", floats);
-			result.addObject("requestURI", "float/procession/list.do");
+			result.addObject("requestURI", "float/parade/list.do");
 			result.addObject("pagesize", 5);
 			result.addObject("banner", banner);
 			result.addObject("language", LocaleContextHolder.getLocale().getLanguage());

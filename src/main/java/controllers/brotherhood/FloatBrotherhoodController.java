@@ -14,17 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ActorService;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.FloatService;
-import services.ProcessionService;
+import services.ParadeService;
+import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Float;
-import domain.Procession;
+import domain.Parade;
 
 @Controller
 @RequestMapping("/float/brotherhood")
@@ -44,7 +43,7 @@ public class FloatBrotherhoodController extends AbstractController {
 	private ConfigurationService	configurationService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 
 	//List----------------------------------------------------------
@@ -71,26 +70,26 @@ public class FloatBrotherhoodController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/listByProcession", method = RequestMethod.GET)
-	public ModelAndView listByProcession(@RequestParam final int processionId) {
+	@RequestMapping(value = "/listByParade", method = RequestMethod.GET)
+	public ModelAndView listByParade(@RequestParam final int paradeId) {
 
 		final ModelAndView result;
 		final Collection<Float> floats;
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		final Procession procession = this.processionService.findOne(processionId);
-		if (procession == null) {
+		final Parade parade = this.paradeService.findOne(paradeId);
+		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
-			final Boolean security = this.processionService.processionBrotherhoodSecurity(processionId);
+			final Boolean security = this.paradeService.paradeBrotherhoodSecurity(paradeId);
 			if (security) {
-				floats = procession.getFloats();
+				floats = parade.getFloats();
 
 				result = new ModelAndView("float/list");
 				result.addObject("floats", floats);
-				result.addObject("requestURI", "float/brotherhood/listByProcession.do");
+				result.addObject("requestURI", "float/brotherhood/listByParade.do");
 				result.addObject("pagesize", 5);
 				result.addObject("banner", banner);
 			} else
@@ -132,29 +131,29 @@ public class FloatBrotherhoodController extends AbstractController {
 		return result;
 	}
 
-	//Add Float to Procession------------------------------------------------------------
-	@RequestMapping(value = "/floatAddProcession", method = RequestMethod.GET)
-	public ModelAndView addFloatToProcessionList(@RequestParam final int processionId) {
+	//Add Float to Parade------------------------------------------------------------
+	@RequestMapping(value = "/floatAddParade", method = RequestMethod.GET)
+	public ModelAndView addFloatToParadeList(@RequestParam final int paradeId) {
 		final ModelAndView result;
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
-		final Procession procession = this.processionService.findOne(processionId);
+		final Parade parade = this.paradeService.findOne(paradeId);
 
-		if (procession == null) {
+		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
-			final Boolean security = this.processionService.processionBrotherhoodSecurity(processionId);
+			final Boolean security = this.paradeService.paradeBrotherhoodSecurity(paradeId);
 			if (security) {
-				final Collection<Float> floatsResult = this.floatService.findFloatsByBrotherhoodId(procession.getBrotherhood().getId());
-				floatsResult.removeAll(procession.getFloats());
+				final Collection<Float> floatsResult = this.floatService.findFloatsByBrotherhoodId(parade.getBrotherhood().getId());
+				floatsResult.removeAll(parade.getFloats());
 
 				result = new ModelAndView("float/listAdd");
 				result.addObject("floats", floatsResult);
-				result.addObject("requestURI", "float/brotherhood/floatAddProcession.do");
+				result.addObject("requestURI", "float/brotherhood/floatAddParade.do");
 				result.addObject("pagesize", 5);
 				result.addObject("banner", banner);
-				result.addObject("processionId", processionId);
+				result.addObject("paradeId", paradeId);
 			} else
 				result = new ModelAndView("redirect:/welcome/index.do");
 		}
@@ -162,45 +161,45 @@ public class FloatBrotherhoodController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/floatAddProcessionPost", method = RequestMethod.GET)
-	public ModelAndView addFloatToProcessionList(@RequestParam final int processionId, @RequestParam final int floatId) {
+	@RequestMapping(value = "/floatAddParadePost", method = RequestMethod.GET)
+	public ModelAndView addFloatToParadeList(@RequestParam final int paradeId, @RequestParam final int floatId) {
 		ModelAndView result;
-		final Procession procession = this.processionService.findOne(processionId);
+		final Parade parade = this.paradeService.findOne(paradeId);
 		final Float floatt = this.floatService.findOne(floatId);
 		final String banner = this.configurationService.findConfiguration().getBanner();
 		Boolean security1;
 		Boolean security2;
 
-		if (procession == null || floatt == null) {
+		if (parade == null || floatt == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
 			security1 = this.floatService.floatBrotherhoodSecurity(floatId);
-			security2 = this.processionService.processionBrotherhoodSecurity(processionId);
+			security2 = this.paradeService.paradeBrotherhoodSecurity(paradeId);
 
 			if (security1 && security2)
 				try {
-					this.floatService.addFloatToProcession(floatt, procession);
+					this.floatService.addFloatToParade(floatt, parade);
 
-					final Collection<Float> floatsResult = this.floatService.findFloatsByBrotherhoodId(procession.getBrotherhood().getId());
-					final Procession processionNew = this.processionService.findOne(processionId);
-					floatsResult.removeAll(processionNew.getFloats());
+					final Collection<Float> floatsResult = this.floatService.findFloatsByBrotherhoodId(parade.getBrotherhood().getId());
+					final Parade paradeNew = this.paradeService.findOne(paradeId);
+					floatsResult.removeAll(paradeNew.getFloats());
 
 					result = new ModelAndView("float/listAdd");
 					result.addObject("banner", banner);
 					result.addObject("floats", floatsResult);
-					result.addObject("processionId", processionId);
+					result.addObject("paradeId", paradeId);
 
 				} catch (final Throwable oops) {
-					final Collection<Float> floatsResult = this.floatService.findFloatsByBrotherhoodId(procession.getBrotherhood().getId());
-					final Procession processionNew = this.processionService.findOne(processionId);
-					floatsResult.removeAll(processionNew.getFloats());
+					final Collection<Float> floatsResult = this.floatService.findFloatsByBrotherhoodId(parade.getBrotherhood().getId());
+					final Parade paradeNew = this.paradeService.findOne(paradeId);
+					floatsResult.removeAll(paradeNew.getFloats());
 
 					result = new ModelAndView("float/listAdd");
 					result.addObject("banner", banner);
 					result.addObject("messageError", "float.commit.error");
 					result.addObject("floats", floatsResult);
-					result.addObject("processionId", processionId);
+					result.addObject("paradeId", paradeId);
 
 				}
 			else

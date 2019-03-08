@@ -43,17 +43,17 @@
 
 </fieldset>
 
-<h3><spring:message code="dashboard.ratiosRequestForProcession" /></h3>
+<h3><spring:message code="dashboard.ratiosRequestForParade" /></h3>
 <fieldset>
 
-<jstl:if test="${existProcession}">
+<jstl:if test="${existParade}">
 
-	<form:form action="dashboard/administrator/calculate.do" modelAttribute="processionIdForm">
+	<form:form action="dashboard/administrator/calculate.do" modelAttribute="paradeIdForm">
 	
 	<form:label path="id">
-		<spring:message code="dashboard.procession" />:</form:label>
+		<spring:message code="dashboard.parade" />:</form:label>
 	<form:select path="id">
-		<form:options items="${processions }" itemLabel="title" itemValue="id" />
+		<form:options items="${parades }" itemLabel="title" itemValue="id" />
 	</form:select>
 	<form:errors cssClass="error" path="id" />
 	<br />
@@ -71,10 +71,10 @@
 
 </fieldset>
 
-<h3><spring:message code="dashboard.processionsLessThirtyDays" /></h3>
+<h3><spring:message code="dashboard.paradesLessThirtyDays" /></h3>
 <fieldset>
 
-   <jstl:forEach items="${findProcessionsLessThirtyDays}" var="p">
+   <jstl:forEach items="${findParadesLessThirtyDays}" var="p">
     <jstl:out value="${p}" />
     <br />
    </jstl:forEach>

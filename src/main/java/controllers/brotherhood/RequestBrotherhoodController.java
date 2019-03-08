@@ -95,7 +95,7 @@ public class RequestBrotherhoodController extends AbstractController {
 		try {
 			request = this.requestService.findOne(requestId);
 
-			if (request.getProcession().getBrotherhood().getId() == owner.getId()) {
+			if (request.getParade().getBrotherhood().getId() == owner.getId()) {
 				final String banner = this.configurationService.findConfiguration().getBanner();
 				result = new ModelAndView("request/reject");
 				result.addObject("request", request);
@@ -115,7 +115,7 @@ public class RequestBrotherhoodController extends AbstractController {
 		owner = this.brotherhoodService.findByPrincipal();
 		try {
 			final Request another = this.requestService.findOne(request.getId());
-			if (another.getProcession().getBrotherhood().getId() == owner.getId()) {
+			if (another.getParade().getBrotherhood().getId() == owner.getId()) {
 
 				request = this.requestService.reconstruct(request, binding);
 
@@ -126,7 +126,7 @@ public class RequestBrotherhoodController extends AbstractController {
 					request.setStatus("REJECTED");
 					request.setColumnNumber(null);
 					request.setRowNumber(null);
-					request.setProcession(another.getProcession());
+					request.setParade(another.getParade());
 					request.setMember(another.getMember());
 
 					if (binding.hasErrors())
@@ -163,9 +163,9 @@ public class RequestBrotherhoodController extends AbstractController {
 			owner = this.brotherhoodService.findByPrincipal();
 			request = this.requestService.findOne(requestId);
 
-			if (request.getProcession().getBrotherhood().getId() == owner.getId()) {
+			if (request.getParade().getBrotherhood().getId() == owner.getId()) {
 				final String banner = this.configurationService.findConfiguration().getBanner();
-				request = this.requestService.suggestNextRow(request.getProcession().getId(), request);
+				request = this.requestService.suggestNextRow(request.getParade().getId(), request);
 				result = new ModelAndView("request/accept");
 				result.addObject("request", request);
 				result.addObject("banner", banner);
@@ -189,9 +189,9 @@ public class RequestBrotherhoodController extends AbstractController {
 			result = this.createEditModelAndViewAccept(request, null);
 		else
 			try {
-				if (this.requestService.hasRequestIn(request.getColumnNumber(), request.getRowNumber(), request.getProcession().getId()))
+				if (this.requestService.hasRequestIn(request.getColumnNumber(), request.getRowNumber(), request.getParade().getId()))
 					result = this.createEditModelAndViewAccept(request, "error.position");
-				else if (request.getProcession().getBrotherhood().getId() == owner.getId()) {
+				else if (request.getParade().getBrotherhood().getId() == owner.getId()) {
 					request.setStatus("APPROVED");
 					this.requestService.save(request);
 

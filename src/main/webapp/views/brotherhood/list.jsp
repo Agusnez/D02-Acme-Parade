@@ -21,7 +21,7 @@
 	
 	<acme:url href="member/list.do?brotherhoodId=${row.id }" code="brotherhood.members" />
 	
-	<acme:url href="procession/list.do?brotherhoodId=${row.id }" code="brotherhood.processions" />
+	<acme:url href="parade/list.do?brotherhoodId=${row.id }" code="brotherhood.parades" />
 	
 	<acme:url href="float/list.do?brotherhoodId=${row.id }" code="brotherhood.floats" />
 	

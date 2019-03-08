@@ -1,7 +1,7 @@
 
 package forms;
 
-public class ProcessionIdForm {
+public class ParadeIdForm {
 
 	private int	id;
 

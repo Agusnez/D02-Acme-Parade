@@ -16,21 +16,21 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.MessageService;
-import services.ProcessionService;
+import services.ParadeService;
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Float;
-import domain.Procession;
+import domain.Parade;
 
 @Controller
-@RequestMapping("/procession/brotherhood")
-public class ProcessionBrotherhoodController extends AbstractController {
+@RequestMapping("/parade/brotherhood")
+public class ParadeBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -44,18 +44,18 @@ public class ProcessionBrotherhoodController extends AbstractController {
 	public ModelAndView list() {
 
 		final ModelAndView result;
-		final Collection<Procession> processions;
+		final Collection<Parade> parades;
 		final Brotherhood b;
 
 		b = this.brotherhoodService.findByPrincipal();
 
-		processions = this.processionService.findProcessionByBrotherhoodId(b.getId());
+		parades = this.paradeService.findParadeByBrotherhoodId(b.getId());
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("procession/list");
-		result.addObject("processions", processions);
-		result.addObject("requestURI", "procession/brotherhood/list.do");
+		result = new ModelAndView("parade/list");
+		result.addObject("parades", parades);
+		result.addObject("requestURI", "parade/brotherhood/list.do");
 		result.addObject("pagesize", 5);
 		result.addObject("banner", banner);
 		result.addObject("language", LocaleContextHolder.getLocale().getLanguage());
@@ -65,24 +65,24 @@ public class ProcessionBrotherhoodController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/listByProcession", method = RequestMethod.GET)
-	public ModelAndView listByProcession(@RequestParam final int processionId) {
+	@RequestMapping(value = "/listByParade", method = RequestMethod.GET)
+	public ModelAndView listByParade(@RequestParam final int paradeId) {
 
 		final ModelAndView result;
 		final Collection<Float> floats;
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		final Procession procession = this.processionService.findOne(processionId);
-		if (procession == null) {
+		final Parade parade = this.paradeService.findOne(paradeId);
+		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
-			floats = procession.getFloats();
+			floats = parade.getFloats();
 
 			result = new ModelAndView("float/list");
 			result.addObject("floats", floats);
-			result.addObject("requestURI", "procession/brotherhood/listByProcession.do");
+			result.addObject("requestURI", "parade/brotherhood/listByParade.do");
 			result.addObject("pagesize", 5);
 			result.addObject("banner", banner);
 		}
@@ -92,25 +92,25 @@ public class ProcessionBrotherhoodController extends AbstractController {
 	}
 	//Display------------------------------------------------------------
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam final int processionId) {
+	public ModelAndView show(@RequestParam final int paradeId) {
 		final ModelAndView result;
 		final Brotherhood login;
 		final Brotherhood owner;
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
-		final Procession processionFound = this.processionService.findOne(processionId);
+		final Parade paradeFound = this.paradeService.findOne(paradeId);
 
-		if (processionFound == null) {
+		if (paradeFound == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
 
 			login = this.brotherhoodService.findByPrincipal();
-			owner = processionFound.getBrotherhood();
+			owner = paradeFound.getBrotherhood();
 
 			if (login.getId() == owner.getId()) {
-				result = new ModelAndView("procession/display");
-				result.addObject("procession", processionFound);
+				result = new ModelAndView("parade/display");
+				result.addObject("parade", paradeFound);
 				result.addObject("banner", banner);
 
 			} else
@@ -130,11 +130,11 @@ public class ProcessionBrotherhoodController extends AbstractController {
 		if (b.getArea() == null)
 			result = new ModelAndView("misc/noArea");
 		else {
-			final Procession procession = this.processionService.create();
+			final Parade parade = this.paradeService.create();
 			final String banner = this.configurationService.findConfiguration().getBanner();
 
-			result = new ModelAndView("procession/edit");
-			result.addObject("procession", procession);
+			result = new ModelAndView("parade/edit");
+			result.addObject("parade", parade);
 			result.addObject("banner", banner);
 		}
 		return result;
@@ -142,36 +142,36 @@ public class ProcessionBrotherhoodController extends AbstractController {
 	}
 	//Editar-------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int processionId) {
+	public ModelAndView edit(@RequestParam final int paradeId) {
 		ModelAndView result;
-		Procession procession;
+		Parade parade;
 		Boolean security;
 
 		final Brotherhood b;
 		b = this.brotherhoodService.findByPrincipal();
-		final Procession processionFind = this.processionService.findOne(processionId);
+		final Parade paradeFind = this.paradeService.findOne(paradeId);
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		if (b.getArea() == null) {
 			result = new ModelAndView("misc/noArea");
 			result.addObject("banner", banner);
-		} else if (processionFind == null) {
+		} else if (paradeFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
 
-			procession = this.processionService.findOne(processionId);
-			security = this.processionService.processionBrotherhoodSecurity(processionId);
+			parade = this.paradeService.findOne(paradeId);
+			security = this.paradeService.paradeBrotherhoodSecurity(paradeId);
 
 			if (security)
-				result = this.createEditModelAndView(procession, null);
+				result = this.createEditModelAndView(parade, null);
 			else
 				result = new ModelAndView("redirect:/welcome/index.do");
 		}
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute(value = "procession") Procession procession, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute(value = "parade") Parade parade, final BindingResult binding) {
 		ModelAndView result;
 
 		final Brotherhood b;
@@ -181,20 +181,20 @@ public class ProcessionBrotherhoodController extends AbstractController {
 			result = new ModelAndView("misc/noArea");
 		else {
 
-			procession = this.processionService.reconstruct(procession, binding);
+			parade = this.paradeService.reconstruct(parade, binding);
 
 			if (binding.hasErrors())
-				result = this.createEditModelAndView(procession, null);
+				result = this.createEditModelAndView(parade, null);
 			else
 				try {
-					this.processionService.save(procession);
+					this.paradeService.save(parade);
 
-					if (procession.getFinalMode())
-						this.messageService.NotificationNewProcession(procession);
+					if (parade.getFinalMode())
+						this.messageService.NotificationNewParade(parade);
 
 					result = new ModelAndView("redirect:list.do");
 				} catch (final Throwable oops) {
-					result = this.createEditModelAndView(procession, "procession.commit.error");
+					result = this.createEditModelAndView(parade, "parade.commit.error");
 
 				}
 		}
@@ -203,31 +203,31 @@ public class ProcessionBrotherhoodController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Procession procession, final BindingResult binding) {
+	public ModelAndView delete(Parade parade, final BindingResult binding) {
 		ModelAndView result;
 
-		procession = this.processionService.findOne(procession.getId());
+		parade = this.paradeService.findOne(parade.getId());
 
 		try {
-			this.processionService.delete(procession);
+			this.paradeService.delete(parade);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(procession, "procession.commit.error");
+			result = this.createEditModelAndView(parade, "parade.commit.error");
 		}
 
 		return result;
 	}
 
 	//Other business methods------------------------------------------------------------------------------------------
-	protected ModelAndView createEditModelAndView(final Procession procession, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Parade parade, final String messageCode) {
 		final ModelAndView result;
 
-		final Collection<Float> floats = procession.getFloats();
+		final Collection<Float> floats = parade.getFloats();
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("procession/edit");
-		result.addObject("procession", procession);
+		result = new ModelAndView("parade/edit");
+		result.addObject("parade", parade);
 		result.addObject("floats", floats);
 		result.addObject("messageError", messageCode);
 		result.addObject("banner", banner);

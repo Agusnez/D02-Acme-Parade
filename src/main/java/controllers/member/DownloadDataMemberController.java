@@ -83,7 +83,7 @@ public class DownloadDataMemberController {
 		myString += "\r\n\r\n";
 		myString += "Requests:\r\n\r\n";
 		for (final Request r : rqs)
-			myString += "Procession title: " + r.getProcession().getTitle() + " Status: " + r.getStatus() + " Column Number: " + r.getColumnNumber() + " Row Number: " + r.getRowNumber() + " Comment: " + r.getComment() + "\r\n";
+			myString += "Parade title: " + r.getParade().getTitle() + " Status: " + r.getStatus() + " Column Number: " + r.getColumnNumber() + " Row Number: " + r.getRowNumber() + " Comment: " + r.getComment() + "\r\n";
 		myString += "\r\n\r\n";
 		myString += "Finder:\r\n\r\n";
 		myString += "Last Updated: " + f.getLastUpdate() + " Keyword: " + f.getKeyWord() + " Area: " + f.getArea();

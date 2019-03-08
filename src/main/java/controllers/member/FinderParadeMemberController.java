@@ -19,11 +19,11 @@ import services.FinderService;
 import services.MemberService;
 import domain.Actor;
 import domain.Finder;
-import domain.Procession;
+import domain.Parade;
 
 @Controller
-@RequestMapping("/finderProcession/member")
-public class FinderProcessionMemberController {
+@RequestMapping("/finderParade/member")
+public class FinderParadeMemberController {
 
 	@Autowired
 	MemberService					memberService;
@@ -42,7 +42,7 @@ public class FinderProcessionMemberController {
 	public ModelAndView showFinder() {
 		ModelAndView result;
 		final Finder finder;
-		Collection<Procession> processions = new ArrayList<Procession>();
+		Collection<Parade> parades = new ArrayList<Parade>();
 
 		final Actor actor = this.actorService.findByPrincipal();
 		finder = this.finderService.findFinderByMember(actor);
@@ -56,14 +56,14 @@ public class FinderProcessionMemberController {
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		if (interval.toDuration().getStandardHours() < timeOut)
-			processions = finder.getProcessions();
+			parades = finder.getParades();
 
-		result = new ModelAndView("procession/listAnonimo");
-		result.addObject("processions", processions);
+		result = new ModelAndView("parade/listAnonimo");
+		result.addObject("parades", parades);
 		result.addObject("finder", finder);
-		result.addObject("requestURI", "finderProcession/member/find.do");
+		result.addObject("requestURI", "finderParade/member/find.do");
 		result.addObject("AreInFinder", true);
-		result.addObject("requestAction", "finderProcession/member/find.do");
+		result.addObject("requestAction", "finderParade/member/find.do");
 		result.addObject("banner", banner);
 		result.addObject("pagesize", pagesize);
 
@@ -103,7 +103,7 @@ public class FinderProcessionMemberController {
 	protected ModelAndView createEditModelAndView(final Finder finder, final String messageCode) {
 		final ModelAndView result;
 
-		result = new ModelAndView("procession/listAnonimo");
+		result = new ModelAndView("parade/listAnonimo");
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 

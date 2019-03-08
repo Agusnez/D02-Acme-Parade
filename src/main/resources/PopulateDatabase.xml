@@ -571,9 +571,9 @@
 	</bean>	
 
 	
-	<!-- Processions -->
-	<bean id="procession1" class="domain.Procession">
-		<property name="title" value="procession1" />
+	<!-- Parades -->
+	<bean id="parade1" class="domain.Parade">
+		<property name="title" value="parade1" />
 		<property name="description" value="Procesión de la mañana de la Semana santa" />
 		<property name="organisationMoment" value="2019/01/01 15:00" />
 		<property name="ticker" value="190423-KHLRM4" />
@@ -599,8 +599,8 @@
 		<property name="finalMode" value="true" />
 	</bean>
 	
-	<bean id="procession2" class="domain.Procession">
-		<property name="title" value="procession2" />
+	<bean id="parade2" class="domain.Parade">
+		<property name="title" value="parade2" />
 		<property name="description" value="Procesión de la tarde de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 12:00" />
 		<property name="ticker" value="190423-WMRXE7" />
@@ -617,8 +617,8 @@
 		<property name="finalMode" value="true" />
 	</bean>
 	
-	<bean id="procession3" class="domain.Procession">
-		<property name="title" value="procession3" />
+	<bean id="parade3" class="domain.Parade">
+		<property name="title" value="parade3" />
 		<property name="description" value="Procesión de la noche de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 22:30" />
 		<property name="ticker" value="190423-RTY7PM" />
@@ -635,8 +635,8 @@
 		<property name="finalMode" value="true" />
 	</bean>
 	
-	<bean id="procession4" class="domain.Procession">
-		<property name="title" value="procession4" />
+	<bean id="parade4" class="domain.Parade">
+		<property name="title" value="parade4" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190423-KHLRM5" />
@@ -653,8 +653,8 @@
 		<property name="finalMode" value="true" />
 	</bean>
 
-	<bean id="procession5" class="domain.Procession">
-		<property name="title" value="procession5" />
+	<bean id="parade5" class="domain.Parade">
+		<property name="title" value="parade5" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190223-KHLRM5" />
@@ -670,8 +670,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession6" class="domain.Procession">
-		<property name="title" value="procession6" />
+	<bean id="parade6" class="domain.Parade">
+		<property name="title" value="parade6" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190445-KHLRM5" />
@@ -687,8 +687,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession7" class="domain.Procession">
-		<property name="title" value="procession7" />
+	<bean id="parade7" class="domain.Parade">
+		<property name="title" value="parade7" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="19056-KHLRM5" />
@@ -704,8 +704,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession8" class="domain.Procession">
-		<property name="title" value="procession8" />
+	<bean id="parade8" class="domain.Parade">
+		<property name="title" value="parade8" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190124-KHLRM5" />
@@ -721,8 +721,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession9" class="domain.Procession">
-		<property name="title" value="procession9" />
+	<bean id="parade9" class="domain.Parade">
+		<property name="title" value="parade9" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190423-KHLTW5" />
@@ -738,8 +738,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession10" class="domain.Procession">
-		<property name="title" value="procession10" />
+	<bean id="parade10" class="domain.Parade">
+		<property name="title" value="parade10" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190423-KGHJM5" />
@@ -755,8 +755,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession11" class="domain.Procession">
-		<property name="title" value="procession11" />
+	<bean id="parade11" class="domain.Parade">
+		<property name="title" value="parade11" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190423-CVDM5" />
@@ -772,8 +772,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession12" class="domain.Procession">
-		<property name="title" value="procession12" />
+	<bean id="parade12" class="domain.Parade">
+		<property name="title" value="parade12" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190423-KERXM5" />
@@ -789,8 +789,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession13" class="domain.Procession">
-		<property name="title" value="procession13" />
+	<bean id="parade13" class="domain.Parade">
+		<property name="title" value="parade13" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190423-KTHJI5" />
@@ -806,8 +806,8 @@
 		</property>
 		<property name="finalMode" value="true" />
 	</bean>
-	<bean id="procession14" class="domain.Procession">
-		<property name="title" value="procession14" />
+	<bean id="parade14" class="domain.Parade">
+		<property name="title" value="parade14" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
 		<property name="ticker" value="190423-KERTD5" />
@@ -1078,51 +1078,51 @@
 		<property name="status" value="APPROVED" />
 		<property name="rowNumber" value="1" />
 		<property name="columnNumber" value="1" />
-		<property name="procession" ref="procession2" />
+		<property name="parade" ref="parade2" />
 		<property name="member" ref="member1"/>
 	</bean>
 
 	<bean id="request2" class="domain.Request">
 		<property name="status" value="PENDING" />
-		<property name="procession" ref="procession3" />
+		<property name="parade" ref="parade3" />
 		<property name="member" ref="member1"/>
 	</bean>
 
 	<bean id="request3" class="domain.Request">
 		<property name="status" value="REJECTED" />
 		<property name="comment" value="A rejected request" />
-		<property name="procession" ref="procession5" />
+		<property name="parade" ref="parade5" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
 	<bean id="request4" class="domain.Request">
 		<property name="status" value="PENDING" />
-		<property name="procession" ref="procession4" />
+		<property name="parade" ref="parade4" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
 	<bean id="request5" class="domain.Request">
 		<property name="status" value="PENDING" />
-		<property name="procession" ref="procession7" />
+		<property name="parade" ref="parade7" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
 	<bean id="request6" class="domain.Request">
 		<property name="status" value="PENDING" />
-		<property name="procession" ref="procession8" />
+		<property name="parade" ref="parade8" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
 	<bean id="request7" class="domain.Request">
 		<property name="status" value="PENDING" />
-		<property name="procession" ref="procession1" />
+		<property name="parade" ref="parade1" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
 	<bean id="request8" class="domain.Request">
 		<property name="status" value="REJECTED" />
 		<property name="comment" value="A rejected request" />
-		<property name="procession" ref="procession1" />
+		<property name="parade" ref="parade1" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
@@ -1372,7 +1372,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/20"/>
 		<property name="member" ref="member1" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -1385,7 +1385,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/20"/>
 		<property name="member" ref="member2" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -1398,7 +1398,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/20"/>
 		<property name="member" ref="member3" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -1411,7 +1411,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/20"/>
 		<property name="member" ref="member4" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -1425,7 +1425,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/20"/>
 		<property name="member" ref="member5" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -1439,7 +1439,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/20"/>
 		<property name="member" ref="member6" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -1453,7 +1453,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/20"/>
 		<property name="member" ref="member7" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -1466,7 +1466,7 @@
 		<property name="maxDate" value="" />
 		<property name="lastUpdate" value="2019/02/12"/>
 		<property name="member" ref="member8" />
-		<property name="processions">
+		<property name="parades">
 			<list>
 			</list>
 		</property>
@@ -2159,7 +2159,7 @@
 		<property name="finderResult" value="10" />
 		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones" />
 		<property name="banner" value="https://tinyurl.com/acme-madruga" />
-		<property name="welcomeMessage" value="Welcome to Acme Madrugá, the site to organise your processions" />
+		<property name="welcomeMessage" value="Welcome to Acme Madrugá, the site to organise your parades" />
 
 	</bean>
 	

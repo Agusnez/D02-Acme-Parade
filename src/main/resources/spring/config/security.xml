@@ -59,10 +59,10 @@
 		<security:intercept-url pattern="/float/list.do" access="permitAll" />
 		<security:intercept-url pattern="/member/list.do" access="permitAll" />
 		<security:intercept-url pattern="/member/brotherhood/display.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/float/procession/list.do" access="permitAll" />
+		<security:intercept-url pattern="/float/parade/list.do" access="permitAll" />
 	
-		<security:intercept-url pattern="/procession/list.do" access="permitAll" />
-		<security:intercept-url pattern="/procession/brotherhood/**" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/parade/list.do" access="permitAll" />
+		<security:intercept-url pattern="/parade/brotherhood/**" access="hasRole('BROTHERHOOD')" />
 
 
 		<security:intercept-url pattern="/register/createBrotherhood.do" access="isAnonymous()" /> 
@@ -81,7 +81,7 @@
 		
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMIN')" />	
 		
-		<security:intercept-url pattern="/finderProcession/member/find.do" access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/finderParade/member/find.do" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enrolment/member/list.do" access="hasRole('MEMBER')" />	
 		<security:intercept-url pattern="/enrolment/member/enrol.do" access="hasRole('MEMBER')" />	
 		<security:intercept-url pattern="/enrolment/member/dropout.do" access="hasRole('MEMBER')" />	
@@ -93,7 +93,7 @@
 		<security:intercept-url pattern="/enrolment/brotherhood/dropout.do" access="hasRole('BROTHERHOOD')" />	
 	
 		<security:intercept-url pattern="/request/member/list.do" access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/request/member/listProcessions.do" access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/request/member/listParades.do" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/request/member/march.do" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/request/member/display.do" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/request/member/delete.do" access="hasRole('MEMBER')" />

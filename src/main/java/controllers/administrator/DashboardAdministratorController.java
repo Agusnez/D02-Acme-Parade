@@ -20,15 +20,15 @@ import services.BrotherhoodService;
 import services.EnrolmentService;
 import services.FinderService;
 import services.MemberService;
+import services.ParadeService;
 import services.PositionService;
-import services.ProcessionService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Parade;
 import domain.Position;
-import domain.Procession;
-import forms.ProcessionIdForm;
+import forms.ParadeIdForm;
 
 @Controller
 @RequestMapping("/dashboard/administrator")
@@ -38,7 +38,7 @@ public class DashboardAdministratorController extends AbstractController {
 	private BrotherhoodService	brotherhoodService;
 
 	@Autowired
-	private ProcessionService	processionService;
+	private ParadeService		paradeService;
 
 	@Autowired
 	private MemberService		memberService;
@@ -66,7 +66,7 @@ public class DashboardAdministratorController extends AbstractController {
 	public ModelAndView display() {
 		ModelAndView result;
 
-		final ProcessionIdForm processionIdForm = new ProcessionIdForm();
+		final ParadeIdForm paradeIdForm = new ParadeIdForm();
 
 		result = new ModelAndView("dashboard/display");
 
@@ -115,28 +115,28 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("pendingRatio", pendingRatio);
 		result.addObject("rejectedRatio", rejectedRatio);
 
-		Boolean existProcession = true;
+		Boolean existParade = true;
 
 		try {
-			final Collection<Procession> processions = this.processionService.findAll();
-			result.addObject("processions", processions);
+			final Collection<Parade> parades = this.paradeService.findAll();
+			result.addObject("parades", parades);
 		} catch (final Throwable oops) {
-			existProcession = false;
+			existParade = false;
 		}
 
-		result.addObject("existProcession", existProcession);
+		result.addObject("existParade", existParade);
 
-		result.addObject("processionIdForm", processionIdForm);
+		result.addObject("paradeIdForm", paradeIdForm);
 
 		//--------------------------------------------------------------------------------------------------------------
 		try {
-			final Collection<String> findProcessionsLessThirtyDays = this.processionService.findProcessionsLessThirtyDays();
-			if (findProcessionsLessThirtyDays.isEmpty())
-				result.addObject("findProcessionsLessThirtyDays", "N/A");
+			final Collection<String> findParadesLessThirtyDays = this.paradeService.findParadesLessThirtyDays();
+			if (findParadesLessThirtyDays.isEmpty())
+				result.addObject("findParadesLessThirtyDays", "N/A");
 			else
-				result.addObject("findProcessionsLessThirtyDays", findProcessionsLessThirtyDays);
+				result.addObject("findParadesLessThirtyDays", findParadesLessThirtyDays);
 		} catch (final Throwable oops) {
-			result.addObject("findProcessionsLessThirtyDays", "N/A");
+			result.addObject("findParadesLessThirtyDays", "N/A");
 		}
 
 		//--------------------------------------------------------------------------------------------------------------
@@ -267,10 +267,10 @@ public class DashboardAdministratorController extends AbstractController {
 
 	}
 	@RequestMapping(value = "/calculate", method = RequestMethod.POST, params = "save")
-	public ModelAndView displayAfter(@Valid final ProcessionIdForm id, final BindingResult binding) {
+	public ModelAndView displayAfter(@Valid final ParadeIdForm id, final BindingResult binding) {
 		ModelAndView result;
 
-		final ProcessionIdForm processionIdForm = new ProcessionIdForm();
+		final ParadeIdForm paradeIdForm = new ParadeIdForm();
 
 		result = new ModelAndView("dashboard/display");
 
@@ -311,35 +311,35 @@ public class DashboardAdministratorController extends AbstractController {
 			result.addObject("theSmallestBrotherhoods", theSmallestBrotherhoods);
 
 		//--------------------------------------------------------------------------------------------------------------
-		final String approvedRatio = this.requestService.ratioProcessionAccepted(id.getId());
-		final String pendingRatio = this.requestService.ratioProcessionPending(id.getId());
-		final String rejectedRatio = this.requestService.ratioProcessionRejected(id.getId());
+		final String approvedRatio = this.requestService.ratioParadeAccepted(id.getId());
+		final String pendingRatio = this.requestService.ratioParadePending(id.getId());
+		final String rejectedRatio = this.requestService.ratioParadeRejected(id.getId());
 		result.addObject("approvedRatio", approvedRatio);
 		result.addObject("pendingRatio", pendingRatio);
 		result.addObject("rejectedRatio", rejectedRatio);
 
-		Boolean existProcession = true;
+		Boolean existParade = true;
 
 		try {
-			final Collection<Procession> processions = this.processionService.findAll();
-			result.addObject("processions", processions);
+			final Collection<Parade> parades = this.paradeService.findAll();
+			result.addObject("parades", parades);
 		} catch (final Throwable oops) {
-			existProcession = false;
+			existParade = false;
 		}
 
-		result.addObject("existProcession", existProcession);
+		result.addObject("existParade", existParade);
 
-		result.addObject("processionIdForm", processionIdForm);
+		result.addObject("paradeIdForm", paradeIdForm);
 
 		//--------------------------------------------------------------------------------------------------------------
 		try {
-			final Collection<String> findProcessionsLessThirtyDays = this.processionService.findProcessionsLessThirtyDays();
-			if (findProcessionsLessThirtyDays.isEmpty())
-				result.addObject("findProcessionsLessThirtyDays", "N/A");
+			final Collection<String> findParadesLessThirtyDays = this.paradeService.findParadesLessThirtyDays();
+			if (findParadesLessThirtyDays.isEmpty())
+				result.addObject("findParadesLessThirtyDays", "N/A");
 			else
-				result.addObject("findProcessionsLessThirtyDays", findProcessionsLessThirtyDays);
+				result.addObject("findParadesLessThirtyDays", findParadesLessThirtyDays);
 		} catch (final Throwable oops) {
-			result.addObject("findProcessionsLessThirtyDays", "N/A");
+			result.addObject("findParadesLessThirtyDays", "N/A");
 		}
 
 		//--------------------------------------------------------------------------------------------------------------

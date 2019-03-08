@@ -27,7 +27,7 @@
 					<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.configuration" /></a></li>	
 					<li><a href="broadcast/administrator/create.do"><spring:message code="master.page.broadcast" /></a></li>	
 					<li><a href="administrator/create.do"><spring:message code="master.page.signUpAdmin" /></a></li>
-					<%-- <li><a href="procession/list.do"><spring:message code="master.page.procession" /></a></li>	 --%>
+					<%-- <li><a href="parade/list.do"><spring:message code="master.page.parade" /></a></li>	 --%>
 					<li><a href="position/administrator/list.do"><spring:message code="master.page.position" /></a></li>	
 					<li><a href="actor/administrator/score/list.do"><spring:message code="master.page.score" /></a></li>	
 					<li><a href="actor/administrator/spammer/list.do"><spring:message code="master.page.spammer" /></a></li>
@@ -50,7 +50,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="float/brotherhood/list.do"><spring:message code="master.page.brotherhood.float.list" /></a></li>
-					<li><a href="procession/brotherhood/list.do"><spring:message code="master.page.procession" /></a></li>
+					<li><a href="parade/brotherhood/list.do"><spring:message code="master.page.parade" /></a></li>
 					<li><a href="enrolment/brotherhood/list.do"><spring:message code="master.page.enrolments" /></a></li> 			
 					<li><a href="enrolment/brotherhood/listNoPosition.do"><spring:message code="master.page.enrolmentNoPosition" /></a></li> 	
 					<li><a href="area/brotherhood/listAreas.do"><spring:message code="master.page.area.select" /></a></li> 		 					
@@ -70,16 +70,16 @@
 			<li><a class="fNiv"><spring:message	code="master.page.member" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<%-- <li><a href="procession/list.do"><spring:message code="master.page.procession" /></a></li> --%>
+					<%-- <li><a href="parade/list.do"><spring:message code="master.page.parade" /></a></li> --%>
 					<li><a href="enrolment/member/list.do"><spring:message code="master.page.enrolment" /></a></li>
-					<li><a href="finderProcession/member/find.do"><spring:message code="master.page.finder" /></a></li>
+					<li><a href="finderParade/member/find.do"><spring:message code="master.page.finder" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.requests" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="request/member/list.do"><spring:message code="master.page.requests.list" /></a></li>
-					<li><a href="request/member/listProcessions.do"><spring:message code="master.page.requests.listProcession" /></a></li>
+					<li><a href="request/member/listParades.do"><spring:message code="master.page.requests.listParade" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.brotherhood.list" /></a></li>
