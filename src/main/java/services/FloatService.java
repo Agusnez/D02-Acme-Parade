@@ -16,7 +16,7 @@ import security.Authority;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Float;
-import domain.Procession;
+import domain.Parade;
 
 @Service
 @Transactional
@@ -34,7 +34,7 @@ public class FloatService {
 	private BrotherhoodService	brotherhoodService;
 
 	@Autowired
-	private ProcessionService	processionService;
+	private ParadeService		paradeService;
 
 	@Autowired
 	private Validator			validator;
@@ -102,13 +102,13 @@ public class FloatService {
 		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(br));
 		Assert.isTrue(actor.getId() == floatt.getBrotherhood().getId());
 
-		final Collection<Procession> processions = this.processionService.findProcessionsByFloatId(floatt.getId());
-		for (final Procession procession : processions) {
-			final Collection<Float> floats = procession.getFloats();
+		final Collection<Parade> parades = this.paradeService.findParadesByFloatId(floatt.getId());
+		for (final Parade parade : parades) {
+			final Collection<Float> floats = parade.getFloats();
 			floats.remove(floatt);
-			procession.setFloats(floats);
-			this.processionService.saveByEditBrotherhood(procession);
-			Assert.isTrue(!procession.getFloats().contains(floatt));
+			parade.setFloats(floats);
+			this.paradeService.saveByEditBrotherhood(parade);
+			Assert.isTrue(!parade.getFloats().contains(floatt));
 		}
 
 		this.floatRepository.delete(floatt);
@@ -143,16 +143,16 @@ public class FloatService {
 		return res;
 	}
 
-	public void addFloatToProcession(final Float floatt, final Procession procession) {
-		final Collection<Float> floats = procession.getFloats();
+	public void addFloatToParade(final Float floatt, final Parade parade) {
+		final Collection<Float> floats = parade.getFloats();
 		Assert.isTrue(!floats.contains(floatt));
 		floats.add(floatt);
 
-		procession.setFloats(floats);
+		parade.setFloats(floats);
 
-		this.processionService.save(procession);
+		this.paradeService.save(parade);
 
-		Assert.isTrue(procession.getFloats().contains(floatt));
+		Assert.isTrue(parade.getFloats().contains(floatt));
 
 	}
 

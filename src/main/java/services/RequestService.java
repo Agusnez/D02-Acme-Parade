@@ -32,7 +32,7 @@ public class RequestService {
 	private Validator			validator;
 
 	@Autowired
-	private ProcessionService	processionService;
+	private ParadeService		paradeService;
 
 
 	// CRUD Methods ------------------------
@@ -113,7 +113,7 @@ public class RequestService {
 
 		request.setComment(resultBBDD.getComment());
 		request.setMember(resultBBDD.getMember());
-		request.setProcession(resultBBDD.getProcession());
+		request.setParade(resultBBDD.getParade());
 		request.setStatus(resultBBDD.getStatus());
 		request.setVersion(resultBBDD.getVersion());
 
@@ -142,10 +142,10 @@ public class RequestService {
 		return requests;
 	}
 
-	public Request suggestNextRow(final int processionId, final Request request) {
+	public Request suggestNextRow(final int paradeId, final Request request) {
 
-		final Integer maxColumn = this.processionService.findOne(processionId).getMaxColumn();
-		final Integer maxRow = this.processionService.findOne(processionId).getMaxRow();
+		final Integer maxColumn = this.paradeService.findOne(paradeId).getMaxColumn();
+		final Integer maxRow = this.paradeService.findOne(paradeId).getMaxRow();
 		Integer i = 0;
 		Integer j = 0;
 		Integer avaliable = 1;
@@ -156,7 +156,7 @@ public class RequestService {
 
 			while (j < maxColumn) {
 
-				avaliable = this.requestRepository.nextFreePosition(processionId, i, j);
+				avaliable = this.requestRepository.nextFreePosition(paradeId, i, j);
 
 				if (avaliable == 0)
 					break;
@@ -183,43 +183,43 @@ public class RequestService {
 		return res;
 	}
 
-	public Collection<Request> requestPerProcessionId(final int processionId) {
+	public Collection<Request> requestPerParadeId(final int paradeId) {
 
-		final Collection<Request> res = this.requestRepository.requestPerProcessionId(processionId);
-
-		return res;
-	}
-
-	public Collection<Request> processionApproved() {
-		final Collection<Request> res = this.requestRepository.processionApproved();
+		final Collection<Request> res = this.requestRepository.requestPerParadeId(paradeId);
 
 		return res;
 	}
 
-	public Collection<Request> processionApproved(final int processionId) {
-		final Collection<Request> res = this.requestRepository.processionApproved(processionId);
+	public Collection<Request> paradeApproved() {
+		final Collection<Request> res = this.requestRepository.paradeApproved();
 
 		return res;
 	}
 
-	public Collection<Request> processionPending(final int processionId) {
-		final Collection<Request> res = this.requestRepository.processionPending(processionId);
+	public Collection<Request> paradeApproved(final int paradeId) {
+		final Collection<Request> res = this.requestRepository.paradeApproved(paradeId);
 
 		return res;
 	}
 
-	public Collection<Request> processionRejected(final int processionId) {
-		final Collection<Request> res = this.requestRepository.processionRejected(processionId);
+	public Collection<Request> paradePending(final int paradeId) {
+		final Collection<Request> res = this.requestRepository.paradePending(paradeId);
 
 		return res;
 	}
 
-	public String ratioProcessionAccepted(final int processionId) {
+	public Collection<Request> paradeRejected(final int paradeId) {
+		final Collection<Request> res = this.requestRepository.paradeRejected(paradeId);
+
+		return res;
+	}
+
+	public String ratioParadeAccepted(final int paradeId) {
 
 		String res;
 
-		final Collection<Request> total = this.requestPerProcessionId(processionId);
-		final Collection<Request> accepted = this.processionApproved(processionId);
+		final Collection<Request> total = this.requestPerParadeId(paradeId);
+		final Collection<Request> accepted = this.paradeApproved(paradeId);
 
 		if (total.isEmpty())
 			res = "N/A";
@@ -238,12 +238,12 @@ public class RequestService {
 
 	}
 
-	public String ratioProcessionPending(final int processionId) {
+	public String ratioParadePending(final int paradeId) {
 
 		String res;
 
-		final Collection<Request> total = this.requestPerProcessionId(processionId);
-		final Collection<Request> pending = this.processionPending(processionId);
+		final Collection<Request> total = this.requestPerParadeId(paradeId);
+		final Collection<Request> pending = this.paradePending(paradeId);
 
 		if (total.isEmpty())
 			res = "N/A";
@@ -262,12 +262,12 @@ public class RequestService {
 
 	}
 
-	public String ratioProcessionRejected(final int processionId) {
+	public String ratioParadeRejected(final int paradeId) {
 
 		String res;
 
-		final Collection<Request> total = this.requestPerProcessionId(processionId);
-		final Collection<Request> rejected = this.processionRejected(processionId);
+		final Collection<Request> total = this.requestPerParadeId(paradeId);
+		final Collection<Request> rejected = this.paradeRejected(paradeId);
 
 		if (total.isEmpty())
 			res = "N/A";
@@ -286,11 +286,11 @@ public class RequestService {
 
 	}
 
-	public Boolean hasRequestIn(final Integer col, final Integer row, final Integer processionId) {
-		return this.requestRepository.requestIn(col, row, processionId).size() > 0 ? true : false;
+	public Boolean hasRequestIn(final Integer col, final Integer row, final Integer paradeId) {
+		return this.requestRepository.requestIn(col, row, paradeId).size() > 0 ? true : false;
 	}
 
-	public Boolean hasAcceptedOrPendingRequestsOfMemberIn(final Integer memberId, final Integer processionId) {
-		return this.requestRepository.findAcceptedOrPendingRequestsOfMemberIn(memberId, processionId).size() > 0 ? true : false;
+	public Boolean hasAcceptedOrPendingRequestsOfMemberIn(final Integer memberId, final Integer paradeId) {
+		return this.requestRepository.findAcceptedOrPendingRequestsOfMemberIn(memberId, paradeId).size() > 0 ? true : false;
 	}
 }

@@ -13,23 +13,23 @@ import domain.Parade;
 public interface ParadeRepository extends JpaRepository<Parade, Integer> {
 
 	@Query("select p from Parade p join p.floats f where f.id = ?1")
-	Collection<Parade> findProcessionsByFloatId(int floatId);
+	Collection<Parade> findParadesByFloatId(int floatId);
 
 	@Query("select count(p) from Parade p where p.ticker = ?1")
-	int countProcessionsWithTicker(String ticker);
+	int countParadeWithTicker(String ticker);
 
 	@Query("select p from Parade p where p.brotherhood.id = ?1")
-	Collection<Parade> findProcessionByBrotherhoodId(int brotherhoodId);
+	Collection<Parade> findParadeByBrotherhoodId(int brotherhoodId);
 
 	@Query("select p from Parade p where p.finalMode = true")
-	Collection<Parade> findProcessionCanBeSeen();
+	Collection<Parade> findParadeCanBeSeen();
 
 	@Query("select p from Parade p where p.finalMode = false and p.brotherhood.id = ?1")
-	Collection<Parade> findProcessionCannotBeSeenOfBrotherhoodId(int brotherhoodId);
+	Collection<Parade> findParadeCannotBeSeenOfBrotherhoodId(int brotherhoodId);
 
 	@Query("select p from Parade p where p.finalMode = true and p.brotherhood.id = ?1")
-	Collection<Parade> findProcessionCanBeSeenOfBrotherhoodId(int brotherhoodId);
+	Collection<Parade> findParadeCanBeSeenOfBrotherhoodId(int brotherhoodId);
 
 	@Query("select p from Parade p join p.brotherhood.members m where m.id = ?1")
-	Collection<Parade> findMemberProcessions(int memberId);
+	Collection<Parade> findMemberParades(int memberId);
 }

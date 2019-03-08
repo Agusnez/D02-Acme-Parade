@@ -19,7 +19,7 @@ import security.Authority;
 import domain.Actor;
 import domain.Finder;
 import domain.Member;
-import domain.Procession;
+import domain.Parade;
 
 @Service
 @Transactional
@@ -36,7 +36,7 @@ public class FinderService {
 	private ActorService		actorService;
 
 	@Autowired
-	private ProcessionService	processionService;
+	private ParadeService		paradeService;
 
 	@Autowired
 	private Validator			validator;
@@ -86,8 +86,8 @@ public class FinderService {
 				Assert.notNull(owner);
 				Assert.isTrue(actor.getId() == owner.getId());
 				finder.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
-				final Collection<Procession> processionsSearchedList = this.processionSearchedList(finder);
-				finder.setProcessions(processionsSearchedList);
+				final Collection<Parade> paradesSearchedList = this.paradeSearchedList(finder);
+				finder.setParades(paradesSearchedList);
 			}
 		} else
 			finder.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
@@ -106,8 +106,8 @@ public class FinderService {
 
 	}
 	// Other business methods -----------------------------------------
-	public Collection<Finder> findFindersByProcessionId(final int processionId) {
-		final Collection<Finder> result = this.finderRepository.findFindersByProcessionId(processionId);
+	public Collection<Finder> findFindersByParadeId(final int paradeId) {
+		final Collection<Finder> result = this.finderRepository.findFindersByParadeId(paradeId);
 		Assert.notNull(result);
 		return result;
 	}
@@ -123,19 +123,19 @@ public class FinderService {
 
 	}
 
-	public Collection<Procession> processionSearchedList(final Finder finder) {
-		final Collection<Procession> processions = this.processionService.findAll();
-		final Collection<Procession> result = new ArrayList<Procession>();
+	public Collection<Parade> paradeSearchedList(final Finder finder) {
+		final Collection<Parade> parades = this.paradeService.findAll();
+		final Collection<Parade> result = new ArrayList<Parade>();
 
-		for (final Procession p : processions)
-			if (this.testProcession(finder, p) == true)
+		for (final Parade p : parades)
+			if (this.testParade(finder, p) == true)
 				result.add(p);
 
 		return result;
 
 	}
 
-	private Boolean testProcession(final Finder finder, final Procession p) {
+	private Boolean testParade(final Finder finder, final Parade p) {
 
 		//filters
 		final String keyWord = finder.getKeyWord();
@@ -213,7 +213,7 @@ public class FinderService {
 
 		if (!finders.isEmpty()) {
 			for (final Finder f : finders) {
-				final Collection<Procession> p = f.getProcessions();
+				final Collection<Parade> p = f.getParades();
 				if (!p.isEmpty() && (p.size() < min))
 					min = p.size();
 				else if (p.isEmpty())
@@ -236,7 +236,7 @@ public class FinderService {
 
 		if (!finders.isEmpty()) {
 			for (final Finder f : finders) {
-				final Collection<Procession> p = f.getProcessions();
+				final Collection<Parade> p = f.getParades();
 				if (!p.isEmpty() && (p.size() > max))
 					max = p.size();
 			}
@@ -258,7 +258,7 @@ public class FinderService {
 			final Integer total = finders.size();
 			Integer sum = 0;
 			for (final Finder f : finders) {
-				final Collection<Procession> p = f.getProcessions();
+				final Collection<Parade> p = f.getParades();
 				if (!p.isEmpty())
 					sum = sum + p.size();
 			}
@@ -286,7 +286,7 @@ public class FinderService {
 			final Integer total = finders.size();
 			Integer sum = 0;
 			for (final Finder f : finders) {
-				final Collection<Procession> p = f.getProcessions();
+				final Collection<Parade> p = f.getParades();
 				if (!p.isEmpty()) {
 					sum = sum + p.size();
 					sum2 = sum2 + (p.size() * p.size());

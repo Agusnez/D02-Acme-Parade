@@ -22,7 +22,7 @@ import domain.Actor;
 import domain.Box;
 import domain.Brotherhood;
 import domain.Member;
-import domain.Procession;
+import domain.Parade;
 import forms.RegisterBrotherhoodForm;
 
 @Service
@@ -46,7 +46,7 @@ public class BrotherhoodService {
 	private UserAccountService		userAccountService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 	@Autowired
 	private Validator				validator;
@@ -114,8 +114,8 @@ public class BrotherhoodService {
 			this.checkPictures(brotherhood.getPictures());
 			result = this.brotherhoodRepository.save(brotherhood);
 			if (brotherhood.getArea() != null) {
-				final Collection<Procession> processions = this.processionService.findProcessionByBrotherhoodId(brotherhood.getId());
-				this.editBrotherhoodInProcessions(processions, brotherhood);
+				final Collection<Parade> parades = this.paradeService.findParadeByBrotherhoodId(brotherhood.getId());
+				this.editBrotherhoodInparades(parades, brotherhood);
 			}
 
 		} else {
@@ -362,11 +362,11 @@ public class BrotherhoodService {
 		return result;
 	}
 
-	private void editBrotherhoodInProcessions(final Collection<Procession> processions, final Brotherhood brotherhood) {
+	private void editBrotherhoodInparades(final Collection<Parade> parades, final Brotherhood brotherhood) {
 
-		for (final Procession p : processions) {
+		for (final Parade p : parades) {
 			p.setBrotherhood(brotherhood);
-			this.processionService.saveByEditBrotherhood(p);
+			this.paradeService.saveByEditBrotherhood(p);
 		}
 
 	}

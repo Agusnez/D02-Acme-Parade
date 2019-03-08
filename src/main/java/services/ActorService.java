@@ -65,7 +65,7 @@ public class ActorService {
 	private AreaService				areaService;
 
 	@Autowired
-	private ProcessionService		processionService;
+	private ParadeService			paradeService;
 
 	@Autowired
 	private FloatService			floatService;
@@ -376,7 +376,7 @@ public class ActorService {
 
 			this.areaService.deleteRelationshipAreaBrotherhood(actorId);
 
-			this.processionService.deleteAll(actorId);
+			this.paradeService.deleteAll(actorId);
 
 			this.floatService.deleteAll(actorId);
 

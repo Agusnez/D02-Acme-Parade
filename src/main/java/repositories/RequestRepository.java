@@ -21,34 +21,34 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select r from Request r where r.member.id=?1")
 	Collection<Request> findRequestsByMemberId(int memberId);
 
-	@Query("select r from Request r where r.procession.brotherhood.id=?1 and r.status='PENDING'")
+	@Query("select r from Request r where r.parade.brotherhood.id=?1 and r.status='PENDING'")
 	Collection<Request> findPendingRequestsByBrotherhoodId(int id);
 
-	@Query("select r from Request r where r.procession.brotherhood.id=?1 and r.status='APPROVED' or r.status='REJECTED'")
+	@Query("select r from Request r where r.parade.brotherhood.id=?1 and r.status='APPROVED' or r.status='REJECTED'")
 	Collection<Request> findFinalRequestsByBrotherhoodId(int id);
 
-	@Query("select count(r) from Request r where r.procession.id = ?1 and r.rowNumber = ?2 and r.columnNumber = ?3")
-	Integer nextFreePosition(int processionId, int row, int column);
+	@Query("select count(r) from Request r where r.parade.id = ?1 and r.rowNumber = ?2 and r.columnNumber = ?3")
+	Integer nextFreePosition(int paradeId, int row, int column);
 
-	@Query("select r from Request r where r.procession.id = ?1")
-	Collection<Request> requestPerProcessionId(int processionId);
+	@Query("select r from Request r where r.parade.id = ?1")
+	Collection<Request> requestPerParadeId(int paradeId);
 
-	@Query("select r from Request r where r.procession.id = ?3 and r.rowNumber = ?2 and r.columnNumber = ?1 and r.status = 'APPROVED'")
-	Collection<Request> requestIn(int col, int row, int processionId);
+	@Query("select r from Request r where r.parade.id = ?3 and r.rowNumber = ?2 and r.columnNumber = ?1 and r.status = 'APPROVED'")
+	Collection<Request> requestIn(int col, int row, int paradeId);
 
 	@Query("select r from Request r where r.status='APPROVED'")
-	Collection<Request> processionApproved();
+	Collection<Request> paradeApproved();
 
-	@Query("select r from Request r where r.status='APPROVED' and r.procession.id = ?1")
-	Collection<Request> processionApproved(int processionId);
+	@Query("select r from Request r where r.status='APPROVED' and r.parade.id = ?1")
+	Collection<Request> paradeApproved(int paradeId);
 
-	@Query("select r from Request r where r.status='PENDING' and r.procession.id = ?1")
-	Collection<Request> processionPending(int processionId);
+	@Query("select r from Request r where r.status='PENDING' and r.parade.id = ?1")
+	Collection<Request> paradePending(int paradeId);
 
-	@Query("select r from Request r where r.status='REJECTED' and r.procession.id = ?1")
-	Collection<Request> processionRejected(int processionId);
+	@Query("select r from Request r where r.status='REJECTED' and r.parade.id = ?1")
+	Collection<Request> paradeRejected(int paradeId);
 
-	@Query("select r from Request r where r.member.id = ?1 and (r.status='APPROVED' or r.status='PENDING') and r.procession.id = ?2")
-	Collection<Request> findAcceptedOrPendingRequestsOfMemberIn(int memberId, int processionId);
+	@Query("select r from Request r where r.member.id = ?1 and (r.status='APPROVED' or r.status='PENDING') and r.parade.id = ?2")
+	Collection<Request> findAcceptedOrPendingRequestsOfMemberIn(int memberId, int paradeId);
 
 }

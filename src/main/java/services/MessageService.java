@@ -20,7 +20,7 @@ import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
 import domain.Message;
-import domain.Procession;
+import domain.Parade;
 import domain.Request;
 import forms.MessageForm;
 
@@ -265,7 +265,7 @@ public class MessageService {
 		return messages;
 	}
 
-	public void NotificationNewProcession(final Procession procession) {
+	public void NotificationNewParade(final Parade parade) {
 
 		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
 		final Collection<Member> members = brotherhood.getMembers();
@@ -275,8 +275,8 @@ public class MessageService {
 			final Message message = this.create3();
 
 			message.setRecipient(member);
-			message.setSubject("New procession/Nueva procesión");
-			message.setBody(brotherhood.getName() + " has created a new procession rigth now: " + procession.getTitle() + "\n" + brotherhood.getName() + " ha creado una nueva procesión ahora mismo: " + procession.getTitle());
+			message.setSubject("New parade/Nueva procesión");
+			message.setBody(brotherhood.getName() + " has created a new parade rigth now: " + parade.getTitle() + "\n" + brotherhood.getName() + " ha creado una nueva procesión ahora mismo: " + parade.getTitle());
 
 			final Collection<Box> boxes = message.getBoxes();
 			boxes.add(this.boxService.findNotificationBoxByActorId(member.getId()));
@@ -341,7 +341,7 @@ public class MessageService {
 
 		message.setRecipient(request.getMember());
 		message.setSubject("Request/Solicitud");
-		message.setBody("Your request for " + request.getProcession().getTitle() + " has been changed" + "\n" + "Su solicitud para " + request.getProcession().getTitle() + " ha sido modificada");
+		message.setBody("Your request for " + request.getParade().getTitle() + " has been changed" + "\n" + "Su solicitud para " + request.getParade().getTitle() + " ha sido modificada");
 
 		final Collection<Box> boxes = message.getBoxes();
 		boxes.add(this.boxService.findNotificationBoxByActorId(request.getMember().getId()));
