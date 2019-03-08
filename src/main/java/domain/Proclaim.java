@@ -1,32 +1,31 @@
 
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class LinkRecord extends DomainEntity {
+public class Proclaim extends DomainEntity {
 
-	private String	title;
+	private Date	moment;
 	private String	description;
-	private String	link;
 
 
-	@NotBlank
-	@SafeHtml
-	public String getTitle() {
-		return this.title;
+	@Past
+	public Date getMoment() {
+		return this.moment;
 	}
 
-	public void setTitle(final String title) {
-		this.title = title;
+	public void setMoment(final Date moment) {
+		this.moment = moment;
 	}
 
 	@NotBlank
@@ -37,17 +36,6 @@ public class LinkRecord extends DomainEntity {
 
 	public void setDescription(final String description) {
 		this.description = description;
-	}
-
-	@URL
-	@NotEmpty
-	@SafeHtml
-	public String getLink() {
-		return this.link;
-	}
-
-	public void setLink(final String link) {
-		this.link = link;
 	}
 
 }

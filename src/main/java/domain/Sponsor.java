@@ -10,10 +10,9 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class MiscellaneousRecord extends DomainEntity {
+public class Sponsor extends Actor {
 
 	private String	title;
-	private String	description;
 
 
 	@NotBlank
@@ -24,16 +23,6 @@ public class MiscellaneousRecord extends DomainEntity {
 
 	public void setTitle(final String title) {
 		this.title = title;
-	}
-
-	@NotBlank
-	@SafeHtml
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(final String description) {
-		this.description = description;
 	}
 
 }

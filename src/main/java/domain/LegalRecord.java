@@ -11,6 +11,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -24,6 +25,7 @@ public class LegalRecord extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return this.title;
 	}
@@ -33,6 +35,7 @@ public class LegalRecord extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
@@ -42,6 +45,7 @@ public class LegalRecord extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getLegalName() {
 		return this.legalName;
 	}
