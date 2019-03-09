@@ -17,13 +17,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ParadeRepository;
-import repositories.ParadeRepository;
 import security.Authority;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Finder;
 import domain.Float;
-import domain.Parade;
 import domain.Parade;
 import domain.Request;
 
@@ -39,19 +37,19 @@ public class ParadeService {
 	// Suporting services
 
 	@Autowired
-	private ActorService			actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private BrotherhoodService		brotherhoodService;
+	private BrotherhoodService	brotherhoodService;
 
 	@Autowired
-	private Validator				validator;
+	private Validator			validator;
 
 	@Autowired
-	private FinderService			finderService;
+	private FinderService		finderService;
 
 	@Autowired
-	private RequestService			requestService;
+	private RequestService		requestService;
 
 
 	// Simple CRUD methods
