@@ -47,6 +47,7 @@
 		<security:intercept-url pattern="/profile/editMember.do" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/profile/editBrotherhood.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/profile/editAdministrator.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/profile/editChapter.do" access="hasRole('CHAPTER')" />
 		
 		
 		<security:intercept-url pattern="/float/brotherhood/**" access="hasRole('BROTHERHOOD')" />
@@ -66,9 +67,12 @@
 
 
 		<security:intercept-url pattern="/register/createBrotherhood.do" access="isAnonymous()" /> 
-		<security:intercept-url pattern="/register/editBrotherhood.do" access="permitAll" /> <!-- REVISAR -->
+		<security:intercept-url pattern="/register/editBrotherhood.do" access="permitAll" /> 
 		<security:intercept-url pattern="/register/createMember.do" access="isAnonymous()" /> 
-		<security:intercept-url pattern="/register/editMember.do" access="permitAll" /> <!-- REVISAR --> 
+		<security:intercept-url pattern="/register/editMember.do" access="permitAll" /> 
+		<security:intercept-url pattern="/register/createChapter.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/register/editChapter.do" access="permitAll" /> 
+		 
 
 		
 		<security:intercept-url pattern="/position/administrator/list.do" access="hasRole('ADMIN')" /> 
@@ -113,6 +117,9 @@
 		
 		<security:intercept-url pattern="/area/brotherhood/select.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/area/brotherhood/listAreas.do" access="hasRole('BROTHERHOOD')" />
+		
+		<security:intercept-url pattern="/area/chapter/select.do" access="hasRole('CHAPTER')" />
+		<security:intercept-url pattern="/area/chapter/listAreas.do" access="hasRole('CHAPTER')" />
 		
 		<security:intercept-url pattern="/dashboard/administrator/display.do" access="hasRole('ADMIN')" />	
 		<security:intercept-url pattern="/dashboard/administrator/calculate.do" access="hasRole('ADMIN')" />	

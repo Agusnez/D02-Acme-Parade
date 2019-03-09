@@ -14,8 +14,15 @@
 	
 	<acme:column property="pictures" titleKey="area.pictures" value="${row.pictures}" />
 
-	
-	<acme:url href="area/administrator/edit.do?areaId=${row.id }" code="edit" />	
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+	<acme:url href="area/administrator/edit.do?areaId=${row.id }" code="area.edit" />
+	</security:authorize>
+	<security:authorize access="hasRole('BROTHERHOOD')">
+	<acme:url href="area/brotherhood/select.do?areaId=${row.id }" code="select" />
+	</security:authorize>
+	<security:authorize access="hasRole('CHAPTER')">
+	<acme:url href="area/chapter/select.do?areaId=${row.id }" code="select" />
+	</security:authorize>
 	
 
 </display:table>

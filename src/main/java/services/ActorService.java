@@ -17,6 +17,7 @@ import security.UserAccountService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 
 @Service
@@ -42,6 +43,9 @@ public class ActorService {
 
 	@Autowired
 	private MemberService			memberService;
+
+	@Autowired
+	private ChapterService			chapterService;
 
 	@Autowired
 	private BoxService				boxService;
@@ -352,6 +356,10 @@ public class ActorService {
 		final Authority brotherhood = new Authority();
 		brotherhood.setAuthority(Authority.BROTHERHOOD);
 
+		//TODO: Comprobar que esté bien
+		final Authority chapter = new Authority();
+		brotherhood.setAuthority(Authority.CHAPTER);
+
 		final Actor actor = this.actorRepository.findOne(actorId);
 
 		this.messageService.deleteAll(actorId);
@@ -380,8 +388,10 @@ public class ActorService {
 
 			this.floatService.deleteAll(actorId);
 
+		} else if (actor.getUserAccount().getAuthorities().contains(chapter)) {
+			final Chapter chapterActor = this.chapterService.findOne(actorId);
+			chapterActor.setArea(null);
 		}
-
 		this.actorRepository.delete(actor);
 
 	}

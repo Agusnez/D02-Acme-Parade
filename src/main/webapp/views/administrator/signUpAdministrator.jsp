@@ -15,30 +15,30 @@
 	<form:hidden path="version"/>
 	
 	
-	<acme:textbox code="administrator.name" path="name" obligatory="true"/>
+	<acme:textbox code="actor.name" path="name" obligatory="true"/>
 
-	<acme:textbox code="administrator.middleName" path="middleName" />
+	<acme:textbox code="actor.middleName" path="middleName" />
 
-	<acme:textbox code="administrator.surname" path="surname" obligatory="true"/>
+	<acme:textbox code="actor.surname" path="surname" obligatory="true"/>
 
-	<acme:textbox code="administrator.photo" path="photo" />
+	<acme:textbox code="actor.photo" path="photo" />
 
-	<acme:textbox code="administrator.email" path="email" obligatory="true" size="35" placeholder="_@_._ / _<_@_._> / _@ / _<_@>" pattern="^[\\w]+@((?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]+){0,1}|(([\\w]\\s)*[\\w])+<\\w+@((?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]+){0,1}>"/>	
+	<acme:textbox code="actor.email" path="email" obligatory="true" size="35" placeholder="_@_._ / _<_@_._> / _@ / _<_@>" pattern="^[\\w]+@((?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]+){0,1}|(([\\w]\\s)*[\\w])+<\\w+@((?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]+){0,1}>"/>	
 
-    <acme:textbox code="administrator.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/>
+    <acme:textbox code="actor.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/>
 
-	<acme:textbox code="administrator.address" path="address" />
+	<acme:textbox code="actor.address" path="address" />
 
-	<acme:textbox code="administrator.username" path="username" obligatory="true"/>
+	<acme:textbox code="actor.username" path="username" obligatory="true"/>
 
-	<acme:password code="administrator.password" path="password" obligatory="true"/>
+	<acme:password code="actor.password" path="password" obligatory="true"/>
 
-	<acme:password code="administrator.confirmPassword" path="confirmPassword" obligatory="true"/>
+	<acme:password code="actor.confirmPassword" path="confirmPassword" obligatory="true"/>
 
 	
-	<acme:submit name="save" code="administrator.save" />
+	<acme:submit name="save" code="actor.save" />
 	
-	<acme:cancel code="administrator.cancel" url="welcome/index.do" />
+	<acme:cancel code="actor.cancel" url="welcome/index.do" />
 	
 
 </form:form> 

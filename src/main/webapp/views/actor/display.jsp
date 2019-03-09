@@ -69,6 +69,10 @@
 <div><spring:message code="actor.establishment" />: <fmt:formatDate value="${actor.establishment}" pattern="yyyy/MM/dd" /></div>
 </security:authorize> 
 
+<security:authorize access="hasAnyRole('BROTHERHOOD', 'CHAPTER')" >
+<acme:display code="actor.title" property="${actor.title }" />
+</security:authorize>
+
 <jstl:if test="${!admin}">
 	<acme:button name="socialProfile" code="actor.socialProfile" onclick="javascript: relativeRedir('socialProfile/administrator,brotherhood,member/list.do');" />
 

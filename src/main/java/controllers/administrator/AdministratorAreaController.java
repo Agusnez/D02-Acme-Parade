@@ -56,7 +56,7 @@ public class AdministratorAreaController extends AbstractController {
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("administrator/listAreas");
+		result = new ModelAndView("area/list");
 		result.addObject("areas", areas);
 		result.addObject("banner", banner);
 		result.addObject("requestURI", "area/administrator/list.do");
@@ -123,7 +123,7 @@ public class AdministratorAreaController extends AbstractController {
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("administrator/createArea");
+		result = new ModelAndView("area/edit");
 		result.addObject("area", area);
 		result.addObject("banner", banner);
 		result.addObject("messageError", messageCode);

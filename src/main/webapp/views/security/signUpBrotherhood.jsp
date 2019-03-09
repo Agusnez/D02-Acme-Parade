@@ -10,33 +10,33 @@
 
 <form:form action="register/editBrotherhood.do" modelAttribute="brotherhood">
 	
-	<acme:textbox code="brotherhood.title" path="title" obligatory="true"/>
+	<acme:textbox code="actor.title" path="title" obligatory="true"/>
 	
 	<acme:textbox code="brotherhood.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http(s)://____.___,http(s)://___.___,..." path="pictures" obligatory="true"/>
 	
 	<acme:textbox code="brotherhood.establishment" path="establishment" placeholder="yyyy/MM/dd" obligatory="true"/>
 	
-	<acme:textbox code="brotherhood.name" path="name" obligatory="true"/>
+	<acme:textbox code="actor.name" path="name" obligatory="true"/>
 
-	<acme:textbox code="brotherhood.middleName" path="middleName" />
+	<acme:textbox code="actor.middleName" path="middleName" />
 	
-	<acme:textbox code="brotherhood.surname" path="surname" obligatory="true"/>
+	<acme:textbox code="actor.surname" path="surname" obligatory="true"/>
 	
-	<acme:textbox code="brotherhood.photo" path="photo" />
+	<acme:textbox code="actor.photo" path="photo" />
 	
-	<acme:textbox code="brotherhood.email" path="email" obligatory="true" size="35" placeholder="_@_._ / _<_@_._>" pattern="^[\\w]+@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+|(([\\w]\\s)*[\\w])+<\\w+@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+>$"/>
+	<acme:textbox code="actor.email" path="email" obligatory="true" size="35" placeholder="_@_._ / _<_@_._>" pattern="^[\\w]+@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+|(([\\w]\\s)*[\\w])+<\\w+@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+>$"/>
 	
-	<acme:textbox code="brotherhood.address" path="address" />
+	<acme:textbox code="actor.address" path="address" />
 	
-	<acme:textbox code="brotherhood.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/> 
+	<acme:textbox code="actor.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/> 
 	
-	<acme:textbox code="brotherhood.username" path="username" obligatory="true"/>
+	<acme:textbox code="actor.username" path="username" obligatory="true"/>
 	
-	<acme:password code="brotherhood.password" path="password" obligatory="true"/>
+	<acme:password code="actor.password" path="password" obligatory="true"/>
 	
-	<acme:password code="brotherhood.confirmPassword" path="confirmPassword" obligatory="true"/>
+	<acme:password code="actor.confirmPassword" path="confirmPassword" obligatory="true"/>
 	
-	<acme:checkbox path="checkbox" code1="brotherhood.checkBox1" code2="brotherhood.checkBox2" href="termsAndConditions/show.do" />
+	<acme:checkbox path="checkbox" code1="actor.checkBox1" code2="actor.checkBox2" href="termsAndConditions/show.do" />
 		
 	<jstl:if test="${showError == true}">
 		<div class="error">
@@ -44,9 +44,9 @@
 		</div>
 	</jstl:if>
 	
-	<input type="submit" name="save" value="<spring:message code="brotherhood.save" />" />
+	<input type="submit" name="save" value="<spring:message code="actor.save" />" />
 	
-	<acme:cancel code="brotherhood.cancel" url="welcome/index.do" />
+	<acme:cancel code="actor.cancel" url="welcome/index.do" />
 	
 </form:form>
 

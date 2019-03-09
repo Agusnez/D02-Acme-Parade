@@ -12,11 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.Credentials;
 import services.BrotherhoodService;
+import services.ChapterService;
 import services.ConfigurationService;
 import services.MemberService;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 import forms.RegisterBrotherhoodForm;
+import forms.RegisterChapterForm;
 import forms.RegisterMemberForm;
 
 @Controller
@@ -30,6 +33,9 @@ public class RegisterController extends AbstractController {
 
 	@Autowired
 	private MemberService			memberService;
+
+	@Autowired
+	private ChapterService			chapterService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -145,6 +151,66 @@ public class RegisterController extends AbstractController {
 
 		result = new ModelAndView("security/signUpMember");
 		result.addObject("member", member);
+		result.addObject("banner", banner);
+		result.addObject("messageError", messageCode);
+		final String countryCode = this.configurationService.findConfiguration().getCountryCode();
+		result.addObject("defaultCountry", countryCode);
+
+		return result;
+	}
+
+	// Chapter
+	@RequestMapping(value = "/createChapter", method = RequestMethod.GET)
+	public ModelAndView createChapter() {
+		final ModelAndView result;
+
+		final RegisterChapterForm chapter = new RegisterChapterForm();
+
+		result = this.createEditModelAndViewChapter(chapter);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/editChapter", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveChapter(@ModelAttribute("chapter") final RegisterChapterForm form, final BindingResult binding) {
+		ModelAndView result;
+		Chapter chapter;
+
+		chapter = this.chapterService.reconstruct(form, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndViewChapter(form);
+		else
+			try {
+				Assert.isTrue(form.getCheckbox());
+				Assert.isTrue(form.checkPassword());
+				this.chapterService.save(chapter);
+				final Credentials credentials = new Credentials();
+				credentials.setJ_username(chapter.getUserAccount().getUsername());
+				credentials.setPassword(chapter.getUserAccount().getPassword());
+				result = new ModelAndView("redirect:/security/login.do");
+				result.addObject("credentials", credentials);
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndViewChapter(form, "chapter.commit.error");
+			}
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewChapter(final RegisterChapterForm chapter) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewChapter(chapter, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewChapter(final RegisterChapterForm chapter, final String messageCode) {
+		ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		result = new ModelAndView("security/signUpChapter");
+		result.addObject("chapter", chapter);
 		result.addObject("banner", banner);
 		result.addObject("messageError", messageCode);
 		final String countryCode = this.configurationService.findConfiguration().getCountryCode();

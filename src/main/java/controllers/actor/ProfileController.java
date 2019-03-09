@@ -19,18 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import security.Authority;
 import security.Credentials;
 import services.ActorService;
 import services.AdministratorService;
 import services.BrotherhoodService;
+import services.ChapterService;
 import services.ConfigurationService;
 import services.MemberService;
+import controllers.AbstractController;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
 
 @Controller
@@ -51,6 +52,9 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private ChapterService			chapterService;
 
 
 	@RequestMapping(value = "/displayPrincipal", method = RequestMethod.GET)
@@ -90,6 +94,9 @@ public class ProfileController extends AbstractController {
 		final Authority authority3 = new Authority();
 		authority3.setAuthority(Authority.ADMIN);
 
+		final Authority authority4 = new Authority();
+		authority4.setAuthority(Authority.CHAPTER);
+
 		String auth = null;
 		String action = null;
 		if (actor.getUserAccount().getAuthorities().contains(authority1)) {
@@ -102,6 +109,9 @@ public class ProfileController extends AbstractController {
 		} else if (actor.getUserAccount().getAuthorities().contains(authority3)) {
 			auth = "administrator";
 			action = "editAdministrator.do";
+		} else if (actor.getUserAccount().getAuthorities().contains(authority4)) {
+			auth = "chapter";
+			action = "editChapter.do";
 		}
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
@@ -132,7 +142,7 @@ public class ProfileController extends AbstractController {
 				result = new ModelAndView("redirect:/profile/displayPrincipal.do");
 				result.addObject("credentials", credentials);
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndViewMember(memberReconstruct, "member.commit.error");
+				result = this.createEditModelAndViewMember(memberReconstruct, "actor.commit.error");
 			}
 		return result;
 	}
@@ -251,6 +261,54 @@ public class ProfileController extends AbstractController {
 		result.addObject("administrator", admin);
 		result.addObject("authority", "administrator");
 		result.addObject("actionURI", "editAdministrator.do");
+		result.addObject("banner", banner);
+		result.addObject("messageError", messageCode);
+		final String countryCode = this.configurationService.findConfiguration().getCountryCode();
+		result.addObject("defaultCountry", countryCode);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/editChapter", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveChapter(@ModelAttribute("chapter") final Chapter chapter, final BindingResult binding) {
+		ModelAndView result;
+
+		final Chapter chapterReconstruct = this.chapterService.reconstruct(chapter, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndViewChapter(chapterReconstruct);
+		else
+			try {
+				this.chapterService.save(chapterReconstruct);
+				final Credentials credentials = new Credentials();
+				credentials.setJ_username(chapterReconstruct.getUserAccount().getUsername());
+				credentials.setPassword(chapterReconstruct.getUserAccount().getPassword());
+				result = new ModelAndView("redirect:/profile/displayPrincipal.do");
+				result.addObject("credentials", credentials);
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndViewChapter(chapterReconstruct, "chapter.commit.error");
+			}
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewChapter(final Chapter chapter) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewChapter(chapter, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewChapter(final Chapter chapter, final String messageCode) {
+		ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		result = new ModelAndView("actor/edit");
+
+		result.addObject("chapter", chapter);
+		result.addObject("authority", "chapter");
+		result.addObject("actionURI", "editChapter.do");
 		result.addObject("banner", banner);
 		result.addObject("messageError", messageCode);
 		final String countryCode = this.configurationService.findConfiguration().getCountryCode();
