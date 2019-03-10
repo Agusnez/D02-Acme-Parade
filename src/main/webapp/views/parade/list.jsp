@@ -26,6 +26,10 @@
 	
 	<acme:dateFormat titleKey="parade.organisationMoment" value="${row.organisationMoment }" pattern="yyyy/MM/dd HH:mm" />
 	
+	<acme:column property="status" titleKey="parade.status" value= "${row.status}: "/>
+	
+	<acme:column property="rejectedComment" titleKey="parade.rejectedComment" value= "${row.rejectedComment}: "/>
+	
 	<jstl:if test="${autoridad == 'brotherhood'}">
 		<acme:column property="finalMode" titleKey="parade.finalMode" value="${row.finalMode }" />
 	</jstl:if>
@@ -35,6 +39,11 @@
 	<acme:url href="float/parade/list.do?paradeId=${row.id }" code="parade.float" />
  	</security:authorize> --%>
 	
+	<security:authorize access="hasRole('CHAPTER')">
+		<acme:url href="parade/chapter/accept.do?paradeId=${row.id }" code="parade.accept" />
+		<acme:url href="parade/chapter/reject.do?paradeId=${row.id }" code="parade.reject" />
+	</security:authorize>
+		
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<acme:url href="parade/brotherhood/edit.do?paradeId=${row.id }" code="parade.edit" />
 	<acme:url href="parade/brotherhood/display.do?paradeId=${row.id }" code="parade.display" />

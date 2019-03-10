@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -35,6 +36,9 @@ public class Parade extends DomainEntity {
 	private Boolean				finalMode;
 	private int					maxColumn;
 	private int					maxRow;
+
+	private String				status;
+	private String				rejectedComment;
 
 	//Relationships----------------------------------------
 	private Brotherhood			brotherhood;
@@ -131,6 +135,23 @@ public class Parade extends DomainEntity {
 
 	public void setMaxColumn(final int maxColumn) {
 		this.maxColumn = maxColumn;
+	}
+
+	@Pattern(regexp = "\\ASUBMITTED\\z|\\AREJECTED\\z|\\AACCEPTED\\z")
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(final String status) {
+		this.status = status;
+	}
+
+	public String getRejectedComment() {
+		return this.rejectedComment;
+	}
+
+	public void setRejectedComment(final String rejectedComment) {
+		this.rejectedComment = rejectedComment;
 	}
 
 }

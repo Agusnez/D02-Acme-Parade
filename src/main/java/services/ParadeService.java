@@ -17,13 +17,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ParadeRepository;
-import repositories.ParadeRepository;
 import security.Authority;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Finder;
 import domain.Float;
-import domain.Parade;
 import domain.Parade;
 import domain.Request;
 
@@ -39,19 +37,19 @@ public class ParadeService {
 	// Suporting services
 
 	@Autowired
-	private ActorService			actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private BrotherhoodService		brotherhoodService;
+	private BrotherhoodService	brotherhoodService;
 
 	@Autowired
-	private Validator				validator;
+	private Validator			validator;
 
 	@Autowired
-	private FinderService			finderService;
+	private FinderService		finderService;
 
 	@Autowired
-	private RequestService			requestService;
+	private RequestService		requestService;
 
 
 	// Simple CRUD methods
@@ -71,6 +69,7 @@ public class ParadeService {
 		result.setBrotherhood(brotherhood);
 
 		result.setFinalMode(false);
+		result.setStatus(null);
 
 		return result;
 
@@ -318,6 +317,26 @@ public class ParadeService {
 
 		return result;
 
+	}
+
+	public Parade reconstructReject(final Parade parade, final BindingResult binding) {
+
+		final Parade paradeBBDD = this.findOne(parade.getId());
+
+		parade.setBrotherhood(paradeBBDD.getBrotherhood());
+		parade.setFloats(paradeBBDD.getFloats());
+		parade.setTitle(paradeBBDD.getTitle());
+		parade.setDescription(paradeBBDD.getDescription());
+		parade.setOrganisationMoment(paradeBBDD.getOrganisationMoment());
+		parade.setTicker(paradeBBDD.getTicker());
+		parade.setFinalMode(paradeBBDD.getFinalMode());
+		parade.setMaxColumn(paradeBBDD.getMaxColumn());
+		parade.setMaxRow(paradeBBDD.getMaxRow());
+		parade.setStatus(paradeBBDD.getStatus());
+
+		this.validator.validate(parade, binding);
+
+		return parade;
 	}
 
 	public Boolean paradeBrotherhoodSecurity(final int paradeId) {

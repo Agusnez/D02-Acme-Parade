@@ -59,6 +59,9 @@
 		
 		<bean class="converters.SocialProfileToStringConverter"/>
 		<bean class="converters.StringToSocialProfileConverter"/>
+		
+		<bean class="converters.ChapterToStringConverter"/>
+		<bean class="converters.StringToChapterConverter"/>
 	</util:list>
 	
 </beans>
