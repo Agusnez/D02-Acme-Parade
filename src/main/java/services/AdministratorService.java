@@ -49,7 +49,7 @@ public class AdministratorService {
 	@Autowired
 	private MessageService			messageService;
 
-	@Autowired
+	@Autowired(required = false)
 	private Validator				validator;
 
 
@@ -234,21 +234,15 @@ public class AdministratorService {
 			for (final String message : messages) {
 
 				for (final String positive : positives)
-					if (message.toLowerCase().contains(" " + positive.toLowerCase() + " ") ||
-						message.toLowerCase().contains(positive.toLowerCase() + " " ) ||
-						message.toLowerCase().contains(" " + positive.toLowerCase()) ||
-						message.toLowerCase().contains(positive.toLowerCase() + ".") ||
-						message.toLowerCase().contains(" " + positive.toLowerCase() + ".")) {
+					if (message.toLowerCase().contains(" " + positive.toLowerCase() + " ") || message.toLowerCase().contains(positive.toLowerCase() + " ") || message.toLowerCase().contains(" " + positive.toLowerCase())
+						|| message.toLowerCase().contains(positive.toLowerCase() + ".") || message.toLowerCase().contains(" " + positive.toLowerCase() + ".")) {
 						p++;
 						N++;
 					}
 
 				for (final String negative : negatives)
-					if (message.toLowerCase().contains(" " + negative.toLowerCase() + " ") ||
-						message.toLowerCase().contains(negative.toLowerCase() + " ") ||
-						message.toLowerCase().contains(" " + negative.toLowerCase()) ||
-						message.toLowerCase().contains(negative.toLowerCase() + ".") ||
-						message.toLowerCase().contains(" " + negative.toLowerCase() + ".")) {
+					if (message.toLowerCase().contains(" " + negative.toLowerCase() + " ") || message.toLowerCase().contains(negative.toLowerCase() + " ") || message.toLowerCase().contains(" " + negative.toLowerCase())
+						|| message.toLowerCase().contains(negative.toLowerCase() + ".") || message.toLowerCase().contains(" " + negative.toLowerCase() + ".")) {
 						n++;
 						N++;
 					}

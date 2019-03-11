@@ -28,7 +28,7 @@ public class RequestService {
 	@Autowired
 	private MemberService		memberService;
 
-	@Autowired
+	@Autowired(required = false)
 	private Validator			validator;
 
 	@Autowired

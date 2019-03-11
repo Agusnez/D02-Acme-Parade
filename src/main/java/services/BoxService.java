@@ -33,7 +33,7 @@ public class BoxService {
 	@Autowired
 	private MessageService	messageService;
 
-	@Autowired
+	@Autowired(required = false)
 	private Validator		validator;
 
 

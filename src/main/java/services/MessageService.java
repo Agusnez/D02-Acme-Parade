@@ -44,7 +44,7 @@ public class MessageService {
 	@Autowired
 	private ConfigurationService	configurationService;
 
-	@Autowired
+	@Autowired(required = false)
 	private Validator				validator;
 
 	@Autowired
