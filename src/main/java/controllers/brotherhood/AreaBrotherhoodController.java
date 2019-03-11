@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.AreaService;
 import services.BrotherhoodService;
 import services.ConfigurationService;
+import controllers.AbstractController;
 import domain.Area;
 import domain.Brotherhood;
 
@@ -57,7 +56,7 @@ public class AreaBrotherhoodController extends AbstractController {
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("brotherhood/listAreas");
+		result = new ModelAndView("area/list");
 		result.addObject("areas", areas);
 		result.addObject("banner", banner);
 		result.addObject("requestURI", "area/brotherhood/listAreas.do");

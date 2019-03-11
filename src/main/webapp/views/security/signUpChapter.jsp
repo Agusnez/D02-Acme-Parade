@@ -8,7 +8,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="register/editMember.do" modelAttribute="member">
+<form:form action="register/editChapter.do" modelAttribute="chapter">
+	
+	<acme:textbox code="actor.title" path="title" obligatory="true"/>
 	
 	<acme:textbox code="actor.name" path="name" obligatory="true"/>
 
@@ -38,9 +40,7 @@
 	
 </form:form>
 
-	 <jstl:if test="${message!=null}">
-<div class="error"><spring:message code="member.commit.error" /></div>
-</jstl:if> 
+	 
  
 <script type="text/javascript">
 	function checkPhone() {

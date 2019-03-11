@@ -39,10 +39,13 @@
 	<acme:textbox code="actor.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/> 
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<acme:textbox code="brotherhood.title" path="title" obligatory="true"/>
 		<acme:textbox code="brotherhood.pictures" path="pictures" obligatory="true"/>
 		<acme:textbox code="brotherhood.establishment" path="establishment" placeholder="yyyy/MM/dd" obligatory="true"/>
 	</security:authorize> 
+	
+	<security:authorize access="hasAnyRole('BROTHERHOOD', 'CHAPTER')" >
+	<acme:textbox code="actor.title" path="title" obligatory="true"/>
+	</security:authorize>
 	
 	<acme:submit name="save" code="actor.save"/>	
 

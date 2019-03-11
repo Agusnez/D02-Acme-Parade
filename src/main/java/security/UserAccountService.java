@@ -83,6 +83,21 @@ public class UserAccountService {
 
 	}
 
+	public UserAccount createChapter() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.CHAPTER);
+		final List<Authority> list = new ArrayList<Authority>();
+		list.add(authority);
+
+		final UserAccount userAccount = new UserAccount();
+		userAccount.setAuthorities(list);
+		userAccount.setIsNotBanned(true);
+
+		return userAccount;
+
+	}
+
 	public UserAccount createAdmin() {
 
 		final Authority authority = new Authority();
