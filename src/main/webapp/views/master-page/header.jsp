@@ -71,6 +71,8 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="area/chapter/listAreas.do"><spring:message code="master.page.chapter.area.list" /></a></li>
+					<li><a href="parade/chapter/list.do"><spring:message code="master.page.chapter.paradeList" /></a></li>
+					
 				</ul>
 			</li>
 			<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.brotherhood.list" /></a></li>

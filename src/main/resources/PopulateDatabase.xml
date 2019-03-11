@@ -241,6 +241,46 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount18" class="security.UserAccount">
+		<property name="username" value="chapter1" />
+		<property name="password" value="178494d73a41f7d68e80f685324d3662" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHAPTER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount19" class="security.UserAccount">
+		<property name="username" value="chapter2" />
+		<property name="password" value="07a29f2348d728fad16c5260823f93ef" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHAPTER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount20" class="security.UserAccount">
+		<property name="username" value="chapter3" />
+		<property name="password" value="4cf7b4e4bb6d429f0f08bc498e397d81" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHAPTER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
 	<!-- Administrators -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -569,13 +609,54 @@
 		<property name="address" value="Las Navas" />
 		<property name="userAccount" ref="userAccount17" />
 	</bean>	
+	
+	<!-- Chapters -->
+	<bean id="chapter1" class="domain.Chapter">
+		<property name="title" value="chapter1" />
+		<property name="name" value="Fernando" />
+		<property name="middleName" value="Roldan" />
+		<property name="surname" value="Lopez" />
+		<property name="photo" value="http://www.ferdy.com" />
+		<property name="email" value="ferdy@mail.com" />
+		<property name="phone" value="+34 672459775" />
+		<property name="address" value="Las Navas" />
+		<property name="userAccount" ref="userAccount18" />
+		<property name="area">
+			<ref bean="area1"/>		
+		</property>
+	</bean>	
+	<bean id="chapter2" class="domain.Chapter">
+		<property name="title" value="chapter2" />
+		<property name="name" value="Sixto" />
+		<property name="middleName" value="Miguel" />
+		<property name="surname" value="Sanchez" />
+		<property name="photo" value="http://www.six.com" />
+		<property name="email" value="six@mail.com" />
+		<property name="phone" value="+34 672195205" />
+		<property name="address" value="Las Navas 34" />
+		<property name="userAccount" ref="userAccount19" />
+		<property name="area">
+			<ref bean="area2"/>		
+		</property>
+	</bean>	
+	<bean id="chapter3" class="domain.Chapter">
+		<property name="title" value="chapter3" />
+		<property name="name" value="Alvaro" />
+		<property name="middleName" value="Giron" />
+		<property name="surname" value="Sánchez" />
+		<property name="photo" value="http://www.giron.com" />
+		<property name="email" value="giron@mail.com" />
+		<property name="phone" value="+34 697018675" />
+		<property name="address" value="Las Navas 56" />
+		<property name="userAccount" ref="userAccount20" />
+	</bean>	
 
 	
 	<!-- Parades -->
 	<bean id="parade1" class="domain.Parade">
 		<property name="title" value="parade1" />
 		<property name="description" value="Procesión de la mañana de la Semana santa" />
-		<property name="organisationMoment" value="2019/01/01 15:00" />
+		<property name="organisationMoment" value="2019/08/08 15:00" />
 		<property name="ticker" value="190423-KHLRM4" />
 		<property name="maxColumn" value="3" />
 		<property name="maxRow" value="10" />
@@ -597,6 +678,8 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
 	
 	<bean id="parade2" class="domain.Parade">
@@ -615,6 +698,8 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
 	
 	<bean id="parade3" class="domain.Parade">
@@ -633,6 +718,8 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
 	
 	<bean id="parade4" class="domain.Parade">
@@ -651,6 +738,8 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
 
 	<bean id="parade5" class="domain.Parade">
@@ -669,7 +758,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="ACCEPTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade6" class="domain.Parade">
 		<property name="title" value="parade6" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -686,7 +778,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="ACCEPTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade7" class="domain.Parade">
 		<property name="title" value="parade7" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -703,7 +798,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade8" class="domain.Parade">
 		<property name="title" value="parade8" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -720,7 +818,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade9" class="domain.Parade">
 		<property name="title" value="parade9" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -737,7 +838,11 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="REJECTED" />
+		<property name="rejectedComment" value="No me gusta este desfile" />
 	</bean>
+	
+	
 	<bean id="parade10" class="domain.Parade">
 		<property name="title" value="parade10" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -754,7 +859,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade11" class="domain.Parade">
 		<property name="title" value="parade11" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -771,7 +879,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade12" class="domain.Parade">
 		<property name="title" value="parade12" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -788,7 +899,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade13" class="domain.Parade">
 		<property name="title" value="parade13" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -805,7 +919,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	<bean id="parade14" class="domain.Parade">
 		<property name="title" value="parade14" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
@@ -822,7 +939,10 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="null" />
 	</bean>
+	
 	
 	<!-- Floats -->
 	<bean id="float1" class="domain.Float">
@@ -2062,6 +2182,109 @@
 		<property name="byDefault" value="True" />
 		<property name="actor" ref="member8" />
 	</bean>
+	
+	<bean id="box86" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter1" />
+		
+	</bean>
+
+	<bean id="box87" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter1" />
+	
+	</bean>
+
+	<bean id="box88" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter1" />
+		
+	</bean>
+
+	<bean id="box89" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter1" />
+		
+	</bean>
+	
+	<bean id="box90" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter1" />
+	</bean>
+	
+	<bean id="box91" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter2" />
+		
+	</bean>
+
+	<bean id="box92" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter2" />
+	
+	</bean>
+
+	<bean id="box93" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter2" />
+		
+	</bean>
+
+	<bean id="box94" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter2" />
+		
+	</bean>
+	
+	<bean id="box95" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter2" />
+	</bean>
+	
+	<bean id="box96" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter3" />
+		
+	</bean>
+
+	<bean id="box97" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter3" />
+	
+	</bean>
+
+	<bean id="box98" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter3" />
+		
+	</bean>
+
+	<bean id="box99" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter3" />
+		
+	</bean>
+	
+	<bean id="box100" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="chapter3" />
+	</bean>
+	
 		
 	
 	<!-- Messages -->

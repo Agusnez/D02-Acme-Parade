@@ -12,9 +12,6 @@
 
 <display:table name="parades" id="row" requestURI="${requestURI }" pagesize="5">
 	
-	<security:authorize access="hasRole('BROTHERHOOD')">
-	<acme:column property="ticker" titleKey="parade.ticker" value= "${row.ticker}: "/>
-	</security:authorize> 
 	
 	<acme:column property="title" titleKey="parade.title" value= "${row.title}: "/>
 	
@@ -30,6 +27,10 @@
 	
 	<acme:column property="rejectedComment" titleKey="parade.rejectedComment" value= "${row.rejectedComment}: "/>
 	
+	<security:authorize access="hasRole('BROTHERHOOD')">
+	<acme:column property="ticker" titleKey="parade.ticker" value= "${row.ticker}: "/>
+	</security:authorize> 
+	
 	<jstl:if test="${autoridad == 'brotherhood'}">
 		<acme:column property="finalMode" titleKey="parade.finalMode" value="${row.finalMode }" />
 	</jstl:if>
@@ -40,8 +41,10 @@
  	</security:authorize> --%>
 	
 	<security:authorize access="hasRole('CHAPTER')">
-		<acme:url href="parade/chapter/accept.do?paradeId=${row.id }" code="parade.accept" />
-		<acme:url href="parade/chapter/reject.do?paradeId=${row.id }" code="parade.reject" />
+		<jstl:if test="${row.status == 'SUBMITTED'}">	
+			<acme:url href="parade/chapter/accept.do?paradeId=${row.id }" code="parade.accept" />
+			<acme:url href="parade/chapter/reject.do?paradeId=${row.id }" code="parade.reject" />
+		</jstl:if>
 	</security:authorize>
 		
 	<security:authorize access="hasRole('BROTHERHOOD')">
@@ -57,3 +60,18 @@
 	</security:authorize>
 	
 	<acme:button name="back" code="parade.back" onclick="javascript: relativeRedir('welcome/index.do');" />
+	
+	
+<script type="text/javascript">
+	var trTags = document.getElementsByTagName("tr");
+	for (var i = 1; i < trTags.length; i++) {
+	  var tdStatus = trTags[i].children[5];
+	  if (tdStatus.innerText == "REJECTED") {
+		  trTags[i].style.backgroundColor = "red";
+	  } else if (tdStatus.innerText == "ACCEPTED") {
+		  trTags[i].style.backgroundColor = "green";
+	  } else{
+		  trTags[i].style.backgroundColor = "grey";
+	  }
+	}
+</script>

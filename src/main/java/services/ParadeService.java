@@ -20,6 +20,7 @@ import repositories.ParadeRepository;
 import security.Authority;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Finder;
 import domain.Float;
 import domain.Parade;
@@ -50,6 +51,9 @@ public class ParadeService {
 
 	@Autowired
 	private RequestService		requestService;
+
+	@Autowired
+	private ChapterService		chapterService;
 
 
 	// Simple CRUD methods
@@ -125,10 +129,25 @@ public class ParadeService {
 
 		Parade result = parade;
 		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		Assert.notNull(brotherhood);
-		final Authority authority = new Authority();
-		authority.setAuthority(Authority.BROTHERHOOD);
-		Assert.isTrue(brotherhood.getUserAccount().getAuthorities().contains(authority));
+		final Chapter chapter = this.chapterService.findByPrincipal();
+		Assert.isTrue(brotherhood != null || chapter != null);
+
+		if (brotherhood == null) {
+
+			final Authority authority = new Authority();
+			authority.setAuthority(Authority.CHAPTER);
+
+			final Boolean security = chapter.getUserAccount().getAuthorities().contains(authority);
+
+			Assert.isTrue(security);
+		} else {
+			final Authority authority = new Authority();
+			authority.setAuthority(Authority.BROTHERHOOD);
+
+			final Boolean security = brotherhood.getUserAccount().getAuthorities().contains(authority);
+
+			Assert.isTrue(security);
+		}
 
 		final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
 		Assert.isTrue(parade.getOrganisationMoment().after(currentMoment));
@@ -138,7 +157,6 @@ public class ParadeService {
 		return result;
 
 	}
-
 	//Esto es una solución debido a que si editamos una brotherhood, hay que editar
 	//las parades. Si hay parades que ya pasaron daría fallo en el de arriba
 	//por el Assert de fechas. Aqui no lo tenemos. Solo es empleado el metodo cuando se edita Brotherhood
