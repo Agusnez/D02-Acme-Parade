@@ -15,6 +15,8 @@
 <form:form action="parade/chapter/reject.do"
 	modelAttribute="parade">
 	
+	<form:hidden path="id" />
+	<form:hidden path="version" /> 
 	
 	<acme:textbox path="rejectedComment" code="parade.rejectedComment"/>
 	

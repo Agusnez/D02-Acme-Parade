@@ -18,6 +18,7 @@ import org.springframework.validation.Validator;
 
 import repositories.ParadeRepository;
 import security.Authority;
+import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Chapter;
@@ -128,26 +129,39 @@ public class ParadeService {
 		Assert.notNull(parade);
 
 		Parade result = parade;
-		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		final Chapter chapter = this.chapterService.findByPrincipal();
+
+		Brotherhood brotherhood = null;
+		Chapter chapter = null;
+
+		final Authority authorityBrotherhood = new Authority();
+		authorityBrotherhood.setAuthority(Authority.BROTHERHOOD);
+		final Authority authorityChapter = new Authority();
+		authorityChapter.setAuthority(Authority.CHAPTER);
+
+		if (LoginService.getPrincipal().getAuthorities().contains(authorityBrotherhood))
+			brotherhood = this.brotherhoodService.findByPrincipal();
+		else if (LoginService.getPrincipal().getAuthorities().contains(authorityChapter))
+			chapter = this.chapterService.findByPrincipal();
+
 		Assert.isTrue(brotherhood != null || chapter != null);
 
-		if (brotherhood == null) {
+		/*
+		 * Aquí pasamos el status a SUBMITTED si se le pusiera en el create o el edit
+		 * el FINAL MODE a TRUE
+		 */
+		if (parade.getId() != 0) {
+			final Parade paradeBBDD = this.findOne(parade.getId());
+			//si estaba a true ya no se puede modificar
+			if (!LoginService.getPrincipal().getAuthorities().contains(authorityChapter)){
+				Assert.isTrue(paradeBBDD.getFinalMode() == false);
+			}
 
-			final Authority authority = new Authority();
-			authority.setAuthority(Authority.CHAPTER);
+			//si estaba a false el de BBDD y ahora se ha puesto a true
+			if (parade.getStatus() == null && parade.getFinalMode() == true)
+				parade.setStatus("SUBMITTED");
 
-			final Boolean security = chapter.getUserAccount().getAuthorities().contains(authority);
-
-			Assert.isTrue(security);
-		} else {
-			final Authority authority = new Authority();
-			authority.setAuthority(Authority.BROTHERHOOD);
-
-			final Boolean security = brotherhood.getUserAccount().getAuthorities().contains(authority);
-
-			Assert.isTrue(security);
-		}
+		} else if (parade.getId() == 0 && parade.getFinalMode() == true)
+			parade.setStatus("SUBMITTED");
 
 		final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
 		Assert.isTrue(parade.getOrganisationMoment().after(currentMoment));
@@ -183,6 +197,7 @@ public class ParadeService {
 
 		Assert.notNull(parade);
 		Assert.isTrue(parade.getId() != 0);
+		Assert.isTrue(parade.getFinalMode() != true);
 
 		final Actor brotherhood = this.actorService.findByPrincipal();
 		Assert.notNull(brotherhood);

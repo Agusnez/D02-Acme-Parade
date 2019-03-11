@@ -138,6 +138,7 @@ public class Parade extends DomainEntity {
 	}
 
 	@Pattern(regexp = "\\ASUBMITTED\\z|\\AREJECTED\\z|\\AACCEPTED\\z")
+	@SafeHtml
 	public String getStatus() {
 		return this.status;
 	}
@@ -146,6 +147,7 @@ public class Parade extends DomainEntity {
 		this.status = status;
 	}
 
+	@SafeHtml
 	public String getRejectedComment() {
 		return this.rejectedComment;
 	}

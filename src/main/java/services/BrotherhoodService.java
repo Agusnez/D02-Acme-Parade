@@ -218,7 +218,7 @@ public class BrotherhoodService {
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
 		brotherhood = this.findByUserAccount(userAccount);
-		//Assert.notNull(brotherhood);
+		Assert.notNull(brotherhood);
 
 		return brotherhood;
 	}
