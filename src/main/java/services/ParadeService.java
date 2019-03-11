@@ -152,9 +152,8 @@ public class ParadeService {
 		if (parade.getId() != 0) {
 			final Parade paradeBBDD = this.findOne(parade.getId());
 			//si estaba a true ya no se puede modificar
-			if (!LoginService.getPrincipal().getAuthorities().contains(authorityChapter)){
+			if (!LoginService.getPrincipal().getAuthorities().contains(authorityChapter))
 				Assert.isTrue(paradeBBDD.getFinalMode() == false);
-			}
 
 			//si estaba a false el de BBDD y ahora se ha puesto a true
 			if (parade.getStatus() == null && parade.getFinalMode() == true)
@@ -335,11 +334,31 @@ public class ParadeService {
 
 	public Double ratioDraftFinalModeParade() {
 
-		final Double result = this.ratioDraftFinalModeParade();
+		final Double result = this.paradeRepository.ratioDraftFinalModeParade();
 
 		return result;
 	}
 
+	public Double ratioSubmitted() {
+
+		final Double result = this.paradeRepository.ratioSubmitted();
+
+		return result;
+	}
+
+	public Double ratioRejected() {
+
+		final Double result = this.paradeRepository.ratioRejected();
+
+		return result;
+	}
+
+	public Double ratioAccepted() {
+
+		final Double result = this.paradeRepository.ratioAccepted();
+
+		return result;
+	}
 	public Parade reconstruct(final Parade parade, final BindingResult binding) {
 
 		Parade result = parade;
