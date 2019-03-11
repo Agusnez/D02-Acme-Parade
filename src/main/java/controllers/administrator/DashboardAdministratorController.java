@@ -262,6 +262,14 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("scores", scores);
 
 		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioDraftFinalModeParade = this.paradeService.ratioDraftFinalModeParade();
+			result.addObject("ratioDraftFinalModeParade", ratioDraftFinalModeParade);
+		} catch (final Throwable oops) {
+			result.addObject("ratioDraftFinalModeParade", "N/A");
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
 
 		return result;
 
@@ -462,6 +470,14 @@ public class DashboardAdministratorController extends AbstractController {
 		final String scores = rango1 + ", " + rango2 + ", " + rango3 + ", " + rango4 + ", " + rango5 + ", " + rango6 + ", " + rango7 + ", " + rango8;
 
 		result.addObject("scores", scores);
+
+		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioDraftFinalModeParade = this.paradeService.ratioDraftFinalModeParade();
+			result.addObject("ratioDraftFinalModeParade", ratioDraftFinalModeParade);
+		} catch (final Throwable oops) {
+			result.addObject("ratioDraftFinalModeParade", "N/A");
+		}
 
 		//--------------------------------------------------------------------------------------------------------------
 

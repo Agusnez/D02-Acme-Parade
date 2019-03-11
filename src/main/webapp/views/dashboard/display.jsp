@@ -153,6 +153,11 @@
 
 <br/>
 
+<h3><spring:message code="dashboard.ratioDraftFinalModeParade" /></h3>
+<fieldset>
+	${ratioDraftFinalModeParade}
+</fieldset>
+<br/>
 <acme:button name="back" code="dashboard.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 	
 <jstl:if test="${language == 'en'}">

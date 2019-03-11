@@ -318,6 +318,13 @@ public class ParadeService {
 		return result;
 	}
 
+	public Double ratioDraftFinalModeParade() {
+
+		final Double result = this.ratioDraftFinalModeParade();
+
+		return result;
+	}
+
 	public Parade reconstruct(final Parade parade, final BindingResult binding) {
 
 		Parade result = parade;
