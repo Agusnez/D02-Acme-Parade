@@ -41,24 +41,29 @@ public class ParadeChapterController extends AbstractController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Parade> parades = new ArrayList<>();
 		final Chapter chapter = this.chapterService.findByPrincipal();
-		final Collection<Brotherhood> brotherhoods = chapter.getArea().getBrotherhoods();
-		//Cuidado que el area puede ser null
 
-		for (final Brotherhood brotherhood : brotherhoods)
-			parades.addAll(this.paradeService.findParadeCanBeSeenOfBrotherhoodId(brotherhood.getId()));
+		if (chapter.getArea() == null)
+			result = new ModelAndView("misc/noArea");
+		else {
 
-		final String banner = this.configurationService.findConfiguration().getBanner();
+			final Collection<Parade> parades = new ArrayList<>();
 
-		result = new ModelAndView("parade/list");
-		result.addObject("parades", parades);
-		result.addObject("banner", banner);
-		result.addObject("requestURI", "parade/chapter/list.do");
+			final Collection<Brotherhood> brotherhoods = chapter.getArea().getBrotherhoods();
+			//Cuidado que el area puede ser null
+			for (final Brotherhood brotherhood : brotherhoods)
+				parades.addAll(this.paradeService.findParadeCanBeSeenOfBrotherhoodId(brotherhood.getId()));
 
+			final String banner = this.configurationService.findConfiguration().getBanner();
+
+			result = new ModelAndView("parade/list");
+			result.addObject("parades", parades);
+			result.addObject("banner", banner);
+			result.addObject("requestURI", "parade/chapter/list.do");
+
+		}
 		return result;
 	}
-
 	// Accept------------------------------------------------------------
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
 	public ModelAndView accept(@RequestParam final int paradeId) {
@@ -69,6 +74,9 @@ public class ParadeChapterController extends AbstractController {
 
 		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else if (!parade.getStatus().equals("SUBMITTED")) {
+			result = new ModelAndView("misc/error");
 			result.addObject("banner", banner);
 		} else {
 			final Chapter chapter = this.chapterService.findByPrincipal();
@@ -96,6 +104,9 @@ public class ParadeChapterController extends AbstractController {
 
 		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else if (!parade.getStatus().equals("SUBMITTED")) {
+			result = new ModelAndView("misc/error");
 			result.addObject("banner", banner);
 		} else {
 			final Chapter chapter = this.chapterService.findByPrincipal();

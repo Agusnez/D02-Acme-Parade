@@ -177,7 +177,7 @@ public class ChapterService {
 		Assert.notNull(userAccount);
 
 		chapter = this.findByUserAccount(userAccount);
-		//Assert.notNull(chapter);
+		Assert.notNull(chapter);
 
 		return chapter;
 	}
