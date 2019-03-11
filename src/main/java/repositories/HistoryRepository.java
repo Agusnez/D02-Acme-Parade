@@ -12,7 +12,16 @@ import domain.History;
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Integer> {
 
-	@Query("select avg(h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1, min(h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1, max(h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1 from History h")
-	Collection<Double> statsOfRecordPerHistory();
+	@Query("select avg(h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1 from History h")
+	Collection<Double> avgRecordPerHistory();
+
+	@Query("select max(h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1 from History h")
+	Collection<Double> maxRecordPerHistory();
+
+	@Query("select min(h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1 from History h")
+	Collection<Double> minRecordPerHistory();
+
+	@Query("select h.brotherhood from History h where ((h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1) > (select avg(h1.legalRecords.size + h1.periodRecords.size + h1.linkRecords.size + h1.miscellaneousRecords.size) + 1 from History h1)")
+	Collection<Double> brotherhoodsMoreThanAverage();
 
 }
