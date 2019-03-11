@@ -233,6 +233,31 @@ public class ParadeService {
 
 	}
 
+	public Parade copy(final int paradeId) {
+
+		Parade result;
+
+		final Parade original = this.paradeRepository.findOne(paradeId);
+
+		final String ticker = this.generateTicker(original.getOrganisationMoment());
+
+		final Parade copy = this.create();
+
+		copy.setDescription(original.getDescription());
+		copy.setMaxColumn(original.getMaxColumn());
+		copy.setMaxRow(original.getMaxRow());
+		copy.setOrganisationMoment(original.getOrganisationMoment());
+		copy.setRejectedComment(null);
+		copy.setStatus("SUBMITTED");
+		copy.setTicker(ticker);
+		copy.setTitle(original.getTitle());
+
+		result = this.saveByEditBrotherhood(copy);
+
+		return result;
+
+	}
+
 	//Other business methods-----------------------------------
 
 	public Collection<Parade> findParadeByBrotherhoodId(final int brotherhoodId) {
