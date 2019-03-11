@@ -57,8 +57,14 @@
 		<bean class="converters.PositionToStringConverter"/>
 		<bean class="converters.StringToPositionConverter"/>
 		
+		<bean class="converters.ProclaimToStringConverter"/>
+		<bean class="converters.StringToProclaimConverter"/>
+		
 		<bean class="converters.RequestToStringConverter"/>
 		<bean class="converters.StringToRequestConverter"/>
+		
+		<bean class="converters.SegmentToStringConverter"/>
+		<bean class="converters.StringToSegmentConverter"/>
 		
 		<bean class="converters.SocialProfileToStringConverter"/>
 		<bean class="converters.StringToSocialProfileConverter"/>
