@@ -26,7 +26,6 @@ import domain.Finder;
 import domain.Float;
 import domain.Parade;
 import domain.Request;
-import domain.Segment;
 
 @Service
 @Transactional
@@ -73,8 +72,6 @@ public class ParadeService {
 		final Collection<Float> floatt = new HashSet<>();
 		result.setFloats(floatt);
 		result.setBrotherhood(brotherhood);
-		final Collection<Segment> segments = new HashSet<>();
-		result.setSegments(segments);
 
 		result.setFinalMode(false);
 		result.setStatus(null);
