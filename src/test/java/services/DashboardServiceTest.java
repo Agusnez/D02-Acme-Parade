@@ -69,9 +69,9 @@ public class DashboardServiceTest extends AbstractTest {
 
 		super.authenticate("admin");
 
-		final Double avg = this.historyService.stddevRecordPerHistory();
+		final Double stddev = this.historyService.stddevRecordPerHistory();
 
-		Assert.isTrue(avg == 3.5);
+		Assert.isTrue(stddev == 3.5);
 
 		super.unauthenticate();
 	}

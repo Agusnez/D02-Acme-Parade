@@ -2192,7 +2192,9 @@
 		</property>
 		<property name="brotherhood" ref="brotherhood1" />
 
-	</bean><bean id="history2" class="domain.History">
+	</bean>
+	
+	<bean id="history2" class="domain.History">
 		<property name="inceptionRecord" ref="inceptionRecord2" />
 		<property name="legalRecords">
 			<list>
