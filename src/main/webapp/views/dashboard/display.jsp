@@ -153,6 +153,21 @@
 
 <br/>
 
+<h3><spring:message code="dashboard.statsOfRecordsPerHistory" /></h3>
+
+<fieldset>
+
+	<ul>
+	<li><spring:message code="dashboard.average" />: ${avgRecordPerHistory}</li>
+	<li><spring:message code="dashboard.minimum" />: ${minRecordPerHistory}</li>
+	<li><spring:message code="dashboard.maximum" />: ${maxRecordPerHistory}</li>
+	<li><spring:message code="dashboard.deviation" />: ${stddevRecordPerHistory}</li>
+	</ul>
+
+</fieldset>	
+
+<br/>
+
 <acme:button name="back" code="dashboard.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 	
 <jstl:if test="${language == 'en'}">

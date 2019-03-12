@@ -19,6 +19,7 @@ import services.AreaService;
 import services.BrotherhoodService;
 import services.EnrolmentService;
 import services.FinderService;
+import services.HistoryService;
 import services.MemberService;
 import services.ParadeService;
 import services.PositionService;
@@ -60,6 +61,9 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private HistoryService		historyService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -263,6 +267,15 @@ public class DashboardAdministratorController extends AbstractController {
 
 		//--------------------------------------------------------------------------------------------------------------
 
+		final Double avgRecordPerHistory = this.historyService.avgRecordPerHistory();
+		result.addObject("avgRecordPerHistory", avgRecordPerHistory);
+		final Double minRecordPerHistory = this.historyService.minRecordPerHistory();
+		result.addObject("minRecordPerHistory", minRecordPerHistory);
+		final Double maxRecordPerHistory = this.historyService.maxRecordPerHistory();
+		result.addObject("maxRecordPerHistory", maxRecordPerHistory);
+		final Double stddevRecordPerHistory = this.historyService.stddevRecordPerHistory();
+		result.addObject("stddevRecordPerHistory", stddevRecordPerHistory);
+
 		return result;
 
 	}
@@ -464,6 +477,15 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("scores", scores);
 
 		//--------------------------------------------------------------------------------------------------------------
+
+		final Double avgRecordPerHistory = this.historyService.avgRecordPerHistory();
+		result.addObject("avgRecordPerHistory", avgRecordPerHistory);
+		final Double minRecordPerHistory = this.historyService.minRecordPerHistory();
+		result.addObject("minRecordPerHistory", minRecordPerHistory);
+		final Double maxRecordPerHistory = this.historyService.maxRecordPerHistory();
+		result.addObject("maxRecordPerHistory", maxRecordPerHistory);
+		final Double stddevRecordPerHistory = this.historyService.stddevRecordPerHistory();
+		result.addObject("stddevRecordPerHistory", stddevRecordPerHistory);
 
 		return result;
 
