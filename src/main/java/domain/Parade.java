@@ -6,9 +6,11 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
@@ -43,6 +45,7 @@ public class Parade extends DomainEntity {
 	//Relationships----------------------------------------
 	private Brotherhood			brotherhood;
 	private Collection<Float>	floats;
+	private Collection<Segment>	segments;
 
 
 	@NotBlank
@@ -154,6 +157,16 @@ public class Parade extends DomainEntity {
 
 	public void setRejectedComment(final String rejectedComment) {
 		this.rejectedComment = rejectedComment;
+	}
+
+	@Valid
+	@OneToMany(cascade = CascadeType.ALL)
+	public Collection<Segment> getSegments() {
+		return this.segments;
+	}
+
+	public void setSegments(final Collection<Segment> segments) {
+		this.segments = segments;
 	}
 
 }
