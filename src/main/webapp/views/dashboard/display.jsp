@@ -158,6 +158,17 @@
 	${ratioDraftFinalModeParade}
 </fieldset>
 <br/>
+
+<h3><spring:message code="dashboard.ratioStatusParade" /></h3>
+<fieldset>
+	<ul>
+	<li><spring:message code="dashboard.approved" />: ${ratioAccepted}</li>
+	<li><spring:message code="dashboard.submitted" />: ${ratioSubmitted}</li>
+	<li><spring:message code="dashboard.rejected" />: ${ratioRejected}</li>
+	</ul>
+</fieldset>
+<br/>
+
 <acme:button name="back" code="dashboard.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 	
 <jstl:if test="${language == 'en'}">
