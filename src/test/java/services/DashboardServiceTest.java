@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -29,6 +30,10 @@ public class DashboardServiceTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 
+	@Autowired
+	private HistoryService	historyService;
+
+
 	// Tests ------------------------------------------------------------------
 
 	// The following are fictitious test cases that are intended to check that 
@@ -36,48 +41,39 @@ public class DashboardServiceTest extends AbstractTest {
 	// it using JUnit.
 
 	@Test
-	public void SamplePositiveTest() {
-		Assert.isTrue(true);
+	public void CorrectAuthorityTest() {
+
+		super.authenticate("admin");
+
+		final Double avg = this.historyService.avgRecordPerHistory();
+
+		Assert.isTrue(avg != null);
+
+		super.unauthenticate();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void SampleNegativeTest() {
-		Assert.isTrue(false);
+	public void IncorrectAuthorityTest() {
+
+		super.authenticate("brotherhood1");
+
+		final Double avg = this.historyService.avgRecordPerHistory();
+
+		Assert.isTrue(avg != null);
+
+		super.unauthenticate();
 	}
 
 	@Test
-	public void SampleDriver() {
-		final Object testingData[][] = {
-			{
-				"userAccount1", super.getEntityId("userAccount1"), null
-			}, {
-				"userAccount2", super.getEntityId("userAccount2"), null
-			}, {
-				"userAccount3", super.getEntityId("userAccount3"), null
-			}, {
-				"non-existent", 0, AssertionError.class
-			}
-		};
+	public void CorrectValueTest() {
 
-		for (int i = 0; i < testingData.length; i++)
-			this.SampleTemplate((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
-	}
+		super.authenticate("admin");
 
-	// Ancillary methods ------------------------------------------------------
+		final Double avg = this.historyService.stddevRecordPerHistory();
 
-	protected void SampleTemplate(final String beanName, final int id, final Class<?> expected) {
-		Class<?> caught;
-		int dbId;
+		Assert.isTrue(avg == 3.5);
 
-		caught = null;
-		try {
-			dbId = super.getEntityId(beanName);
-			Assert.isTrue(dbId == id);
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-
-		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 	}
 
 }
