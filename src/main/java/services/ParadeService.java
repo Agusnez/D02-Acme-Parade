@@ -152,9 +152,8 @@ public class ParadeService {
 		if (parade.getId() != 0) {
 			final Parade paradeBBDD = this.findOne(parade.getId());
 			//si estaba a true ya no se puede modificar
-			if (!LoginService.getPrincipal().getAuthorities().contains(authorityChapter)){
+			if (!LoginService.getPrincipal().getAuthorities().contains(authorityChapter))
 				Assert.isTrue(paradeBBDD.getFinalMode() == false);
-			}
 
 			//si estaba a false el de BBDD y ahora se ha puesto a true
 			if (parade.getStatus() == null && parade.getFinalMode() == true)
