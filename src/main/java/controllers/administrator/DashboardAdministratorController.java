@@ -270,6 +270,28 @@ public class DashboardAdministratorController extends AbstractController {
 		}
 
 		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioSubmitted = this.paradeService.ratioSubmitted();
+			result.addObject("ratioSubmitted", ratioSubmitted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioSubmitted", "N/A");
+		}
+
+		try {
+			final Double ratioRejected = this.paradeService.ratioRejected();
+			result.addObject("ratioRejected", ratioRejected);
+		} catch (final Throwable oops) {
+			result.addObject("ratioRejected", "N/A");
+		}
+
+		try {
+			final Double ratioAccepted = this.paradeService.ratioAccepted();
+			result.addObject("ratioAccepted", ratioAccepted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioAccepted", "N/A");
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
 
 		return result;
 
@@ -477,6 +499,28 @@ public class DashboardAdministratorController extends AbstractController {
 			result.addObject("ratioDraftFinalModeParade", ratioDraftFinalModeParade);
 		} catch (final Throwable oops) {
 			result.addObject("ratioDraftFinalModeParade", "N/A");
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioSubmitted = this.paradeService.ratioSubmitted();
+			result.addObject("ratioSubmitted", ratioSubmitted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioSubmitted", "N/A");
+		}
+
+		try {
+			final Double ratioRejected = this.paradeService.ratioRejected();
+			result.addObject("ratioRejected", ratioRejected);
+		} catch (final Throwable oops) {
+			result.addObject("ratioRejected", "N/A");
+		}
+
+		try {
+			final Double ratioAccepted = this.paradeService.ratioAccepted();
+			result.addObject("ratioAccepted", ratioAccepted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioAccepted", "N/A");
 		}
 
 		//--------------------------------------------------------------------------------------------------------------
