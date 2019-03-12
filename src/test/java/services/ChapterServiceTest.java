@@ -8,10 +8,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Chapter;
-import forms.RegisterChapterForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -29,22 +29,36 @@ public class ChapterServiceTest extends AbstractTest {
 	@Test
 	public void testRegisterChapter() {
 
-		final RegisterChapterForm chapterForm = new RegisterChapterForm();
+		final Chapter chapter = this.chapterService.create();
 
-		chapterForm.setTitle("chapter2");
-		chapterForm.setName("Michael");
-		chapterForm.setMiddleName("Jeffrey");
-		chapterForm.setSurname("Jordan");
-		chapterForm.setPhoto("https://es.wikipedia.org/wiki/Michael_Jordan");
-		chapterForm.setEmail("jordan@gmail.com");
-		chapterForm.setPhone("672195205");
-		chapterForm.setAddress("Reina Mercedes 34");
-		chapterForm.setUsername("michaeljordan");
-		chapterForm.setPassword("michaeljordan");
+		chapter.setTitle("chapter40");
+		chapter.setName("Michael");
+		chapter.setMiddleName("Jeffrey");
+		chapter.setSurname("Jordan");
+		chapter.setPhoto("https://es.wikipedia.org/wiki/Michael_Jordan");
+		chapter.setEmail("jordan@gmail.com");
+		chapter.setPhone("672195205");
+		chapter.setAddress("Reina Mercedes 34");
 
-		final Chapter chapter = this.chapterService.reconstruct(chapterForm, null);
+		chapter.getUserAccount().setUsername("chapter40");
+		chapter.getUserAccount().setPassword("chapter40");
 
-		this.chapterService.save(chapter);
+		final Chapter chapterSaved = this.chapterService.save(chapter);
+
+		Assert.notNull(chapterSaved);
 	}
 
+	@Test
+	public void testEditChapter() {
+		super.authenticate("chapter1");
+
+		final Chapter chapter1 = this.chapterService.findOne(super.getEntityId("chapter1"));
+
+		chapter1.setName("AAAA");
+
+		final Chapter chapterSaved = this.chapterService.save(chapter1);
+
+		Assert.isTrue(chapterSaved.getName().equals("AAAA"));
+
+	}
 }
