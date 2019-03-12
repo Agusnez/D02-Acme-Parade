@@ -25,7 +25,7 @@ public class SegmentService {
 
 	// Simple CRUD methods
 
-	public Segment create() {
+	public Segment create(final int brotherhoodId) {
 
 		final Segment result = new Segment();
 
@@ -65,4 +65,5 @@ public class SegmentService {
 		this.segmentRepository.delete(segment);
 
 	}
+
 }
