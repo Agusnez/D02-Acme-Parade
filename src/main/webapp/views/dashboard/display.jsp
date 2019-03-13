@@ -168,6 +168,30 @@
 
 <br/>
 
+<h3><spring:message code="dashboard.largestBrotherhood" /></h3>
+<fieldset>
+
+   <jstl:forEach items="${largestBrotherhood}" var="lb">
+    <jstl:out value="${lb.title}" />
+    <br />
+   </jstl:forEach>
+
+</fieldset>
+
+<br/>
+
+<h3><spring:message code="dashboard.brotherhoodsMoreThanAverage" /></h3>
+<fieldset>
+
+   <jstl:forEach items="${brotherhoodsMoreThanAverage}" var="ba">
+    <jstl:out value="${ba.title}" />
+    <br />
+   </jstl:forEach>
+
+</fieldset>
+
+<br/>
+
 <acme:button name="back" code="dashboard.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 	
 <jstl:if test="${language == 'en'}">

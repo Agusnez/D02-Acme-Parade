@@ -39,7 +39,7 @@ public class DashboardServiceTest extends AbstractTest {
 	@Test
 	public void authorityTest() {
 		final Object authorityTest[][] = {
-			{
+			{//only the admin can summon this services
 				"admin", null
 			}, {
 				"member1", IllegalArgumentException.class
@@ -57,13 +57,13 @@ public class DashboardServiceTest extends AbstractTest {
 	@Test
 	public void valueTest() {
 		final Object valueTest[][] = {
-			{
+			{//2 histories with a total of 9 record = 4.5
 				"avg", 4.5, null
-			}, {
+			}, {//brotherhood 1 has 8 record in total
 				"max", 8.0, null
-			}, {
+			}, {//brotherhood 2 has only 1 record (the mandatory one)
 				"min", 1.0, null
-			}, {
+			}, {//sqrt(((8-4.5)^2+(1-4.5)^2)/2) = 3.5
 				"stddev", 3.5, null
 			}, {
 				"avg", 0.0, IllegalArgumentException.class

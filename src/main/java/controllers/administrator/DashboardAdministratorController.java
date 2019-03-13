@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AreaService;
 import services.BrotherhoodService;
+import services.ConfigurationService;
 import services.EnrolmentService;
 import services.FinderService;
 import services.HistoryService;
@@ -36,34 +37,37 @@ import forms.ParadeIdForm;
 public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
-	private ParadeService		paradeService;
+	private ParadeService			paradeService;
 
 	@Autowired
-	private MemberService		memberService;
+	private MemberService			memberService;
 
 	@Autowired
-	private AreaService			areaService;
+	private AreaService				areaService;
 
 	@Autowired
-	private RequestService		requestService;
+	private RequestService			requestService;
 
 	@Autowired
-	private PositionService		positionService;
+	private PositionService			positionService;
 
 	@Autowired
-	private EnrolmentService	enrolmentService;
+	private EnrolmentService		enrolmentService;
 
 	@Autowired
-	private FinderService		finderService;
+	private FinderService			finderService;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private HistoryService		historyService;
+	private HistoryService			historyService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -276,6 +280,15 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double stddevRecordPerHistory = this.historyService.stddevRecordPerHistory();
 		result.addObject("stddevRecordPerHistory", stddevRecordPerHistory);
 
+		final Collection<Brotherhood> largestBrotherhood = this.historyService.largestBrotherhood();
+		result.addObject("largestBrotherhood", largestBrotherhood);
+
+		final Collection<Brotherhood> brotherhoodsMoreThanAverage = this.historyService.brotherhoodsMoreThanAverage();
+		result.addObject("brotherhoodsMoreThanAverage", brotherhoodsMoreThanAverage);
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		result.addObject("banner", banner);
+
 		return result;
 
 	}
@@ -486,6 +499,15 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("maxRecordPerHistory", maxRecordPerHistory);
 		final Double stddevRecordPerHistory = this.historyService.stddevRecordPerHistory();
 		result.addObject("stddevRecordPerHistory", stddevRecordPerHistory);
+
+		final Collection<Brotherhood> largestBrotherhood = this.historyService.largestBrotherhood();
+		result.addObject("largestBrotherhood", largestBrotherhood);
+
+		final Collection<Brotherhood> brotherhoodsMoreThanAverage = this.historyService.brotherhoodsMoreThanAverage();
+		result.addObject("brotherhoodsMoreThanAverage", brotherhoodsMoreThanAverage);
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		result.addObject("banner", banner);
 
 		return result;
 
