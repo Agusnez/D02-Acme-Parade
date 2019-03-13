@@ -97,6 +97,24 @@ public class LegalRecordService {
 		return result;
 	}
 
+	public void delete(final LegalRecord legalRecord) {
+
+		Assert.notNull(legalRecord);
+		Assert.isTrue(legalRecord.getId() != 0);
+
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+
+		final Authority br = new Authority();
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(br));
+
+		final History history = this.historyService.findByBrotherhoodId(actor.getId());
+		Assert.notNull(history);
+
+		history.getLegalRecords().remove(legalRecord);
+		this.legalRecordRepository.delete(legalRecord);
+	}
+
 	// Other business methods -----------------------
 
 	public Boolean securityLegal(final int legalId) {

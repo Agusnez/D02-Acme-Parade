@@ -40,20 +40,6 @@ public class ParadeService {
 
 	@Autowired
 	private ActorService		actorService;
-<<<<<<< HEAD
-
-	@Autowired
-	private BrotherhoodService	brotherhoodService;
-
-	@Autowired
-	private Validator			validator;
-
-	@Autowired
-	private FinderService		finderService;
-
-	@Autowired
-	private RequestService		requestService;
-=======
 
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
@@ -69,7 +55,6 @@ public class ParadeService {
 
 	@Autowired
 	private ChapterService		chapterService;
->>>>>>> master
 
 
 	// Simple CRUD methods

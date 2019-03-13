@@ -97,6 +97,25 @@ public class PeriodRecordService {
 		return result;
 	}
 
+	public void delete(final PeriodRecord periodRecord) {
+
+		Assert.notNull(periodRecord);
+		Assert.isTrue(periodRecord.getId() != 0);
+
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+
+		final Authority br = new Authority();
+		br.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(br));
+
+		final History history = this.historyService.findByBrotherhoodId(actor.getId());
+		Assert.notNull(history);
+
+		history.getPeriodRecords().remove(periodRecord);
+		this.periodRecordRepository.delete(periodRecord);
+	}
+
 	// Other business methods -----------------------
 
 	public Boolean securityPeriod(final int periodId) {

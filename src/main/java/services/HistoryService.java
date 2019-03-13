@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.HistoryRepository;
 import security.Authority;
@@ -37,6 +39,9 @@ public class HistoryService {
 
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	//Simple CRUD methods--------------------------------
@@ -98,17 +103,6 @@ public class HistoryService {
 
 		return result;
 	}
-	//
-	//	public Curriculum findByPersonalRecordId(final int personalRecordId) {
-	//
-	//		Assert.notNull(personalRecordId);
-	//
-	//		final Curriculum result = this.curriculumRepository.findByPersonalRecordId(personalRecordId);
-	//
-	//		Assert.notNull(result);
-	//
-	//		return result;
-	//	}
 
 	public Boolean securityHistory() {
 
@@ -122,6 +116,36 @@ public class HistoryService {
 			res = true;
 
 		return res;
+
+	}
+
+	public History reconstruct(final History history, final BindingResult binding) {
+
+		History result;
+
+		if (history.getId() == 0 || history == null) {
+
+			final InceptionRecord ir = this.inceptionRecordService.create();
+
+			final History historyNew = this.create(ir);
+
+			history.setBrotherhood(historyNew.getBrotherhood());
+
+			this.validator.validate(history, binding);
+
+			result = history;
+		} else {
+
+			final History historyBBDD = this.findOne(history.getId());
+
+			history.setBrotherhood(historyBBDD.getBrotherhood());
+
+			this.validator.validate(history, binding);
+
+			result = history;
+		}
+
+		return result;
 
 	}
 }
