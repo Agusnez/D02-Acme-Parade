@@ -2,15 +2,17 @@
 package domain;
 
 import java.sql.Time;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,10 +20,10 @@ public class Segment extends DomainEntity {
 
 	private String	origin;
 	private String	destination;
-	private Time	timeOrigin;
-	private Time	timeDestination;
-	private Boolean	finalMode;
-	private String	status;
+	private Date	timeOrigin;
+	private Date	timeDestination;
+
+	private Parade	parade;
 
 
 	@NotBlank
@@ -44,7 +46,8 @@ public class Segment extends DomainEntity {
 		this.destination = destination;
 	}
 
-	public Time getTimeOrigin() {
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	public Date getTimeOrigin() {
 		return this.timeOrigin;
 	}
 
@@ -52,7 +55,8 @@ public class Segment extends DomainEntity {
 		this.timeOrigin = timeOrigin;
 	}
 
-	public Time getTimeDestination() {
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	public Date getTimeDestination() {
 		return this.timeDestination;
 	}
 
@@ -60,23 +64,14 @@ public class Segment extends DomainEntity {
 		this.timeDestination = timeDestination;
 	}
 
-	@NotNull
-	public Boolean getFinalMode() {
-		return this.finalMode;
+	@Valid
+	@ManyToOne(optional = false)
+	public Parade getParade() {
+		return this.parade;
 	}
 
-	public void setFinalMode(final Boolean finalMode) {
-		this.finalMode = finalMode;
-	}
-
-	@NotBlank
-	@Pattern(regexp = "\\APENDING\\z|\\AREJECTED\\z|\\AAPPROVED\\z")
-	public String getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(final String status) {
-		this.status = status;
+	public void setParade(final Parade parade) {
+		this.parade = parade;
 	}
 
 }

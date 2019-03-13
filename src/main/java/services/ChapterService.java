@@ -222,4 +222,7 @@ public class ChapterService {
 
 	}
 
+	public void flush() {
+		this.chapterRepository.flush();
+	}
 }

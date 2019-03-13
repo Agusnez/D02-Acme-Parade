@@ -18,8 +18,10 @@ import org.springframework.validation.Validator;
 
 import repositories.ParadeRepository;
 import security.Authority;
+import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Finder;
 import domain.Float;
 import domain.Parade;
@@ -38,6 +40,7 @@ public class ParadeService {
 
 	@Autowired
 	private ActorService		actorService;
+<<<<<<< HEAD
 
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
@@ -50,6 +53,23 @@ public class ParadeService {
 
 	@Autowired
 	private RequestService		requestService;
+=======
+
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private Validator			validator;
+
+	@Autowired
+	private FinderService		finderService;
+
+	@Autowired
+	private RequestService		requestService;
+
+	@Autowired
+	private ChapterService		chapterService;
+>>>>>>> master
 
 
 	// Simple CRUD methods
@@ -69,6 +89,7 @@ public class ParadeService {
 		result.setBrotherhood(brotherhood);
 
 		result.setFinalMode(false);
+		result.setStatus(null);
 
 		return result;
 
@@ -123,11 +144,38 @@ public class ParadeService {
 		Assert.notNull(parade);
 
 		Parade result = parade;
-		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		Assert.notNull(brotherhood);
-		final Authority authority = new Authority();
-		authority.setAuthority(Authority.BROTHERHOOD);
-		Assert.isTrue(brotherhood.getUserAccount().getAuthorities().contains(authority));
+
+		Brotherhood brotherhood = null;
+		Chapter chapter = null;
+
+		final Authority authorityBrotherhood = new Authority();
+		authorityBrotherhood.setAuthority(Authority.BROTHERHOOD);
+		final Authority authorityChapter = new Authority();
+		authorityChapter.setAuthority(Authority.CHAPTER);
+
+		if (LoginService.getPrincipal().getAuthorities().contains(authorityBrotherhood))
+			brotherhood = this.brotherhoodService.findByPrincipal();
+		else if (LoginService.getPrincipal().getAuthorities().contains(authorityChapter))
+			chapter = this.chapterService.findByPrincipal();
+
+		Assert.isTrue(brotherhood != null || chapter != null);
+
+		/*
+		 * Aquí pasamos el status a SUBMITTED si se le pusiera en el create o el edit
+		 * el FINAL MODE a TRUE
+		 */
+		if (parade.getId() != 0) {
+			final Parade paradeBBDD = this.findOne(parade.getId());
+			//si estaba a true ya no se puede modificar
+			if (!LoginService.getPrincipal().getAuthorities().contains(authorityChapter))
+				Assert.isTrue(paradeBBDD.getFinalMode() == false);
+
+			//si estaba a false el de BBDD y ahora se ha puesto a true
+			if (parade.getStatus() == null && parade.getFinalMode() == true)
+				parade.setStatus("SUBMITTED");
+
+		} else if (parade.getId() == 0 && parade.getFinalMode() == true)
+			parade.setStatus("SUBMITTED");
 
 		final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
 		Assert.isTrue(parade.getOrganisationMoment().after(currentMoment));
@@ -137,7 +185,6 @@ public class ParadeService {
 		return result;
 
 	}
-
 	//Esto es una solución debido a que si editamos una brotherhood, hay que editar
 	//las parades. Si hay parades que ya pasaron daría fallo en el de arriba
 	//por el Assert de fechas. Aqui no lo tenemos. Solo es empleado el metodo cuando se edita Brotherhood
@@ -164,6 +211,7 @@ public class ParadeService {
 
 		Assert.notNull(parade);
 		Assert.isTrue(parade.getId() != 0);
+		Assert.isTrue(parade.getFinalMode() != true);
 
 		final Actor brotherhood = this.actorService.findByPrincipal();
 		Assert.notNull(brotherhood);
@@ -211,6 +259,31 @@ public class ParadeService {
 				this.paradeRepository.delete(p);
 
 			}
+
+	}
+
+	public Parade copy(final int paradeId) {
+
+		Parade result;
+
+		final Parade original = this.paradeRepository.findOne(paradeId);
+
+		final String ticker = this.generateTicker(original.getOrganisationMoment());
+
+		final Parade copy = this.create();
+
+		copy.setDescription(original.getDescription());
+		copy.setMaxColumn(original.getMaxColumn());
+		copy.setMaxRow(original.getMaxRow());
+		copy.setOrganisationMoment(original.getOrganisationMoment());
+		copy.setRejectedComment(null);
+		copy.setStatus("SUBMITTED");
+		copy.setTicker(ticker);
+		copy.setTitle(original.getTitle());
+
+		result = this.saveByEditBrotherhood(copy);
+
+		return result;
 
 	}
 
@@ -274,6 +347,33 @@ public class ParadeService {
 		return result;
 	}
 
+	public Double ratioDraftFinalModeParade() {
+
+		final Double result = this.paradeRepository.ratioDraftFinalModeParade();
+
+		return result;
+	}
+
+	public Double ratioSubmitted() {
+
+		final Double result = this.paradeRepository.ratioSubmitted();
+
+		return result;
+	}
+
+	public Double ratioRejected() {
+
+		final Double result = this.paradeRepository.ratioRejected();
+
+		return result;
+	}
+
+	public Double ratioAccepted() {
+
+		final Double result = this.paradeRepository.ratioAccepted();
+
+		return result;
+	}
 	public Parade reconstruct(final Parade parade, final BindingResult binding) {
 
 		Parade result = parade;
@@ -316,6 +416,26 @@ public class ParadeService {
 
 		return result;
 
+	}
+
+	public Parade reconstructReject(final Parade parade, final BindingResult binding) {
+
+		final Parade paradeBBDD = this.findOne(parade.getId());
+
+		parade.setBrotherhood(paradeBBDD.getBrotherhood());
+		parade.setFloats(paradeBBDD.getFloats());
+		parade.setTitle(paradeBBDD.getTitle());
+		parade.setDescription(paradeBBDD.getDescription());
+		parade.setOrganisationMoment(paradeBBDD.getOrganisationMoment());
+		parade.setTicker(paradeBBDD.getTicker());
+		parade.setFinalMode(paradeBBDD.getFinalMode());
+		parade.setMaxColumn(paradeBBDD.getMaxColumn());
+		parade.setMaxRow(paradeBBDD.getMaxRow());
+		parade.setStatus(paradeBBDD.getStatus());
+
+		this.validator.validate(parade, binding);
+
+		return parade;
 	}
 
 	public Boolean paradeBrotherhoodSecurity(final int paradeId) {
