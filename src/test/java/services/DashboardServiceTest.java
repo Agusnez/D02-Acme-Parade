@@ -36,44 +36,95 @@ public class DashboardServiceTest extends AbstractTest {
 
 	// Tests ------------------------------------------------------------------
 
-	// The following are fictitious test cases that are intended to check that 
-	// JUnit works well in this project.  Just righ-click this class and run 
-	// it using JUnit.
-
 	@Test
-	public void CorrectAuthorityTest() {
+	public void authorityTest() {
+		final Object authorityTest[][] = {
+			{
+				"admin", null
+			}, {
+				"member1", IllegalArgumentException.class
+			}, {
+				"brotherhood1", IllegalArgumentException.class
+			}, {
+				null, IllegalArgumentException.class
+			}
+		};
 
-		super.authenticate("admin");
-
-		final Double avg = this.historyService.avgRecordPerHistory();
-
-		Assert.isTrue(avg != null);
-
-		super.unauthenticate();
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void IncorrectAuthorityTest() {
-
-		super.authenticate("brotherhood1");
-
-		final Double avg = this.historyService.avgRecordPerHistory();
-
-		Assert.isTrue(avg != null);
-
-		super.unauthenticate();
+		for (int i = 0; i < authorityTest.length; i++)
+			this.AuthorityTemplate((String) authorityTest[i][0], (Class<?>) authorityTest[i][1]);
 	}
 
 	@Test
-	public void CorrectValueTest() {
+	public void valueTest() {
+		final Object valueTest[][] = {
+			{
+				"avg", 4.5, null
+			}, {
+				"max", 8.0, null
+			}, {
+				"min", 1.0, null
+			}, {
+				"stddev", 3.5, null
+			}, {
+				"avg", 0.0, IllegalArgumentException.class
+			}, {
+				"max", 0.0, IllegalArgumentException.class
+			}, {
+				"min", 0.0, IllegalArgumentException.class
+			}, {
+				"stddev", 0.0, IllegalArgumentException.class
+			}
+		};
 
-		super.authenticate("admin");
+		for (int i = 0; i < valueTest.length; i++)
+			this.ValueTemplate((String) valueTest[i][0], (Double) valueTest[i][1], (Class<?>) valueTest[i][2]);
+	}
 
-		final Double stddev = this.historyService.stddevRecordPerHistory();
+	// Ancillary methods ------------------------------------------------------
 
-		Assert.isTrue(stddev == 3.5);
+	protected void AuthorityTemplate(final String username, final Class<?> expected) {
+		Class<?> caught;
 
-		super.unauthenticate();
+		caught = null;
+		try {
+			super.authenticate(username);
+
+			final Double avg = this.historyService.avgRecordPerHistory();
+
+			Assert.isTrue(avg != null);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+	}
+
+	protected void ValueTemplate(final String method, final Double value, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate("admin");
+
+			Double test = 0.0;
+
+			if (method == "avg")
+				test = this.historyService.avgRecordPerHistory();
+			else if (method == "max")
+				test = this.historyService.maxRecordPerHistory();
+			else if (method == "min")
+				test = this.historyService.minRecordPerHistory();
+			else if (method == "stddev")
+				test = this.historyService.stddevRecordPerHistory();
+
+			Assert.isTrue(test.equals(value));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
 	}
 
 }
