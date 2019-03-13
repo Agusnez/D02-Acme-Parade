@@ -32,4 +32,16 @@ public interface ParadeRepository extends JpaRepository<Parade, Integer> {
 
 	@Query("select p from Parade p join p.brotherhood.members m where m.id = ?1")
 	Collection<Parade> findMemberParades(int memberId);
+
+	@Query("select (select count(p1) from Parade p1 where p1.finalMode = false )/count(p2)*1.0 from Parade p2 where p2.finalMode = true")
+	Double ratioDraftFinalModeParade();
+
+	@Query("select (select count(p1) from Parade p1 where (p1.finalMode = true) and (p1.status = 'SUBMITTED') )/count(p2)*1.0 from Parade p2 where p2.finalMode = true")
+	Double ratioSubmitted();
+
+	@Query("select (select count(p1) from Parade p1 where (p1.finalMode = true) and (p1.status = 'REJECTED') )/count(p2)*1.0 from Parade p2 where p2.finalMode = true")
+	Double ratioRejected();
+
+	@Query("select (select count(p1) from Parade p1 where (p1.finalMode = true) and (p1.status = 'ACCEPTED') )/count(p2)*1.0 from Parade p2 where p2.finalMode = true")
+	Double ratioAccepted();
 }

@@ -332,6 +332,33 @@ public class ParadeService {
 		return result;
 	}
 
+	public Double ratioDraftFinalModeParade() {
+
+		final Double result = this.paradeRepository.ratioDraftFinalModeParade();
+
+		return result;
+	}
+
+	public Double ratioSubmitted() {
+
+		final Double result = this.paradeRepository.ratioSubmitted();
+
+		return result;
+	}
+
+	public Double ratioRejected() {
+
+		final Double result = this.paradeRepository.ratioRejected();
+
+		return result;
+	}
+
+	public Double ratioAccepted() {
+
+		final Double result = this.paradeRepository.ratioAccepted();
+
+		return result;
+	}
 	public Parade reconstruct(final Parade parade, final BindingResult binding) {
 
 		Parade result = parade;
