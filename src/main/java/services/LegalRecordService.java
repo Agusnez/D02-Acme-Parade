@@ -106,6 +106,7 @@ public class LegalRecordService {
 		Assert.notNull(actor);
 
 		final Authority br = new Authority();
+		br.setAuthority(Authority.BROTHERHOOD);
 		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(br));
 
 		final History history = this.historyService.findByBrotherhoodId(actor.getId());
