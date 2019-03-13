@@ -943,6 +943,37 @@
 		<property name="rejectedComment" value="" />
 	</bean>
 	
+	<!-- Segments -->
+	<bean id="segment1" class="domain.Segment">
+		<property name="origin" value="place1" />
+		<property name="destination" value="place2" />
+		<property name="timeOrigin" value="2019/08/08 16:00" />
+		<property name="timeDestination" value="2019/08/08 17:00" />
+		<property name="parade">
+			<ref bean="parade1"/>		
+		</property>
+	</bean>
+	<bean id="segment2" class="domain.Segment">
+		<property name="origin" value="place2" />
+		<property name="destination" value="place3" />
+		<property name="timeOrigin" value="2019/08/08 17:00" />
+		<property name="timeDestination" value="2019/08/08 17:30" />
+		<property name="parade">
+			<ref bean="parade1"/>		
+		</property>
+		<property name="contiguous">
+			<ref bean="segment1"/>		
+		</property>
+	</bean>
+	<bean id="segment3" class="domain.Segment">
+		<property name="origin" value="place2" />
+		<property name="destination" value="place4" />
+		<property name="timeOrigin" value="2019/12/12 19:00" />
+		<property name="timeDestination" value="2019/12/12 20:00" />
+		<property name="parade">
+			<ref bean="parade2"/>		
+		</property>
+	</bean>
 	
 	<!-- Floats -->
 	<bean id="float1" class="domain.Float">

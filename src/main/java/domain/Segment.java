@@ -1,13 +1,13 @@
 
 package domain;
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -24,6 +24,7 @@ public class Segment extends DomainEntity {
 	private Date	timeDestination;
 
 	private Parade	parade;
+	private Segment	contiguous;
 
 
 	@NotBlank
@@ -51,7 +52,7 @@ public class Segment extends DomainEntity {
 		return this.timeOrigin;
 	}
 
-	public void setTimeOrigin(final Time timeOrigin) {
+	public void setTimeOrigin(final Date timeOrigin) {
 		this.timeOrigin = timeOrigin;
 	}
 
@@ -60,7 +61,7 @@ public class Segment extends DomainEntity {
 		return this.timeDestination;
 	}
 
-	public void setTimeDestination(final Time timeDestination) {
+	public void setTimeDestination(final Date timeDestination) {
 		this.timeDestination = timeDestination;
 	}
 
@@ -72,6 +73,16 @@ public class Segment extends DomainEntity {
 
 	public void setParade(final Parade parade) {
 		this.parade = parade;
+	}
+
+	@Valid
+	@OneToOne()
+	public Segment getContiguous() {
+		return this.contiguous;
+	}
+
+	public void setContiguous(final Segment contiguous) {
+		this.contiguous = contiguous;
 	}
 
 }
