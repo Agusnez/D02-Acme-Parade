@@ -50,7 +50,7 @@
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<acme:url href="parade/brotherhood/display.do?paradeId=${row.id }" code="parade.display" />
 	<acme:url href="float/brotherhood/floatAddParade.do?paradeId=${row.id }" code="parade.addFloat" />	
-	<acme:url href="float/brotherhood/listByParade.do?paradeId=${row.id }" code="parade.float" />
+	<acme:url href="segment/brotherhood/path.do?paradeId=${row.id }" code="parade.path" />
 	<div></div>
 	</security:authorize> 
 

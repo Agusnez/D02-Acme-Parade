@@ -22,6 +22,10 @@ public class SegmentService {
 
 
 	// Suporting services
+	
+	public Collection<Segment> findByParade(final int paradeId) {
+		return this.segmentRepository.segmentsPerParade(paradeId);
+	}
 
 	// Simple CRUD methods
 
