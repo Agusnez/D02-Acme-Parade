@@ -22,6 +22,10 @@ public class SegmentService {
 	private SegmentRepository	segmentRepository;
 
 	// Suporting services
+	
+	public Collection<Segment> findByParade(final int paradeId) {
+		return this.segmentRepository.segmentsPerParade(paradeId);
+	}
 
 	@Autowired
 	private ParadeService		paradeService;
