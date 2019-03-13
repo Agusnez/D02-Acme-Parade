@@ -436,5 +436,9 @@ public class ParadeService {
 
 		return res;
 	}
+	public void flush() {
+		this.paradeRepository.flush();
+
+	}
 
 }

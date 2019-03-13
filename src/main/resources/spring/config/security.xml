@@ -117,7 +117,7 @@
 		<security:intercept-url pattern="/area/administrator/edit.do" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/area/brotherhood/select.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/area/brotherhood/listAreas.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/segment/brotherhood/path.do" access="hasRole('BROTHERHOOD')" />
 		
 		<security:intercept-url pattern="/area/chapter/select.do" access="hasRole('CHAPTER')" />
 		<security:intercept-url pattern="/area/chapter/listAreas.do" access="hasRole('CHAPTER')" />
