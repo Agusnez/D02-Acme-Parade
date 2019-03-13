@@ -25,29 +25,6 @@ public class ChapterServiceTest extends AbstractTest {
 	private ChapterService	chapterService;
 
 
-	//	//a)Requirement 5 : Register new actor Chapter
-	//	@Test
-	//	public void testRegisterChapter() {
-	//
-	//		final Chapter chapter = this.chapterService.create();
-	//
-	//		chapter.setTitle("chapter40");
-	//		chapter.setName("Michael");
-	//		chapter.setMiddleName("Jeffrey");
-	//		chapter.setSurname("Jordan");
-	//		chapter.setPhoto("https://es.wikipedia.org/wiki/Michael_Jordan");
-	//		chapter.setEmail("jordan@gmail.com");
-	//		chapter.setPhone("672195205");
-	//		chapter.setAddress("Reina Mercedes 34");
-	//
-	//		chapter.getUserAccount().setUsername("chapter40");
-	//		chapter.getUserAccount().setPassword("chapter40");
-	//
-	//		final Chapter chapterSaved = this.chapterService.save(chapter);
-	//
-	//		Assert.notNull(chapterSaved);
-	//	}
-
 	/*
 	 * a) Requirement: Actor manage his/her profile
 	 * Negative cases:
@@ -64,7 +41,14 @@ public class ChapterServiceTest extends AbstractTest {
 				"brotherhood1", "chapter1", "calle 13", "a@a.com", "+34 333 3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
 			}, {
 				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", ConstraintViolationException.class
+			}, {
+				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, null, "http://www.photo.com", "title", ConstraintViolationException.class
 			}
+		//			,{
+		//				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, "surname", "http://www.photo.com", "title", ConstraintViolationException.class
+		//			}
+		//COMENTAR SI PONGO SOLO UN NULL NO DETECTA AUN ESTANDO FLUSH
+
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -90,7 +74,8 @@ public class ChapterServiceTest extends AbstractTest {
 			chapter.setPhoto(photo);
 			chapter.setTitle(title);
 
-			this.chapterService.save(chapter);
+			final Chapter chapterSaved = this.chapterService.save(chapter);
+			this.chapterService.saveAndFlush(chapterSaved);
 
 			this.unauthenticate();
 		} catch (final Throwable oops) {
