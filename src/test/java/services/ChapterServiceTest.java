@@ -24,6 +24,9 @@ public class ChapterServiceTest extends AbstractTest {
 	@Autowired
 	private ChapterService	chapterService;
 
+	@Autowired
+	private ParadeService	paradeService;
+
 
 	//	//a)Requirement 5 : Register new actor Chapter
 	//	@Test(expected = ConstraintViolationException.class)
@@ -101,50 +104,54 @@ public class ChapterServiceTest extends AbstractTest {
 	//		super.checkExceptions(expected, caught);
 	//	}
 
-	//a)Requirement 5 : Register new actor Chapter
-	//b)All data wrong
+	/*
+	 * a) Requirement 7 : Register new actor Chapter
+	 * Negative cases:
+	 * 2. El title itroducido es incorrecto(Null)
+	 * Data coverage:
+	 */
 	@Test
 	public void driverRegisterChapter() {
 		final Object testingData[][] = {
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter55", "chapter55", null
-			//			},//Todo bien
 			{
-				null, "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			},//Title null
+				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56", null
+			},//1.Todo bien
+			{
+				null, "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
+			},//2.Title null
 				//			{
-			//				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Name null NOFUNCIONA
-			//			{
-			//				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter55", "chapter55", null
-			//			},//Middle name null
-			//			{
-			//				"title1", "name1", "middleName1", null, "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Surname null NOFUNCIONA
-			//	{
-			//				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Photo no URL
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", null, "email1@gmail.com", "672195205", "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Photo null
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", "https://google.com", null, "672195205", "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Email null
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Email no pattern
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", null, "address1", "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Phone null
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", null, "chapter55", "chapter55", ConstraintViolationException.class
-			//			},//Address null
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", null, "chapter55", ConstraintViolationException.class
-			//			},//Username null
-			//			{
-			//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter55", null, ConstraintViolationException.class
-			//			},//Password null
+				//				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
+				//			},//Name null
+				//				{
+				//				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
+				//			},//Middle name null
+				//			{
+				//				"title1", "name1", "middleName1", null, "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter60", "chapter60", ConstraintViolationException.class
+				//			},//Surname null NOFUNCIONA
+				//	{
+				//				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
+				//			},//Photo no URL
+				//			{
+				//				"title1", "name1", "middleName1", "surname1", null, "email1@gmail.com", "672195205", "address1", "chapter62", "chapter55", ConstraintViolationException.class
+				//			},//Photo null
+				//			{
+				//				"title1", "name1", "middleName1", "surname1", "https://google.com", null, "672195205", "address1", "chapter63", "chapter55", NullPointerException.class
+				//			},//Email null
+				//			{
+				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
+				//			},//Email no pattern
+				//			{
+				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", null, "address1", "chapter65", "chapter55", ConstraintViolationException.class
+				//			},//Phone null
+				//			{
+				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", null, "chapter66", "chapter55", ConstraintViolationException.class
+				//			},//Address null
+				//			{
+				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", null, "chapter55", ConstraintViolationException.class
+				//			},//Username null
+				//			{
+				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter67", null, ConstraintViolationException.class
+				//			},//Password null
 
 		};
 
@@ -184,4 +191,39 @@ public class ChapterServiceTest extends AbstractTest {
 
 	}
 
+	/*
+	 * PRODRÍA IR EN EL DE PARADE
+	 * a) Requirement 7/2 : Make decisions on the parades
+	 * Negative cases:
+	 * 2. El actor que quiere hacerlo no es un Chapter
+	 * 3. El parade no tiene status submitted
+	 * 4. El parade no está en su area
+	 * Data coverage:
+	 */
+
+	//	protected void templateMakeDecision(final String username, final String paradeId, final String accion, final Class<?> expected) {
+	//
+	//		Class<?> caught;
+	//
+	//		caught = null;
+	//		try {
+	//			this.authenticate(username);
+	//			final Parade parade = this.paradeService.findOne(super.getEntityId(paradeId));
+	//
+	//			if (accion == "accept")
+	//				parade.setStatus("ACCEPTED");
+	//			else if (accion == "reject")
+	//				parade.setStatus("REJECTED");
+	//
+	//			this.paradeService.save(parade);
+	//			this.chapterService.flush();
+	//			this.paradeService.flush();
+	//
+	//		} catch (final Throwable oops) {
+	//			caught = oops.getClass();
+	//		}
+	//
+	//		super.checkExceptions(expected, caught);
+	//
+	//	}
 }
