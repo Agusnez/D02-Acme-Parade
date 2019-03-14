@@ -61,6 +61,8 @@
 		<security:intercept-url pattern="/member/list.do" access="permitAll" />
 		<security:intercept-url pattern="/member/brotherhood/display.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/float/parade/list.do" access="permitAll" />
+		<security:intercept-url pattern="/history/display.do" access="permitAll" />
+		
 	
 		<security:intercept-url pattern="/parade/list.do" access="permitAll" />
 		<security:intercept-url pattern="/parade/brotherhood/**" access="hasRole('BROTHERHOOD')" />

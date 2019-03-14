@@ -32,6 +32,7 @@
 		<value>/views/enrolment/tiles.xml</value>
 		<value>/views/request/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
+		<value>/views/history/tiles.xml</value>
 		<value>/views/box/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
 		<value>/views/socialProfile/tiles.xml</value>

@@ -36,6 +36,7 @@
 		<value>/views/enrolment/messages</value>
 
 		<value>/views/dashboard/messages</value>
+		<value>/views/history/messages</value>
 
 
 		<value>/views/request/messages</value>
