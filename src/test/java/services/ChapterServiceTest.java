@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
+import domain.Area;
 import domain.Chapter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,14 +28,18 @@ public class ChapterServiceTest extends AbstractTest {
 	@Autowired
 	private ParadeService	paradeService;
 
+	@Autowired
+	private AreaService		areaService;
+
 
 	/*
 	 * a) Requirement: Actor manage his/her profile
-	 * Negative cases:
+	 * b) Negative cases:
 	 * 2. El usuario que está logeado, no es el mismo que el que está editando
 	 * 3. El email no sigue el patrón especificado
 	 * 4. Atributo "surname" y "name" están a null
-	 * Data coverage:
+	 * c)99%?
+	 * d)27,27%
 	 */
 	@Test
 	public void driverEditChapter() {
@@ -48,6 +53,10 @@ public class ChapterServiceTest extends AbstractTest {
 				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", ConstraintViolationException.class
 			}, {
 				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, null, "http://www.photo.com", "title", ConstraintViolationException.class
+			}, {
+				"chapter1", "chapter1", null, "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
+			}, {
+				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", null, "surname", "name", "http://www.photo.com", "title", null
 			}
 		//			,{
 		//				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, "surname", "http://www.photo.com", "title", ConstraintViolationException.class
@@ -92,9 +101,10 @@ public class ChapterServiceTest extends AbstractTest {
 
 	/*
 	 * a) Requirement 7 : Register new actor Chapter
-	 * Negative cases:
-	 * 2. El title itroducido es incorrecto(Null)
-	 * Data coverage:
+	 * b) Negative cases:
+	 * 2. El title introducido es incorrecto(Null)
+	 * c)99%?
+	 * d)9,1%
 	 */
 	@Test
 	public void driverRegisterChapter() {
@@ -179,38 +189,59 @@ public class ChapterServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * PRODRÍA IR EN EL DE PARADE
-	 * a) Requirement 7/2 : Make decisions on the parades
-	 * Negative cases:
-	 * 2. El actor que quiere hacerlo no es un Chapter
-	 * 3. El parade no tiene status submitted
-	 * 4. El parade no está en su area
-	 * Data coverage:
+	 * 
+	 * a)(Level B)Requirement 2.1: Self-assing an area to co-ordinate. Once an area is
+	 * self-assigned, it cannot be changed.
+	 * b)Negative cases:
+	 * 2. Chapter se asigna un area cuando ya tiene una
+	 * c)0%
+	 * d)? ¿Hay que tomar los datos que interfieren en ese caso de uso en concreto?
 	 */
 
-	//	protected void templateMakeDecision(final String username, final String paradeId, final String accion, final Class<?> expected) {
-	//
-	//		Class<?> caught;
-	//
-	//		caught = null;
-	//		try {
-	//			this.authenticate(username);
-	//			final Parade parade = this.paradeService.findOne(super.getEntityId(paradeId));
-	//
-	//			if (accion == "accept")
-	//				parade.setStatus("ACCEPTED");
-	//			else if (accion == "reject")
-	//				parade.setStatus("REJECTED");
-	//
-	//			this.paradeService.save(parade);
-	//			this.chapterService.flush();
-	//			this.paradeService.flush();
-	//
-	//		} catch (final Throwable oops) {
-	//			caught = oops.getClass();
-	//		}
-	//
-	//		super.checkExceptions(expected, caught);
-	//
-	//	}
+	@Test
+	public void driverAssignArea() {
+		final Object testingData[][] = {
+
+			{
+				"chapter3", "area3", null
+			}, {
+				"chapter1", null, AssertionError.class
+			},
+
+		//			{
+		//				"chapter1", "area3", IllegalArgumentException.class
+		//			}
+		//COMENTAR PROBLEMA DE SET/SAVE BBDD
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateAssignArea((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+
+	}
+
+	protected void templateAssignArea(final String username, final String areaBean, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate(username);
+
+			final Area area = this.areaService.findOne(super.getEntityId(areaBean));
+
+			final Chapter chapter = this.chapterService.findOne(super.getEntityId(username));
+
+			chapter.setArea(area);
+
+			this.chapterService.save(chapter);
+			this.chapterService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+	}
+
 }
