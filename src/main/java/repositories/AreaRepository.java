@@ -20,4 +20,7 @@ public interface AreaRepository extends JpaRepository<Area, Integer> {
 
 	@Query("select (select count(a1) from Area a1 where a1.brotherhoods.size=0)/count(a2)*1.0 from Area a2")
 	Double ratioArea();
+
+	@Query("select 1-(select count(c) from Chapter c where c.area != null)/count(a)*1.0 from Area a")
+	Double ratioAreasNotCoordinatedAnyChapters();
 }

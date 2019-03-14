@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
+import domain.Area;
 import domain.Chapter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,88 +28,83 @@ public class ChapterServiceTest extends AbstractTest {
 	@Autowired
 	private ParadeService	paradeService;
 
+	@Autowired
+	private AreaService		areaService;
 
-	//	//a)Requirement 5 : Register new actor Chapter
-	//	@Test(expected = ConstraintViolationException.class)
-	//	public void testRegisterChapter() {
-	//
-	//		final Chapter chapter = this.chapterService.create();
-	//
-	//		chapter.setTitle("title1");
-	//		chapter.setName("Michael");
-	//		chapter.setMiddleName("Jeffrey");
-	//		chapter.setSurname("Jordan");
-	//		chapter.setPhoto("https://es.wikipedia.org/wiki/Michael_Jordan");
-	//		chapter.setEmail("jordan@gmail.com");
-	//		chapter.setPhone("672195205");
-	//		chapter.setAddress("Reina Mercedes 34");
-	//
-	//		chapter.getUserAccount().setUsername("chapter40");
-	//		chapter.getUserAccount().setPassword("chapter40");
-	//
-	//		final Chapter chapterSaved = this.chapterService.save(chapter);
-	//
-	//		Assert.notNull(chapterSaved);
-	//	}
 
 	/*
 	 * a) Requirement: Actor manage his/her profile
-	 * Negative cases:
+	 * b) Negative cases:
 	 * 2. El usuario que está logeado, no es el mismo que el que está editando
 	 * 3. El email no sigue el patrón especificado
-	 * Data coverage:
+	 * 4. Atributo "surname" y "name" están a null
+	 * c)99%?
+	 * d)27,27%
 	 */
-	//	@Test
-	//	public void driverEditChapter() {
-	//		final Object testingData[][] = {
-	//			{
-	//				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
-	//			}, {
-	//				"brotherhood1", "chapter1", "calle 13", "a@a.com", "+34 333 3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
-	//			}, {
-	//				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", ConstraintViolationException.class
-	//			}
-	//		};
-	//
-	//		for (int i = 0; i < testingData.length; i++)
-	//			this.templateEditChapter((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-	//				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (Class<?>) testingData[i][10]);
-	//
-	//	}
-	//	protected void templateEditChapter(final String username, final int chapterId, final String address, final String email, final String phone, final String middleName, final String surname, final String name, final String photo, final String title,
-	//		final Class<?> expected) {
-	//		Class<?> caught;
-	//
-	//		caught = null;
-	//		try {
-	//			this.authenticate(username);
-	//
-	//			final Chapter chapter = this.chapterService.findOne(chapterId);
-	//
-	//			chapter.setAddress(address);
-	//			chapter.setEmail(email);
-	//			chapter.setMiddleName(middleName);
-	//			chapter.setName(surname);
-	//			chapter.setName(name);
-	//			chapter.setPhoto(photo);
-	//			chapter.setTitle(title);
-	//
-	//			this.chapterService.save(chapter);
-	//
-	//			this.unauthenticate();
-	//		} catch (final Throwable oops) {
-	//			caught = oops.getClass();
-	//
-	//		}
-	//
-	//		super.checkExceptions(expected, caught);
-	//	}
+	@Test
+	public void driverEditChapter() {
+		final Object testingData[][] = {
+
+			{
+				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
+			}, {
+				"brotherhood1", "chapter1", "calle 13", "a@a.com", "+34 333 3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
+			}, {
+				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", ConstraintViolationException.class
+			}, {
+				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, null, "http://www.photo.com", "title", ConstraintViolationException.class
+			}, {
+				"chapter1", "chapter1", null, "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
+			}, {
+				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", null, "surname", "name", "http://www.photo.com", "title", null
+			}
+		//			,{
+		//				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, "surname", "http://www.photo.com", "title", ConstraintViolationException.class
+		//			}
+		//COMENTAR SI PONGO SOLO UN NULL NO DETECTA AUN ESTANDO FLUSH
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEditChapter((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
+				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (Class<?>) testingData[i][10]);
+
+	}
+	protected void templateEditChapter(final String username, final int chapterId, final String address, final String email, final String phone, final String middleName, final String surname, final String name, final String photo, final String title,
+		final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate(username);
+
+			final Chapter chapter = this.chapterService.findOne(chapterId);
+
+			chapter.setAddress(address);
+			chapter.setEmail(email);
+			chapter.setMiddleName(middleName);
+			chapter.setName(surname);
+			chapter.setName(name);
+			chapter.setPhoto(photo);
+			chapter.setTitle(title);
+
+			this.chapterService.save(chapter);
+			this.chapterService.flush();
+
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+
+		}
+
+		super.checkExceptions(expected, caught);
+	}
 
 	/*
 	 * a) Requirement 7 : Register new actor Chapter
-	 * Negative cases:
-	 * 2. El title itroducido es incorrecto(Null)
-	 * Data coverage:
+	 * b) Negative cases:
+	 * 2. El title introducido es incorrecto(Null)
+	 * c)99%?
+	 * d)9,1%
 	 */
 	@Test
 	public void driverRegisterChapter() {
@@ -120,38 +116,39 @@ public class ChapterServiceTest extends AbstractTest {
 				null, "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
 			},//2.Title null
 				//			{
-				//				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
-				//			},//Name null
-				//				{
-				//				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
-				//			},//Middle name null
-				//			{
-				//				"title1", "name1", "middleName1", null, "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter60", "chapter60", ConstraintViolationException.class
-				//			},//Surname null NOFUNCIONA
-				//	{
-				//				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
-				//			},//Photo no URL
-				//			{
-				//				"title1", "name1", "middleName1", "surname1", null, "email1@gmail.com", "672195205", "address1", "chapter62", "chapter55", ConstraintViolationException.class
-				//			},//Photo null
-				//			{
-				//				"title1", "name1", "middleName1", "surname1", "https://google.com", null, "672195205", "address1", "chapter63", "chapter55", NullPointerException.class
-				//			},//Email null
-				//			{
-				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
-				//			},//Email no pattern
-				//			{
-				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", null, "address1", "chapter65", "chapter55", ConstraintViolationException.class
-				//			},//Phone null
-				//			{
-				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", null, "chapter66", "chapter55", ConstraintViolationException.class
-				//			},//Address null
-				//			{
-				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", null, "chapter55", ConstraintViolationException.class
-				//			},//Username null
-				//			{
-				//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter67", null, ConstraintViolationException.class
-				//			},//Password null
+		//				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
+		//			},//Name null
+		//				{
+		//				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
+		//			},//Middle name null
+		//			{
+		//				"title1", "name1", "middleName1", null, "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter60", "chapter60", ConstraintViolationException.class
+		//			},//Surname null NOFUNCIONA
+		//	{
+		//				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
+		//			},//Photo no URL
+
+		//			{
+		//				"title1", "name1", "middleName1", "surname1", null, "email1@gmail.com", "672195205", "address1", "chapter62", "chapter55", ConstraintViolationException.class
+		//			},//Photo null
+		//			{
+		//				"title1", "name1", "middleName1", "surname1", "https://google.com", null, "672195205", "address1", "chapter63", "chapter55", NullPointerException.class
+		//			},//Email null
+		//			{
+		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
+		//			},//Email no pattern
+		//			{
+		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", null, "address1", "chapter65", "chapter55", ConstraintViolationException.class
+		//			},//Phone null
+		//			{
+		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", null, "chapter66", "chapter55", ConstraintViolationException.class
+		//			},//Address null
+		//			{
+		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", null, "chapter55", ConstraintViolationException.class
+		//			},//Username null
+		//			{
+		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter67", null, ConstraintViolationException.class
+		//			},//Password null
 
 		};
 
@@ -192,38 +189,59 @@ public class ChapterServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * PRODRÍA IR EN EL DE PARADE
-	 * a) Requirement 7/2 : Make decisions on the parades
-	 * Negative cases:
-	 * 2. El actor que quiere hacerlo no es un Chapter
-	 * 3. El parade no tiene status submitted
-	 * 4. El parade no está en su area
-	 * Data coverage:
+	 * 
+	 * a)(Level B)Requirement 2.1: Self-assing an area to co-ordinate. Once an area is
+	 * self-assigned, it cannot be changed.
+	 * b)Negative cases:
+	 * 2. Chapter se asigna un area cuando ya tiene una
+	 * c)0%
+	 * d)? ¿Hay que tomar los datos que interfieren en ese caso de uso en concreto?
 	 */
 
-	//	protected void templateMakeDecision(final String username, final String paradeId, final String accion, final Class<?> expected) {
-	//
-	//		Class<?> caught;
-	//
-	//		caught = null;
-	//		try {
-	//			this.authenticate(username);
-	//			final Parade parade = this.paradeService.findOne(super.getEntityId(paradeId));
-	//
-	//			if (accion == "accept")
-	//				parade.setStatus("ACCEPTED");
-	//			else if (accion == "reject")
-	//				parade.setStatus("REJECTED");
-	//
-	//			this.paradeService.save(parade);
-	//			this.chapterService.flush();
-	//			this.paradeService.flush();
-	//
-	//		} catch (final Throwable oops) {
-	//			caught = oops.getClass();
-	//		}
-	//
-	//		super.checkExceptions(expected, caught);
-	//
-	//	}
+	@Test
+	public void driverAssignArea() {
+		final Object testingData[][] = {
+
+			{
+				"chapter3", "area3", null
+			}, {
+				"chapter1", null, AssertionError.class
+			},
+
+		//			{
+		//				"chapter1", "area3", IllegalArgumentException.class
+		//			}
+		//COMENTAR PROBLEMA DE SET/SAVE BBDD
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateAssignArea((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+
+	}
+
+	protected void templateAssignArea(final String username, final String areaBean, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate(username);
+
+			final Area area = this.areaService.findOne(super.getEntityId(areaBean));
+
+			final Chapter chapter = this.chapterService.findOne(super.getEntityId(username));
+
+			chapter.setArea(area);
+
+			this.chapterService.save(chapter);
+			this.chapterService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+	}
+
 }
