@@ -225,4 +225,8 @@ public class ChapterService {
 	public void flush() {
 		this.chapterRepository.flush();
 	}
+
+	public void saveAndFlush(final Chapter chapter) {
+		this.chapterRepository.saveAndFlush(chapter);
+	}
 }

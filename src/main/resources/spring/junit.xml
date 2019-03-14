@@ -20,6 +20,7 @@
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
+
 	<import resource="datasource.xml" />
 	<import resource="config/packages.xml" />
 	
