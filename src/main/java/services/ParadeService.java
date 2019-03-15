@@ -441,4 +441,15 @@ public class ParadeService {
 
 	}
 
+	public Boolean exist(final int paradeId) {
+		Boolean res = false;
+
+		final Parade parade = this.paradeRepository.findOne(paradeId);
+
+		if (parade != null)
+			res = true;
+
+		return res;
+	}
+
 }

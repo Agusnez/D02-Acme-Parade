@@ -1,0 +1,36 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
+<form:form action="segment/brotherhood/edit.do" modelAttribute="parade">
+	
+	
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="paradeId" />
+	
+	<acme:textbox path="origin" code="segment.origin" obligatory="true"/>
+	
+	<acme:textbox path="destination" code="segment.destination"  obligatory="true"/>
+	
+	<acme:textbox path="timeOrigin" code="segment.timeOrigin" placeholder="yyyy/MM/dd hh:mm" obligatory="true"/>
+	
+	<acme:textbox path="timeDestination" code="segment.timeDestination" placeholder="yyyy/MM/dd hh:mm" obligatory="true"/>
+  	
+			
+	<acme:submit name="save" code="segment.save" />	
+
+	<acme:cancel code="parade.cancel" url="parade/brotherhood/list.do" />
+	
+	<jstl:if test="${segment.id != 0}">
+	<acme:delete confirmation="segment.confirm.delete" code="segment.delete" />
+	</jstl:if>	
+	
+
+</form:form>

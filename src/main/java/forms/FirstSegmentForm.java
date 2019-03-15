@@ -1,31 +1,29 @@
 
-package domain;
+package forms;
 
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import domain.DomainEntity;
+
 @Entity
 @Access(AccessType.PROPERTY)
-public class Segment extends DomainEntity {
+public class FirstSegmentForm extends DomainEntity {
 
 	private String	origin;
 	private String	destination;
 	private Date	timeOrigin;
 	private Date	timeDestination;
 
-	private Parade	parade;
-	private Segment	contiguous;
+	private int		paradeId;
 
 
 	@NotBlank
@@ -68,24 +66,12 @@ public class Segment extends DomainEntity {
 		this.timeDestination = timeDestination;
 	}
 
-	@Valid
-	@ManyToOne(optional = false)
-	public Parade getParade() {
-		return this.parade;
+	public int getParadeId() {
+		return this.paradeId;
 	}
 
-	public void setParade(final Parade parade) {
-		this.parade = parade;
-	}
-
-	@Valid
-	@OneToOne()
-	public Segment getContiguous() {
-		return this.contiguous;
-	}
-
-	public void setContiguous(final Segment contiguous) {
-		this.contiguous = contiguous;
+	public void setParadeId(final int paradeId) {
+		this.paradeId = paradeId;
 	}
 
 }
