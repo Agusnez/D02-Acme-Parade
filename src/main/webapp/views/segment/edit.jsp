@@ -35,7 +35,7 @@
 
 	<acme:cancel code="parade.cancel" url="parade/brotherhood/list.do" />
 	
-	<jstl:if test="${segment.id != 0}">
+	<jstl:if test="${segment.id != 0 and delete}">
 	<acme:delete confirmation="segment.confirm.delete" code="segment.delete" />
 	</jstl:if>	
 	

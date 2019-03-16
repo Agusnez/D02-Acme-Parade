@@ -135,6 +135,11 @@ public class SegmentBrotherhoodController {
 		Boolean security;
 		final Boolean exist;
 
+		final Segment contiguousAfter = this.segmentService.segmentContiguous(segmentId);
+		Boolean delete = false;
+		if (contiguousAfter == null)
+			delete = true;
+
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Brotherhood b;
@@ -148,9 +153,10 @@ public class SegmentBrotherhoodController {
 				segment = this.segmentService.findOne(segmentId);
 				security = this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId());
 
-				if (security)
+				if (security) {
 					result = this.createEditModelAndView(segment, null);
-				else
+					result.addObject("delete", delete);
+				} else
 					result = new ModelAndView("redirect:/welcome/index.do");
 			} else {
 				result = new ModelAndView("misc/notExist");
@@ -160,7 +166,6 @@ public class SegmentBrotherhoodController {
 
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveComplete")
 	public ModelAndView saveComplete(@ModelAttribute(value = "segment") final FirstSegmentForm form, final BindingResult binding) {
 		ModelAndView result;
@@ -208,6 +213,24 @@ public class SegmentBrotherhoodController {
 		else
 			try {
 				this.segmentService.save(segmentReconstruct);
+				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + segmentReconstruct.getParade().getId());
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(form, "segment.commit.error");
+			}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@ModelAttribute(value = "segment") final Segment form, final BindingResult binding) {
+		ModelAndView result;
+
+		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(form);
+		else
+			try {
+				this.segmentService.delete(segmentReconstruct);
 				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + segmentReconstruct.getParade().getId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(form, "segment.commit.error");

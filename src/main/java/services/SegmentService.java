@@ -69,16 +69,20 @@ public class SegmentService {
 	public Segment save(final Segment segment) {
 		Segment result;
 
+		Assert.isTrue(segment.getTimeOrigin().before(segment.getTimeDestination()));
+
 		if (segment.getId() != 0) {
 			if (segment.getContiguous() != null) {
-
-				Assert.isTrue(segment.getContiguous().getTimeOrigin().before(segment.getTimeOrigin()));
-				Assert.isTrue(segment.getContiguous().getTimeDestination().before(segment.getTimeOrigin()));
 
 				final Segment contiguousBefore = segment.getContiguous();
 
 				contiguousBefore.setDestination(segment.getOrigin());
 				contiguousBefore.setTimeDestination(segment.getTimeOrigin());
+
+				Assert.isTrue(contiguousBefore.getTimeOrigin().before(segment.getTimeOrigin()));
+				Assert.isTrue(contiguousBefore.getTimeDestination().before(segment.getTimeOrigin()));
+
+				Assert.isTrue(contiguousBefore.getTimeOrigin().before(contiguousBefore.getTimeDestination()));
 
 				this.segmentRepository.save(contiguousBefore);
 
@@ -88,17 +92,18 @@ public class SegmentService {
 
 			if (contiguousAfter != null) {
 
+				contiguousAfter.setOrigin(segment.getDestination());
+				contiguousAfter.setTimeOrigin(segment.getTimeDestination());
+
 				Assert.isTrue(contiguousAfter.getTimeOrigin().after(segment.getTimeOrigin()));
 				Assert.isTrue(contiguousAfter.getTimeDestination().after(segment.getTimeDestination()));
 
-				contiguousAfter.setOrigin(segment.getDestination());
-				contiguousAfter.setTimeOrigin(segment.getTimeDestination());
+				Assert.isTrue(contiguousAfter.getTimeOrigin().before(contiguousAfter.getTimeDestination()));
 
 				this.segmentRepository.save(contiguousAfter);
 
 			}
 
-			Assert.isTrue(segment.getTimeOrigin().before(segment.getTimeDestination()));
 		}
 
 		result = this.segmentRepository.save(segment);
@@ -108,6 +113,10 @@ public class SegmentService {
 	public void delete(final Segment segment) {
 
 		Assert.isTrue(segment.getId() != 0);
+
+		final Segment contiguousAfter = this.segmentContiguous(segment.getId());
+
+		Assert.isTrue(contiguousAfter == null);
 
 		this.segmentRepository.delete(segment);
 

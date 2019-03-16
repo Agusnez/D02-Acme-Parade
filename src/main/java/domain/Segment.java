@@ -30,6 +30,7 @@ public class Segment extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml
+	//@Pattern(regexp = "^\\d\\.\\d\\-\\d\\.\\d$")
 	public String getOrigin() {
 		return this.origin;
 	}
@@ -40,6 +41,7 @@ public class Segment extends DomainEntity {
 
 	@NotBlank
 	@SafeHtml
+	//@Pattern(regexp = "^\\d.\\d-\\d.\\d$")
 	public String getDestination() {
 		return this.destination;
 	}
