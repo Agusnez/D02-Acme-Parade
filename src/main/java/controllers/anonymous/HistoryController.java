@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.anonymous;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ConfigurationService;
 import services.HistoryService;
+import controllers.AbstractController;
 import domain.History;
 
 @Controller
@@ -64,7 +65,7 @@ public class HistoryController extends AbstractController {
 	//		if (existHistory)
 	//			result = new ModelAndView("redirect:display.do");
 	//		else
-	//			result = new ModelAndView("redirect:/personalRecord/handyWorker/create.do");
+	//			result = new ModelAndView("redirect:/inceptionRecord/brotherhood/create.do");
 	//
 	//		return result;
 	//	}

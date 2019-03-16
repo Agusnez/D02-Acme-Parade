@@ -25,6 +25,8 @@
 	
 	<acme:url href="float/list.do?brotherhoodId=${row.id }" code="brotherhood.floats" />
 	
+	<acme:url href="history/display.do?brotherhoodId=${row.id }" code="brotherhood.history" />
+	
 	<security:authorize access="hasRole('MEMBER')">
 	<acme:url href="enrolment/member/enrol.do?brotherhoodId=${row.id }" code="brotherhood.enrol" />
 	</security:authorize>
