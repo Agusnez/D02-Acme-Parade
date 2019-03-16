@@ -90,6 +90,15 @@ public class ChapterService {
 
 			Assert.isTrue(actor.getId() == chapter.getId());
 
+			final Chapter chapterBBDD = this.findOne(chapter.getId());
+
+			if (chapterBBDD.getArea() != null)
+				Assert.isTrue(chapterBBDD.getArea().equals(chapter.getArea()));
+			else if (chapterBBDD.getArea() == null && chapter.getArea() != null) {
+				final Chapter chapterByArea = this.findChapterByAreaId(chapter.getArea().getId());
+				Assert.isNull(chapterByArea);
+			}
+
 			this.actorService.checkEmail(chapter.getEmail(), false);
 			this.actorService.checkPhone(chapter.getPhone());
 
@@ -160,7 +169,6 @@ public class ChapterService {
 		return result;
 
 	}
-
 	// Other business methods 
 
 	public Chapter findByUserAccount(final UserAccount userAccount) {
@@ -222,4 +230,17 @@ public class ChapterService {
 
 	}
 
+	public void flush() {
+		this.chapterRepository.flush();
+	}
+
+	public void saveAndFlush(final Chapter chapter) {
+		this.chapterRepository.saveAndFlush(chapter);
+	}
+
+	Chapter findChapterByAreaId(final int areaId) {
+		final Chapter chapter = this.chapterRepository.findChapterByAreaId(areaId);
+
+		return chapter;
+	}
 }

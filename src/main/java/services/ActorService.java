@@ -173,12 +173,12 @@ public class ActorService {
 		if (StringUtils.isNumericSpace(phone) && count == 4) {
 			res.replaceAll("\\s+", ""); //quitar espacios
 			res = this.configurationService.findConfiguration().getCountryCode() + " " + phone;
+			Assert.isTrue(res.contains(this.configurationService.findConfiguration().getCountryCode() + " " + phone));
 
 		}
 		return res;
 
 	}
-
 	public String authorityAuthenticated() {
 		String res = null;
 

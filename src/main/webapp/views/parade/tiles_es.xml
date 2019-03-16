@@ -36,5 +36,11 @@
 		<put-attribute name="body" value="/views/parade/listAnonimo.jsp" />
 	</definition>
 	
+	<definition name="parade/reject" extends="master.page">	
+		<put-attribute name="title" value="Rechazar desfile" />
+		<put-attribute name="body" value="/views/parade/reject.jsp" />
+	</definition>
+	
+	
 	
 </tiles-definitions>

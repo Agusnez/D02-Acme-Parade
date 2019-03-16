@@ -1,16 +1,18 @@
 
 package domain;
 
-import java.sql.Time;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,10 +20,11 @@ public class Segment extends DomainEntity {
 
 	private String	origin;
 	private String	destination;
-	private Time	timeOrigin;
-	private Time	timeDestination;
-	private Boolean	finalMode;
-	private String	status;
+	private Date	timeOrigin;
+	private Date	timeDestination;
+
+	private Parade	parade;
+	private Segment	contiguous;
 
 
 	@NotBlank
@@ -44,39 +47,42 @@ public class Segment extends DomainEntity {
 		this.destination = destination;
 	}
 
-	public Time getTimeOrigin() {
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	public Date getTimeOrigin() {
 		return this.timeOrigin;
 	}
 
-	public void setTimeOrigin(final Time timeOrigin) {
+	public void setTimeOrigin(final Date timeOrigin) {
 		this.timeOrigin = timeOrigin;
 	}
 
-	public Time getTimeDestination() {
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	public Date getTimeDestination() {
 		return this.timeDestination;
 	}
 
-	public void setTimeDestination(final Time timeDestination) {
+	public void setTimeDestination(final Date timeDestination) {
 		this.timeDestination = timeDestination;
 	}
 
-	@NotNull
-	public Boolean getFinalMode() {
-		return this.finalMode;
+	@Valid
+	@ManyToOne(optional = false)
+	public Parade getParade() {
+		return this.parade;
 	}
 
-	public void setFinalMode(final Boolean finalMode) {
-		this.finalMode = finalMode;
+	public void setParade(final Parade parade) {
+		this.parade = parade;
 	}
 
-	@NotBlank
-	@Pattern(regexp = "\\APENDING\\z|\\AREJECTED\\z|\\AAPPROVED\\z")
-	public String getStatus() {
-		return this.status;
+	@Valid
+	@OneToOne()
+	public Segment getContiguous() {
+		return this.contiguous;
 	}
 
-	public void setStatus(final String status) {
-		this.status = status;
+	public void setContiguous(final Segment contiguous) {
+		this.contiguous = contiguous;
 	}
 
 }

@@ -16,15 +16,15 @@
 	<form:hidden path="version" />
 	
 	
-	<acme:textbox path="title" code="parade.title" />
+	<acme:textbox path="title" code="parade.title" obligatory="true"/>
 	
-	<acme:textbox path="description" code="parade.description" />
+	<acme:textbox path="description" code="parade.description" obligatory="true"/>
 	
-	<acme:textbox path="maxRow" code="parade.maxRow" />
+	<acme:textbox path="maxRow" code="parade.maxRow" obligatory="true"/>
 	
-	<acme:textbox path="maxColumn" code="parade.maxColumn" />
+	<acme:textbox path="maxColumn" code="parade.maxColumn" obligatory="true"/>
 	
-	<acme:textbox path="organisationMoment" code="parade.organisationMoment" placeholder="yyyy/MM/dd hh:mm"/>
+	<acme:textbox path="organisationMoment" code="parade.organisationMoment" placeholder="yyyy/MM/dd hh:mm" obligatory="true"/>
   	
   	<acme:choose path="finalMode" code="parade.finalMode" value1="true" value2="false" label1="Final" label2="No Final" />
 			

@@ -270,6 +270,36 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("scores", scores);
 
 		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioDraftFinalModeParade = this.paradeService.ratioDraftFinalModeParade();
+			result.addObject("ratioDraftFinalModeParade", ratioDraftFinalModeParade);
+		} catch (final Throwable oops) {
+			result.addObject("ratioDraftFinalModeParade", "N/A");
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioSubmitted = this.paradeService.ratioSubmitted();
+			result.addObject("ratioSubmitted", ratioSubmitted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioSubmitted", "N/A");
+		}
+
+		try {
+			final Double ratioRejected = this.paradeService.ratioRejected();
+			result.addObject("ratioRejected", ratioRejected);
+		} catch (final Throwable oops) {
+			result.addObject("ratioRejected", "N/A");
+		}
+
+		try {
+			final Double ratioAccepted = this.paradeService.ratioAccepted();
+			result.addObject("ratioAccepted", ratioAccepted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioAccepted", "N/A");
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
 
 		final Double avgRecordPerHistory = this.historyService.avgRecordPerHistory();
 		result.addObject("avgRecordPerHistory", avgRecordPerHistory);
@@ -488,6 +518,36 @@ public class DashboardAdministratorController extends AbstractController {
 		final String scores = rango1 + ", " + rango2 + ", " + rango3 + ", " + rango4 + ", " + rango5 + ", " + rango6 + ", " + rango7 + ", " + rango8;
 
 		result.addObject("scores", scores);
+
+		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioDraftFinalModeParade = this.paradeService.ratioDraftFinalModeParade();
+			result.addObject("ratioDraftFinalModeParade", ratioDraftFinalModeParade);
+		} catch (final Throwable oops) {
+			result.addObject("ratioDraftFinalModeParade", "N/A");
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
+		try {
+			final Double ratioSubmitted = this.paradeService.ratioSubmitted();
+			result.addObject("ratioSubmitted", ratioSubmitted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioSubmitted", "N/A");
+		}
+
+		try {
+			final Double ratioRejected = this.paradeService.ratioRejected();
+			result.addObject("ratioRejected", ratioRejected);
+		} catch (final Throwable oops) {
+			result.addObject("ratioRejected", "N/A");
+		}
+
+		try {
+			final Double ratioAccepted = this.paradeService.ratioAccepted();
+			result.addObject("ratioAccepted", ratioAccepted);
+		} catch (final Throwable oops) {
+			result.addObject("ratioAccepted", "N/A");
+		}
 
 		//--------------------------------------------------------------------------------------------------------------
 

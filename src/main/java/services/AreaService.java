@@ -284,4 +284,11 @@ public class AreaService {
 		}
 	}
 
+	public Double ratioAreasNotCoordinatedAnyChapters() {
+
+		final Double res = this.areaRepository.ratioAreasNotCoordinatedAnyChapters();
+
+		return res;
+	}
+
 }

@@ -30,6 +30,10 @@
 
 <acme:display property="${parade.finalMode }" code="parade.finalMode" />
 
+<jstl:if test="${!parade.finalMode }">
+<acme:button name="edit" code="parade.edit" onclick="javascript: relativeRedir('parade/brotherhood/edit.do?paradeId=${parade.id }');" />
+</jstl:if>
+
 <acme:button name="back" code="parade.back" onclick="javascript: relativeRedir('parade/brotherhood/list.do');" />
 
 
