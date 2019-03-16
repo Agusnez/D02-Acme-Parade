@@ -41,7 +41,7 @@ public class ChapterService {
 	@Autowired
 	private BoxService			boxService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator			validator;
 
 

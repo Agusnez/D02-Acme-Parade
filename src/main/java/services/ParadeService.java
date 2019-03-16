@@ -42,7 +42,7 @@ public class ParadeService {
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator			validator;
 
 	@Autowired

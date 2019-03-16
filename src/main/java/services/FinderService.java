@@ -38,7 +38,7 @@ public class FinderService {
 	@Autowired
 	private ParadeService		paradeService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator			validator;
 
 

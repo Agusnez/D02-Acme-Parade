@@ -48,7 +48,7 @@ public class BrotherhoodService {
 	@Autowired
 	private ParadeService			paradeService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator				validator;
 
 

@@ -36,7 +36,7 @@ public class FloatService {
 	@Autowired
 	private ParadeService		paradeService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator			validator;
 
 

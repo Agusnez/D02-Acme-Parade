@@ -29,7 +29,7 @@ public class SocialProfileService {
 	@Autowired
 	private ActorService			actorService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator				validator;
 
 

@@ -29,7 +29,7 @@ public class AreaService {
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator			validator;
 
 

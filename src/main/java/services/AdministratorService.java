@@ -49,7 +49,7 @@ public class AdministratorService {
 	@Autowired
 	private MessageService			messageService;
 
-	@Autowired(required = false)
+	@Autowired
 	private Validator				validator;
 
 
