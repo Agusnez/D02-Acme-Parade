@@ -43,9 +43,9 @@ public class SegmentBrotherhoodController {
 	public ModelAndView path(@RequestParam final int paradeId) {
 
 		ModelAndView result;
-		Brotherhood member = this.brotherhoodService.findByPrincipal();
-		Parade parade = this.paradeService.findOne(paradeId);
-		
+		final Brotherhood member = this.brotherhoodService.findByPrincipal();
+		final Parade parade = this.paradeService.findOne(paradeId);
+
 		if (parade == null)
 			return new ModelAndView("redirect:/welcome/index.do");
 
@@ -105,54 +105,61 @@ public class SegmentBrotherhoodController {
 		return result;
 
 	}
-	
+
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int paradeId) {
 		ModelAndView result;
-		Brotherhood member = this.brotherhoodService.findByPrincipal();
-		
-		Segment segment = this.segmentService.findOne(paradeId);
-		
+		final Brotherhood member = this.brotherhoodService.findByPrincipal();
+
+		final Segment segment = this.segmentService.findOne(paradeId);
+
 		if (segment == null)
 			return new ModelAndView("redirect:/welcome/index.do");
-		
+
 		if (this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId())) {
-			
+
 			final String banner = this.configurationService.findConfiguration().getBanner();
 			result = new ModelAndView("segment/display");
 			result.addObject("segment", segment);
 			result.addObject("banner", banner);
-		} else {
+		} else
 			result = new ModelAndView("redirect:/welcome/index.do");
-		}
-		
+
 		return result;
 	}
 
-	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	//	public ModelAndView edit(@RequestParam final int segmentId) {
-	//		ModelAndView result;
-	//		Segment segment;
-	//		Boolean security;
-	//
-	//		final Brotherhood b;
-	//		b = this.brotherhoodService.findByPrincipal();
-	//
-	//		if (b.getArea() == null)
-	//			result = new ModelAndView("misc/noArea");
-	//		else {
-	//			segment = this.segmentService.findOne(segmentId);
-	//			security = this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId());
-	//
-	//			if (security)
-	//				result = this.createEditModelAndView(segment, null);
-	//			else
-	//				result = new ModelAndView("redirect:/welcome/index.do");
-	//
-	//		}
-	//
-	//		return result;
-	//	}
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int segmentId) {
+		ModelAndView result;
+		Segment segment;
+		Boolean security;
+		final Boolean exist;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		final Brotherhood b;
+		b = this.brotherhoodService.findByPrincipal();
+
+		if (b.getArea() == null)
+			result = new ModelAndView("misc/noArea");
+		else {
+			exist = this.segmentService.exist(segmentId);
+			if (exist) {
+				segment = this.segmentService.findOne(segmentId);
+				security = this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId());
+
+				if (security)
+					result = this.createEditModelAndView(segment, null);
+				else
+					result = new ModelAndView("redirect:/welcome/index.do");
+			} else {
+				result = new ModelAndView("misc/notExist");
+				result.addObject("banner", banner);
+			}
+		}
+
+		return result;
+	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveComplete")
 	public ModelAndView saveComplete(@ModelAttribute(value = "segment") final FirstSegmentForm form, final BindingResult binding) {
@@ -190,6 +197,24 @@ public class SegmentBrotherhoodController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveEdit")
+	public ModelAndView saveEdit(@ModelAttribute(value = "segment") final Segment form, final BindingResult binding) {
+		ModelAndView result;
+
+		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(form);
+		else
+			try {
+				this.segmentService.save(segmentReconstruct);
+				result = new ModelAndView("redirect:/segment/brotherhood/path.do?=" + form.getParade().getId());
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(form, "segment.commit.error");
+			}
+		return result;
+	}
+
 	// Ancillary methods
 
 	protected ModelAndView createEditModelAndView(final FirstSegmentForm segment) {
@@ -209,6 +234,7 @@ public class SegmentBrotherhoodController {
 		result.addObject("segment", segment);
 		result.addObject("banner", banner);
 		result.addObject("complete", true);
+		result.addObject("edit", false);
 		result.addObject("name", "saveComplete");
 		result.addObject("messageError", messageCode);
 
@@ -232,7 +258,32 @@ public class SegmentBrotherhoodController {
 		result.addObject("segment", segment);
 		result.addObject("banner", banner);
 		result.addObject("complete", false);
+		result.addObject("edit", false);
 		result.addObject("name", "saveParcial");
+		result.addObject("messageError", messageCode);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Segment segment) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(segment, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Segment segment, final String messageCode) {
+		ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		result = new ModelAndView("segment/edit");
+		result.addObject("segment", segment);
+		result.addObject("banner", banner);
+		result.addObject("complete", true);
+		result.addObject("edit", true);
+		result.addObject("name", "saveEdit");
 		result.addObject("messageError", messageCode);
 
 		return result;

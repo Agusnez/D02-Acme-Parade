@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.SegmentRepository;
 import domain.Parade;
@@ -23,6 +24,9 @@ public class SegmentService {
 
 	@Autowired
 	private SegmentRepository	segmentRepository;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// Suporting services
@@ -113,6 +117,8 @@ public class SegmentService {
 
 		final Segment result = this.create();
 
+		this.validator.validate(segment, binding);
+
 		final Segment contiguous = this.lastSegment(segment.getParadeId());
 
 		final Parade parade = this.paradeService.findOne(segment.getParadeId());
@@ -133,6 +139,8 @@ public class SegmentService {
 
 		final Segment result = this.create();
 
+		this.validator.validate(segment, binding);
+
 		final Segment contiguous = this.lastSegment(segment.getParadeId());
 
 		final Parade parade = this.paradeService.findOne(segment.getParadeId());
@@ -145,6 +153,21 @@ public class SegmentService {
 		result.setTimeDestination(segment.getTimeDestination());
 		result.setContiguous(contiguous);
 		result.setParade(parade);
+
+		return result;
+	}
+
+	public Segment reconstruct(final Segment segment, final BindingResult binding) {
+
+		final Segment result;
+
+		final Segment segmentBBDD = this.findOne(segment.getId());
+
+		segment.setContiguous(segmentBBDD.getContiguous());
+
+		this.validator.validate(segment, binding);
+
+		result = segment;
 
 		return result;
 	}
@@ -168,6 +191,18 @@ public class SegmentService {
 	public Segment segmentContiguous(final int segmentId) {
 
 		final Segment result = this.segmentRepository.segmentContiguous(segmentId);
+
+		return result;
+	}
+
+	public boolean exist(final int segmentId) {
+
+		Boolean result = false;
+
+		final Segment segment = this.segmentRepository.findOne(segmentId);
+
+		if (segment != null)
+			result = true;
 
 		return result;
 	}

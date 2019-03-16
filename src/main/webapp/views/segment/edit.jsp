@@ -13,7 +13,10 @@
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="paradeId" />
+	
+	<jstl:if test="${complete}">
+		<form:hidden path="paradeId" />
+	</jstl:if>	
 	
 	<jstl:if test="${complete}">
 		<acme:textbox path="origin" code="segment.origin" obligatory="true"/>
