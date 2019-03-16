@@ -44,4 +44,11 @@ public interface ParadeRepository extends JpaRepository<Parade, Integer> {
 
 	@Query("select (select count(p1) from Parade p1 where (p1.finalMode = true) and (p1.status = 'ACCEPTED') )/count(p2)*1.0 from Parade p2 where p2.finalMode = true")
 	Double ratioAccepted();
+
+	@Query("select (select count(p) from Parade p where (select c from Chapter c where c.area.id=p.brotherhood.area.id)!=null)/count(pt)*1.0 from Parade pt")
+	Double avgParadesCoordinatedByChapters();
+
+	@Query("select count(p) from Parade p where p.brotherhood.area.id = ?1")
+	Integer countParadesByChapterId(int chapterAreaId);
+
 }

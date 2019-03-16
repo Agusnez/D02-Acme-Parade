@@ -26,9 +26,6 @@ public class ChapterServiceTest extends AbstractTest {
 	private ChapterService	chapterService;
 
 	@Autowired
-	private ParadeService	paradeService;
-
-	@Autowired
 	private AreaService		areaService;
 
 
