@@ -120,6 +120,8 @@
 		<security:intercept-url pattern="/segment/brotherhood/path.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/segment/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/segment/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/segment/brotherhood/display.do" access="hasRole('BROTHERHOOD')" />
+
 		
 		<security:intercept-url pattern="/area/chapter/select.do" access="hasRole('CHAPTER')" />
 		<security:intercept-url pattern="/area/chapter/listAreas.do" access="hasRole('CHAPTER')" />
