@@ -943,6 +943,26 @@
 		<property name="rejectedComment" value="" />
 	</bean>
 	
+	<bean id="parade15" class="domain.Parade">
+		<property name="title" value="parade15" />
+		<property name="description" value="Procesión bonita" />
+		<property name="organisationMoment" value="2019/12/12 15:00" />
+		<property name="ticker" value="190423-KERHH5" />
+		<property name="maxColumn" value="3" />
+		<property name="maxRow" value="10" />
+		<property name="brotherhood">
+			<ref bean="brotherhood4"/>		
+		</property>
+		<property name="floats">
+			<list>
+				<ref bean="float14" />
+			</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="" />
+	</bean>
+	
 	<!-- Segments -->
 	<bean id="segment1" class="domain.Segment">
 		<property name="origin" value="23535.34634-432414.37373" />
@@ -1139,6 +1159,19 @@
 		</property>
 		<property name="brotherhood">
 			<ref bean="brotherhood1"/>		
+		</property>
+	</bean>
+	
+	<bean id="float14" class="domain.Float">
+		<property name="title" value="Paso 14 del gran poder" />
+		<property name="description" value="El bonito cristo" />
+		<property name="pictures">
+			<list>
+				<value>http://www.dropbox.com/bonito</value>
+			</list>
+		</property>
+		<property name="brotherhood">
+			<ref bean="brotherhood4"/>		
 		</property>
 	</bean>
 	

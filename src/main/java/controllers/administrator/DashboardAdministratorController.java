@@ -17,7 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AreaService;
 import services.BrotherhoodService;
+
 import services.ConfigurationService;
+
+import services.ChapterService;
+
 import services.EnrolmentService;
 import services.FinderService;
 import services.HistoryService;
@@ -28,6 +32,7 @@ import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Parade;
 import domain.Position;
 import forms.ParadeIdForm;
@@ -68,6 +73,9 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private ChapterService		chapterService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -124,6 +132,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("rejectedRatio", rejectedRatio);
 
 		Boolean existParade = true;
+		Boolean existChapter = true;
 
 		try {
 			final Collection<Parade> parades = this.paradeService.findAll();
@@ -132,7 +141,14 @@ public class DashboardAdministratorController extends AbstractController {
 			existParade = false;
 		}
 
+		try {
+			this.chapterService.findAll();
+		} catch (final Throwable oops) {
+			existChapter = false;
+		}
+
 		result.addObject("existParade", existParade);
+		result.addObject("existChapter", existChapter);
 
 		result.addObject("paradeIdForm", paradeIdForm);
 
@@ -149,6 +165,27 @@ public class DashboardAdministratorController extends AbstractController {
 
 		//--------------------------------------------------------------------------------------------------------------
 
+		try {
+			final Double avgParadesCoordinatedByChapters = this.paradeService.avgParadesCoordinatedByChapters();
+			final Integer minParadesCoordinatedByChapters = this.paradeService.minParadesCoordinatedByChapters();
+			final Integer maxParadesCoordinatedByChapters = this.paradeService.maxParadesCoordinatedByChapters();
+			final Double stddevParadesCoordinatedByChapters = this.paradeService.stddevParadesCoordinatedByChapters();
+			final Collection<Chapter> chaptersCoordinatesMoreThan10Percent = this.paradeService.chaptersCoordinatesMoreThan10Percent();
+
+			result.addObject("avgParadesCoordinatedByChapters", avgParadesCoordinatedByChapters);
+			result.addObject("minParadesCoordinatedByChapters", minParadesCoordinatedByChapters);
+			result.addObject("maxParadesCoordinatedByChapters", maxParadesCoordinatedByChapters);
+			result.addObject("stddevParadesCoordinatedByChapters", stddevParadesCoordinatedByChapters);
+			result.addObject("chaptersCoordinatesMoreThan10Percent", chaptersCoordinatesMoreThan10Percent);
+		} catch (final Throwable oops) {
+			result.addObject("avgParadesCoordinatedByChapters", "N/A");
+			result.addObject("minParadesCoordinatedByChapters", "N/A");
+			result.addObject("maxParadesCoordinatedByChapters", "N/A");
+			result.addObject("stddevParadesCoordinatedByChapters", "N/A");
+			result.addObject("chaptersCoordinatesMoreThan10Percent", "N/A");
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
 		try {
 			final Collection<Double> ratiosRequest = this.requestService.ratiosRequest();
 			result.addObject("ratiosRequest", ratiosRequest);

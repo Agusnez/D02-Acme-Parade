@@ -81,6 +81,24 @@
 
 </fieldset>
 
+<h3><spring:message code="dashboard.paradesCoordinated" /></h3>
+<fieldset>
+<ul>
+	<li><spring:message code="dashboard.avgParadesCoordinatedByChapters" />: ${avgParadesCoordinatedByChapters}</li>
+	<li><spring:message code="dashboard.minParadesCoordinatedByChapters" />: ${minParadesCoordinatedByChapters}</li>
+	<li><spring:message code="dashboard.maxParadesCoordinatedByChapters" />: ${maxParadesCoordinatedByChapters}</li>
+	<li><spring:message code="dashboard.stddevParadesCoordinatedByChapters" />: ${stddevParadesCoordinatedByChapters}</li>
+	
+	<li><spring:message code="dashboard.chaptersCoordinatesMoreThan10Percent" />:</li>
+
+   	<jstl:forEach items="${chaptersCoordinatesMoreThan10Percent}" var="cc">
+    <jstl:out value="--${cc.name}" />
+    <br />
+   </jstl:forEach>
+	
+</ul>
+</fieldset>
+
 <h3><spring:message code="dashboard.ratiosRequest" /></h3>
 <fieldset>
 

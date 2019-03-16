@@ -454,4 +454,75 @@ public class ParadeService {
 		return res;
 	}
 
+
+	public Double avgParadesCoordinatedByChapters() {
+
+		final Double res = this.paradeRepository.avgParadesCoordinatedByChapters();
+
+		return res;
+
+	}
+
+	public Integer minParadesCoordinatedByChapters() {
+		Integer min = 0;
+
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer res = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				if (min == 0 || res < min)
+					min = res;
+			}
+
+		return min;
+	}
+
+	public Integer maxParadesCoordinatedByChapters() {
+		Integer max = 0;
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer res = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				if (max == 0 || res > max)
+					max = res;
+			}
+
+		return max;
+	}
+
+	public Double stddevParadesCoordinatedByChapters() {
+		Double res = 0.0;
+		final Double avg = this.avgParadesCoordinatedByChapters();
+
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer xi = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				res = res + Math.pow(xi - avg, 2);
+			}
+
+		res = Math.sqrt(res / chapters.size());
+
+		return res;
+
+	}
+
+	public Collection<Chapter> chaptersCoordinatesMoreThan10Percent() {
+		final Collection<Chapter> res = new HashSet<Chapter>();
+
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer xi = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				if (xi > this.avgParadesCoordinatedByChapters() * 1.1)
+					res.add(c);
+			}
+
+		return res;
+	}
+
 }
