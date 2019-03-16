@@ -2417,6 +2417,144 @@
 
 	</bean>
 	
+	<!-- Histories -->
+		
+	<bean id="history1" class="domain.History">
+		<property name="inceptionRecord" ref="inceptionRecord1" />
+		<property name="legalRecords">
+			<list>
+				<ref bean="legalRecord1" />
+			</list>
+		</property>
+		<property name="periodRecords">
+			<list>
+				<ref bean="periodRecord1" />
+			</list>
+		</property>
+		<property name="linkRecords">
+			<list>
+				<ref bean="linkRecord1" />
+				<ref bean="linkRecord2" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord1" />
+				<ref bean="miscellaneousRecord2" />
+				<ref bean="miscellaneousRecord3" />
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1" />
+
+	</bean>
+	
+	<bean id="history2" class="domain.History">
+		<property name="inceptionRecord" ref="inceptionRecord2" />
+		<property name="legalRecords">
+			<list>
+			</list>
+		</property>
+		<property name="periodRecords">
+			<list>
+			</list>
+		</property>
+		<property name="linkRecords">
+			<list>
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood2" />
+
+	</bean>
+	
+	<!-- inceptionRecords -->
+	
+	<bean id="inceptionRecord1" class="domain.InceptionRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="photos">
+			<list>
+				<value>photo1.com</value>
+				<value>photo2.com</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="inceptionRecord2" class="domain.InceptionRecord">
+		<property name="title" value="title2" />
+		<property name="description" value="description2" />
+		<property name="photos">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- legalRecords -->
+	
+	<bean id="legalRecord1" class="domain.LegalRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="legalName" value="legalName1" />
+		<property name="VATNumber" value="21" />
+		<property name="laws">
+			<list>
+				<value>law1</value>
+				<value>law2</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- periodRecords -->
+	
+	<bean id="periodRecord1" class="domain.PeriodRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="startYear" value="2020/01/10 17:00" />
+		<property name="endYear" value="2021/01/10 17:00" />
+		<property name="photos">
+			<list>
+				<value>photo1.com</value>
+				<value>photo2.com</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- linkRecords -->
+	
+	<bean id="linkRecord1" class="domain.LinkRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="link" value="http://www.facebook.com/link1/" />
+	</bean>
+	
+	<bean id="linkRecord2" class="domain.LinkRecord">
+		<property name="title" value="title2" />
+		<property name="description" value="description2" />
+		<property name="link" value="http://www.facebook.com/link2/" />
+	</bean>
+	
+	<!-- miscellaneousRecords -->
+	
+	<bean id="miscellaneousRecord1" class="domain.MiscellaneousRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+	</bean>
+	
+	<bean id="miscellaneousRecord2" class="domain.MiscellaneousRecord">
+		<property name="title" value="title2" />
+		<property name="description" value="description2" />
+	</bean>
+	
+	<bean id="miscellaneousRecord3" class="domain.MiscellaneousRecord">
+		<property name="title" value="title3" />
+		<property name="description" value="description3" />
+	</bean>
+	
+	
+	
 	
 
 </beans>

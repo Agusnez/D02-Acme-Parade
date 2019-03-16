@@ -153,6 +153,43 @@
 
 <br/>
 
+<h3><spring:message code="dashboard.statsOfRecordsPerHistory" /></h3>
+
+<fieldset>
+
+	<ul>
+	<li><spring:message code="dashboard.average" />: ${avgRecordPerHistory}</li>
+	<li><spring:message code="dashboard.minimum" />: ${minRecordPerHistory}</li>
+	<li><spring:message code="dashboard.maximum" />: ${maxRecordPerHistory}</li>
+	<li><spring:message code="dashboard.deviation" />: ${stddevRecordPerHistory}</li>
+	</ul>
+
+</fieldset>	
+
+<br/>
+
+<h3><spring:message code="dashboard.largestBrotherhood" /></h3>
+<fieldset>
+
+   <jstl:forEach items="${largestBrotherhood}" var="lb">
+    <jstl:out value="${lb.title}" />
+    <br />
+   </jstl:forEach>
+
+</fieldset>
+
+<br/>
+
+<h3><spring:message code="dashboard.brotherhoodsMoreThanAverage" /></h3>
+<fieldset>
+
+   <jstl:forEach items="${brotherhoodsMoreThanAverage}" var="ba">
+    <jstl:out value="${ba.title}" />
+    <br />
+   </jstl:forEach>
+
+</fieldset>
+
 <h3><spring:message code="dashboard.ratioDraftFinalModeParade" /></h3>
 <fieldset>
 	${ratioDraftFinalModeParade}
@@ -167,6 +204,7 @@
 	<li><spring:message code="dashboard.rejected" />: ${ratioRejected}</li>
 	</ul>
 </fieldset>
+
 <br/>
 
 <acme:button name="back" code="dashboard.back" onclick="javascript: relativeRedir('welcome/index.do');" />

@@ -206,19 +206,16 @@ public class ChapterServiceTest extends AbstractTest {
 				"chapter3", "area3", null
 			}, {
 				"chapter1", null, AssertionError.class
-			},
-
-		//			{
-		//				"chapter1", "area3", IllegalArgumentException.class
-		//			}
-		//COMENTAR PROBLEMA DE SET/SAVE BBDD
+			}, {
+				"chapter1", "area3", IllegalArgumentException.class
+			}
+		//		final COMENTAR PROBLEMA DE SET/SAVE BBDD
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateAssignArea((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 
 	}
-
 	protected void templateAssignArea(final String username, final String areaBean, final Class<?> expected) {
 
 		Class<?> caught;
@@ -230,10 +227,11 @@ public class ChapterServiceTest extends AbstractTest {
 			final Area area = this.areaService.findOne(super.getEntityId(areaBean));
 
 			final Chapter chapter = this.chapterService.findOne(super.getEntityId(username));
+			final Chapter chapterCopy = this.copyChapter(chapter);
 
-			chapter.setArea(area);
+			chapterCopy.setArea(area);
 
-			this.chapterService.save(chapter);
+			this.chapterService.save(chapterCopy);
 			this.chapterService.flush();
 
 		} catch (final Throwable oops) {
@@ -243,5 +241,25 @@ public class ChapterServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+	public Chapter copyChapter(final Chapter chapter) {
+		final Chapter chapterCopy = this.chapterService.create();
 
+		chapterCopy.setAddress(chapter.getAddress());
+		chapterCopy.setArea(chapter.getArea());
+		chapterCopy.setEmail(chapter.getEmail());
+		chapterCopy.setMiddleName(chapter.getMiddleName());
+		chapterCopy.setName(chapter.getName());
+		chapterCopy.setPhone(chapter.getPhone());
+		chapterCopy.setPhoto(chapter.getPhoto());
+		chapterCopy.setScore(chapter.getScore());
+		chapterCopy.setSpammer(chapter.getSpammer());
+		chapterCopy.setTitle(chapter.getTitle());
+		chapterCopy.setUserAccount(chapter.getUserAccount());
+		chapterCopy.setSurname(chapter.getSurname());
+		chapterCopy.setId(chapter.getId());
+		chapterCopy.setVersion(chapter.getVersion());
+
+		return chapterCopy;
+
+	}
 }

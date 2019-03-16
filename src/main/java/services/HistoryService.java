@@ -93,6 +93,72 @@ public class HistoryService {
 		return h;
 	}
 
+	public Double avgRecordPerHistory() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.ADMIN);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
+		return this.historyRepository.avgRecordPerHistory();
+	}
+
+	public Double maxRecordPerHistory() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.ADMIN);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
+		return this.historyRepository.maxRecordPerHistory();
+	}
+
+	public Double minRecordPerHistory() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.ADMIN);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
+		return this.historyRepository.minRecordPerHistory();
+	}
+
+	public Double stddevRecordPerHistory() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.ADMIN);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
+		return this.historyRepository.stddevRecordPerHistory();
+	}
+
+	public Collection<Brotherhood> largestBrotherhood() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.ADMIN);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
+		return this.historyRepository.largestBrotherhood();
+	}
+
+	public Collection<Brotherhood> brotherhoodsMoreThanAverage() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.ADMIN);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
+		return this.historyRepository.brotherhoodsMoreThanAverage();
+	}
+
 	//Other business methods----------------------------
 
 	public History findByBrotherhoodId(final int brotherhoodId) {
