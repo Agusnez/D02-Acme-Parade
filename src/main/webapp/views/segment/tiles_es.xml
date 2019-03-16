@@ -22,7 +22,7 @@
 	</definition>
 
 	<definition name="segment/edit" extends="master.page">	
-		<put-attribute name="title" value="Segmento: Editar" />
+		<put-attribute name="title" value="Segmento" />
 		<put-attribute name="body" value="/views/segment/edit.jsp" />
 	</definition>
 	

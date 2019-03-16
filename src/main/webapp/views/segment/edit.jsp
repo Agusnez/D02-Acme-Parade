@@ -8,23 +8,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="segment/brotherhood/edit.do" modelAttribute="parade">
+<form:form action="segment/brotherhood/edit.do" modelAttribute="segment">
 	
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="paradeId" />
 	
-	<acme:textbox path="origin" code="segment.origin" obligatory="true"/>
+	<jstl:if test="${complete}">
+		<acme:textbox path="origin" code="segment.origin" obligatory="true"/>
+	</jstl:if>	
 	
 	<acme:textbox path="destination" code="segment.destination"  obligatory="true"/>
 	
-	<acme:textbox path="timeOrigin" code="segment.timeOrigin" placeholder="yyyy/MM/dd hh:mm" obligatory="true"/>
+	<jstl:if test="${complete}">
+		<acme:textbox path="timeOrigin" code="segment.timeOrigin" placeholder="yyyy/MM/dd hh:mm" obligatory="true"/>
+	</jstl:if>	
 	
 	<acme:textbox path="timeDestination" code="segment.timeDestination" placeholder="yyyy/MM/dd hh:mm" obligatory="true"/>
   	
 			
-	<acme:submit name="save" code="segment.save" />	
+	<acme:submit name="${name}" code="segment.save" />	
 
 	<acme:cancel code="parade.cancel" url="parade/brotherhood/list.do" />
 	

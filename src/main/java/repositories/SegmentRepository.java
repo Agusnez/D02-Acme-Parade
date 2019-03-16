@@ -17,4 +17,7 @@ public interface SegmentRepository extends JpaRepository<Segment, Integer> {
 
 	@Query("select s from Segment s where s.parade.id =?1")
 	Collection<Segment> segmentsPerParade(int paradeId);
+
+	@Query("select s from Segment s where s.contiguous.id = ?1")
+	Segment segmentContiguous(int segmentId);
 }

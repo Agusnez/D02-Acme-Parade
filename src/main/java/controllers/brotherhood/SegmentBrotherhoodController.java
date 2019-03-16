@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +51,7 @@ public class SegmentBrotherhoodController {
 			final String banner = this.configurationService.findConfiguration().getBanner();
 			result = new ModelAndView("segment/path");
 			result.addObject("segments", segments);
+			result.addObject("paradeId", paradeId);
 			result.addObject("banner", banner);
 		} else
 			result = new ModelAndView("redirect:/welcome/index.do");
@@ -124,6 +127,42 @@ public class SegmentBrotherhoodController {
 	//		return result;
 	//	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveComplete")
+	public ModelAndView saveComplete(@ModelAttribute(value = "segment") final FirstSegmentForm form, final BindingResult binding) {
+		ModelAndView result;
+
+		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(form);
+		else
+			try {
+				this.segmentService.save(segmentReconstruct);
+				result = new ModelAndView("redirect:/segment/brotherhood/path.do?=" + form.getParadeId());
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(form, "segment.commit.error");
+			}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "saveParcial")
+	public ModelAndView saveParcial(@ModelAttribute(value = "segment") final ContiguousSegmentForm form, final BindingResult binding) {
+		ModelAndView result;
+
+		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(form);
+		else
+			try {
+				this.segmentService.save(segmentReconstruct);
+				result = new ModelAndView("redirect:/segment/brotherhood/path.do?=" + form.getParadeId());
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(form, "segment.commit.error");
+			}
+		return result;
+	}
+
 	// Ancillary methods
 
 	protected ModelAndView createEditModelAndView(final FirstSegmentForm segment) {
@@ -142,6 +181,8 @@ public class SegmentBrotherhoodController {
 		result = new ModelAndView("segment/edit");
 		result.addObject("segment", segment);
 		result.addObject("banner", banner);
+		result.addObject("complete", true);
+		result.addObject("name", "saveComplete");
 		result.addObject("messageError", messageCode);
 
 		return result;
@@ -163,9 +204,10 @@ public class SegmentBrotherhoodController {
 		result = new ModelAndView("segment/edit");
 		result.addObject("segment", segment);
 		result.addObject("banner", banner);
+		result.addObject("complete", false);
+		result.addObject("name", "saveParcial");
 		result.addObject("messageError", messageCode);
 
 		return result;
 	}
-
 }
