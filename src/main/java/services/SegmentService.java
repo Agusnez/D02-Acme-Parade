@@ -164,6 +164,7 @@ public class SegmentService {
 		final Segment segmentBBDD = this.findOne(segment.getId());
 
 		segment.setContiguous(segmentBBDD.getContiguous());
+		segment.setParade(segmentBBDD.getParade());
 
 		this.validator.validate(segment, binding);
 

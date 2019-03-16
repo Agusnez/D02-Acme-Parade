@@ -14,7 +14,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<jstl:if test="${complete}">
+	<jstl:if test="${!edit}">
 		<form:hidden path="paradeId" />
 	</jstl:if>	
 	

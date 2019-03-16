@@ -172,7 +172,7 @@ public class SegmentBrotherhoodController {
 		else
 			try {
 				this.segmentService.save(segmentReconstruct);
-				result = new ModelAndView("redirect:/segment/brotherhood/path.do?=" + form.getParadeId());
+				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + form.getParadeId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(form, "segment.commit.error");
 			}
@@ -190,7 +190,7 @@ public class SegmentBrotherhoodController {
 		else
 			try {
 				this.segmentService.save(segmentReconstruct);
-				result = new ModelAndView("redirect:/segment/brotherhood/path.do?=" + form.getParadeId());
+				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + form.getParadeId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(form, "segment.commit.error");
 			}
@@ -208,7 +208,7 @@ public class SegmentBrotherhoodController {
 		else
 			try {
 				this.segmentService.save(segmentReconstruct);
-				result = new ModelAndView("redirect:/segment/brotherhood/path.do?=" + form.getParade().getId());
+				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + segmentReconstruct.getParade().getId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(form, "segment.commit.error");
 			}
