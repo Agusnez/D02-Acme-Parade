@@ -38,6 +38,7 @@
 		<value>/views/socialProfile/tiles.xml</value>
 		<value>/views/area/tiles.xml</value>
 		<value>/views/segment/tiles.xml</value>
+		<value>/views/chapter/tiles.xml</value>
 		
 		<value>/views/inceptionRecord/tiles.xml</value>
 		<value>/views/legalRecord/tiles.xml</value>

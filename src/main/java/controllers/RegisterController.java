@@ -15,12 +15,15 @@ import services.BrotherhoodService;
 import services.ChapterService;
 import services.ConfigurationService;
 import services.MemberService;
+import services.SponsorService;
 import domain.Brotherhood;
 import domain.Chapter;
 import domain.Member;
+import domain.Sponsor;
 import forms.RegisterBrotherhoodForm;
 import forms.RegisterChapterForm;
 import forms.RegisterMemberForm;
+import forms.RegisterSponsorForm;
 
 @Controller
 @RequestMapping("/register")
@@ -39,6 +42,9 @@ public class RegisterController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private SponsorService			sponsorService;
 
 
 	//Brotherhood
@@ -211,6 +217,64 @@ public class RegisterController extends AbstractController {
 
 		result = new ModelAndView("security/signUpChapter");
 		result.addObject("chapter", chapter);
+		result.addObject("banner", banner);
+		result.addObject("messageError", messageCode);
+		final String countryCode = this.configurationService.findConfiguration().getCountryCode();
+		result.addObject("defaultCountry", countryCode);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/createSponsor", method = RequestMethod.GET)
+	public ModelAndView createSponsor() {
+		final ModelAndView result;
+		final RegisterSponsorForm sponsor = new RegisterSponsorForm();
+
+		result = this.createEditModelAndViewSponsor(sponsor);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/editSponsor", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveSponsor(@ModelAttribute("sponsor") final RegisterSponsorForm form, final BindingResult binding) {
+		ModelAndView result;
+		Sponsor sponsor;
+
+		sponsor = this.sponsorService.reconstruct(form, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndViewSponsor(form);
+		else
+			try {
+				Assert.isTrue(form.getCheckbox());
+				Assert.isTrue(form.checkPassword());
+				this.sponsorService.save(sponsor);
+				final Credentials credentials = new Credentials();
+				credentials.setJ_username(sponsor.getUserAccount().getUsername());
+				credentials.setPassword(sponsor.getUserAccount().getPassword());
+				result = new ModelAndView("redirect:/security/login.do");
+				result.addObject("credentials", credentials);
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndViewSponsor(form, "sponsor.commit.error");
+			}
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewSponsor(final RegisterSponsorForm sponsor) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewSponsor(sponsor, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewSponsor(final RegisterSponsorForm sponsor, final String messageCode) {
+		ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		result = new ModelAndView("security/signUpSponsor");
+		result.addObject("sponsor", sponsor);
 		result.addObject("banner", banner);
 		result.addObject("messageError", messageCode);
 		final String countryCode = this.configurationService.findConfiguration().getCountryCode();

@@ -24,6 +24,10 @@
 	<acme:url href="area/chapter/select.do?areaId=${row.id }" code="select" />
 	</security:authorize>
 	
+	<security:authorize access="isAnonymous()">
+	<acme:url href="brotherhood/listByArea.do?areaId=${row.id }" code="area.brotherhood" />
+	</security:authorize>
+	
 
 </display:table>
 

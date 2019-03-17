@@ -51,6 +51,7 @@
 		<value>/views/message/messages</value>
 		<value>/views/area/messages</value>
 		<value>/views/segment/messages</value>
+		<value>/views/chapter/messages</value>
 
 	</util:list>
 
