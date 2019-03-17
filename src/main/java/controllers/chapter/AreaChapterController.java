@@ -41,7 +41,7 @@ public class AreaChapterController extends AbstractController {
 		final Chapter chapter = this.chapterService.findByPrincipal();
 
 		if (chapter.getArea() == null)
-			areas = this.areaService.findAll();
+			areas = this.areaService.areasNotCoordinatedAnyChapters();
 		else {
 			areas = new ArrayList<>();
 			areas.add(chapter.getArea());
@@ -67,8 +67,12 @@ public class AreaChapterController extends AbstractController {
 		area = this.areaService.findOne(areaId);
 		Assert.notNull(area);
 
+		final Chapter chapterOwner = this.chapterService.findChapterByAreaId(areaId);
+
 		if (chapter.getArea() != null)
 			result = new ModelAndView("redirect:listAreas.do");
+		else if (chapterOwner != null)
+			result = new ModelAndView("misc/error");
 		else
 			try {
 				chapter.setArea(area);
@@ -80,5 +84,6 @@ public class AreaChapterController extends AbstractController {
 				result.addObject("banner", banner);
 			}
 		return result;
+
 	}
 }

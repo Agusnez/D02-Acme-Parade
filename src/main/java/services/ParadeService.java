@@ -161,6 +161,9 @@ public class ParadeService {
 			if (parade.getStatus() == null && parade.getFinalMode() == true)
 				parade.setStatus("SUBMITTED");
 
+			if (parade.getStatus() == "REJECTED")
+				Assert.isTrue(parade.getRejectedComment() != null && parade.getRejectedComment() != "");
+
 		} else if (parade.getId() == 0 && parade.getFinalMode() == true)
 			parade.setStatus("SUBMITTED");
 
