@@ -140,11 +140,11 @@ public class ParadeService {
 
 		if (LoginService.getPrincipal().getAuthorities().contains(authorityBrotherhood))
 			brotherhood = this.brotherhoodService.findByPrincipal();
-		else if (LoginService.getPrincipal().getAuthorities().contains(authorityChapter))
+		else if (LoginService.getPrincipal().getAuthorities().contains(authorityChapter)) {
 			chapter = this.chapterService.findByPrincipal();
-		final Chapter chapterCoordinatedParades = this.chapterService.findChapterByAreaId(parade.getBrotherhood().getArea().getId());
-		Assert.isTrue(chapter.getId() == chapterCoordinatedParades.getId());
-
+			final Chapter chapterCoordinatedParades = this.chapterService.findChapterByAreaId(parade.getBrotherhood().getArea().getId());
+			Assert.isTrue(chapter.getId() == chapterCoordinatedParades.getId());
+		}
 		Assert.isTrue(brotherhood != null || chapter != null);
 
 		/*
@@ -453,7 +453,6 @@ public class ParadeService {
 
 		return res;
 	}
-
 
 	public Double avgParadesCoordinatedByChapters() {
 
