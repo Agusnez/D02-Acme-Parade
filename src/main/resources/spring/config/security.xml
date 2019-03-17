@@ -73,6 +73,11 @@
 		<security:intercept-url pattern="/register/editMember.do" access="permitAll" /> 
 		<security:intercept-url pattern="/register/createChapter.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/register/editChapter.do" access="permitAll" /> 
+		
+		
+		<security:intercept-url pattern="/chapter/list.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/area/list.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/brotherhood/listByArea.do" access="isAnonymous()" /> 
 		 
 
 		

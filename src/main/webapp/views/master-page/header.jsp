@@ -103,6 +103,7 @@
 			<li><a class="fNiv" href="register/createMember.do"><spring:message code="master.page.member.signup" /></a></li>
 			<li><a class="fNiv" href="register/createChapter.do"><spring:message code="master.page.chapter.signup" /></a></li>
 			<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.brotherhood.list" /></a></li>
+			<li><a class="fNiv" href="chapter/list.do"><spring:message code="master.page.chapter.list" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
