@@ -16,14 +16,21 @@
        
 <tiles-definitions>
 
-<definition name="segment/path" extends="master.page">	
-	<put-attribute name="title" value="Path of parade" />
-	<put-attribute name="body" value="/views/segment/list.jsp" />
-</definition>
+	<definition name="segment/path" extends="master.page">	
+		<put-attribute name="title" value="Path of parade" />
+		<put-attribute name="body" value="/views/segment/list.jsp" />
+	</definition>
 	
-<definition name="segment/display" extends="master.page">	
-	<put-attribute name="title" value="Segment" />
-	<put-attribute name="body" value="/views/segment/display.jsp" />
-</definition>
+	<definition name="segment/edit" extends="master.page">	
+		<put-attribute name="title" value="Segment" />
+		<put-attribute name="body" value="/views/segment/edit.jsp" />
+	</definition>
+
+	
+	<definition name="segment/display" extends="master.page">	
+		<put-attribute name="title" value="Segment" />
+		<put-attribute name="body" value="/views/segment/display.jsp" />
+	</definition>
+
 
 </tiles-definitions>
