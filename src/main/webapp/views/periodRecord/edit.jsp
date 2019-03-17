@@ -9,56 +9,27 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="professionalRecord/handyWorker/edit.do"
-	modelAttribute="professionalRecord" method="post">
+
+<form:form modelAttribute="periodRecord" action="periodRecord/brotherhood/edit.do">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
+	<acme:textbox code="periodRecord.title" path="title" obligatory="true"/>
+	
+	<acme:textbox code="periodRecord.description" path="description" obligatory="true"/>
+	
+	<acme:textbox code="periodRecord.startYear" path="startYear" obligatory="true"/>
+	
+	<acme:textbox code="periodRecord.endYear" path="endYear" obligatory="true"/>
+	
+	<acme:textbox code="periodRecord.photos" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.___,https://___.___,..." path="photos" obligatory="false"/>
+	
+	<acme:submit name="save" code="periodRecord.save" />
+		
+	<acme:cancel code="periodRecord.cancel" url="history/display.do"/>
 
-	<form:label path="companyName">
-		<spring:message code="professionalRecord.companyName"></spring:message>
-	</form:label>
-	<form:input path="companyName" />
-	<form:errors cssClass="error" path="companyName"></form:errors>
-	<br />
-
-	<form:label path="role">
-		<spring:message code="professionalRecord.role"></spring:message>
-	</form:label>
-	<form:input path="role" />
-	<form:errors cssClass="error" path="role"></form:errors>
-	<br />
-
-	<form:label path="attachment">
-		<spring:message code="professionalRecord.attachment"></spring:message>
-	</form:label>
-	<form:input path="attachment" />
-	<form:errors cssClass="error" path="attachment"></form:errors>
-	<br />
-
-	<form:label path="comments">
-		<spring:message code="professionalRecord.comments"></spring:message>
-	</form:label>
-	<form:textarea path="comments" />
-	<form:errors cssClass="error" path="comments"></form:errors>
-	<br />
-
-	<form:label path="period">
-		<spring:message code="professionalRecord.period" />
-	</form:label>
-	<form:input path="period" />
-	<form:errors cssClass="error" path="period" />
-	<br />
-
-
-	<input type="submit" name="save"
-		value="<spring:message code="professionalRecord.save"/>" />
-
-
-	<input type="button" name="cancel"
-		value="<spring:message code="professionalRecord.cancel" />"
-		onclick="javascript: relativeRedir('curriculum/handyWorker/display.do');" />
 
 </form:form>

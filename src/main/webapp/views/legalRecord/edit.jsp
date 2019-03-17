@@ -9,56 +9,29 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="educationRecord/handyWorker/edit.do"
 	modelAttribute="educationRecord" method="post">
+
+<form:form modelAttribute="legalRecord" action="legalRecord/brotherhood/edit.do">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
+	<acme:textbox code="legalRecord.title" path="title" obligatory="true"/>
+	
+	<acme:textbox code="legalRecord.description" path="description" obligatory="true"/>
+	
+	<acme:textbox code="legalRecord.legalName" path="legalName" obligatory="true"/>
+	
+	<acme:textbox code="legalRecord.VATNumber" path="VATNumber" obligatory="true"/>
+	
+	<acme:textbox code="legalRecord.laws" size="100" path="laws" obligatory="false"/>
 
-	<form:label path="title">
-		<spring:message code="educationRecord.title"></spring:message>
-	</form:label>
-	<form:input path="title" />
-	<form:errors cssClass="error" path="title"></form:errors>
-	<br />
+	<acme:submit name="save" code="legalRecord.save" />
+	
+	
+	<acme:cancel code="legalRecord.cancel" url="history/display.do"/>
 
-	<form:label path="institution">
-		<spring:message code="educationRecord.institution"></spring:message>
-	</form:label>
-	<form:input path="institution" />
-	<form:errors cssClass="error" path="institution"></form:errors>
-	<br />
-
-	<form:label path="attachment">
-		<spring:message code="educationRecord.attachment"></spring:message>
-	</form:label>
-	<form:input path="attachment" />
-	<form:errors cssClass="error" path="attachment"></form:errors>
-	<br />
-
-	<form:label path="comments">
-		<spring:message code="educationRecord.comments"></spring:message>
-	</form:label>
-	<form:textarea path="comments" />
-	<form:errors cssClass="error" path="comments"></form:errors>
-	<br />
-
-	<form:label path="period">
-		<spring:message code="educationRecord.period" />
-	</form:label>
-	<form:input path="period" />
-	<form:errors cssClass="error" path="period" />
-	<br />
-
-
-	<input type="submit" name="save"
-		value="<spring:message code="educationRecord.save"/>" />
-
-
-	<input type="button" name="cancel"
-		value="<spring:message code="educationRecord.cancel" />"
-		onclick="javascript: relativeRedir('curriculum/handyWorker/display.do');" />
 
 </form:form>

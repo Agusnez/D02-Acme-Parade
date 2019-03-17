@@ -25,7 +25,7 @@
 	<acme:submit name="save" code="miscellaneousRecord.save" />
 	
 	
-	<acme:cancel code="inceptionRecord.cancel" url="history/display.do"/>
+	<acme:cancel code="miscellaneousRecord.cancel" url="history/display.do"/>
 
 
 </form:form>

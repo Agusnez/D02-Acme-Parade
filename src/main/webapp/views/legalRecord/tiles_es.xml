@@ -16,9 +16,9 @@
       
 <tiles-definitions>
 
-	<definition name="educationRecord/handyWorker/edit" extends="master.page">
-		<put-attribute name="title" value="Editar registro académico" />
-		<put-attribute name="body" value="/views/educationRecord/edit.jsp" />
+	<definition name="legalRecord/brotherhood/edit" extends="master.page">
+		<put-attribute name="title" value="Editar registro legal" />
+		<put-attribute name="body" value="/views/legalRecord/edit.jsp" />
 	</definition>	
 	
 </tiles-definitions>
