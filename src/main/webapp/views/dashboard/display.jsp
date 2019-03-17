@@ -131,6 +131,7 @@
 	<li><spring:message code="dashboard.minimum" />: ${minBrotherhoodPerArea}</li>
 	<li><spring:message code="dashboard.maximum" />: ${maxBrotherhoodPerArea}</li>
 	<li><spring:message code="dashboard.deviation" />: ${stddevBrotherhoodPerArea}</li>
+	<li><spring:message code="dashboard.ratioAreasNotCoordinatedAnyChapters" />: ${ratioAreasNotCoordinatedAnyChapters}</li>
 	</ul>
 
 </fieldset>

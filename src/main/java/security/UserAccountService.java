@@ -113,6 +113,21 @@ public class UserAccountService {
 
 	}
 
+	public UserAccount createSponsor() {
+
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.SPONSOR);
+		final List<Authority> list = new ArrayList<Authority>();
+		list.add(authority);
+
+		final UserAccount userAccount = new UserAccount();
+		userAccount.setAuthorities(list);
+		userAccount.setIsNotBanned(true);
+
+		return userAccount;
+
+	}
+
 	public Collection<UserAccount> findAll() {
 
 		Collection<UserAccount> result;

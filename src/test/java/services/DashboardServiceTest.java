@@ -33,6 +33,12 @@ public class DashboardServiceTest extends AbstractTest {
 	@Autowired
 	private HistoryService	historyService;
 
+	@Autowired
+	private ParadeService	paradeService;
+
+	@Autowired
+	private AreaService		areaService;
+
 
 	// Tests ------------------------------------------------------------------
 
@@ -73,13 +79,28 @@ public class DashboardServiceTest extends AbstractTest {
 				"min", 0.0, IllegalArgumentException.class
 			}, {
 				"stddev", 0.0, IllegalArgumentException.class
+			},
+			//En los siguientes escenarios no hacemos uso de
+			//test negativos porque el error va ser siempre el mismo
+			//(IllegalArgumentException)
+			{
+				"avgParadesCoordinatedByChapters", 0.93333, null
+			}, {
+				"minParadesCoordinatedByChapters", 1.0, null
+			}, {
+				"maxParadesCoordinatedByChapters", 13.0, null
+			}, {
+				"stddevParadesCoordinatedByChapters", 6.966801508530774, null
+			}, {
+				"chaptersCoordinatesMoreThan10Percent", 1.0, null
+			}, {
+				"ratioAreasNotCoordinatedAnyChapters", 0.33333, null
 			}
 		};
 
 		for (int i = 0; i < valueTest.length; i++)
 			this.ValueTemplate((String) valueTest[i][0], (Double) valueTest[i][1], (Class<?>) valueTest[i][2]);
 	}
-
 	// Ancillary methods ------------------------------------------------------
 
 	protected void AuthorityTemplate(final String username, final Class<?> expected) {
@@ -117,7 +138,18 @@ public class DashboardServiceTest extends AbstractTest {
 				test = this.historyService.minRecordPerHistory();
 			else if (method == "stddev")
 				test = this.historyService.stddevRecordPerHistory();
-
+			else if (method == "avgParadesCoordinatedByChapters")
+				test = this.paradeService.avgParadesCoordinatedByChapters();
+			else if (method == "minParadesCoordinatedByChapters")
+				test = this.paradeService.minParadesCoordinatedByChapters() * 1.0;
+			else if (method == "maxParadesCoordinatedByChapters")
+				test = this.paradeService.maxParadesCoordinatedByChapters() * 1.0;
+			else if (method == "stddevParadesCoordinatedByChapters")
+				test = this.paradeService.stddevParadesCoordinatedByChapters();
+			else if (method == "chaptersCoordinatesMoreThan10Percent")
+				test = this.paradeService.chaptersCoordinatesMoreThan10Percent().size() * 1.0;
+			else if (method == "ratioAreasNotCoordinatedAnyChapters")
+				test = this.areaService.ratioAreasNotCoordinatedAnyChapters();
 			Assert.isTrue(test.equals(value));
 
 		} catch (final Throwable oops) {
@@ -126,5 +158,4 @@ public class DashboardServiceTest extends AbstractTest {
 
 		this.checkExceptions(expected, caught);
 	}
-
 }
