@@ -11,7 +11,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-	modelAttribute="educationRecord" method="post">
 
 <form:form modelAttribute="legalRecord" action="legalRecord/brotherhood/edit.do">
 
