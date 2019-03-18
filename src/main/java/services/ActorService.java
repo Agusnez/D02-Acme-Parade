@@ -358,7 +358,11 @@ public class ActorService {
 
 		//TODO: Comprobar que esté bien
 		final Authority chapter = new Authority();
-		brotherhood.setAuthority(Authority.CHAPTER);
+		chapter.setAuthority(Authority.CHAPTER);
+
+		//TODO: Comprobar que esté bien
+		final Authority sponsor = new Authority();
+		sponsor.setAuthority(Authority.SPONSOR);
 
 		final Actor actor = this.actorRepository.findOne(actorId);
 
@@ -391,6 +395,8 @@ public class ActorService {
 		} else if (actor.getUserAccount().getAuthorities().contains(chapter)) {
 			final Chapter chapterActor = this.chapterService.findOne(actorId);
 			chapterActor.setArea(null);
+		} else if (actor.getUserAccount().getAuthorities().contains(sponsor)) {
+			//ahora habría que borrar la relacion de sponsor con sponsorship
 		}
 		this.actorRepository.delete(actor);
 

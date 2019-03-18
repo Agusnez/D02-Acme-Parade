@@ -17,11 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AreaService;
 import services.BrotherhoodService;
-
-import services.ConfigurationService;
-
 import services.ChapterService;
-
+import services.ConfigurationService;
 import services.EnrolmentService;
 import services.FinderService;
 import services.HistoryService;
@@ -75,7 +72,7 @@ public class DashboardAdministratorController extends AbstractController {
 	private ConfigurationService	configurationService;
 
 	@Autowired
-	private ChapterService		chapterService;
+	private ChapterService			chapterService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -185,6 +182,13 @@ public class DashboardAdministratorController extends AbstractController {
 			result.addObject("chaptersCoordinatesMoreThan10Percent", "N/A");
 		}
 
+		try {
+			final Double ratioAreasNotCoordinatedAnyChapters = this.areaService.ratioAreasNotCoordinatedAnyChapters();
+			result.addObject("ratioAreasNotCoordinatedAnyChapters", ratioAreasNotCoordinatedAnyChapters);
+
+		} catch (final Throwable oops) {
+			result.addObject("ratioAreasNotCoordinatedAnyChapters", "N/A");
+		}
 		//--------------------------------------------------------------------------------------------------------------
 		try {
 			final Collection<Double> ratiosRequest = this.requestService.ratiosRequest();

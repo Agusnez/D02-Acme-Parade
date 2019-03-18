@@ -47,18 +47,17 @@ public class ChapterServiceTest extends AbstractTest {
 			}, {
 				"brotherhood1", "chapter1", "calle 13", "a@a.com", "+34 333 3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
 			}, {
-				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", ConstraintViolationException.class
+				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
 			}, {
 				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, null, "http://www.photo.com", "title", ConstraintViolationException.class
 			}, {
 				"chapter1", "chapter1", null, "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
 			}, {
 				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", null, "surname", "name", "http://www.photo.com", "title", null
+			}, {
+				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, "surname", "http://www.photo.com", "title", ConstraintViolationException.class
 			}
-		//			,{
-		//				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, "surname", "http://www.photo.com", "title", ConstraintViolationException.class
-		//			}
-		//COMENTAR SI PONGO SOLO UN NULL NO DETECTA AUN ESTANDO FLUSH
+
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -72,20 +71,24 @@ public class ChapterServiceTest extends AbstractTest {
 
 		caught = null;
 		try {
-			this.authenticate(username);
 
+			this.authenticate(username);
 			final Chapter chapter = this.chapterService.findOne(chapterId);
 
 			chapter.setAddress(address);
 			chapter.setEmail(email);
 			chapter.setMiddleName(middleName);
-			chapter.setName(surname);
+			chapter.setSurname(surname);
 			chapter.setName(name);
 			chapter.setPhoto(photo);
 			chapter.setTitle(title);
 
+			this.startTransaction();
+
 			this.chapterService.save(chapter);
 			this.chapterService.flush();
+
+			this.rollbackTransaction();
 
 			this.unauthenticate();
 		} catch (final Throwable oops) {
@@ -95,7 +98,6 @@ public class ChapterServiceTest extends AbstractTest {
 
 		super.checkExceptions(expected, caught);
 	}
-
 	/*
 	 * a) Requirement 7 : Register new actor Chapter
 	 * b) Negative cases:
@@ -112,9 +114,9 @@ public class ChapterServiceTest extends AbstractTest {
 			{
 				null, "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
 			},//2.Title null
-				//			{
-		//				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
-		//			},//Name null
+			{
+				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
+			},//Name null
 		//				{
 		//				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
 		//			},//Middle name null
@@ -160,6 +162,7 @@ public class ChapterServiceTest extends AbstractTest {
 
 		caught = null;
 		try {
+
 			final Chapter chapter = this.chapterService.create();
 
 			chapter.setTitle(title);
@@ -174,8 +177,12 @@ public class ChapterServiceTest extends AbstractTest {
 			chapter.getUserAccount().setUsername(username);
 			chapter.getUserAccount().setPassword(password);
 
+			this.startTransaction();
+
 			this.chapterService.save(chapter);
 			this.chapterService.flush();
+
+			this.rollbackTransaction();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -219,17 +226,20 @@ public class ChapterServiceTest extends AbstractTest {
 
 		caught = null;
 		try {
-			super.authenticate(username);
 
 			final Area area = this.areaService.findOne(super.getEntityId(areaBean));
 
 			final Chapter chapter = this.chapterService.findOne(super.getEntityId(username));
-			final Chapter chapterCopy = this.copyChapter(chapter);
 
-			chapterCopy.setArea(area);
+			chapter.setArea(area);
 
-			this.chapterService.save(chapterCopy);
+			this.startTransaction();
+
+			super.authenticate(username);
+			this.chapterService.save(chapter);
 			this.chapterService.flush();
+
+			this.rollbackTransaction();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -238,25 +248,5 @@ public class ChapterServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
-	public Chapter copyChapter(final Chapter chapter) {
-		final Chapter chapterCopy = this.chapterService.create();
 
-		chapterCopy.setAddress(chapter.getAddress());
-		chapterCopy.setArea(chapter.getArea());
-		chapterCopy.setEmail(chapter.getEmail());
-		chapterCopy.setMiddleName(chapter.getMiddleName());
-		chapterCopy.setName(chapter.getName());
-		chapterCopy.setPhone(chapter.getPhone());
-		chapterCopy.setPhoto(chapter.getPhoto());
-		chapterCopy.setScore(chapter.getScore());
-		chapterCopy.setSpammer(chapter.getSpammer());
-		chapterCopy.setTitle(chapter.getTitle());
-		chapterCopy.setUserAccount(chapter.getUserAccount());
-		chapterCopy.setSurname(chapter.getSurname());
-		chapterCopy.setId(chapter.getId());
-		chapterCopy.setVersion(chapter.getVersion());
-
-		return chapterCopy;
-
-	}
 }

@@ -44,7 +44,7 @@
 	</security:authorize> 
 	
 	<security:authorize access="hasAnyRole('BROTHERHOOD', 'CHAPTER')" >
-	<acme:textbox code="actor.title" path="title" obligatory="true"/>
+	<acme:textbox code="actor.titlee" path="title" obligatory="true"/>
 	</security:authorize>
 	
 	<acme:submit name="save" code="actor.save"/>	

@@ -238,7 +238,7 @@ public class ChapterService {
 		this.chapterRepository.saveAndFlush(chapter);
 	}
 
-	Chapter findChapterByAreaId(final int areaId) {
+	public Chapter findChapterByAreaId(final int areaId) {
 		final Chapter chapter = this.chapterRepository.findChapterByAreaId(areaId);
 
 		return chapter;

@@ -280,6 +280,19 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount21" class="security.UserAccount">
+		<property name="username" value="sponsor1" />
+		<property name="password" value="42c63ad66d4dc07ed17753772bef96d6" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<!-- Administrators -->	
 	
@@ -651,6 +664,17 @@
 		<property name="userAccount" ref="userAccount20" />
 	</bean>	
 
+	<!-- Sponsors -->
+	<bean id="sponsor1" class="domain.Sponsor">
+		<property name="name" value="David" />
+		<property name="middleName" value="de" />
+		<property name="surname" value="MiguelÁngel" />
+		<property name="photo" value="http://www.sponse.com" />
+		<property name="email" value="sponse@mail.com" />
+		<property name="phone" value="+34 672008675" />
+		<property name="address" value="Las Navas" />
+		<property name="userAccount" ref="userAccount21" />
+	</bean>
 	
 	<!-- Parades -->
 	<bean id="parade1" class="domain.Parade">
@@ -2347,6 +2371,40 @@
 		<property name="name" value="notification box" />
 		<property name="byDefault" value="True" />
 		<property name="actor" ref="chapter3" />
+	</bean>
+	
+	<bean id="box101" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+		
+	</bean>
+
+	<bean id="box102" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+	
+	</bean>
+
+	<bean id="box103" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+		
+	</bean>
+
+	<bean id="box104" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+		
+	</bean>
+	
+	<bean id="box105" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
 	</bean>
 	
 		

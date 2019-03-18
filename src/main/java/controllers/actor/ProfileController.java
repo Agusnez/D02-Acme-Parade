@@ -27,12 +27,14 @@ import services.BrotherhoodService;
 import services.ChapterService;
 import services.ConfigurationService;
 import services.MemberService;
+import services.SponsorService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
 import domain.Chapter;
 import domain.Member;
+import domain.Sponsor;
 
 @Controller
 @RequestMapping("/profile")
@@ -55,6 +57,9 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private ChapterService			chapterService;
+
+	@Autowired
+	private SponsorService			sponsorService;
 
 
 	@RequestMapping(value = "/displayPrincipal", method = RequestMethod.GET)
@@ -97,6 +102,9 @@ public class ProfileController extends AbstractController {
 		final Authority authority4 = new Authority();
 		authority4.setAuthority(Authority.CHAPTER);
 
+		final Authority authority5 = new Authority();
+		authority5.setAuthority(Authority.SPONSOR);
+
 		String auth = null;
 		String action = null;
 		if (actor.getUserAccount().getAuthorities().contains(authority1)) {
@@ -112,6 +120,9 @@ public class ProfileController extends AbstractController {
 		} else if (actor.getUserAccount().getAuthorities().contains(authority4)) {
 			auth = "chapter";
 			action = "editChapter.do";
+		} else if (actor.getUserAccount().getAuthorities().contains(authority5)) {
+			auth = "sponsor";
+			action = "editSponsor.do";
 		}
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
@@ -261,6 +272,54 @@ public class ProfileController extends AbstractController {
 		result.addObject("administrator", admin);
 		result.addObject("authority", "administrator");
 		result.addObject("actionURI", "editAdministrator.do");
+		result.addObject("banner", banner);
+		result.addObject("messageError", messageCode);
+		final String countryCode = this.configurationService.findConfiguration().getCountryCode();
+		result.addObject("defaultCountry", countryCode);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/editSponsor", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveSponsor(@ModelAttribute("sponsor") final Sponsor sponsor, final BindingResult binding) {
+		ModelAndView result;
+
+		final Sponsor sponsorReconstruct = this.sponsorService.reconstruct(sponsor, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndViewSponsor(sponsorReconstruct);
+		else
+			try {
+				this.sponsorService.save(sponsorReconstruct);
+				final Credentials credentials = new Credentials();
+				credentials.setJ_username(sponsorReconstruct.getUserAccount().getUsername());
+				credentials.setPassword(sponsorReconstruct.getUserAccount().getPassword());
+				result = new ModelAndView("redirect:/profile/displayPrincipal.do");
+				result.addObject("credentials", credentials);
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndViewSponsor(sponsorReconstruct, "sponsor.commit.error");
+			}
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewSponsor(final Sponsor sponsor) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewSponsor(sponsor, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewSponsor(final Sponsor sponsor, final String messageCode) {
+		ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		result = new ModelAndView("actor/edit");
+
+		result.addObject("sponsor", sponsor);
+		result.addObject("authority", "sponsor");
+		result.addObject("actionURI", "editSponsor.do");
 		result.addObject("banner", banner);
 		result.addObject("messageError", messageCode);
 		final String countryCode = this.configurationService.findConfiguration().getCountryCode();
