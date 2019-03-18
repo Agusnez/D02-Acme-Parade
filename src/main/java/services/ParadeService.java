@@ -56,6 +56,9 @@ public class ParadeService {
 	@Autowired
 	private ChapterService		chapterService;
 
+	@Autowired
+	private SegmentService		segmentService;
+
 
 	// Simple CRUD methods
 
@@ -231,6 +234,8 @@ public class ParadeService {
 
 		if (!parades.isEmpty())
 			for (final Parade p : parades) {
+
+				this.segmentService.deleteAll(p.getId());
 
 				final Collection<Finder> findersByParade = this.finderService.findFindersByParadeId(p.getId());
 				if (!findersByParade.isEmpty())
