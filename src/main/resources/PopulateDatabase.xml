@@ -2644,8 +2644,35 @@
 		<property name="description" value="description3" />
 	</bean>
 	
+	<!-- Proclaims -->
+	<bean id="proclaim1" class="domain.Proclaim">
+		<property name="moment" value="2019/01/10 17:00" />
+		<property name="description" value="Este es el primer proclaim" />
+		<property name="chapter" ref="chapter1" />
+	</bean>
 	
-	
-	
+	 <bean id="proclaim2" class="domain.Proclaim">
+		<property name="moment" value="2019/01/12 17:00" />
+		<property name="description" value="La cofradía se supende" />
+		<property name="chapter" ref="chapter1" />
+		
+	</bean>
+	<bean id="proclaim3" class="domain.Proclaim">
+		<property name="moment" value="2019/01/28 17:00" />
+		<property name="description" value="Previsión de lluvia Lunes santo" />
+		<property name="chapter" ref="chapter1" />
+		
+	</bean>
+	<bean id="proclaim4" class="domain.Proclaim">
+		<property name="moment" value="2019/01/30 17:00" />
+		<property name="description" value="Hola mundo" />
+		<property name="chapter" ref="chapter2" />
+		
+	</bean>
+	<bean id="proclaim5" class="domain.Proclaim">
+		<property name="moment" value="2019/01/05 17:00" />
+		<property name="description" value="Este proclaim es importante" />
+		<property name="chapter" ref="chapter2" />
+	</bean>
 
 </beans>

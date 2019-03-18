@@ -17,7 +17,6 @@ import security.UserAccountService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
-import domain.Chapter;
 import domain.Member;
 
 @Service
@@ -356,11 +355,9 @@ public class ActorService {
 		final Authority brotherhood = new Authority();
 		brotherhood.setAuthority(Authority.BROTHERHOOD);
 
-		//TODO: Comprobar que esté bien
 		final Authority chapter = new Authority();
 		chapter.setAuthority(Authority.CHAPTER);
 
-		//TODO: Comprobar que esté bien
 		final Authority sponsor = new Authority();
 		sponsor.setAuthority(Authority.SPONSOR);
 
@@ -392,12 +389,14 @@ public class ActorService {
 
 			this.floatService.deleteAll(actorId);
 
+			//History
+
 		} else if (actor.getUserAccount().getAuthorities().contains(chapter)) {
-			final Chapter chapterActor = this.chapterService.findOne(actorId);
-			chapterActor.setArea(null);
+			//TODO Proclaim
 		} else if (actor.getUserAccount().getAuthorities().contains(sponsor)) {
-			//ahora habría que borrar la relacion de sponsor con sponsorship
+			//TODO Sponsorship
 		}
+
 		this.actorRepository.delete(actor);
 
 	}
