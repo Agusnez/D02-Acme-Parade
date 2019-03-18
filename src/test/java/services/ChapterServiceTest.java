@@ -30,13 +30,47 @@ public class ChapterServiceTest extends AbstractTest {
 
 
 	/*
+	 * ----CALCULO DE COBERTURA DE SENTENCIAS----
+	 * A la hora de realizar el cálculo, nos fijamos en el "método" del servicio
+	 * que estamos probando y analizamos su composición (if, for, ...) y calculamos
+	 * el número de casos total que se pueden dar. Entonces la ecuación sería:
+	 * 
+	 * (nº casos probados / nº casos totales)*100 = cobertura(%)
+	 * 
+	 * Alfinal del archivo concluimos la cobertura total de los métodos y
+	 * por consiguiente del servicio
+	 * 
+	 * 
+	 * ----CALCULO DE COBERTURA DE DATOS----
+	 * A la hora de realizar el cálculo, nos fijamos en cada una
+	 * de las propiedades del objeto, fijándonos tanto en las
+	 * restricciones por parte del "dominio" como por parte de las
+	 * "reglas de negocio" y calculamos el total de comprobaciones.
+	 * Si realizamos todas las comprobaciones sobre una propiedad del objeto
+	 * que estamos probando,decimos que esta es un "propiedad probada".
+	 * 
+	 * (nº propiedades probadas / nº propiedades totales)*100 = cobertura(%)
+	 * 
+	 * ----Nota:
+	 * Cabe destacar que si en un test del servicio ya hemos podido
+	 * probar casos de un determinado método del servicio, podemos
+	 * obviar la cobertura de este.
+	 */
+
+	/*
 	 * a) Requirement: Actor manage his/her profile
+	 * 
 	 * b) Negative cases:
 	 * 2. El usuario que está logeado, no es el mismo que el que está editando
 	 * 3. El email no sigue el patrón especificado
-	 * 4. Atributo "surname" y "name" están a null
-	 * c)99%?
-	 * d)27,27%
+	 * 4. El atributo email está a null
+	 * 
+	 * c) Covertura sentencias
+	 * -save(): 2 probado / 4 totales = 50%
+	 * -findOne(): 1 probado / 1 total = 100%
+	 * 
+	 * d) Covertura datos
+	 * -Chapter: 1 probado / 9 totales = 11,1%
 	 */
 	@Test
 	public void driverEditChapter() {
@@ -49,13 +83,7 @@ public class ChapterServiceTest extends AbstractTest {
 			}, {
 				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
 			}, {
-				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, null, "http://www.photo.com", "title", ConstraintViolationException.class
-			}, {
-				"chapter1", "chapter1", null, "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
-			}, {
-				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", null, "surname", "name", "http://www.photo.com", "title", null
-			}, {
-				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", null, "surname", "http://www.photo.com", "title", ConstraintViolationException.class
+				"chapter1", "chapter1", "calle 13", null, "3333", "middleName", "surname", "name", "http://www.photo.com", "title", NullPointerException.class
 			}
 
 		};
@@ -248,5 +276,16 @@ public class ChapterServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * -------COBERTURA ChapterServiceTest-------
+	 * 
+	 * ----Cobertura Total Sentencias:
+	 * save()=50%
+	 * findOne()=100%
+	 * 
+	 * ----Cobertura Total Datos:
+	 * Chapter=11,1%
+	 */
 
 }

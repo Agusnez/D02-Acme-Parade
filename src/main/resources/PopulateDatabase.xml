@@ -989,8 +989,8 @@
 	
 	<!-- Segments -->
 	<bean id="segment1" class="domain.Segment">
-		<property name="origin" value="23535.34634-432414.37373" />
-		<property name="destination" value="34.52451-26.262646" />
+		<property name="origin" value="90.0, -180.0" />
+		<property name="destination" value="-90.0, -180.0" />
 		<property name="timeOrigin" value="2019/08/08 16:00" />
 		<property name="timeDestination" value="2019/08/08 17:00" />
 		<property name="parade">
@@ -998,8 +998,8 @@
 		</property>
 	</bean>
 	<bean id="segment2" class="domain.Segment">
-		<property name="origin" value="34.52451-26.262646" />
-		<property name="destination" value="5.415-14.35414" />
+		<property name="origin" value="-90.0, 180.0" />
+		<property name="destination" value="90.0, 180.0" />
 		<property name="timeOrigin" value="2019/08/08 17:00" />
 		<property name="timeDestination" value="2019/08/08 17:30" />
 		<property name="parade">
@@ -1010,8 +1010,8 @@
 		</property>
 	</bean>
 	<bean id="segment3" class="domain.Segment">
-		<property name="origin" value="5.678-12.23" />
-		<property name="destination" value="5.6789-6.4674783" />
+		<property name="origin" value="5.678, -12.23" />
+		<property name="destination" value="5.6789, -6.4674783" />
 		<property name="timeOrigin" value="2019/12/12 19:00" />
 		<property name="timeDestination" value="2019/12/12 20:00" />
 		<property name="parade">
@@ -2644,8 +2644,35 @@
 		<property name="description" value="description3" />
 	</bean>
 	
+	<!-- Proclaims -->
+	<bean id="proclaim1" class="domain.Proclaim">
+		<property name="moment" value="2019/01/10 17:00" />
+		<property name="description" value="Este es el primer proclaim" />
+		<property name="chapter" ref="chapter1" />
+	</bean>
 	
-	
-	
+	 <bean id="proclaim2" class="domain.Proclaim">
+		<property name="moment" value="2019/01/12 17:00" />
+		<property name="description" value="La cofradía se supende" />
+		<property name="chapter" ref="chapter1" />
+		
+	</bean>
+	<bean id="proclaim3" class="domain.Proclaim">
+		<property name="moment" value="2019/01/28 17:00" />
+		<property name="description" value="Previsión de lluvia Lunes santo" />
+		<property name="chapter" ref="chapter1" />
+		
+	</bean>
+	<bean id="proclaim4" class="domain.Proclaim">
+		<property name="moment" value="2019/01/30 17:00" />
+		<property name="description" value="Hola mundo" />
+		<property name="chapter" ref="chapter2" />
+		
+	</bean>
+	<bean id="proclaim5" class="domain.Proclaim">
+		<property name="moment" value="2019/01/05 17:00" />
+		<property name="description" value="Este proclaim es importante" />
+		<property name="chapter" ref="chapter2" />
+	</bean>
 
 </beans>
