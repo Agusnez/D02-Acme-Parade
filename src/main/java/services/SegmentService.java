@@ -182,6 +182,24 @@ public class SegmentService {
 		return result;
 	}
 
+	public void deleteAll(final int paradeId) {
+
+		final Collection<Segment> segments = this.segmentRepository.segmentsPerParade(paradeId);
+		int i = 0;
+
+		if (!segments.isEmpty())
+			while (i < segments.size()) {
+
+				final Segment segment = this.segmentRepository.lastSegment(paradeId);
+
+				this.segmentRepository.delete(segment);
+
+				i++;
+
+			}
+
+	}
+
 	// Other business methods 
 
 	public Segment lastSegment(final int paradeId) {
