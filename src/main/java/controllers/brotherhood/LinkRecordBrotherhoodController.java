@@ -85,7 +85,7 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 		else
 			try {
 				this.linkRecordService.save(linkRecord);
-				result = new ModelAndView("redirect:/history/brotherhood/display.do");
+				result = new ModelAndView("redirect:/brotherhood/display.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(linkRecord, "linkRecord.commit.error");
 			}

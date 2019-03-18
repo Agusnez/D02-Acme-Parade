@@ -85,7 +85,7 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 		else
 			try {
 				this.miscellaneousRecordService.save(miscellaneousRecord);
-				result = new ModelAndView("redirect:/history/brotherhood/display.do");
+				result = new ModelAndView("redirect:/brotherhood/display.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(miscellaneousRecord, "miscellaneousRecord.commit.error");
 			}
