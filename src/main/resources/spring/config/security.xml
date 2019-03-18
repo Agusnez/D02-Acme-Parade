@@ -61,11 +61,16 @@
 		<security:intercept-url pattern="/member/list.do" access="permitAll" />
 		<security:intercept-url pattern="/member/brotherhood/display.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/float/parade/list.do" access="permitAll" />
+		<security:intercept-url pattern="/proclaim/list.do" access="permitAll" />
+		
 	
 		<security:intercept-url pattern="/parade/list.do" access="permitAll" />
 		<security:intercept-url pattern="/parade/brotherhood/**" access="hasRole('BROTHERHOOD')" />
 
 		<security:intercept-url pattern="/parade/chapter/**" access="hasRole('CHAPTER')" />
+		
+		
+		<security:intercept-url pattern="/proclaim/chapter/**" access="hasRole('CHAPTER')" />
 	
 		<security:intercept-url pattern="/register/createBrotherhood.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/register/editBrotherhood.do" access="permitAll" /> 
