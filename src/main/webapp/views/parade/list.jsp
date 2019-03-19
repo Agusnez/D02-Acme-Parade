@@ -26,7 +26,7 @@
 	<acme:column property="status" titleKey="parade.status" value= "${row.status}: "/>
 	
 	<acme:column property="rejectedComment" titleKey="parade.rejectedComment" value= "${row.rejectedComment}: "/>
-	
+		
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<acme:column property="ticker" titleKey="parade.ticker" value= "${row.ticker}: "/>
 	</security:authorize> 

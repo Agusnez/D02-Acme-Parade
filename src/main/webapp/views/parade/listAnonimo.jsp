@@ -45,6 +45,10 @@
 	<acme:dateFormat titleKey="parade.organisationMoment" value="${row.organisationMoment }" pattern="yyyy/MM/dd HH:mm" />
 
 	<acme:url href="float/parade/list.do?paradeId=${row.id }" code="parade.float" />
+	
+	<security:authorize access="hasRole('SPONSOR')">	
+		<acme:url href="sponsorship/sponsor/sponsor.do?paradeId=${row.id}" code="parade.sponsor" />
+	</security:authorize>
 
 </display:table>
 	
