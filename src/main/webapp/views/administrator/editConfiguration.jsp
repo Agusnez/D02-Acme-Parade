@@ -30,7 +30,9 @@
 	
 	<acme:textbox code="configuration.priorities" size="100" path="priorities" obligatory="true"/>
 	
-	<acme:textbox code="configuration.vatTax"  path="vatTax" obligatory="true"/>
+	<acme:textbox code="configuration.vatTax"  path="vatTax"/>
+	
+	<acme:textbox code="configuration.fare"  path="fare"/>
 	
 	<acme:submit name="save" code="configuration.save" />
 	
