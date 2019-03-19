@@ -17,7 +17,6 @@ import security.UserAccountService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
-import domain.Chapter;
 import domain.Member;
 
 @Service
@@ -73,6 +72,9 @@ public class ActorService {
 
 	@Autowired
 	private FloatService			floatService;
+
+	@Autowired
+	private ProclaimService			proclaimService;
 
 
 	//Simple CRUD methods --------------------------------------------------
@@ -356,9 +358,11 @@ public class ActorService {
 		final Authority brotherhood = new Authority();
 		brotherhood.setAuthority(Authority.BROTHERHOOD);
 
-		//TODO: Comprobar que esté bien
 		final Authority chapter = new Authority();
-		brotherhood.setAuthority(Authority.CHAPTER);
+		chapter.setAuthority(Authority.CHAPTER);
+
+		final Authority sponsor = new Authority();
+		sponsor.setAuthority(Authority.SPONSOR);
 
 		final Actor actor = this.actorRepository.findOne(actorId);
 
@@ -388,10 +392,16 @@ public class ActorService {
 
 			this.floatService.deleteAll(actorId);
 
-		} else if (actor.getUserAccount().getAuthorities().contains(chapter)) {
-			final Chapter chapterActor = this.chapterService.findOne(actorId);
-			chapterActor.setArea(null);
+			//History
+
+		} else if (actor.getUserAccount().getAuthorities().contains(chapter))
+
+			this.proclaimService.deleteAll(actorId);
+
+		else if (actor.getUserAccount().getAuthorities().contains(sponsor)) {
+			//TODO Sponsorship
 		}
+
 		this.actorRepository.delete(actor);
 
 	}

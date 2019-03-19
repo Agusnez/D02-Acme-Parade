@@ -291,4 +291,11 @@ public class AreaService {
 		return res;
 	}
 
+	public Collection<Area> areasNotCoordinatedAnyChapters() {
+
+		final Collection<Area> res = this.areaRepository.areasNotCoordinatedAnyChapters();
+
+		return res;
+	}
+
 }

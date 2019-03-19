@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Access(AccessType.PROPERTY)
 public class History extends DomainEntity {
 
-	private InceptionRecord					inceptioRecord;
+	private InceptionRecord					inceptionRecord;
 	private Collection<LegalRecord>			legalRecords;
 	private Collection<PeriodRecord>		periodRecords;
 	private Collection<LinkRecord>			linkRecords;
@@ -26,12 +26,12 @@ public class History extends DomainEntity {
 
 	@Valid
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
-	public InceptionRecord getInceptioRecord() {
-		return this.inceptioRecord;
+	public InceptionRecord getInceptionRecord() {
+		return this.inceptionRecord;
 	}
 
-	public void setInceptioRecord(final InceptionRecord inceptioRecord) {
-		this.inceptioRecord = inceptioRecord;
+	public void setInceptionRecord(final InceptionRecord inceptionRecord) {
+		this.inceptionRecord = inceptionRecord;
 	}
 
 	@Valid

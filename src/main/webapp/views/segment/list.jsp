@@ -21,11 +21,16 @@
 	
 	<acme:column property="timeDestination" titleKey="segment.timeDestination" value= "${row.timeDestination}"/>
 	
-	<acme:url href="segment/brotherhood/display.do?paradeId=${row.id}" code="segment.display" />
+	
+	<display:column>
+		<acme:url href="segment/brotherhood/display.do?paradeId=${row.id}" code="segment.display" />
+		<acme:url href="segment/brotherhood/edit.do?segmentId=${row.id}" code="segment.edit" />
+	</display:column>
 	
 
 </display:table>
 
+	<a href="segment/brotherhood/create.do?paradeId=${paradeId }"><spring:message code="segment.create"/></a>
 	
 	<acme:button name="back" code="back" onclick="javascript: relativeRedir('welcome/index.do');" />
 	

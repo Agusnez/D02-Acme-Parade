@@ -421,4 +421,14 @@ public class BrotherhoodService {
 
 		}
 	}
+
+	public Collection<Brotherhood> findBrotherhoodsByAreaId(final int areaId) {
+		Assert.notNull(areaId);
+
+		Collection<Brotherhood> result;
+
+		result = this.brotherhoodRepository.findByAreaId(areaId);
+
+		return result;
+	}
 }

@@ -280,6 +280,19 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount21" class="security.UserAccount">
+		<property name="username" value="sponsor1" />
+		<property name="password" value="42c63ad66d4dc07ed17753772bef96d6" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<!-- Administrators -->	
 	
@@ -651,6 +664,17 @@
 		<property name="userAccount" ref="userAccount20" />
 	</bean>	
 
+	<!-- Sponsors -->
+	<bean id="sponsor1" class="domain.Sponsor">
+		<property name="name" value="David" />
+		<property name="middleName" value="de" />
+		<property name="surname" value="MiguelÁngel" />
+		<property name="photo" value="http://www.sponse.com" />
+		<property name="email" value="sponse@mail.com" />
+		<property name="phone" value="+34 672008675" />
+		<property name="address" value="Las Navas" />
+		<property name="userAccount" ref="userAccount21" />
+	</bean>
 	
 	<!-- Parades -->
 	<bean id="parade1" class="domain.Parade">
@@ -943,10 +967,30 @@
 		<property name="rejectedComment" value="" />
 	</bean>
 	
+	<bean id="parade15" class="domain.Parade">
+		<property name="title" value="parade15" />
+		<property name="description" value="Procesión bonita" />
+		<property name="organisationMoment" value="2019/12/12 15:00" />
+		<property name="ticker" value="190423-KERHH5" />
+		<property name="maxColumn" value="3" />
+		<property name="maxRow" value="10" />
+		<property name="brotherhood">
+			<ref bean="brotherhood4"/>		
+		</property>
+		<property name="floats">
+			<list>
+				<ref bean="float14" />
+			</list>
+		</property>
+		<property name="finalMode" value="true" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="" />
+	</bean>
+	
 	<!-- Segments -->
 	<bean id="segment1" class="domain.Segment">
-		<property name="origin" value="place1" />
-		<property name="destination" value="place2" />
+		<property name="origin" value="90.0, -180.0" />
+		<property name="destination" value="-90.0, -180.0" />
 		<property name="timeOrigin" value="2019/08/08 16:00" />
 		<property name="timeDestination" value="2019/08/08 17:00" />
 		<property name="parade">
@@ -954,8 +998,8 @@
 		</property>
 	</bean>
 	<bean id="segment2" class="domain.Segment">
-		<property name="origin" value="place2" />
-		<property name="destination" value="place3" />
+		<property name="origin" value="-90.0, 180.0" />
+		<property name="destination" value="90.0, 180.0" />
 		<property name="timeOrigin" value="2019/08/08 17:00" />
 		<property name="timeDestination" value="2019/08/08 17:30" />
 		<property name="parade">
@@ -966,8 +1010,8 @@
 		</property>
 	</bean>
 	<bean id="segment3" class="domain.Segment">
-		<property name="origin" value="place2" />
-		<property name="destination" value="place4" />
+		<property name="origin" value="5.678, -12.23" />
+		<property name="destination" value="5.6789, -6.4674783" />
 		<property name="timeOrigin" value="2019/12/12 19:00" />
 		<property name="timeDestination" value="2019/12/12 20:00" />
 		<property name="parade">
@@ -1139,6 +1183,19 @@
 		</property>
 		<property name="brotherhood">
 			<ref bean="brotherhood1"/>		
+		</property>
+	</bean>
+	
+	<bean id="float14" class="domain.Float">
+		<property name="title" value="Paso 14 del gran poder" />
+		<property name="description" value="El bonito cristo" />
+		<property name="pictures">
+			<list>
+				<value>http://www.dropbox.com/bonito</value>
+			</list>
+		</property>
+		<property name="brotherhood">
+			<ref bean="brotherhood4"/>		
 		</property>
 	</bean>
 	
@@ -2316,6 +2373,40 @@
 		<property name="actor" ref="chapter3" />
 	</bean>
 	
+	<bean id="box101" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+		
+	</bean>
+
+	<bean id="box102" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+	
+	</bean>
+
+	<bean id="box103" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+		
+	</bean>
+
+	<bean id="box104" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+		
+	</bean>
+	
+	<bean id="box105" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor1" />
+	</bean>
+	
 		
 	
 	<!-- Messages -->
@@ -2417,6 +2508,171 @@
 
 	</bean>
 	
+	<!-- Histories -->
+		
+	<bean id="history1" class="domain.History">
+		<property name="inceptionRecord" ref="inceptionRecord1" />
+		<property name="legalRecords">
+			<list>
+				<ref bean="legalRecord1" />
+			</list>
+		</property>
+		<property name="periodRecords">
+			<list>
+				<ref bean="periodRecord1" />
+			</list>
+		</property>
+		<property name="linkRecords">
+			<list>
+				<ref bean="linkRecord1" />
+				<ref bean="linkRecord2" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord1" />
+				<ref bean="miscellaneousRecord2" />
+				<ref bean="miscellaneousRecord3" />
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1" />
+
+	</bean>
 	
+	<bean id="history2" class="domain.History">
+		<property name="inceptionRecord" ref="inceptionRecord2" />
+		<property name="legalRecords">
+			<list>
+			</list>
+		</property>
+		<property name="periodRecords">
+			<list>
+			</list>
+		</property>
+		<property name="linkRecords">
+			<list>
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood2" />
+
+	</bean>
+	
+	<!-- inceptionRecords -->
+	
+	<bean id="inceptionRecord1" class="domain.InceptionRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="photos">
+			<list>
+				<value>photo1.com</value>
+				<value>photo2.com</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="inceptionRecord2" class="domain.InceptionRecord">
+		<property name="title" value="title2" />
+		<property name="description" value="description2" />
+		<property name="photos">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- legalRecords -->
+	
+	<bean id="legalRecord1" class="domain.LegalRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="legalName" value="legalName1" />
+		<property name="VATNumber" value="21" />
+		<property name="laws">
+			<list>
+				<value>law1</value>
+				<value>law2</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- periodRecords -->
+	
+	<bean id="periodRecord1" class="domain.PeriodRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="startYear" value="2020/01/10 17:00" />
+		<property name="endYear" value="2021/01/10 17:00" />
+		<property name="photos">
+			<list>
+				<value>photo1.com</value>
+				<value>photo2.com</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- linkRecords -->
+	
+	<bean id="linkRecord1" class="domain.LinkRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="link" value="http://www.facebook.com/link1/" />
+	</bean>
+	
+	<bean id="linkRecord2" class="domain.LinkRecord">
+		<property name="title" value="title2" />
+		<property name="description" value="description2" />
+		<property name="link" value="http://www.facebook.com/link2/" />
+	</bean>
+	
+	<!-- miscellaneousRecords -->
+	
+	<bean id="miscellaneousRecord1" class="domain.MiscellaneousRecord">
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+	</bean>
+	
+	<bean id="miscellaneousRecord2" class="domain.MiscellaneousRecord">
+		<property name="title" value="title2" />
+		<property name="description" value="description2" />
+	</bean>
+	
+	<bean id="miscellaneousRecord3" class="domain.MiscellaneousRecord">
+		<property name="title" value="title3" />
+		<property name="description" value="description3" />
+	</bean>
+	
+	<!-- Proclaims -->
+	<bean id="proclaim1" class="domain.Proclaim">
+		<property name="moment" value="2019/01/10 17:00" />
+		<property name="description" value="Este es el primer proclaim" />
+		<property name="chapter" ref="chapter1" />
+	</bean>
+	
+	 <bean id="proclaim2" class="domain.Proclaim">
+		<property name="moment" value="2019/01/12 17:00" />
+		<property name="description" value="La cofradía se supende" />
+		<property name="chapter" ref="chapter1" />
+		
+	</bean>
+	<bean id="proclaim3" class="domain.Proclaim">
+		<property name="moment" value="2019/01/28 17:00" />
+		<property name="description" value="Previsión de lluvia Lunes santo" />
+		<property name="chapter" ref="chapter1" />
+		
+	</bean>
+	<bean id="proclaim4" class="domain.Proclaim">
+		<property name="moment" value="2019/01/30 17:00" />
+		<property name="description" value="Hola mundo" />
+		<property name="chapter" ref="chapter2" />
+		
+	</bean>
+	<bean id="proclaim5" class="domain.Proclaim">
+		<property name="moment" value="2019/01/05 17:00" />
+		<property name="description" value="Este proclaim es importante" />
+		<property name="chapter" ref="chapter2" />
+	</bean>
 
 </beans>

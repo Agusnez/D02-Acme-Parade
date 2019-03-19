@@ -72,6 +72,7 @@
 					<li class="arrow"></li>
 					<li><a href="area/chapter/listAreas.do"><spring:message code="master.page.chapter.area.list" /></a></li>
 					<li><a href="parade/chapter/list.do"><spring:message code="master.page.chapter.paradeList" /></a></li>
+					<li><a href="proclaim/chapter/create.do"><spring:message code="master.page.chapter.createProclaim" /></a></li>
 					
 				</ul>
 			</li>
@@ -102,7 +103,10 @@
 			<li><a class="fNiv" href="register/createBrotherhood.do"><spring:message code="master.page.brotherhood.signup" /></a></li>
 			<li><a class="fNiv" href="register/createMember.do"><spring:message code="master.page.member.signup" /></a></li>
 			<li><a class="fNiv" href="register/createChapter.do"><spring:message code="master.page.chapter.signup" /></a></li>
+			<li><a class="fNiv" href="register/createSponsor.do"><spring:message code="master.page.sponsor.signup" /></a></li>
 			<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.brotherhood.list" /></a></li>
+			<li><a class="fNiv" href="chapter/list.do"><spring:message code="master.page.chapter.list" /></a></li>
+			<li><a class="fNiv" href="proclaim/list.do"><spring:message code="master.page.proclaim.list" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -122,6 +126,9 @@
 					</security:authorize>
 					<security:authorize access="hasRole('CHAPTER')">
 					<li><a href="data/chapter/get.do"><spring:message code="master.page.get.data" /> </a></li>	
+					</security:authorize>
+					<security:authorize access="hasRole('SPONSOR')">
+					<li><a href="data/sponsor/get.do"><spring:message code="master.page.get.data" /> </a></li>	
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 					

@@ -24,4 +24,7 @@ public interface BrotherhoodRepository extends JpaRepository<Brotherhood, Intege
 	@Query("select b.title from Brotherhood b where b.members.size = (select min(b.members.size) from Brotherhood b)")
 	Collection<Brotherhood> theSmallestBrotherhoods();
 
+	@Query("select b from Brotherhood b where b.area.id = ?1")
+	Collection<Brotherhood> findByAreaId(int areaAccountId);
+
 }

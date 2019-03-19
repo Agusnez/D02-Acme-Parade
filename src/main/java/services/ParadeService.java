@@ -56,6 +56,9 @@ public class ParadeService {
 	@Autowired
 	private ChapterService		chapterService;
 
+	@Autowired
+	private SegmentService		segmentService;
+
 
 	// Simple CRUD methods
 
@@ -140,11 +143,11 @@ public class ParadeService {
 
 		if (LoginService.getPrincipal().getAuthorities().contains(authorityBrotherhood))
 			brotherhood = this.brotherhoodService.findByPrincipal();
-		else if (LoginService.getPrincipal().getAuthorities().contains(authorityChapter))
+		else if (LoginService.getPrincipal().getAuthorities().contains(authorityChapter)) {
 			chapter = this.chapterService.findByPrincipal();
-		final Chapter chapterCoordinatedParades = this.chapterService.findChapterByAreaId(parade.getBrotherhood().getArea().getId());
-		Assert.isTrue(chapter.getId() == chapterCoordinatedParades.getId());
-
+			final Chapter chapterCoordinatedParades = this.chapterService.findChapterByAreaId(parade.getBrotherhood().getArea().getId());
+			Assert.isTrue(chapter.getId() == chapterCoordinatedParades.getId());
+		}
 		Assert.isTrue(brotherhood != null || chapter != null);
 
 		/*
@@ -160,6 +163,9 @@ public class ParadeService {
 			//si estaba a false el de BBDD y ahora se ha puesto a true
 			if (parade.getStatus() == null && parade.getFinalMode() == true)
 				parade.setStatus("SUBMITTED");
+
+			if (parade.getStatus() == "REJECTED")
+				Assert.isTrue(parade.getRejectedComment() != null && parade.getRejectedComment() != "");
 
 		} else if (parade.getId() == 0 && parade.getFinalMode() == true)
 			parade.setStatus("SUBMITTED");
@@ -228,6 +234,8 @@ public class ParadeService {
 
 		if (!parades.isEmpty())
 			for (final Parade p : parades) {
+
+				this.segmentService.deleteAll(p.getId());
 
 				final Collection<Finder> findersByParade = this.finderService.findFindersByParadeId(p.getId());
 				if (!findersByParade.isEmpty())
@@ -441,6 +449,87 @@ public class ParadeService {
 	public void flush() {
 		this.paradeRepository.flush();
 
+	}
+
+	public Boolean exist(final int paradeId) {
+		Boolean res = false;
+
+		final Parade parade = this.paradeRepository.findOne(paradeId);
+
+		if (parade != null)
+			res = true;
+
+		return res;
+	}
+
+	public Double avgParadesCoordinatedByChapters() {
+
+		final Double res = this.paradeRepository.avgParadesCoordinatedByChapters();
+
+		return res;
+
+	}
+
+	public Integer minParadesCoordinatedByChapters() {
+		Integer min = 0;
+
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer res = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				if (min == 0 || res < min)
+					min = res;
+			}
+
+		return min;
+	}
+
+	public Integer maxParadesCoordinatedByChapters() {
+		Integer max = 0;
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer res = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				if (max == 0 || res > max)
+					max = res;
+			}
+
+		return max;
+	}
+
+	public Double stddevParadesCoordinatedByChapters() {
+		Double res = 0.0;
+		final Double avg = this.avgParadesCoordinatedByChapters();
+
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer xi = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				res = res + Math.pow(xi - avg, 2);
+			}
+
+		res = Math.sqrt(res / chapters.size());
+
+		return res;
+
+	}
+
+	public Collection<Chapter> chaptersCoordinatesMoreThan10Percent() {
+		final Collection<Chapter> res = new HashSet<Chapter>();
+
+		final Collection<Chapter> chapters = this.chapterService.findAll();
+
+		for (final Chapter c : chapters)
+			if (c.getArea() != null) {
+				final Integer xi = this.paradeRepository.countParadesByChapterId(c.getArea().getId());
+				if (xi > this.avgParadesCoordinatedByChapters() * 1.1)
+					res.add(c);
+			}
+
+		return res;
 	}
 
 }

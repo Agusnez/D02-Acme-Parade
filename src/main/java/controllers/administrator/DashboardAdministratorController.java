@@ -17,8 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AreaService;
 import services.BrotherhoodService;
+import services.ChapterService;
+import services.ConfigurationService;
 import services.EnrolmentService;
 import services.FinderService;
+import services.HistoryService;
 import services.MemberService;
 import services.ParadeService;
 import services.PositionService;
@@ -26,6 +29,7 @@ import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Parade;
 import domain.Position;
 import forms.ParadeIdForm;
@@ -35,31 +39,40 @@ import forms.ParadeIdForm;
 public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
-	private ParadeService		paradeService;
+	private ParadeService			paradeService;
 
 	@Autowired
-	private MemberService		memberService;
+	private MemberService			memberService;
 
 	@Autowired
-	private AreaService			areaService;
+	private AreaService				areaService;
 
 	@Autowired
-	private RequestService		requestService;
+	private RequestService			requestService;
 
 	@Autowired
-	private PositionService		positionService;
+	private PositionService			positionService;
 
 	@Autowired
-	private EnrolmentService	enrolmentService;
+	private EnrolmentService		enrolmentService;
 
 	@Autowired
-	private FinderService		finderService;
+	private FinderService			finderService;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private HistoryService			historyService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
+	@Autowired
+	private ChapterService			chapterService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -116,6 +129,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("rejectedRatio", rejectedRatio);
 
 		Boolean existParade = true;
+		Boolean existChapter = true;
 
 		try {
 			final Collection<Parade> parades = this.paradeService.findAll();
@@ -124,7 +138,14 @@ public class DashboardAdministratorController extends AbstractController {
 			existParade = false;
 		}
 
+		try {
+			this.chapterService.findAll();
+		} catch (final Throwable oops) {
+			existChapter = false;
+		}
+
 		result.addObject("existParade", existParade);
+		result.addObject("existChapter", existChapter);
 
 		result.addObject("paradeIdForm", paradeIdForm);
 
@@ -141,6 +162,34 @@ public class DashboardAdministratorController extends AbstractController {
 
 		//--------------------------------------------------------------------------------------------------------------
 
+		try {
+			final Double avgParadesCoordinatedByChapters = this.paradeService.avgParadesCoordinatedByChapters();
+			final Integer minParadesCoordinatedByChapters = this.paradeService.minParadesCoordinatedByChapters();
+			final Integer maxParadesCoordinatedByChapters = this.paradeService.maxParadesCoordinatedByChapters();
+			final Double stddevParadesCoordinatedByChapters = this.paradeService.stddevParadesCoordinatedByChapters();
+			final Collection<Chapter> chaptersCoordinatesMoreThan10Percent = this.paradeService.chaptersCoordinatesMoreThan10Percent();
+
+			result.addObject("avgParadesCoordinatedByChapters", avgParadesCoordinatedByChapters);
+			result.addObject("minParadesCoordinatedByChapters", minParadesCoordinatedByChapters);
+			result.addObject("maxParadesCoordinatedByChapters", maxParadesCoordinatedByChapters);
+			result.addObject("stddevParadesCoordinatedByChapters", stddevParadesCoordinatedByChapters);
+			result.addObject("chaptersCoordinatesMoreThan10Percent", chaptersCoordinatesMoreThan10Percent);
+		} catch (final Throwable oops) {
+			result.addObject("avgParadesCoordinatedByChapters", "N/A");
+			result.addObject("minParadesCoordinatedByChapters", "N/A");
+			result.addObject("maxParadesCoordinatedByChapters", "N/A");
+			result.addObject("stddevParadesCoordinatedByChapters", "N/A");
+			result.addObject("chaptersCoordinatesMoreThan10Percent", "N/A");
+		}
+
+		try {
+			final Double ratioAreasNotCoordinatedAnyChapters = this.areaService.ratioAreasNotCoordinatedAnyChapters();
+			result.addObject("ratioAreasNotCoordinatedAnyChapters", ratioAreasNotCoordinatedAnyChapters);
+
+		} catch (final Throwable oops) {
+			result.addObject("ratioAreasNotCoordinatedAnyChapters", "N/A");
+		}
+		//--------------------------------------------------------------------------------------------------------------
 		try {
 			final Collection<Double> ratiosRequest = this.requestService.ratiosRequest();
 			result.addObject("ratiosRequest", ratiosRequest);
@@ -292,6 +341,24 @@ public class DashboardAdministratorController extends AbstractController {
 		}
 
 		//--------------------------------------------------------------------------------------------------------------
+
+		final Double avgRecordPerHistory = this.historyService.avgRecordPerHistory();
+		result.addObject("avgRecordPerHistory", avgRecordPerHistory);
+		final Double minRecordPerHistory = this.historyService.minRecordPerHistory();
+		result.addObject("minRecordPerHistory", minRecordPerHistory);
+		final Double maxRecordPerHistory = this.historyService.maxRecordPerHistory();
+		result.addObject("maxRecordPerHistory", maxRecordPerHistory);
+		final Double stddevRecordPerHistory = this.historyService.stddevRecordPerHistory();
+		result.addObject("stddevRecordPerHistory", stddevRecordPerHistory);
+
+		final Collection<Brotherhood> largestBrotherhood = this.historyService.largestBrotherhood();
+		result.addObject("largestBrotherhood", largestBrotherhood);
+
+		final Collection<Brotherhood> brotherhoodsMoreThanAverage = this.historyService.brotherhoodsMoreThanAverage();
+		result.addObject("brotherhoodsMoreThanAverage", brotherhoodsMoreThanAverage);
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		result.addObject("banner", banner);
 
 		return result;
 
@@ -524,6 +591,24 @@ public class DashboardAdministratorController extends AbstractController {
 		}
 
 		//--------------------------------------------------------------------------------------------------------------
+
+		final Double avgRecordPerHistory = this.historyService.avgRecordPerHistory();
+		result.addObject("avgRecordPerHistory", avgRecordPerHistory);
+		final Double minRecordPerHistory = this.historyService.minRecordPerHistory();
+		result.addObject("minRecordPerHistory", minRecordPerHistory);
+		final Double maxRecordPerHistory = this.historyService.maxRecordPerHistory();
+		result.addObject("maxRecordPerHistory", maxRecordPerHistory);
+		final Double stddevRecordPerHistory = this.historyService.stddevRecordPerHistory();
+		result.addObject("stddevRecordPerHistory", stddevRecordPerHistory);
+
+		final Collection<Brotherhood> largestBrotherhood = this.historyService.largestBrotherhood();
+		result.addObject("largestBrotherhood", largestBrotherhood);
+
+		final Collection<Brotherhood> brotherhoodsMoreThanAverage = this.historyService.brotherhoodsMoreThanAverage();
+		result.addObject("brotherhoodsMoreThanAverage", brotherhoodsMoreThanAverage);
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		result.addObject("banner", banner);
 
 		return result;
 
