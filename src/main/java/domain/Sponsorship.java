@@ -4,8 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -58,8 +57,7 @@ public class Sponsorship extends DomainEntity {
 		this.activated = activated;
 	}
 
-	@OneToOne(optional = false)
-	@Valid
+	@ManyToOne
 	public Sponsor getSponsor() {
 		return this.sponsor;
 	}
@@ -68,8 +66,7 @@ public class Sponsorship extends DomainEntity {
 		this.sponsor = sponsor;
 	}
 
-	@OneToOne(optional = false)
-	@Valid
+	@ManyToOne
 	public Parade getParade() {
 		return this.parade;
 	}

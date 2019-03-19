@@ -26,7 +26,7 @@
 	<acme:column property="status" titleKey="parade.status" value= "${row.status}: "/>
 	
 	<acme:column property="rejectedComment" titleKey="parade.rejectedComment" value= "${row.rejectedComment}: "/>
-	
+		
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<acme:column property="ticker" titleKey="parade.ticker" value= "${row.ticker}: "/>
 	</security:authorize> 
@@ -44,12 +44,6 @@
 		<jstl:if test="${row.status == 'SUBMITTED'}">	
 			<acme:url href="parade/chapter/accept.do?paradeId=${row.id }" code="parade.accept" />
 			<acme:url href="parade/chapter/reject.do?paradeId=${row.id }" code="parade.reject" />
-		</jstl:if>
-	</security:authorize>
-	
-	<security:authorize access="hasRole('SPONSOR')">
-		<jstl:if test="${row.status == 'ACCEPTED'}">	
-			<acme:url href="sponsorship/sponsor/sponsor.do?paradeId=${row.id }" code="parade.sponsor" />
 		</jstl:if>
 	</security:authorize>
 		

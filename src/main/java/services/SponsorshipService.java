@@ -36,7 +36,7 @@ public class SponsorshipService {
 	private ParadeService			paradeService;
 
 
-	public SponsorshipForm create() {
+	public SponsorshipForm create(final int paradeId) {
 
 		final Sponsor sponsor = this.sponsorService.findByPrincipal();
 		Assert.notNull(sponsor);
@@ -45,6 +45,8 @@ public class SponsorshipService {
 		Assert.isTrue(sponsor.getUserAccount().getAuthorities().contains(authority));
 
 		final SponsorshipForm sponsorshipForm = new SponsorshipForm();
+
+		sponsorshipForm.setParadeId(paradeId);
 
 		return sponsorshipForm;
 
@@ -121,7 +123,6 @@ public class SponsorshipService {
 		final Sponsorship result = new Sponsorship();
 
 		result.setBanner(sponsorship.getBanner());
-		result.setParade(this.paradeService.findOne(sponsorship.getParadeId()));
 		result.setCreditCard(sponsorship.getCreditCard());
 		result.setTargetUrl(sponsorship.getTargetUrl());
 
@@ -129,6 +130,7 @@ public class SponsorshipService {
 
 			result.setActivated(true);
 			result.setSponsor(this.sponsorService.findByPrincipal());
+			result.setParade(this.paradeService.findOne(sponsorship.getParadeId()));
 
 		} else {
 
@@ -138,10 +140,25 @@ public class SponsorshipService {
 			result.setVersion(theOldOne.getVersion());
 			result.setActivated(theOldOne.getActivated());
 			result.setSponsor(theOldOne.getSponsor());
+			result.setParade(theOldOne.getParade());
 
 		}
 
 		this.validator.validate(result, binding);
+
+		return result;
+	}
+
+	public SponsorshipForm editForm(final Sponsorship sponsorship) {
+
+		final SponsorshipForm result = new SponsorshipForm();
+
+		result.setBanner(sponsorship.getBanner());
+		result.setCreditCard(sponsorship.getCreditCard());
+		result.setId(sponsorship.getId());
+		result.setParadeId(sponsorship.getParade().getId());
+		result.setTargetUrl(sponsorship.getTargetUrl());
+		result.setVersion(sponsorship.getVersion());
 
 		return result;
 	}

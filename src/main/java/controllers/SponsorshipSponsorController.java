@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ConfigurationService;
+import services.ParadeService;
 import services.SponsorService;
 import services.SponsorshipService;
+import domain.Parade;
 import domain.Sponsor;
 import domain.Sponsorship;
 import forms.SponsorshipForm;
@@ -33,6 +36,9 @@ public class SponsorshipSponsorController {
 
 	@Autowired
 	private SponsorService			sponsorService;
+
+	@Autowired
+	private ParadeService			paradeService;
 
 
 	//List----------------------------------------------------------
@@ -91,15 +97,26 @@ public class SponsorshipSponsorController {
 
 	//Create------------------------------------------------------------------
 	@RequestMapping(value = "/sponsor", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int paradeId) {
 		final ModelAndView result;
-
-		final SponsorshipForm sponsorship = this.sponsorshipService.create();
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("sponsorship/edit");
-		result.addObject("sponsorship", sponsorship);
-		result.addObject("banner", banner);
+		final Parade parade = this.paradeService.findOne(paradeId);
+
+		if (parade == null) {
+
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+
+		} else {
+
+			final SponsorshipForm sponsorship = this.sponsorshipService.create(paradeId);
+
+			result = new ModelAndView("sponsorship/edit");
+			result.addObject("sponsorship", sponsorship);
+			result.addObject("banner", banner);
+
+		}
 
 		return result;
 
@@ -110,6 +127,7 @@ public class SponsorshipSponsorController {
 	public ModelAndView edit(@RequestParam final int sponsorshipId) {
 		ModelAndView result;
 		Sponsorship sponsorship;
+		SponsorshipForm sponsorshipForm;
 		Boolean security;
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
@@ -123,29 +141,33 @@ public class SponsorshipSponsorController {
 
 			security = this.sponsorshipService.sponsorshipSponsorSecurity(sponsorshipId);
 
-			if (security)
-				result = this.createEditModelAndView(sponsorship, null);
-			else
+			if (security) {
+
+				sponsorshipForm = this.sponsorshipService.editForm(sponsorship);
+				result = this.createEditModelAndView(sponsorshipForm, null);
+
+			} else
 				result = new ModelAndView("redirect:/welcome/index.do");
+
 			result.addObject("banner", banner);
 		}
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final SponsorshipForm sponsorshipform, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute(value = "sponsorship") final SponsorshipForm sponsorshipform, final BindingResult binding) {
 		ModelAndView result;
 
 		final Sponsorship sponsorship = this.sponsorshipService.reconstruct(sponsorshipform, binding);
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(sponsorship, null);
+			result = this.createEditModelAndView(sponsorshipform, null);
 		else
 			try {
 				this.sponsorshipService.save(sponsorship);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(sponsorship, "sponsorship.commit.error");
+				result = this.createEditModelAndView(sponsorshipform, "sponsorship.commit.error");
 
 			}
 
@@ -219,7 +241,7 @@ public class SponsorshipSponsorController {
 	}
 
 	//Other business methods---------------------------------------------------------------------------------------------
-	protected ModelAndView createEditModelAndView(final Sponsorship sponsorship, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final SponsorshipForm sponsorship, final String messageCode) {
 		final ModelAndView result;
 
 		final String banner = this.configurationService.findConfiguration().getBanner();

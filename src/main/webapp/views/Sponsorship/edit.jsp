@@ -9,15 +9,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="sponsorship/sponsor/edit.do" modelAttribute="sponsor">
+<form:form action="sponsorship/sponsor/edit.do" modelAttribute="sponsorship">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="paradeId" />
 	
 	
 	<acme:textbox code="sponsorship.banner" path="banner" obligatory="true"/>
 	
-	<acme:textbox code="sponsorship.targetURL" path="targetURL" obligatory="true"/>
+	<acme:textbox code="sponsorship.targetUrl" path="targetUrl" obligatory="true"/>
 	
 	<acme:textbox code="sponsorship.creditCard.holderName" path="creditCard.holderName" obligatory="true"/>
 	
@@ -29,7 +30,7 @@
 	
 	<acme:textbox code="sponsorship.creditCard.expYear" path="creditCard.expYear" obligatory="true"/>
 	
-	<acme:textbox code="sponsorship.creditCard.CVV" path="creditCard.CVV" obligatory="true"/>
+	<acme:textbox code="sponsorship.creditCard.cvv" path="creditCard.cvv" obligatory="true"/>
 	
 	<acme:submit name="save" code="sponsorship.save" />
 	
