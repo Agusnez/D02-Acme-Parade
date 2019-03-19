@@ -71,6 +71,7 @@ public class SegmentService {
 
 		Assert.isTrue(segment.getTimeOrigin().before(segment.getTimeDestination()));
 
+		Assert.isTrue(!segment.getTimeOrigin().before(segment.getParade().getOrganisationMoment()));
 		if (segment.getId() != 0) {
 			if (segment.getContiguous() != null) {
 
@@ -80,7 +81,7 @@ public class SegmentService {
 				contiguousBefore.setTimeDestination(segment.getTimeOrigin());
 
 				Assert.isTrue(contiguousBefore.getTimeOrigin().before(segment.getTimeOrigin()));
-				Assert.isTrue(contiguousBefore.getTimeDestination().before(segment.getTimeOrigin()));
+				Assert.isTrue(contiguousBefore.getTimeDestination().before(segment.getTimeDestination()));
 
 				Assert.isTrue(contiguousBefore.getTimeOrigin().before(contiguousBefore.getTimeDestination()));
 
