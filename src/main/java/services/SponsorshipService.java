@@ -155,6 +155,15 @@ public class SponsorshipService {
 		return result;
 	}
 
+	public void deleteAll(final int actorId) {
+
+		final Collection<Sponsorship> sponsorships = this.findAllBySponsorId(actorId);
+
+		if (!sponsorships.isEmpty())
+			for (final Sponsorship s : sponsorships)
+				this.sponsorshipRepository.delete(s);
+	}
+
 	public SponsorshipForm editForm(final Sponsorship sponsorship) {
 
 		final SponsorshipForm result = new SponsorshipForm();

@@ -79,6 +79,9 @@ public class ActorService {
 	@Autowired
 	private HistoryService			historyService;
 
+	@Autowired
+	private SponsorshipService		sponsorshipService;
+
 
 	//Simple CRUD methods --------------------------------------------------
 
@@ -401,9 +404,9 @@ public class ActorService {
 
 			this.proclaimService.deleteAll(actorId);
 
-		else if (actor.getUserAccount().getAuthorities().contains(sponsor)) {
-			//TODO Sponsorship
-		}
+		else if (actor.getUserAccount().getAuthorities().contains(sponsor))
+
+			this.sponsorshipService.deleteAll(actorId);
 
 		this.actorRepository.delete(actor);
 
