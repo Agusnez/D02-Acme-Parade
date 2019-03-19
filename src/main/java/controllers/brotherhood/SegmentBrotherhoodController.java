@@ -46,19 +46,21 @@ public class SegmentBrotherhoodController {
 		final Brotherhood member = this.brotherhoodService.findByPrincipal();
 		final Parade parade = this.paradeService.findOne(paradeId);
 
-		if (parade == null)
-			return new ModelAndView("redirect:/welcome/index.do");
+		if (parade == null) {
+			result = new ModelAndView("misc/notExist");
+		} else {
 
-		if (parade.getBrotherhood().equals(member)) {
-			final Collection<Segment> segments = this.segmentService.findByParade(paradeId);
-
-			final String banner = this.configurationService.findConfiguration().getBanner();
-			result = new ModelAndView("segment/path");
-			result.addObject("segments", segments);
-			result.addObject("paradeId", paradeId);
-			result.addObject("banner", banner);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			if (parade.getBrotherhood().equals(member)) {
+				final Collection<Segment> segments = this.segmentService.findByParade(paradeId);
+	
+				final String banner = this.configurationService.findConfiguration().getBanner();
+				result = new ModelAndView("segment/path");
+				result.addObject("segments", segments);
+				result.addObject("paradeId", paradeId);
+				result.addObject("banner", banner);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return result;
 	}
@@ -109,21 +111,22 @@ public class SegmentBrotherhoodController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int paradeId) {
 		ModelAndView result;
-		final Brotherhood member = this.brotherhoodService.findByPrincipal();
 
 		final Segment segment = this.segmentService.findOne(paradeId);
 
-		if (segment == null)
-			return new ModelAndView("redirect:/welcome/index.do");
+		if (segment == null) {
+			result = new ModelAndView("misc/notExist");
+		} else {
 
-		if (this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId())) {
-
-			final String banner = this.configurationService.findConfiguration().getBanner();
-			result = new ModelAndView("segment/display");
-			result.addObject("segment", segment);
-			result.addObject("banner", banner);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			if (this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId())) {
+	
+				final String banner = this.configurationService.findConfiguration().getBanner();
+				result = new ModelAndView("segment/display");
+				result.addObject("segment", segment);
+				result.addObject("banner", banner);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return result;
 	}
