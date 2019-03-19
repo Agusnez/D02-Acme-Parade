@@ -67,8 +67,11 @@ public class ConfigurationAdministratorController {
 	protected ModelAndView createEditModelAndView(final Configuration configuration, final String messageCode) {
 		ModelAndView result;
 
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
 		result = new ModelAndView("administrator/editConfiguration");
 		result.addObject("configuration", configuration);
+		result.addObject("banner", banner);
 		result.addObject("messageError", messageCode);
 
 		return result;

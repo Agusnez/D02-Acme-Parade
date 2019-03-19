@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.ParadeService;
+import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Parade;
+import domain.Sponsorship;
 
 @Controller
 @RequestMapping("/parade")
@@ -30,6 +32,9 @@ public class ParadeController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private SponsorshipService		sponsorshipService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -60,5 +65,41 @@ public class ParadeController extends AbstractController {
 		}
 		return result;
 
+	}
+
+	//Display------------------------------------------------------------
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int paradeId) {
+		final ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		final Parade paradeFound = this.paradeService.findOne(paradeId);
+
+		if (paradeFound == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
+
+			result = new ModelAndView("parade/display");
+			result.addObject("parade", paradeFound);
+			result.addObject("banner", banner);
+
+			try {
+				final Sponsorship s = this.sponsorshipService.ramdomSponsorship(paradeId);
+
+				if (s != null) {
+					result.addObject("find", true);
+					result.addObject("bannerSponsorship", s.getBanner());
+				}
+
+				else
+					result.addObject("find", false);
+			} catch (final Throwable oops) {
+				result.addObject("find", false);
+			}
+
+		}
+
+		return result;
 	}
 }
