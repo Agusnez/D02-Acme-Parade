@@ -141,6 +141,7 @@ public class SponsorshipService {
 			result.setActivated(theOldOne.getActivated());
 			result.setSponsor(theOldOne.getSponsor());
 			result.setParade(theOldOne.getParade());
+			result.setRecollect(theOldOne.getRecollect());
 
 		}
 
