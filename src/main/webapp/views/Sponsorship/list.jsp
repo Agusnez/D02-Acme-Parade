@@ -17,6 +17,8 @@
 	
 	<acme:column property="targetUrl" titleKey="sponsorship.targetUrl" value= "${row.targetUrl}: "/>
 	
+	<acme:column property="recollect" titleKey="sponsorship.recollect" value= "${row.recollect}: "/>
+	
 	<acme:column property="parade.title" titleKey="sponsorship.parade.title" value= "${row.parade.title}: "/>
 	
 	<acme:column property="creditCard.number" titleKey="sponsorship.creditCard.number" value= "${row.creditCard.number}: "/>
