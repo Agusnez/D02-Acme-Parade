@@ -46,6 +46,12 @@
 			<acme:url href="parade/chapter/reject.do?paradeId=${row.id }" code="parade.reject" />
 		</jstl:if>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('SPONSOR')">
+		<jstl:if test="${row.status == 'ACCEPTED'}">	
+			<acme:url href="sponsorship/sponsor/sponsor.do?paradeId=${row.id }" code="parade.sponsor" />
+		</jstl:if>
+	</security:authorize>
 		
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<acme:url href="parade/brotherhood/display.do?paradeId=${row.id }" code="parade.display" />

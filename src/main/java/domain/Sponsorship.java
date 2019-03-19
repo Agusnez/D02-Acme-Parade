@@ -19,6 +19,7 @@ public class Sponsorship extends DomainEntity {
 	private CreditCard	creditCard;
 	private Boolean		activated;
 	private Sponsor		sponsor;
+	private Parade		parade;
 
 
 	@URL
@@ -65,6 +66,16 @@ public class Sponsorship extends DomainEntity {
 
 	public void setSponsor(final Sponsor sponsor) {
 		this.sponsor = sponsor;
+	}
+
+	@OneToOne(optional = false)
+	@Valid
+	public Parade getParade() {
+		return this.parade;
+	}
+
+	public void setParade(final Parade parade) {
+		this.parade = parade;
 	}
 
 }

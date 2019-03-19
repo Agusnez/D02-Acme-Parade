@@ -17,6 +17,7 @@ import services.SponsorService;
 import services.SponsorshipService;
 import domain.Sponsor;
 import domain.Sponsorship;
+import forms.SponsorshipForm;
 
 @Controller
 @RequestMapping("/sponsorship/sponsor")
@@ -93,7 +94,7 @@ public class SponsorshipSponsorController {
 	public ModelAndView create() {
 		final ModelAndView result;
 
-		final Sponsorship sponsorship = this.sponsorshipService.create();
+		final SponsorshipForm sponsorship = this.sponsorshipService.create();
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		result = new ModelAndView("sponsorship/edit");
@@ -132,10 +133,10 @@ public class SponsorshipSponsorController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(Sponsorship sponsorship, final BindingResult binding) {
+	public ModelAndView save(final SponsorshipForm sponsorshipform, final BindingResult binding) {
 		ModelAndView result;
 
-		sponsorship = this.sponsorshipService.reconstruct(sponsorship, binding);
+		final Sponsorship sponsorship = this.sponsorshipService.reconstruct(sponsorshipform, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(sponsorship, null);
@@ -144,7 +145,7 @@ public class SponsorshipSponsorController {
 				this.sponsorshipService.save(sponsorship);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(sponsorship, "float.commit.error");
+				result = this.createEditModelAndView(sponsorship, "sponsorship.commit.error");
 
 			}
 

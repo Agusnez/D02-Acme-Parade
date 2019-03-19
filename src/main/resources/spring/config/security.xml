@@ -172,6 +172,13 @@
 		<security:intercept-url pattern="/actor/list.do" access="isAuthenticated()" />
 		
 		<security:intercept-url pattern="/broadcast/administrator/create.do" access="hasRole('ADMIN')" />
+		
+		
+		<security:intercept-url pattern="/sponsorship/sponsor/create.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/list.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/edit.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/deactivate.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/reactivate.do" access="hasRole('SPONSOR')" />
 
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

@@ -14,6 +14,7 @@ import repositories.SponsorshipRepository;
 import security.Authority;
 import domain.Sponsor;
 import domain.Sponsorship;
+import forms.SponsorshipForm;
 
 @Service
 @Transactional
@@ -31,8 +32,11 @@ public class SponsorshipService {
 	@Autowired
 	private SponsorService			sponsorService;
 
+	@Autowired
+	private ParadeService			paradeService;
 
-	public Sponsorship create() {
+
+	public SponsorshipForm create() {
 
 		final Sponsor sponsor = this.sponsorService.findByPrincipal();
 		Assert.notNull(sponsor);
@@ -40,9 +44,9 @@ public class SponsorshipService {
 		authority.setAuthority(Authority.SPONSOR);
 		Assert.isTrue(sponsor.getUserAccount().getAuthorities().contains(authority));
 
-		final Sponsorship sponsorship = new Sponsorship();
+		final SponsorshipForm sponsorshipForm = new SponsorshipForm();
 
-		return sponsorship;
+		return sponsorshipForm;
 
 	}
 
@@ -112,21 +116,28 @@ public class SponsorshipService {
 
 	}
 
-	public Sponsorship reconstruct(final Sponsorship sponsorship, final BindingResult binding) {
+	public Sponsorship reconstruct(final SponsorshipForm sponsorship, final BindingResult binding) {
 
-		final Sponsorship result = sponsorship;
+		final Sponsorship result = new Sponsorship();
+
+		result.setBanner(sponsorship.getBanner());
+		result.setParade(this.paradeService.findOne(sponsorship.getParadeId()));
+		result.setCreditCard(sponsorship.getCreditCard());
+		result.setTargetUrl(sponsorship.getTargetUrl());
 
 		if (sponsorship.getId() == 0) {
 
-			sponsorship.setActivated(true);
-			sponsorship.setSponsor(this.sponsorService.findByPrincipal());
+			result.setActivated(true);
+			result.setSponsor(this.sponsorService.findByPrincipal());
 
 		} else {
 
 			final Sponsorship theOldOne = this.findOne(sponsorship.getId());
 
-			sponsorship.setActivated(theOldOne.getActivated());
-			sponsorship.setSponsor(theOldOne.getSponsor());
+			result.setId(theOldOne.getId());
+			result.setVersion(theOldOne.getVersion());
+			result.setActivated(theOldOne.getActivated());
+			result.setSponsor(theOldOne.getSponsor());
 
 		}
 
