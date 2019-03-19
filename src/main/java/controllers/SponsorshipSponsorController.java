@@ -4,6 +4,9 @@ package controllers;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +18,8 @@ import services.SponsorshipService;
 import domain.Sponsor;
 import domain.Sponsorship;
 
+@Controller
+@RequestMapping("/sponsorship/sponsor")
 public class SponsorshipSponsorController {
 
 	//Services -----------------------------------------------------------
@@ -36,7 +41,9 @@ public class SponsorshipSponsorController {
 		final ModelAndView result;
 		final Collection<Sponsorship> sponsorships;
 
-		sponsorships = this.sponsorshipService.findAll();
+		final Sponsor sponsor = this.sponsorService.findByPrincipal();
+
+		sponsorships = this.sponsorshipService.findAllBySponsorId(sponsor.getId());
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
@@ -79,6 +86,151 @@ public class SponsorshipSponsorController {
 				result = new ModelAndView("redirect:/welcome/index.do");
 		}
 		return result;
+	}
+
+	//Create------------------------------------------------------------------
+	@RequestMapping(value = "/sponsor", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView result;
+
+		final Sponsorship sponsorship = this.sponsorshipService.create();
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		result = new ModelAndView("sponsorship/edit");
+		result.addObject("sponsorship", sponsorship);
+		result.addObject("banner", banner);
+
+		return result;
+
+	}
+
+	//Edit--------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int sponsorshipId) {
+		ModelAndView result;
+		Sponsorship sponsorship;
+		Boolean security;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+
+		if (sponsorship == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
+
+			security = this.sponsorshipService.sponsorshipSponsorSecurity(sponsorshipId);
+
+			if (security)
+				result = this.createEditModelAndView(sponsorship, null);
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+			result.addObject("banner", banner);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(Sponsorship sponsorship, final BindingResult binding) {
+		ModelAndView result;
+
+		sponsorship = this.sponsorshipService.reconstruct(sponsorship, binding);
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(sponsorship, null);
+		else
+			try {
+				this.sponsorshipService.save(sponsorship);
+				result = new ModelAndView("redirect:/welcome/index.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(sponsorship, "float.commit.error");
+
+			}
+
+		return result;
+	}
+
+	//deactivate--------------------------------------------------------------------
+	@RequestMapping(value = "/deactivate", method = RequestMethod.GET)
+	public ModelAndView deActivate(@RequestParam final int sponsorshipId) {
+
+		ModelAndView result;
+		Sponsorship sponsorship;
+		Boolean security;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+
+		if (sponsorship == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
+
+			security = this.sponsorshipService.sponsorshipSponsorSecurity(sponsorshipId);
+
+			if (security) {
+
+				this.sponsorshipService.deactivate(sponsorshipId);
+				result = new ModelAndView("redirect:/sponsorship/sponsor/list.do");
+
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+			result.addObject("banner", banner);
+		}
+		return result;
+
+	}
+
+	//reactivate--------------------------------------------------------------------
+	@RequestMapping(value = "/reactivate", method = RequestMethod.GET)
+	public ModelAndView reActivate(@RequestParam final int sponsorshipId) {
+
+		ModelAndView result;
+		Sponsorship sponsorship;
+		Boolean security;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+
+		if (sponsorship == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
+
+			security = this.sponsorshipService.sponsorshipSponsorSecurity(sponsorshipId);
+
+			if (security) {
+
+				this.sponsorshipService.reactivate(sponsorshipId);
+				result = new ModelAndView("redirect:/sponsorship/sponsor/list.do");
+
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+			result.addObject("banner", banner);
+		}
+		return result;
+
+	}
+
+	//Other business methods---------------------------------------------------------------------------------------------
+	protected ModelAndView createEditModelAndView(final Sponsorship sponsorship, final String messageCode) {
+		final ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		result = new ModelAndView("sponsorship/edit");
+		result.addObject("sponsorship", sponsorship);
+		result.addObject("messageError", messageCode);
+		result.addObject("banner", banner);
+		result.addObject("language", LocaleContextHolder.getLocale().getLanguage());
+
+		return result;
+
 	}
 
 }
