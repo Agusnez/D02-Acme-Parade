@@ -217,6 +217,36 @@ public class ParadeBrotherhoodController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/copy", method = RequestMethod.GET)
+	public ModelAndView copy(@RequestParam final int paradeId) {
+		final ModelAndView result;
+		final Brotherhood login;
+		final Brotherhood owner;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		final Parade paradeFound = this.paradeService.findOne(paradeId);
+
+		if (paradeFound == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
+
+			login = this.brotherhoodService.findByPrincipal();
+			owner = paradeFound.getBrotherhood();
+
+			if (login.getId() == owner.getId()) {
+				
+				this.paradeService.copy(paradeFound.getId());
+				
+				result = new ModelAndView("redirect:list.do");
+				result.addObject("banner", banner);
+
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
+		return result;
+	}
 
 	//Other business methods------------------------------------------------------------------------------------------
 	protected ModelAndView createEditModelAndView(final Parade parade, final String messageCode) {
