@@ -30,6 +30,8 @@
 	
 	<acme:textbox code="configuration.priorities" size="100" path="priorities" obligatory="true"/>
 	
+	<acme:textbox code="configuration.vatTax"  path="vatTax" obligatory="true"/>
+	
 	<acme:submit name="save" code="configuration.save" />
 	
 	<acme:cancel code="configuration.cancel" url="welcome/index.do" />

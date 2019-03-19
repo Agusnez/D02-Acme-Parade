@@ -2505,6 +2505,7 @@
 		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones" />
 		<property name="banner" value="https://tinyurl.com/acme-madruga" />
 		<property name="welcomeMessage" value="Welcome to Acme Madrugá, the site to organise your parades" />
+		<property name="vatTax" value="0.21" />
 
 	</bean>
 	

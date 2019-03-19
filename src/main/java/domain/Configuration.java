@@ -32,6 +32,7 @@ public class Configuration extends DomainEntity {
 	private Collection<String>	priorities;
 	private String				welcomeMessage;
 	private String				welcomeMessageEs;
+	private Double				vatTax;
 
 
 	//Getters y Setters-----------------------------------------------------
@@ -132,6 +133,16 @@ public class Configuration extends DomainEntity {
 
 	public void setPriorities(final Collection<String> priorities) {
 		this.priorities = priorities;
+	}
+
+	@Min(0)
+	@Max(1)
+	public Double getVatTax() {
+		return this.vatTax;
+	}
+
+	public void setVatTax(final Double vatTax) {
+		this.vatTax = vatTax;
 	}
 
 	// Relationships ----------------------------------------------------------
