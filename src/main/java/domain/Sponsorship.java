@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -16,6 +18,7 @@ public class Sponsorship extends DomainEntity {
 	private String		targetUrl;
 	private CreditCard	creditCard;
 	private Boolean		activated;
+	private Sponsor		sponsor;
 
 
 	@URL
@@ -52,6 +55,16 @@ public class Sponsorship extends DomainEntity {
 
 	public void setActivated(final Boolean activated) {
 		this.activated = activated;
+	}
+
+	@OneToOne(optional = false)
+	@Valid
+	public Sponsor getSponsor() {
+		return this.sponsor;
+	}
+
+	public void setSponsor(final Sponsor sponsor) {
+		this.sponsor = sponsor;
 	}
 
 }
