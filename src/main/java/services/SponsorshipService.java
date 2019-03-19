@@ -134,6 +134,7 @@ public class SponsorshipService {
 			result.setActivated(true);
 			result.setSponsor(this.sponsorService.findByPrincipal());
 			result.setParade(this.paradeService.findOne(sponsorship.getParadeId()));
+			result.setRecollect(0.0);
 
 		} else {
 
@@ -144,6 +145,7 @@ public class SponsorshipService {
 			result.setActivated(theOldOne.getActivated());
 			result.setSponsor(theOldOne.getSponsor());
 			result.setParade(theOldOne.getParade());
+			result.setRecollect(theOldOne.getRecollect());
 			result.setRecollect(theOldOne.getRecollect());
 
 		}
