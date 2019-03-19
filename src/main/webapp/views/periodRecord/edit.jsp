@@ -31,5 +31,8 @@
 		
 	<acme:cancel code="periodRecord.cancel" url="history/display.do"/>
 
+	<jstl:if test="${periodRecord.id != 0}">
+	<acme:submit name="delete" code="periodRecord.delete" />
+	</jstl:if>
 
 </form:form>

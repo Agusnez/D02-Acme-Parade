@@ -29,5 +29,8 @@
 	
 	<acme:cancel code="linkRecord.cancel" url="history/display.do"/>
 
+	<jstl:if test="${linkRecord.id != 0}">
+	<acme:submit name="delete" code="linkRecord.delete" />
+	</jstl:if>
 
 </form:form>

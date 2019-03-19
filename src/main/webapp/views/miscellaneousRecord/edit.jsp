@@ -27,5 +27,8 @@
 	
 	<acme:cancel code="miscellaneousRecord.cancel" url="history/display.do"/>
 
+	<jstl:if test="${miscellaneousRecord.id != 0}">
+	<acme:submit name="delete" code="miscellaneousRecord.delete" />
+	</jstl:if>
 
 </form:form>

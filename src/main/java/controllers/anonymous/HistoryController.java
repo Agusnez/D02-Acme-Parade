@@ -32,22 +32,22 @@ public class HistoryController extends AbstractController {
 	public ModelAndView display(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
 		History history;
-		Boolean security;
+		//		Boolean security;
+		//
+		//		security = this.historyService.securityHistory();
 
-		security = this.historyService.securityHistory();
+		//		if (security) {
 
-		if (security) {
+		history = this.historyService.findByBrotherhoodId(brotherhoodId);
 
-			history = this.historyService.findByBrotherhoodId(brotherhoodId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
-			final String banner = this.configurationService.findConfiguration().getBanner();
-
-			result = new ModelAndView("history/display");
-			result.addObject("history", history);
-			result.addObject("banner", banner);
-			result.addObject("requestURI", "history/display.do");
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+		result = new ModelAndView("history/display");
+		result.addObject("history", history);
+		result.addObject("banner", banner);
+		result.addObject("requestURI", "history/display.do");
+		//		} else
+		//			result = new ModelAndView("redirect:/welcome/index.do");
 
 		return result;
 

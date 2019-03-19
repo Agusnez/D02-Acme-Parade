@@ -10,7 +10,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <fieldset>
-
+<acme:display code="history.inceptionRecord" property=""/>
 <div>
 <acme:display code="history.inceptionRecord.title" property="${history.inceptionRecord.title }" />
 
@@ -22,6 +22,7 @@
 </fieldset>
 
 <fieldset>
+<acme:display code="history.legalRecords" property=""/>
 <div>
 <display:table pagesize="5" name="history.legalRecords" id="row" 
 requestURI="${requestURI }" class="displaytag">
@@ -48,6 +49,7 @@ requestURI="${requestURI }" class="displaytag">
 
 
 <fieldset>
+<acme:display code="history.periodRecords" property=""/>
 <div>
 <display:table pagesize="5" name="history.periodRecords" id="row" 
 requestURI="${requestURI }" class="displaytag">
@@ -74,6 +76,7 @@ requestURI="${requestURI }" class="displaytag">
 
 
 <fieldset>
+<acme:display code="history.linkRecords" property=""/>
 <div>
 <display:table pagesize="5" name="history.linkRecords" id="row" 
 requestURI="${requestURI }" class="displaytag">
@@ -95,6 +98,7 @@ requestURI="${requestURI }" class="displaytag">
 
 
 <fieldset>
+<acme:display code="history.miscellaneousRecords" property=""/>
 <div>
 <display:table pagesize="5" name="history.miscellaneousRecords" id="row" 
 requestURI="${requestURI }" class="displaytag">

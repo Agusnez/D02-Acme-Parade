@@ -93,6 +93,27 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final MiscellaneousRecord miscellaneousRecord) {
+		ModelAndView result;
+
+		final MiscellaneousRecord miscellaneousRecordFind = this.miscellaneousRecordService.findOne(miscellaneousRecord.getId());
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (miscellaneousRecordFind == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else
+			try {
+				this.miscellaneousRecordService.delete(miscellaneousRecordFind);
+				result = new ModelAndView("redirect:/brotherhood/display.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(miscellaneousRecordFind, "miscellaneousRecord.commit.error");
+			}
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final MiscellaneousRecord miscellaneousRecord) {

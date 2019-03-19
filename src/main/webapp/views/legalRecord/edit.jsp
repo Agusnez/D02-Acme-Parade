@@ -31,6 +31,10 @@
 	
 	
 	<acme:cancel code="legalRecord.cancel" url="history/display.do"/>
+	
+	<jstl:if test="${legalRecord.id != 0}">
+	<acme:submit name="delete" code="legalRecord.delete" />
+	</jstl:if>
 
 
 </form:form>

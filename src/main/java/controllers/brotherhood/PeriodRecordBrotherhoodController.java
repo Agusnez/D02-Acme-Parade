@@ -93,6 +93,27 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final PeriodRecord periodRecord) {
+		ModelAndView result;
+
+		final PeriodRecord periodRecordFind = this.periodRecordService.findOne(periodRecord.getId());
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (periodRecordFind == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else
+			try {
+				this.periodRecordService.delete(periodRecordFind);
+				result = new ModelAndView("redirect:/brotherhood/display.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(periodRecordFind, "periodRecord.commit.error");
+			}
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final PeriodRecord periodRecord) {

@@ -93,6 +93,27 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final LinkRecord linkRecord) {
+		ModelAndView result;
+
+		final LinkRecord linkRecordFind = this.linkRecordService.findOne(linkRecord.getId());
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (linkRecordFind == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else
+			try {
+				this.linkRecordService.delete(linkRecordFind);
+				result = new ModelAndView("redirect:/brotherhood/display.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(linkRecordFind, "linkRecord.commit.error");
+			}
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final LinkRecord linkRecord) {
