@@ -96,6 +96,15 @@ public class ProclaimService {
 		return result;
 	}
 
+	public void deleteAll(final int actorId) {
+
+		final Collection<Proclaim> proclaims = this.proclaimsPerChapter(actorId);
+
+		if (!proclaims.isEmpty())
+			for (final Proclaim p : proclaims)
+				this.proclaimRepository.delete(p);
+	}
+
 	//Other methods
 	public Proclaim reconstruct(final Proclaim proclaim, final BindingResult binding) {
 
@@ -106,6 +115,13 @@ public class ProclaimService {
 		proclaim.setChapter(proclaimNew.getChapter());
 		this.validator.validate(proclaim, binding);
 		result = proclaim;
+
+		return result;
+	}
+
+	public Collection<Proclaim> proclaimsPerChapter(final int actorId) {
+
+		final Collection<Proclaim> result = this.proclaimRepository.proclaimsPerChapter(actorId);
 
 		return result;
 	}

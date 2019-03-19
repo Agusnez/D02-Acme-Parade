@@ -73,6 +73,12 @@ public class ActorService {
 	@Autowired
 	private FloatService			floatService;
 
+	@Autowired
+	private ProclaimService			proclaimService;
+
+	@Autowired
+	private HistoryService			historyService;
+
 
 	//Simple CRUD methods --------------------------------------------------
 
@@ -389,11 +395,13 @@ public class ActorService {
 
 			this.floatService.deleteAll(actorId);
 
-			//History
+			this.historyService.deleteAll(actorId);
 
-		} else if (actor.getUserAccount().getAuthorities().contains(chapter)) {
-			//TODO Proclaim
-		} else if (actor.getUserAccount().getAuthorities().contains(sponsor)) {
+		} else if (actor.getUserAccount().getAuthorities().contains(chapter))
+
+			this.proclaimService.deleteAll(actorId);
+
+		else if (actor.getUserAccount().getAuthorities().contains(sponsor)) {
 			//TODO Sponsorship
 		}
 

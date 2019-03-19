@@ -40,6 +40,7 @@
 		<value>/views/segment/tiles.xml</value>
 		<value>/views/chapter/tiles.xml</value>
 		<value>/views/proclaim/tiles.xml</value>
+		<value>/views/sponsorship/tiles.xml</value>
 		
 		<value>/views/inceptionRecord/tiles.xml</value>
 		<value>/views/legalRecord/tiles.xml</value>

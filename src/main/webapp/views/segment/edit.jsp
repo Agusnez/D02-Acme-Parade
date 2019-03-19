@@ -19,10 +19,10 @@
 	</jstl:if>	
 	
 	<jstl:if test="${complete}">
-		<acme:textbox path="origin" code="segment.origin" obligatory="true"/>
+		<acme:textbox path="origin" code="segment.origin" placeholder="-90,180" obligatory="true"/>
 	</jstl:if>	
 	
-	<acme:textbox path="destination" code="segment.destination"  obligatory="true"/>
+	<acme:textbox path="destination" code="segment.destination" placeholder="90,-180"  obligatory="true"/>
 	
 	<jstl:if test="${complete}">
 		<acme:textbox path="timeOrigin" code="segment.timeOrigin" placeholder="yyyy/MM/dd hh:mm" obligatory="true"/>

@@ -170,17 +170,25 @@ public class SegmentBrotherhoodController {
 	public ModelAndView saveComplete(@ModelAttribute(value = "segment") final FirstSegmentForm form, final BindingResult binding) {
 		ModelAndView result;
 
+		Boolean security = false;
+
 		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(form);
-		else
-			try {
-				this.segmentService.save(segmentReconstruct);
-				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + form.getParadeId());
-			} catch (final Throwable oops) {
+		else {
+			security = this.paradeService.paradeBrotherhoodSecurity(form.getParadeId());
+			if (security)
+				try {
+					this.segmentService.save(segmentReconstruct);
+					result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + form.getParadeId());
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView(form, "segment.commit.error");
+				}
+			else
 				result = this.createEditModelAndView(form, "segment.commit.error");
-			}
+		}
+
 		return result;
 	}
 
@@ -188,17 +196,27 @@ public class SegmentBrotherhoodController {
 	public ModelAndView saveParcial(@ModelAttribute(value = "segment") final ContiguousSegmentForm form, final BindingResult binding) {
 		ModelAndView result;
 
+		Boolean security = false;
+
 		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(form);
-		else
-			try {
-				this.segmentService.save(segmentReconstruct);
-				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + form.getParadeId());
-			} catch (final Throwable oops) {
+		else {
+
+			security = this.paradeService.paradeBrotherhoodSecurity(form.getParadeId());
+
+			if (security)
+				try {
+					this.segmentService.save(segmentReconstruct);
+					result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + form.getParadeId());
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView(form, "segment.commit.error");
+				}
+			else
 				result = this.createEditModelAndView(form, "segment.commit.error");
-			}
+		}
+
 		return result;
 	}
 
@@ -206,17 +224,27 @@ public class SegmentBrotherhoodController {
 	public ModelAndView saveEdit(@ModelAttribute(value = "segment") final Segment form, final BindingResult binding) {
 		ModelAndView result;
 
+		Boolean security = false;
+
 		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(form);
-		else
-			try {
-				this.segmentService.save(segmentReconstruct);
-				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + segmentReconstruct.getParade().getId());
-			} catch (final Throwable oops) {
+		else {
+
+			security = this.paradeService.paradeBrotherhoodSecurity(form.getParade().getId());
+
+			if (security)
+				try {
+					this.segmentService.save(segmentReconstruct);
+					result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + segmentReconstruct.getParade().getId());
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView(form, "segment.commit.error");
+				}
+			else
 				result = this.createEditModelAndView(form, "segment.commit.error");
-			}
+		}
+
 		return result;
 	}
 
@@ -224,17 +252,27 @@ public class SegmentBrotherhoodController {
 	public ModelAndView delete(@ModelAttribute(value = "segment") final Segment form, final BindingResult binding) {
 		ModelAndView result;
 
+		Boolean security = false;
+
 		final Segment segmentReconstruct = this.segmentService.reconstruct(form, binding);
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(form);
-		else
-			try {
-				this.segmentService.delete(segmentReconstruct);
-				result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + segmentReconstruct.getParade().getId());
-			} catch (final Throwable oops) {
+		else {
+
+			security = this.paradeService.paradeBrotherhoodSecurity(form.getParade().getId());
+
+			if (security)
+				try {
+					this.segmentService.delete(segmentReconstruct);
+					result = new ModelAndView("redirect:/segment/brotherhood/path.do?paradeId=" + segmentReconstruct.getParade().getId());
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView(form, "segment.commit.error");
+				}
+			else
 				result = this.createEditModelAndView(form, "segment.commit.error");
-			}
+		}
+
 		return result;
 	}
 

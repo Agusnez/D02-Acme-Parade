@@ -159,6 +159,14 @@ public class HistoryService {
 		return this.historyRepository.brotherhoodsMoreThanAverage();
 	}
 
+	public void deleteAll(final int actorId) {
+
+		final History history = this.findByBrotherhoodId(actorId);
+
+		if (history != null)
+			this.historyRepository.delete(history);
+	}
+
 	//Other business methods----------------------------
 
 	public History findByBrotherhoodId(final int brotherhoodId) {
