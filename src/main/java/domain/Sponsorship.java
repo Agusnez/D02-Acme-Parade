@@ -19,7 +19,7 @@ public class Sponsorship extends DomainEntity {
 	private Boolean		activated;
 	private Sponsor		sponsor;
 	private Parade		parade;
-	private int			recollect;
+	private Double		recollect;
 
 
 	@URL
@@ -76,11 +76,11 @@ public class Sponsorship extends DomainEntity {
 		this.parade = parade;
 	}
 
-	public int getRecollect() {
+	public Double getRecollect() {
 		return this.recollect;
 	}
 
-	public void setRecollect(final int recollect) {
+	public void setRecollect(final Double recollect) {
 		this.recollect = recollect;
 	}
 

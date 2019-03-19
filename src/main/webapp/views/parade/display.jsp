@@ -12,6 +12,11 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
+<jstl:if test="${find}">
+	<fieldset>
+		<img src="${bannerSponsorship}" alt="Banner" width="489" height="297"/>
+	</fieldset>
+</jstl:if>
 <acme:display property="${parade.title }" code="parade.title" />
 
 <acme:display property="${parade.description }" code="parade.description" />

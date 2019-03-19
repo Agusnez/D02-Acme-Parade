@@ -35,6 +35,9 @@ public class SponsorshipService {
 	@Autowired
 	private ParadeService			paradeService;
 
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	public SponsorshipForm create(final int paradeId) {
 
@@ -164,4 +167,44 @@ public class SponsorshipService {
 		return result;
 	}
 
+	public Sponsorship ramdomSponsorship(final int paradeId) {
+
+		Sponsorship result = null;
+		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllByParadeId(paradeId);
+
+		final Double vatTax = this.configurationService.findConfiguration().getVatTax();
+		final Double fare = this.configurationService.findConfiguration().getFare();
+		if (!sponsorships.isEmpty()) {
+
+			final int M = 0;
+			final int N = sponsorships.size();
+			final int limit = (int) (Math.random() * (N - M + 1) + M);
+
+			int i = 0;
+
+			for (final Sponsorship s : sponsorships) {
+
+				if (i == limit) {
+					result = s;
+
+					Double recollect = result.getRecollect();
+
+					if (fare != null)
+						if (vatTax == null)
+							recollect = recollect + fare;
+						else
+							recollect = recollect + ((1 - vatTax) * fare);
+
+					result.setRecollect(recollect);
+					break;
+				}
+
+				i++;
+
+			}
+
+		}
+
+		return result;
+	}
 }

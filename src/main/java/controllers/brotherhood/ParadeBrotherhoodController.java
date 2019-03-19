@@ -17,10 +17,12 @@ import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.MessageService;
 import services.ParadeService;
+import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Float;
 import domain.Parade;
+import domain.Sponsorship;
 
 @Controller
 @RequestMapping("/parade/brotherhood")
@@ -37,6 +39,9 @@ public class ParadeBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private MessageService			messageService;
+
+	@Autowired
+	private SponsorshipService		sponsorshipService;
 
 
 	//List---------------------------------------------------------------------------
@@ -112,6 +117,20 @@ public class ParadeBrotherhoodController extends AbstractController {
 				result = new ModelAndView("parade/display");
 				result.addObject("parade", paradeFound);
 				result.addObject("banner", banner);
+
+				try {
+					final Sponsorship s = this.sponsorshipService.ramdomSponsorship(paradeId);
+
+					if (s != null) {
+						result.addObject("find", true);
+						result.addObject("bannerSponsorship", s.getBanner());
+					}
+
+					else
+						result.addObject("find", false);
+				} catch (final Throwable oops) {
+					result.addObject("find", false);
+				}
 
 			} else
 				result = new ModelAndView("redirect:/welcome/index.do");
