@@ -45,15 +45,16 @@ public class SegmentBrotherhoodController {
 		ModelAndView result;
 		final Brotherhood member = this.brotherhoodService.findByPrincipal();
 		final Parade parade = this.paradeService.findOne(paradeId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
 		} else {
 
 			if (parade.getBrotherhood().equals(member)) {
 				final Collection<Segment> segments = this.segmentService.findByParade(paradeId);
 	
-				final String banner = this.configurationService.findConfiguration().getBanner();
 				result = new ModelAndView("segment/path");
 				result.addObject("segments", segments);
 				result.addObject("paradeId", paradeId);
@@ -111,16 +112,17 @@ public class SegmentBrotherhoodController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int paradeId) {
 		ModelAndView result;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Segment segment = this.segmentService.findOne(paradeId);
 
 		if (segment == null) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
 		} else {
 
 			if (this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId())) {
 	
-				final String banner = this.configurationService.findConfiguration().getBanner();
 				result = new ModelAndView("segment/display");
 				result.addObject("segment", segment);
 				result.addObject("banner", banner);

@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +12,10 @@ import domain.Parade;
 
 @Repository
 public interface ParadeRepository extends JpaRepository<Parade, Integer> {
+	
+	
+	//@Query("")
+	//Collection<Parade> findParadeCopy(String title, String description, Date organisationMoment, int maxColumn, int maxRow);
 
 	@Query("select p from Parade p join p.floats f where f.id = ?1")
 	Collection<Parade> findParadesByFloatId(int floatId);
