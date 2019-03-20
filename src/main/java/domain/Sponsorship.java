@@ -20,7 +20,7 @@ public class Sponsorship extends DomainEntity {
 	private Boolean		activated;
 	private Sponsor		sponsor;
 	private Parade		parade;
-	private Double		recollect;
+	private Double		cost;
 
 
 	@URL
@@ -80,12 +80,12 @@ public class Sponsorship extends DomainEntity {
 		this.parade = parade;
 	}
 
-	public Double getRecollect() {
-		return this.recollect;
+	public Double getCost() {
+		return this.cost;
 	}
 
-	public void setRecollect(final Double recollect) {
-		this.recollect = recollect;
+	public void setCost(final Double cost) {
+		this.cost = cost;
 	}
 
 }
