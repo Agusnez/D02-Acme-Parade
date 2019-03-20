@@ -11,12 +11,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
-<jstl:if test="${find}">
-	<fieldset>
-		<img src="${bannerSponsorship}" alt="Banner" width="489" height="297"/>
-	</fieldset>
-</jstl:if>
 <acme:display property="${parade.title }" code="parade.title" />
 
 <acme:display property="${parade.description }" code="parade.description" />
@@ -40,5 +34,11 @@
 </jstl:if>
 
 <acme:button name="back" code="parade.back" onclick="javascript: relativeRedir('parade/brotherhood/list.do');" />
+
+<jstl:if test="${find}">
+	<fieldset>
+		<img src="${bannerSponsorship}" alt="Banner" width="489" height="297"/>
+	</fieldset>
+</jstl:if>
 
 
