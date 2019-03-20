@@ -34,7 +34,7 @@
 	
 	<acme:submit name="save" code="sponsorship.save" />
 	
-	<acme:cancel code="sponsorship.cancel" url="welcome/index.do" />
+	<acme:cancel code="sponsorship.cancel" url="sponsorship/sponsor/list.do" />
 
 
 </form:form>    
