@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -218,4 +219,22 @@ public class SponsorshipService {
 
 		return result;
 	}
+	
+	public Integer deactivateExpiredCardSponsorships() {
+		int actualMonth = Calendar.MONTH + 1;
+		int actualYear = Calendar.YEAR;
+		
+		Integer result = 0;
+		
+		Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findCreditCardExpired(actualMonth, actualYear);
+		
+		for (Sponsorship s: sponsorships) {
+			this.deactivate(s.getId());
+			result++;
+		}
+
+		return result;
+		
+	}
+	
 }

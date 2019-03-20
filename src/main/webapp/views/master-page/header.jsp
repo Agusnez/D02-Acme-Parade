@@ -32,7 +32,8 @@
 					<li><a href="actor/administrator/score/list.do"><spring:message code="master.page.score" /></a></li>	
 					<li><a href="actor/administrator/spammer/list.do"><spring:message code="master.page.spammer" /></a></li>
 					<li><a href="dashboard/administrator/display.do"><spring:message code="master.page.dashboard" /></a></li>	
-					<li><a href="actor/administrator/profile/list.do"><spring:message code="master.page.profiles" /></a></li>	
+					<li><a href="actor/administrator/profile/list.do"><spring:message code="master.page.profiles" /></a></li>
+					<li><a href="actor/administrator/sponsorship/deactivateExpired.do"><spring:message code="master.page.deactivateExpired" /></a></li>	
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.area" /></a>
