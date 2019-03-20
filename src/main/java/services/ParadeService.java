@@ -167,9 +167,9 @@ public class ParadeService {
 			if (parade.getStatus() == "REJECTED")
 				Assert.isTrue(parade.getRejectedComment() != null && parade.getRejectedComment() != "");
 
-		} else if (parade.getId() == 0 && parade.getFinalMode() == true)
+		} else if (parade.getId() == 0 && parade.getFinalMode() == true){
 			parade.setStatus("SUBMITTED");
-
+		}
 		final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
 		Assert.isTrue(parade.getOrganisationMoment().after(currentMoment));
 

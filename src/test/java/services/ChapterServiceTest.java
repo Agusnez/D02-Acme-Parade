@@ -31,47 +31,46 @@ public class ChapterServiceTest extends AbstractTest {
 
 
 	/*
-	 * ----CALCULO DE COBERTURA DE SENTENCIAS----
-	 * A la hora de realizar el cálculo, nos fijamos en el "método" del servicio
-	 * que estamos probando y analizamos su composición (if, for, ...) y calculamos
-	 * el número de casos total que se pueden dar. Entonces la ecuación sería:
+	 * ----CALCULATE SENTENCE COVERAGE----
+	 * To calculate the sentence coverage, we have to look at each "service's method"
+	 * we are testing and we have to analyse its composition (if, for, ...) and Asserts.
+	 * Then, we calculate the number of total cases which our code can execute. The equation will be:
 	 * 
-	 * (nº casos probados / nº casos totales)*100 = cobertura(%)
+	 * (nº passed cases / nº total cases)*100 = coverage(%)
 	 * 
-	 * Alfinal del archivo concluimos la cobertura total de los métodos y
-	 * por consiguiente del servicio
+	 * In the end of the class, we conclude with the total coverage of the service's methods
+	 * which means the service's coverage.
 	 * 
 	 * 
-	 * ----CALCULO DE COBERTURA DE DATOS----
-	 * A la hora de realizar el cálculo, nos fijamos en cada una
-	 * de las propiedades del objeto, fijándonos tanto en las
-	 * restricciones por parte del "dominio" como por parte de las
-	 * "reglas de negocio" y calculamos el total de comprobaciones.
-	 * Si realizamos todas las comprobaciones sobre una propiedad del objeto
-	 * que estamos probando,decimos que esta es un "propiedad probada".
+	 * ----CALCULATE DATA COVERAGE----
+	 * To calculate the data coverage, we have look at
+	 * each object's attributes, we analyse in each one of them
+	 * the domain's restrictions and the business rules
+	 * about the attribute. If we have tested all types of cases
+	 * in a attribute, that is called "proven attribute".
 	 * 
-	 * (nº propiedades probadas / nº propiedades totales)*100 = cobertura(%)
+	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
 	 * 
-	 * ----Nota:
-	 * Cabe destacar que si en un test del servicio ya hemos podido
-	 * probar casos de un determinado método del servicio, podemos
-	 * obviar la cobertura de este.
+	 * ----Note:
+	 * It's clear that if we have tested all cases about a method in a test
+	 * and now It have already had a 100% of coverage, we don't have to
+	 * mention its coverage in other test.
 	 */
 
 	/*
 	 * a) Requirement: Actor manage his/her profile
 	 * 
 	 * b) Negative cases:
-	 * 2. El usuario que está logeado, no es el mismo que el que está editando
-	 * 3. El email no sigue el patrón especificado
-	 * 4. El atributo email está a null
+	 * 2. The user who is logged, It's not the same as the user who is being edited
+	 * 3. The email pattern is wrong
+	 * 4. The email attribute is null
 	 * 
-	 * c) Cobertura sentencias
-	 * -save(): 2 probado / 4 totales = 50%
-	 * -findOne(): 1 probado / 1 total = 100%
+	 * c) Sentence coverage
+	 * -save(): 2 passed cases / 8 total cases = 25%
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
-	 * d) Cobertura datos
-	 * -Chapter: 1 probado / 9 totales = 11,1%
+	 * d) Data coverage
+	 * -Chapter: 1 passed cases / 9 total cases = 11,1%
 	 */
 	@Test
 	public void driverEditChapter() {
@@ -79,14 +78,17 @@ public class ChapterServiceTest extends AbstractTest {
 
 			{
 				"chapter1", "chapter1", "calle 13", "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
-			}, {
+			}, //1.All fine
+			{
 				"brotherhood1", "chapter1", "calle 13", "a@a.com", "+34 333 3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
-			}, {
+			}, //2. The user who is logged, It's not the same as the user who is being edited
+			{
 				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
-			}, {
+			}, //3. The email pattern is wrong
+			{
 				"chapter1", "chapter1", "calle 13", null, "3333", "middleName", "surname", "name", "http://www.photo.com", "title", NullPointerException.class
 			}
-
+		//4. The email attribute is null
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -133,12 +135,12 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 1. Register to the system as a chapter.
 	 * Negative cases:
 	 * b)2, 3, 4, 5, 6
-	 * c) Cobertura sentencias
-	 * -save(): 1 probado / 4 totales = 25%
+	 * c) Sentence coverage
+	 * -save(): 1 probado / 8 totales = 12,5%
 	 * 
 	 * 
-	 * d) Cobertura datos
-	 * -Chapter: 5 probado / 10 totales = 50%
+	 * d) Data coverage
+	 * -Chapter: 5 probado / 10 totales = 50% NO ES ASI, PREGUNTAME
 	 */
 	@Test
 	public void driverRegisterChapter() {
@@ -212,9 +214,13 @@ public class ChapterServiceTest extends AbstractTest {
 	 * a)(Level B)Requirement 2.1: Self-assing an area to co-ordinate. Once an area is
 	 * self-assigned, it cannot be changed.
 	 * b)Negative cases:
-	 * 2. Chapter se asigna un area cuando ya tiene una
-	 * c)0%
-	 * d)? ¿Hay que tomar los datos que interfieren en ese caso de uso en concreto?
+	 * 3. A Chapter who have an area, self-assing another area.
+	 * c) Sentence coverage
+	 * 
+	 * -save(): 1 passed cases / 8 total cases = 12,5%
+	 * 
+	 * d) Data coverage
+	 * 0%
 	 */
 
 	@Test
@@ -224,11 +230,9 @@ public class ChapterServiceTest extends AbstractTest {
 			{
 				"chapter3", "area3", null
 			}, {
-				"chapter1", null, AssertionError.class
-			}, {
 				"chapter1", "area3", IllegalArgumentException.class
 			}
-		//		final COMENTAR PROBLEMA DE SET/SAVE BBDD
+
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -269,11 +273,11 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 2. Browse the proclaims of the chapters.
 	 * Negative cases:
 	 * b)
-	 * c) Cobertura sentencias
-	 * -findAll()=100%
+	 * c) Sentence coverage
+	 * -findAll()= 1 passed cases / 2 total cases = 50%
 	 * 
-	 * 
-	 * d) Cobertura datos
+	 * d) Data coverage
+	 * 0%
 	 */
 	@Test
 	public void testListChapters() {
@@ -283,14 +287,15 @@ public class ChapterServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * -------COBERTURA ChapterServiceTest-------
+	 * -------Coverage ChapterService-------
 	 * 
-	 * ----Cobertura Total Sentencias:
-	 * save()=75%
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * save()=37,5%
 	 * findOne()=100%
+	 * findAll()=100%
 	 * 
-	 * ----Cobertura Total Datos:
-	 * Chapter=50%
+	 * ----TOTAL DATA COVERAGE:
+	 * Chapter=
 	 */
 
 }
