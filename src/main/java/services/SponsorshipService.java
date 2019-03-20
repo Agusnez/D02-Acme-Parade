@@ -193,7 +193,7 @@ public class SponsorshipService {
 		if (!sponsorships.isEmpty()) {
 
 			final int M = 0;
-			final int N = sponsorships.size();
+			final int N = sponsorships.size() - 1;
 			final int limit = (int) (Math.random() * (N - M + 1) + M);
 
 			int i = 0;

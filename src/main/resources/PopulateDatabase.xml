@@ -293,6 +293,19 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount22" class="security.UserAccount">
+		<property name="username" value="sponsor2" />
+		<property name="password" value="3dc67f80a03324e01b1640f45d107485" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<!-- Administrators -->	
 	
@@ -674,6 +687,17 @@
 		<property name="phone" value="+34 672008675" />
 		<property name="address" value="Las Navas" />
 		<property name="userAccount" ref="userAccount21" />
+	</bean>
+	
+	<bean id="sponsor2" class="domain.Sponsor">
+		<property name="name" value="José" />
+		<property name="middleName" value="Rodolfo" />
+		<property name="surname" value="García" />
+		<property name="photo" value="http://www.sponse2.com" />
+		<property name="email" value="sponse2@mail.com" />
+		<property name="phone" value="+34 672012675" />
+		<property name="address" value="Las Navajas" />
+		<property name="userAccount" ref="userAccount22" />
 	</bean>
 	
 	<!-- Parades -->
@@ -2407,6 +2431,40 @@
 		<property name="actor" ref="sponsor1" />
 	</bean>
 	
+	<bean id="box106" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor2" />
+		
+	</bean>
+
+	<bean id="box107" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor2" />
+	
+	</bean>
+
+	<bean id="box108" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor2" />
+		
+	</bean>
+
+	<bean id="box109" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor2" />
+		
+	</bean>
+	
+	<bean id="box110" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor2" />
+	</bean>
+	
 		
 	
 	<!-- Messages -->
@@ -2675,6 +2733,65 @@
 		<property name="moment" value="2019/01/05 17:00" />
 		<property name="description" value="Este proclaim es importante" />
 		<property name="chapter" ref="chapter2" />
+	</bean>
+	
+	<!-- Sponsorships -->
+	
+	<bean id="sponsorship1" class="domain.Sponsorship">
+		<property name="banner" value="http://clipart-library.com/images/LidoMaKET.png"/>
+		<property name="targetUrl" value="http://clipart-library.com/images/LidoMaKET.png"/>
+		<property name="creditCard" ref="creditCard1"/>		
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor1"/>
+		<property name="Parade" ref="parade5"/>
+		<property name="Cost" value="2.12"/>
+	</bean>
+	
+	<bean id="sponsorship2" class="domain.Sponsorship">
+		<property name="banner" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="targetUrl" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="activated" value="true"/>
+		<property name="sponsor" ref="sponsor2"/>
+		<property name="Parade" ref="parade5"/>
+		<property name="Cost" value="0.0"/>
+	</bean>
+	
+	<bean id="sponsorship3" class="domain.Sponsorship">
+		<property name="banner" value="http://clipart-library.com/images/LidoMaKET.png"/>
+		<property name="targetUrl" value="http://clipart-library.com/images/LidoMaKET.png"/>
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor1"/>
+		<property name="Parade" ref="parade6"/>
+		<property name="Cost" value="0.0"/>
+	</bean>
+	
+	<bean id="sponsorship4" class="domain.Sponsorship">
+		<property name="banner" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="targetUrl" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="activated" value="false"/>
+		<property name="Sponsor" ref="sponsor2"/>
+		<property name="Parade" ref="parade6"/>
+		<property name="Cost" value="1.19"/>
+	</bean>
+	
+	<!-- creditCards -->
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="David"/>
+		<property name="make" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expMonth" value="12"/>
+		<property name="expYear" value="2020"/>
+		<property name="cvv" value="123"/>
+	</bean>
+	
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="José"/>
+		<property name="make" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expMonth" value="12"/>
+		<property name="expYear" value="2020"/>
+		<property name="cvv" value="123"/>
 	</bean>
 
 </beans>
