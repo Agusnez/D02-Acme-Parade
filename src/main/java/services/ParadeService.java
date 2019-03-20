@@ -322,6 +322,13 @@ public class ParadeService {
 		return result;
 	}
 
+	public Collection<Parade> findParadeCanBeSeenOfBrotherhoodIdForChapter(final int brotherhoodId) {
+
+		final Collection<Parade> result = this.paradeRepository.findParadeCanBeSeenOfBrotherhoodIdForChapter(brotherhoodId);
+
+		return result;
+	}
+
 	public Collection<String> findParadesLessThirtyDays() {
 
 		final Collection<String> result = new HashSet<>();
