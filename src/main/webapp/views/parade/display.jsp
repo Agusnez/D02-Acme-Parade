@@ -37,7 +37,7 @@
 
 <jstl:if test="${find}">
 	<fieldset>
-		<img src="${bannerSponsorship}" alt="Banner" width="489" height="297"/>
+		<img src="${bannerSponsorship}" alt="Banner" width="200" height="100"/>
 	</fieldset>
 </jstl:if>
 
