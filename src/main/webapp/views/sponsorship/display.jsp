@@ -17,6 +17,8 @@
 
 <acme:display code="sponsorship.targetUrl" property="${sponsorship.targetUrl }" />
 
+<acme:display code="sponsorship.cost" property="${sponsorship.cost }" />
+
 <acme:display code="sponsorship.sponsor" property="${sponsorship.sponsor.name}" />
 
 <acme:display code="sponsorship.creditCard.holderName" property="${sponsorship.creditCard.holderName}" />

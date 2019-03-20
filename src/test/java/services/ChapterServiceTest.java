@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Area;
@@ -65,11 +66,11 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 3. El email no sigue el patrón especificado
 	 * 4. El atributo email está a null
 	 * 
-	 * c) Covertura sentencias
+	 * c) Cobertura sentencias
 	 * -save(): 2 probado / 4 totales = 50%
 	 * -findOne(): 1 probado / 1 total = 100%
 	 * 
-	 * d) Covertura datos
+	 * d) Cobertura datos
 	 * -Chapter: 1 probado / 9 totales = 11,1%
 	 */
 	@Test
@@ -126,12 +127,18 @@ public class ChapterServiceTest extends AbstractTest {
 
 		super.checkExceptions(expected, caught);
 	}
+
 	/*
-	 * a) Requirement 7 : Register new actor Chapter
-	 * b) Negative cases:
-	 * 2. El title introducido es incorrecto(Null)
-	 * c)99%?
-	 * d)9,1%
+	 * a)(Level B)Requirement 7 :An actor who is not authenticated must be able to:
+	 * 1. Register to the system as a chapter.
+	 * Negative cases:
+	 * b)2, 3, 4, 5, 6
+	 * c) Cobertura sentencias
+	 * -save(): 1 probado / 4 totales = 25%
+	 * 
+	 * 
+	 * d) Cobertura datos
+	 * -Chapter: 5 probado / 10 totales = 50%
 	 */
 	@Test
 	public void driverRegisterChapter() {
@@ -141,41 +148,21 @@ public class ChapterServiceTest extends AbstractTest {
 			},//1.Todo bien
 			{
 				null, "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
-			},//2.Title null
+			},//2.Title = null
 			{
 				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
-			},//Name null
-		//				{
-		//				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
-		//			},//Middle name null
-		//			{
-		//				"title1", "name1", "middleName1", null, "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter60", "chapter60", ConstraintViolationException.class
-		//			},//Surname null NOFUNCIONA
-		//	{
-		//				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
-		//			},//Photo no URL
+			},//3.Name = null
+			{
+				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
+			},//4.Middle name = null
+			{
+				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
+			},//5.Photo = no URL
 
-		//			{
-		//				"title1", "name1", "middleName1", "surname1", null, "email1@gmail.com", "672195205", "address1", "chapter62", "chapter55", ConstraintViolationException.class
-		//			},//Photo null
-		//			{
-		//				"title1", "name1", "middleName1", "surname1", "https://google.com", null, "672195205", "address1", "chapter63", "chapter55", NullPointerException.class
-		//			},//Email null
-		//			{
-		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
-		//			},//Email no pattern
-		//			{
-		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", null, "address1", "chapter65", "chapter55", ConstraintViolationException.class
-		//			},//Phone null
-		//			{
-		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", null, "chapter66", "chapter55", ConstraintViolationException.class
-		//			},//Address null
-		//			{
-		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", null, "chapter55", ConstraintViolationException.class
-		//			},//Username null
-		//			{
-		//				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter67", null, ConstraintViolationException.class
-		//			},//Password null
+			{
+				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
+			},
+		//6.Email = no pattern
 
 		};
 
@@ -278,14 +265,32 @@ public class ChapterServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
+	 * 2. Browse the proclaims of the chapters.
+	 * Negative cases:
+	 * b)
+	 * c) Cobertura sentencias
+	 * -findAll()=100%
+	 * 
+	 * 
+	 * d) Cobertura datos
+	 */
+	@Test
+	public void testListChapters() {
+		final Integer expected = 3;
+		final Integer result = this.chapterService.findAll().size();
+		Assert.isTrue(expected == result);
+	}
+
+	/*
 	 * -------COBERTURA ChapterServiceTest-------
 	 * 
 	 * ----Cobertura Total Sentencias:
-	 * save()=50%
+	 * save()=75%
 	 * findOne()=100%
 	 * 
 	 * ----Cobertura Total Datos:
-	 * Chapter=11,1%
+	 * Chapter=50%
 	 */
 
 }

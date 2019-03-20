@@ -9,8 +9,6 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<h3><spring:message code="chapter.chapters" /></h3>
-
 <display:table name="chapters" id="row" requestURI="${requestURI }" pagesize="5">
 
 	<acme:column property="title" titleKey="chapter.title" value= "${row.title}: "/>

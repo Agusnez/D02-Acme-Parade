@@ -52,7 +52,7 @@ public class ParadeChapterController extends AbstractController {
 			final Collection<Brotherhood> brotherhoods = chapter.getArea().getBrotherhoods();
 			//Cuidado que el area puede ser null
 			for (final Brotherhood brotherhood : brotherhoods)
-				parades.addAll(this.paradeService.findParadeCanBeSeenOfBrotherhoodId(brotherhood.getId()));
+				parades.addAll(this.paradeService.findParadeCanBeSeenOfBrotherhoodIdForChapter(brotherhood.getId()));
 
 			final String banner = this.configurationService.findConfiguration().getBanner();
 

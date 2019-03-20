@@ -3,6 +3,7 @@ package services;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,11 @@ public class SponsorshipService {
 
 	public Sponsorship save(final Sponsorship sponsorship) {
 
+		final Date now = new Date(System.currentTimeMillis() - 1000);
+
+		Assert.isTrue(sponsorship.getCreditCard().getExpYear() - 1900 >= now.getYear());
+		Assert.isTrue(sponsorship.getCreditCard().getExpMonth() - 1 >= now.getMonth() || sponsorship.getCreditCard().getExpYear() - 1900 > now.getYear());
+
 		final Sponsorship result = this.sponsorshipRepository.save(sponsorship);
 
 		return result;
@@ -135,7 +141,7 @@ public class SponsorshipService {
 			result.setActivated(true);
 			result.setSponsor(this.sponsorService.findByPrincipal());
 			result.setParade(this.paradeService.findOne(sponsorship.getParadeId()));
-			result.setRecollect(0.0);
+			result.setCost(0.0);
 
 		} else {
 
@@ -146,8 +152,7 @@ public class SponsorshipService {
 			result.setActivated(theOldOne.getActivated());
 			result.setSponsor(theOldOne.getSponsor());
 			result.setParade(theOldOne.getParade());
-			result.setRecollect(theOldOne.getRecollect());
-			result.setRecollect(theOldOne.getRecollect());
+			result.setCost(theOldOne.getCost());
 
 		}
 
@@ -189,7 +194,7 @@ public class SponsorshipService {
 		if (!sponsorships.isEmpty()) {
 
 			final int M = 0;
-			final int N = sponsorships.size();
+			final int N = sponsorships.size() - 1;
 			final int limit = (int) (Math.random() * (N - M + 1) + M);
 
 			int i = 0;
@@ -199,15 +204,15 @@ public class SponsorshipService {
 				if (i == limit) {
 					result = s;
 
-					Double recollect = result.getRecollect();
+					Double cost = result.getCost();
 
 					if (fare != null)
 						if (vatTax == null)
-							recollect = recollect + fare;
+							cost = cost + fare;
 						else
-							recollect = recollect + ((1 - vatTax) * fare);
+							cost = cost + ((1 + vatTax) * fare);
 
-					result.setRecollect(recollect);
+					result.setCost(cost);
 					break;
 				}
 
