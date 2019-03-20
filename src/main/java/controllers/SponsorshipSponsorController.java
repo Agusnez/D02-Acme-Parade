@@ -160,16 +160,23 @@ public class SponsorshipSponsorController {
 
 		final Sponsorship sponsorship = this.sponsorshipService.reconstruct(sponsorshipform, binding);
 
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(sponsorshipform, null);
-		else
-			try {
-				this.sponsorshipService.save(sponsorship);
-				result = new ModelAndView("redirect:/welcome/index.do");
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(sponsorshipform, "sponsorship.commit.error");
+		final Boolean security = this.sponsorshipService.sponsorshipSponsorSecurity(sponsorship.getId());
 
-			}
+		if (security) {
+
+			if (binding.hasErrors())
+				result = this.createEditModelAndView(sponsorshipform, null);
+			else
+				try {
+					this.sponsorshipService.save(sponsorship);
+					result = new ModelAndView("redirect:/welcome/index.do");
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView(sponsorshipform, "sponsorship.commit.error");
+
+				}
+
+		} else
+			result = new ModelAndView("redirect:/welcome/index.do");
 
 		return result;
 	}
