@@ -23,8 +23,8 @@ public class SponsorshipService {
 	@Autowired
 	private SponsorshipRepository	sponsorshipRepository;
 
-	@Autowired
-	private ActorService			actorService;
+	//	@Autowired
+	//	private ActorService			actorService;
 
 	@Autowired
 	private Validator				validator;
@@ -84,6 +84,82 @@ public class SponsorshipService {
 	public Collection<Sponsorship> findAllBySponsorId(final int id) {
 
 		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAllBySponsorId(id);
+
+		return sponsorships;
+	}
+
+	public Double ratioOfActiveSponsorships() {
+
+		final Double result = this.sponsorshipRepository.ratioOfActiveSponsorships();
+
+		return result;
+	}
+
+	public Double averageActiveSponsorshipsPerSponsor() {
+
+		final Double result = this.sponsorshipRepository.averageActiveSponsorshipsPerSponsor();
+
+		return result;
+	}
+
+	public Integer minActiveSponsorshipsPerSponsor() {
+		Integer min = 0;
+
+		final Collection<Sponsor> sponsors = this.sponsorService.findAll();
+
+		for (final Sponsor s : sponsors) {
+			final Integer res = this.activeSponsorshipsPerSponsorId(s.getId()).size();
+			if (min == 0 || res < min)
+				min = res;
+		}
+
+		return min;
+	}
+
+	public Integer maxActiveSponsorshipsPerSponsor() {
+		Integer max = 0;
+
+		final Collection<Sponsor> sponsors = this.sponsorService.findAll();
+
+		for (final Sponsor s : sponsors) {
+			final Integer res = this.activeSponsorshipsPerSponsorId(s.getId()).size();
+			if (res > max)
+				max = res;
+		}
+
+		return max;
+	}
+
+	public Double standartDeviationOfActiveSponsorshipsPerSponsor() {
+
+		final Collection<Sponsor> sponsors = this.sponsorService.findAll();
+		Double sum = 0.0;
+		Double div = 0.0;
+		final Double med = this.sponsorshipRepository.averageActiveSponsorshipsPerSponsor();
+		Double med2 = 0.0;
+		Double res = 0.0;
+		Double result = 0.0;
+		if (!sponsors.isEmpty()) {
+			for (final Sponsor s : sponsors)
+				sum = sum + (this.activeSponsorshipsPerSponsorId(s.getId()).size()) * (this.activeSponsorshipsPerSponsorId(s.getId()).size());
+			div = sum / sponsors.size();
+
+			med2 = med * med;
+
+			res = div - med2;
+
+			result = Math.sqrt(res);
+		}
+
+		return result;
+
+	}
+
+	public Collection<Sponsorship> activeSponsorshipsPerSponsorId(final int sponsorId) {
+
+		Assert.notNull(sponsorId);
+
+		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.activeSponsorshipsPerSponsorId(sponsorId);
 
 		return sponsorships;
 	}
