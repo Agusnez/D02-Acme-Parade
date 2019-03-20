@@ -61,7 +61,6 @@ public class SponsorshipService {
 
 		final Sponsorship sponsorship;
 		sponsorship = this.sponsorshipRepository.findOne(sponsorshipId);
-		Assert.notNull(sponsorship);
 		return sponsorship;
 
 	}
@@ -224,22 +223,22 @@ public class SponsorshipService {
 
 		return result;
 	}
-	
+
 	public Integer deactivateExpiredCardSponsorships() {
-		int actualMonth = Calendar.MONTH + 1;
-		int actualYear = Calendar.YEAR;
-		
+		final int actualMonth = Calendar.MONTH + 1;
+		final int actualYear = Calendar.YEAR;
+
 		Integer result = 0;
-		
-		Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findCreditCardExpired(actualMonth, actualYear);
-		
-		for (Sponsorship s: sponsorships) {
+
+		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findCreditCardExpired(actualMonth, actualYear);
+
+		for (final Sponsorship s : sponsorships) {
 			this.deactivate(s.getId());
 			result++;
 		}
 
 		return result;
-		
+
 	}
-	
+
 }
