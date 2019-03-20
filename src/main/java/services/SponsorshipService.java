@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,11 @@ public class SponsorshipService {
 	}
 
 	public Sponsorship save(final Sponsorship sponsorship) {
+
+		final Date now = new Date(System.currentTimeMillis() - 1000);
+
+		Assert.isTrue(sponsorship.getCreditCard().getExpYear() - 1900 >= now.getYear());
+		Assert.isTrue(sponsorship.getCreditCard().getExpMonth() - 1 >= now.getMonth() || sponsorship.getCreditCard().getExpYear() - 1900 > now.getYear());
 
 		final Sponsorship result = this.sponsorshipRepository.save(sponsorship);
 
