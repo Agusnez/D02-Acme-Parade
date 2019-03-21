@@ -364,6 +364,27 @@ public class DashboardAdministratorController extends AbstractController {
 		final String banner = this.configurationService.findConfiguration().getBanner();
 		result.addObject("banner", banner);
 
+		//-------------------------------------------------------------------------------------------------
+
+		final Double averageActiveSponsorshipsPerSponsor = this.sponsorshipService.averageActiveSponsorshipsPerSponsor();
+		result.addObject("averageActiveSponsorshipsPerSponsor", averageActiveSponsorshipsPerSponsor);
+		final Integer minActiveSponsorshipsPerSponsor = this.sponsorshipService.minActiveSponsorshipsPerSponsor();
+		result.addObject("minActiveSponsorshipsPerSponsor", minActiveSponsorshipsPerSponsor);
+		final Integer maxActiveSponsorshipsPerSponsor = this.sponsorshipService.maxActiveSponsorshipsPerSponsor();
+		result.addObject("maxActiveSponsorshipsPerSponsor", maxActiveSponsorshipsPerSponsor);
+		final Double standartDeviationOfActiveSponsorshipsPerSponsor = this.sponsorshipService.standartDeviationOfActiveSponsorshipsPerSponsor();
+		result.addObject("standartDeviationOfActiveSponsorshipsPerSponsor", standartDeviationOfActiveSponsorshipsPerSponsor);
+
+		try {
+			final Double ratioOfActiveSponsorships = this.sponsorshipService.ratioOfActiveSponsorships();
+			result.addObject("ratioOfActiveSponsorships", ratioOfActiveSponsorships);
+		} catch (final Throwable oops) {
+			result.addObject("ratioOfActiveSponsorships", "N/A");
+		}
+
+		final Collection<String> top5SporsorsActivedSponsorships = this.sponsorshipService.top5SporsorsActivedSponsorships();
+		result.addObject("top5SporsorsActivedSponsorships", top5SporsorsActivedSponsorships);
+
 		return result;
 
 	}
@@ -628,7 +649,9 @@ public class DashboardAdministratorController extends AbstractController {
 			result.addObject("ratioOfActiveSponsorships", "N/A");
 		}
 
-		//RESTANTE
+		final Collection<String> top5SporsorsActivedSponsorships = this.sponsorshipService.top5SporsorsActivedSponsorships();
+		result.addObject("top5SporsorsActivedSponsorships", top5SporsorsActivedSponsorships);
+
 		final String banner = this.configurationService.findConfiguration().getBanner();
 		result.addObject("banner", banner);
 

@@ -247,6 +247,16 @@
 </fieldset>
 <br/>
 
+<h3><spring:message code="dashboard.top5SporsorsActivedSponsorships" /></h3>
+<fieldset>
+
+   <jstl:forEach items="${top5SporsorsActivedSponsorships}" var="b">
+    <jstl:out value="${b}" />
+    <br />
+   </jstl:forEach>
+
+</fieldset>
+
 <acme:button name="back" code="dashboard.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 	
 <jstl:if test="${language == 'en'}">

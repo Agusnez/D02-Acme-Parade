@@ -1,9 +1,12 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -159,6 +162,19 @@ public class SponsorshipService {
 
 		return result;
 
+	}
+
+	public Collection<String> top5SporsorsActivedSponsorships() {
+
+		final Collection<String> sponsors = this.sponsorshipRepository.rankingSporsorsActivedSponsorships();
+
+		final List<String> ranking = new ArrayList<String>();
+		ranking.addAll(sponsors);
+
+		Collection<String> result = new HashSet<String>();
+		if (ranking.size() > 4)
+			result = ranking.subList(0, 5);
+		return result;
 	}
 
 	public Collection<Sponsorship> activeSponsorshipsPerSponsorId(final int sponsorId) {
