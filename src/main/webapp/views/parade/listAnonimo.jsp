@@ -43,8 +43,12 @@
 	<acme:column property="description" titleKey="parade.description" value= "${row.description}: "/>
 	
 	<acme:dateFormat titleKey="parade.organisationMoment" value="${row.organisationMoment }" pattern="yyyy/MM/dd HH:mm" />
+	
+	<acme:column property="status" titleKey="parade.status" value= "${row.status}: "/>
 
 	<acme:url href="float/parade/list.do?paradeId=${row.id }" code="parade.float" />
+	
+	<acme:url href="parade/display.do?paradeId=${row.id }" code="parade.display" />
 	
 	<security:authorize access="hasRole('SPONSOR')">	
 		<acme:url href="sponsorship/sponsor/sponsor.do?paradeId=${row.id}" code="parade.sponsor" />
@@ -55,3 +59,17 @@
 	<br/>
 	
 	<acme:button name="back" code="parade.back" onclick="javascript: relativeRedir('welcome/index.do');" />
+	
+<script type="text/javascript">
+	var trTags = document.getElementsByTagName("tr");
+	for (var i = 1; i < trTags.length; i++) {
+	  var tdStatus = trTags[i].children[5];
+	  if (tdStatus.innerText == "REJECTED") {
+		  trTags[i].style.backgroundColor = "red";
+	  } else if (tdStatus.innerText == "ACCEPTED") {
+		  trTags[i].style.backgroundColor = "green";
+	  } else{
+		  trTags[i].style.backgroundColor = "grey";
+	  }
+	}
+</script>

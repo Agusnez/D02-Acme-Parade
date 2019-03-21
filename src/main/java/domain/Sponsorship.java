@@ -5,8 +5,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -19,11 +21,12 @@ public class Sponsorship extends DomainEntity {
 	private Boolean		activated;
 	private Sponsor		sponsor;
 	private Parade		parade;
-	private Double		recollect;
+	private Double		cost;
 
 
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getBanner() {
 		return this.banner;
 	}
@@ -34,6 +37,7 @@ public class Sponsorship extends DomainEntity {
 
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getTargetUrl() {
 		return this.targetUrl;
 	}
@@ -42,6 +46,7 @@ public class Sponsorship extends DomainEntity {
 		this.targetUrl = targetUrl;
 	}
 
+	@Valid
 	public CreditCard getCreditCard() {
 		return this.creditCard;
 	}
@@ -59,6 +64,7 @@ public class Sponsorship extends DomainEntity {
 	}
 
 	@ManyToOne
+	@Valid
 	public Sponsor getSponsor() {
 		return this.sponsor;
 	}
@@ -68,6 +74,7 @@ public class Sponsorship extends DomainEntity {
 	}
 
 	@ManyToOne
+	@Valid
 	public Parade getParade() {
 		return this.parade;
 	}
@@ -76,12 +83,12 @@ public class Sponsorship extends DomainEntity {
 		this.parade = parade;
 	}
 
-	public Double getRecollect() {
-		return this.recollect;
+	public Double getCost() {
+		return this.cost;
 	}
 
-	public void setRecollect(final Double recollect) {
-		this.recollect = recollect;
+	public void setCost(final Double cost) {
+		this.cost = cost;
 	}
 
 }

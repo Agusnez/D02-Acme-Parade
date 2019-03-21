@@ -167,9 +167,9 @@ public class ParadeService {
 			if (parade.getStatus() == "REJECTED")
 				Assert.isTrue(parade.getRejectedComment() != null && parade.getRejectedComment() != "");
 
-		} else if (parade.getId() == 0 && parade.getFinalMode() == true)
+		} else if (parade.getId() == 0 && parade.getFinalMode() == true){
 			parade.setStatus("SUBMITTED");
-
+		}
 		final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
 		Assert.isTrue(parade.getOrganisationMoment().after(currentMoment));
 
@@ -318,6 +318,13 @@ public class ParadeService {
 	public Collection<Parade> findParadeCanBeSeenOfBrotherhoodId(final int brotherhoodId) {
 
 		final Collection<Parade> result = this.paradeRepository.findParadeCanBeSeenOfBrotherhoodId(brotherhoodId);
+
+		return result;
+	}
+
+	public Collection<Parade> findParadeCanBeSeenOfBrotherhoodIdForChapter(final int brotherhoodId) {
+
+		final Collection<Parade> result = this.paradeRepository.findParadeCanBeSeenOfBrotherhoodIdForChapter(brotherhoodId);
 
 		return result;
 	}

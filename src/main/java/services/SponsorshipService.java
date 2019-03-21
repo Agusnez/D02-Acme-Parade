@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +61,6 @@ public class SponsorshipService {
 
 		final Sponsorship sponsorship;
 		sponsorship = this.sponsorshipRepository.findOne(sponsorshipId);
-		Assert.notNull(sponsorship);
 		return sponsorship;
 
 	}
@@ -74,6 +75,11 @@ public class SponsorshipService {
 	}
 
 	public Sponsorship save(final Sponsorship sponsorship) {
+
+		final Date now = new Date(System.currentTimeMillis() - 1000);
+
+		Assert.isTrue(sponsorship.getCreditCard().getExpYear() - 1900 >= now.getYear());
+		Assert.isTrue(sponsorship.getCreditCard().getExpMonth() - 1 >= now.getMonth() || sponsorship.getCreditCard().getExpYear() - 1900 > now.getYear());
 
 		final Sponsorship result = this.sponsorshipRepository.save(sponsorship);
 
@@ -171,7 +177,7 @@ public class SponsorshipService {
 
 		final Sponsor login = this.sponsorService.findByPrincipal();
 
-		if (sponsorhip.getSponsor().equals(login))
+		if (login.equals(sponsorhip.getSponsor()))
 			res = true;
 
 		return res;
@@ -210,6 +216,7 @@ public class SponsorshipService {
 			result.setActivated(true);
 			result.setSponsor(this.sponsorService.findByPrincipal());
 			result.setParade(this.paradeService.findOne(sponsorship.getParadeId()));
+			result.setCost(0.0);
 
 		} else {
 
@@ -220,13 +227,22 @@ public class SponsorshipService {
 			result.setActivated(theOldOne.getActivated());
 			result.setSponsor(theOldOne.getSponsor());
 			result.setParade(theOldOne.getParade());
-			result.setRecollect(theOldOne.getRecollect());
+			result.setCost(theOldOne.getCost());
 
 		}
 
 		this.validator.validate(result, binding);
 
 		return result;
+	}
+
+	public void deleteAll(final int actorId) {
+
+		final Collection<Sponsorship> sponsorships = this.findAllBySponsorId(actorId);
+
+		if (!sponsorships.isEmpty())
+			for (final Sponsorship s : sponsorships)
+				this.sponsorshipRepository.delete(s);
 	}
 
 	public SponsorshipForm editForm(final Sponsorship sponsorship) {
@@ -253,7 +269,7 @@ public class SponsorshipService {
 		if (!sponsorships.isEmpty()) {
 
 			final int M = 0;
-			final int N = sponsorships.size();
+			final int N = sponsorships.size() - 1;
 			final int limit = (int) (Math.random() * (N - M + 1) + M);
 
 			int i = 0;
@@ -263,15 +279,15 @@ public class SponsorshipService {
 				if (i == limit) {
 					result = s;
 
-					Double recollect = result.getRecollect();
+					Double cost = result.getCost();
 
 					if (fare != null)
 						if (vatTax == null)
-							recollect = recollect + fare;
+							cost = cost + fare;
 						else
-							recollect = recollect + ((1 - vatTax) * fare);
+							cost = cost + ((1 + vatTax) * fare);
 
-					result.setRecollect(recollect);
+					result.setCost(cost);
 					break;
 				}
 
@@ -283,4 +299,22 @@ public class SponsorshipService {
 
 		return result;
 	}
+
+	public Integer deactivateExpiredCardSponsorships() {
+		final int actualMonth = Calendar.MONTH + 1;
+		final int actualYear = Calendar.YEAR;
+
+		Integer result = 0;
+
+		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findCreditCardExpired(actualMonth, actualYear);
+
+		for (final Sponsorship s : sponsorships) {
+			this.deactivate(s.getId());
+			result++;
+		}
+
+		return result;
+
+	}
+
 }

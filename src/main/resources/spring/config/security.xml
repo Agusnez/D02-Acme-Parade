@@ -79,6 +79,7 @@
 		
 	
 		<security:intercept-url pattern="/parade/list.do" access="permitAll" />
+		<security:intercept-url pattern="/parade/display.do" access="permitAll" />
 		<security:intercept-url pattern="/parade/brotherhood/**" access="hasRole('BROTHERHOOD')" />
 
 		<security:intercept-url pattern="/parade/chapter/**" access="hasRole('CHAPTER')" />
@@ -169,7 +170,8 @@
 		<security:intercept-url pattern="/actor/administrator/spammer/banActor.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/actor/administrator/profile/list.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/actor/administrator/profile/displayActor.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/actor/administrator/profile/deleteProfile.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/actor/administrator/profile/deleteProfile.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/actor/administrator/sponsorship/deactivateExpired.do" access="hasRole('ADMIN')" /> 
 		
 		
 		<security:intercept-url pattern="/box/actor/list.do" access="isAuthenticated()" /> 

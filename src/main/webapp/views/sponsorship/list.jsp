@@ -17,11 +17,13 @@
 	
 	<acme:column property="targetUrl" titleKey="sponsorship.targetUrl" value= "${row.targetUrl}: "/>
 	
-	<acme:column property="recollect" titleKey="sponsorship.recollect" value= "${row.recollect}: "/>
+	<acme:column property="cost" titleKey="sponsorship.cost" value= "${row.cost}: "/>
 	
 	<acme:column property="parade.title" titleKey="sponsorship.parade.title" value= "${row.parade.title}: "/>
 	
 	<acme:column property="creditCard.number" titleKey="sponsorship.creditCard.number" value= "${row.creditCard.number}: "/>
+	
+	<acme:column property="activated" titleKey="sponsorship.activated" value= "${row.activated}: "/>
 		
 	<acme:url href="sponsorship/sponsor/edit.do?sponsorshipId=${row.id }" code="sponsorship.edit" />
 	

@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,7 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 
 	@Query("select s from Sponsorship s where s.activated = true and s.parade.id = ?1")
 	Collection<Sponsorship> findAllByParadeId(int paradeId);
+<<<<<<< HEAD
 
 	@Query("select (select count(s1) from Sponsorship s1 where s1.activated = true)/count(s2)*1.0 from Sponsorship s2")
 	Double ratioOfActiveSponsorships();
@@ -27,4 +29,9 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	@Query("select s from Sponsorship s where s.activated=true and s.sponsor.id =?1")
 	Collection<Sponsorship> activeSponsorshipsPerSponsorId(final int sponsorId);
 
+=======
+	
+	@Query("select s from Sponsorship s where (s.creditCard.expYear < ?2) or (s.creditCard.expYear = ?2 or s.creditCard.expMonth < ?1)")
+	Collection<Sponsorship> findCreditCardExpired(int actualMonth, int actualYear);
+>>>>>>> master
 }

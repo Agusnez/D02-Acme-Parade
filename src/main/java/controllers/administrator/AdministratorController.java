@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AdministratorService;
 import services.ConfigurationService;
+import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Actor;
 
@@ -40,6 +41,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+	
+	@Autowired
+	private SponsorshipService 		sponsorshipService;
 
 
 	//Methods
@@ -236,4 +240,20 @@ public class AdministratorController extends AbstractController {
 
 		return result;
 	}
+	
+	
+	
+	@RequestMapping(value = "sponsorship/deactivateExpired", method = RequestMethod.GET)
+	public ModelAndView deactivateExpired() {
+		ModelAndView result;
+		
+		Integer numberOfDeactivatedSponsorships = this.sponsorshipService.deactivateExpiredCardSponsorships();
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		result = new ModelAndView("administrator/processSuccess");
+		result.addObject("numOfDeactivations", numberOfDeactivatedSponsorships);
+		result.addObject("banner", banner);
+		return result;
+	}
+	
 }

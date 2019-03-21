@@ -13,10 +13,9 @@
 <display:table name="proclaims" id="row" requestURI="${requestURI }" pagesize="5">
 
 	
-	<acme:column property="moment" titleKey="proclaim.moment" value= "${row.moment}: "/>
-	
+	<acme:dateFormat titleKey="proclaim.moment" pattern="yyyy/MM/dd HH:mm" value="${row.moment}"/>
+
 	<acme:column property="chapter.title" titleKey="proclaim.chapter" value= "${row.chapter.title}: "/>
-	
 	
 	<acme:column property="description" titleKey="proclaim.description" value= "${row.description}: "/>
 

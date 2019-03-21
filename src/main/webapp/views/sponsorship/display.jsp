@@ -17,6 +17,8 @@
 
 <acme:display code="sponsorship.targetUrl" property="${sponsorship.targetUrl }" />
 
+<acme:display code="sponsorship.cost" property="${sponsorship.cost }" />
+
 <acme:display code="sponsorship.sponsor" property="${sponsorship.sponsor.name}" />
 
 <acme:display code="sponsorship.creditCard.holderName" property="${sponsorship.creditCard.holderName}" />
@@ -29,7 +31,7 @@
 
 <acme:display code="sponsorship.creditCard.expYear" property="${sponsorship.creditCard.expYear}" />
 
-<acme:button name="back" code="sponsorship.back" onclick="javascript: relativeRedir('welcome/index.do');" />
+<acme:button name="back" code="sponsorship.back" onclick="javascript: relativeRedir('sponsorship/sponsor/list.do');" />
 
 <jstl:if test="${sponsorship.activated }">
 <acme:button name="edit" code="sponsorship.deactivate" onclick="javascript: relativeRedir('sponsorship/sponsor/deactivate.do?sponsorshipId=${sponsorship.id }');" />

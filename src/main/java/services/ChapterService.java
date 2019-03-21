@@ -64,7 +64,6 @@ public class ChapterService {
 
 		Chapter chapter;
 		chapter = this.chapterRepository.findOne(chapterId);
-		Assert.notNull(chapter);
 		return chapter;
 
 	}
