@@ -48,6 +48,8 @@
 
 	<acme:url href="float/parade/list.do?paradeId=${row.id }" code="parade.float" />
 	
+	<acme:url href="parade/display.do?paradeId=${row.id }" code="parade.display" />
+	
 	<security:authorize access="hasRole('SPONSOR')">	
 		<acme:url href="sponsorship/sponsor/sponsor.do?paradeId=${row.id}" code="parade.sponsor" />
 	</security:authorize>
