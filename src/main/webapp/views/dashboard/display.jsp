@@ -226,6 +226,37 @@
 
 <br/>
 
+<h3><spring:message code="dashboard.statsOfActiveSponsorshipsPerSponsor" /></h3>
+
+<fieldset>
+
+	<ul>
+	<li><spring:message code="dashboard.average" />: ${averageActiveSponsorshipsPerSponsor}</li>
+	<li><spring:message code="dashboard.minimum" />: ${minActiveSponsorshipsPerSponsor}</li>
+	<li><spring:message code="dashboard.maximum" />: ${maxActiveSponsorshipsPerSponsor}</li>
+	<li><spring:message code="dashboard.deviation" />: ${standartDeviationOfActiveSponsorshipsPerSponsor}</li>
+	</ul>
+
+</fieldset>	
+
+<br/>
+
+<h3><spring:message code="dashboard.ratioOfActiveSponsorships" /></h3>
+<fieldset>
+	${ratioOfActiveSponsorships}
+</fieldset>
+<br/>
+
+<h3><spring:message code="dashboard.top5SporsorsActivedSponsorships" /></h3>
+<fieldset>
+
+   <jstl:forEach items="${top5SporsorsActivedSponsorships}" var="b">
+    <jstl:out value="${b}" />
+    <br />
+   </jstl:forEach>
+
+</fieldset>
+
 <acme:button name="back" code="dashboard.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 	
 <jstl:if test="${language == 'en'}">

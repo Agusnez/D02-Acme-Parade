@@ -92,6 +92,25 @@ public class MiscellaneousRecordService {
 		return result;
 	}
 
+	public void delete(final MiscellaneousRecord miscellaneousRecord) {
+
+		Assert.notNull(miscellaneousRecord);
+		Assert.isTrue(miscellaneousRecord.getId() != 0);
+
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+
+		final Authority br = new Authority();
+		br.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(br));
+
+		final History history = this.historyService.findByBrotherhoodId(actor.getId());
+		Assert.notNull(history);
+
+		history.getMiscellaneousRecords().remove(miscellaneousRecord);
+		this.miscellaneousRecordRepository.delete(miscellaneousRecord);
+	}
+
 	// Other business methods -----------------------
 
 	public Boolean securityMiscellaneous(final int miscellaneousId) {

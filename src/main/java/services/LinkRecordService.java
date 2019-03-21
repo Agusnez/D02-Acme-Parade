@@ -97,6 +97,25 @@ public class LinkRecordService {
 		return result;
 	}
 
+	public void delete(final LinkRecord linkRecord) {
+
+		Assert.notNull(linkRecord);
+		Assert.isTrue(linkRecord.getId() != 0);
+
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+
+		final Authority br = new Authority();
+		br.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(br));
+
+		final History history = this.historyService.findByBrotherhoodId(actor.getId());
+		Assert.notNull(history);
+
+		history.getLinkRecords().remove(linkRecord);
+		this.linkRecordRepository.delete(linkRecord);
+	}
+
 	// Other business methods -----------------------
 
 	public Boolean securityLink(final int linkId) {

@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.InceptionRecordRepository;
 import security.Authority;
 import domain.Brotherhood;
+import domain.History;
 import domain.InceptionRecord;
 
 @Service
@@ -26,6 +27,9 @@ public class InceptionRecordService {
 
 	@Autowired
 	private BrotherhoodService			brotherhoodService;
+
+	@Autowired
+	private HistoryService				historyService;
 
 
 	//Simple CRUD methods
@@ -75,4 +79,23 @@ public class InceptionRecordService {
 		return result;
 	}
 
+	public Boolean securityInception(final int inceptionId) {
+
+		Boolean res = false;
+		InceptionRecord loginInception = null;
+
+		final InceptionRecord owner = this.findOne(inceptionId);
+
+		final Brotherhood login = this.brotherhoodService.findByPrincipal();
+		final History loginHistory = this.historyService.findByBrotherhoodId(login.getId());
+
+		if (loginHistory != null)
+			loginInception = loginHistory.getInceptionRecord();
+
+		if (loginInception != null && owner != null)
+			if (loginInception.equals(owner))
+				res = true;
+
+		return res;
+	}
 }
