@@ -2639,6 +2639,8 @@
 		<property name="description" value="description2" />
 		<property name="photos">
 			<list>
+				<value>photo3.com</value>
+				<value>photo4.com</value>
 			</list>
 		</property>
 	</bean>

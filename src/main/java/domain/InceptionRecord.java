@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
@@ -40,6 +41,7 @@ public class InceptionRecord extends DomainEntity {
 	}
 
 	@ElementCollection
+	@NotEmpty
 	public Collection<String> getPhotos() {
 		return this.photos;
 	}

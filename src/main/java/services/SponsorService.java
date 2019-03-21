@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.SponsorRepository;
+import repositories.SponsorshipRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -28,19 +30,22 @@ public class SponsorService {
 
 	// Managed Repository ------------------------
 	@Autowired
-	private SponsorRepository	sponsorRepository;
+	private SponsorRepository		sponsorRepository;
 
 	@Autowired
-	private UserAccountService	userAccountService;
+	private SponsorshipRepository	sponsorshipRepository;
 
 	@Autowired
-	private ActorService		actorService;
+	private UserAccountService		userAccountService;
 
 	@Autowired
-	private BoxService			boxService;
+	private ActorService			actorService;
 
 	@Autowired
-	private Validator			validator;
+	private BoxService				boxService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	// Simple CRUD methods 
@@ -216,6 +221,21 @@ public class SponsorService {
 
 		return result;
 
+	}
+
+	public Collection<Sponsor> sponsorsWithActiveSponsorships() {
+
+		int c = 0;
+		final Collection<Sponsor> result = new HashSet<Sponsor>();
+		final Collection<Sponsor> total = this.sponsorRepository.findAll();
+
+		for (final Sponsor s : total) {
+			c = this.sponsorshipRepository.activeSponsorshipsPerSponsorId(s.getId()).size();
+			if (c > 0)
+				result.add(s);
+
+		}
+		return result;
 	}
 
 }

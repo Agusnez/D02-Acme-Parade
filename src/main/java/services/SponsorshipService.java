@@ -170,6 +170,21 @@ public class SponsorshipService {
 		return sponsorships;
 	}
 
+	public Sponsor theBestSponsor() {
+		Integer max = 0;
+		Sponsor result = new Sponsor();
+		final Collection<Sponsor> sponsors = this.sponsorService.findAll();
+
+		for (final Sponsor s : sponsors) {
+			final Integer res = this.activeSponsorshipsPerSponsorId(s.getId()).size();
+			if (res > max)
+				max = res;
+			result = s;
+		}
+
+		return result;
+	}
+
 	public Boolean sponsorshipSponsorSecurity(final int sponsorhipId) {
 		Boolean res = false;
 

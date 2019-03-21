@@ -219,6 +219,13 @@ public class HistoryService {
 		return result;
 	}
 
+	public History historyPerInceptionRecordId(final int inceptionRecordId) {
+
+		final History result = this.historyRepository.historyPerInceptionRecordId(inceptionRecordId);
+
+		return result;
+	}
+
 	//	public History reconstruct(final History history, final BindingResult binding) {
 	//
 	//		History result;

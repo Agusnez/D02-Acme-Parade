@@ -137,4 +137,5 @@ public class LegalRecordService {
 
 		return res;
 	}
+
 }

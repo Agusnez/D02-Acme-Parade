@@ -19,13 +19,12 @@
 	
 	<input type="text" hidden="true" value="${historyId }"
 		name="historyId" />
-
-
+	
 	<acme:textbox code="inceptionRecord.title" path="title" obligatory="true"/>
 	
 	<acme:textbox code="inceptionRecord.description" path="description" obligatory="true"/>
 	
-	<acme:textbox code="inceptionRecord.photos" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.___,https://___.___,..." path="photos" obligatory="false"/>
+	<acme:textbox code="inceptionRecord.photos" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.___,https://___.___,..." path="photos" obligatory="true"/>
 	
 	<jstl:if test="${inceptionRecord.id==0}">
 	<acme:submit name="save1" code="inceptionRecord.save1" />
@@ -35,7 +34,7 @@
 	<acme:submit name="save2" code="inceptionRecord.save2" />
 	</jstl:if>
 
-	<acme:cancel code="inceptionRecord.cancel" url="welcome/index.do"/>
+	<acme:cancel code="inceptionRecord.cancel" url="/history/display.do?brotherhoodId=${id}" />
 
 
 </form:form>

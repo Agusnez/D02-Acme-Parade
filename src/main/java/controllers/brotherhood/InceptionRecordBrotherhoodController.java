@@ -5,12 +5,14 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.HistoryService;
 import services.InceptionRecordService;
@@ -32,6 +34,9 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
 
 
 	// Create -------------------------------------------------
@@ -56,10 +61,36 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int inceptionRecordId) {
+		ModelAndView result;
+		InceptionRecord inceptionRecord;
+
+		Boolean security;
+		security = this.inceptionRecordService.securityInception(inceptionRecordId);
+
+		if (security) {
+
+			inceptionRecord = this.inceptionRecordService.findOne(inceptionRecordId);
+			Assert.notNull(inceptionRecord);
+			result = this.create2ModelAndView(inceptionRecord);
+		} else
+			result = new ModelAndView("redirect:/welcome/index.do");
+
+		return result;
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save1")
 	public ModelAndView save1(@Valid final InceptionRecord inceptionRecord, final BindingResult binding) {
 
 		ModelAndView result;
+
+		int id = 0;
+		if (inceptionRecord.getId() != 0) {
+			final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
 
 		if (binding.hasErrors())
 			result = this.create2ModelAndView(inceptionRecord);
@@ -69,7 +100,7 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 				final History history;
 				history = this.historyService.create(ir);
 				this.historyService.save(history);
-				result = new ModelAndView("redirect:/brotherhood/display.do");
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.create2ModelAndView(inceptionRecord, "inceptionRecord.commit.error");
 			}
@@ -82,12 +113,19 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 
 		ModelAndView result;
 
+		int id = 0;
+		if (inceptionRecord.getId() != 0) {
+			final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(inceptionRecord, historyId);
 		else
 			try {
 				this.inceptionRecordService.save(inceptionRecord);
-				result = new ModelAndView("redirect:/brotherhood/display.do");
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(inceptionRecord, "inceptionRecord.commit.error", historyId);
 			}
@@ -109,6 +147,16 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 
 		ModelAndView result;
 		result = new ModelAndView("inceptionRecord/brotherhood/edit");
+
+		int id = 0;
+		if (inceptionRecord.getId() != 0) {
+			final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
+		result.addObject("id", id);
+
 		result.addObject("inceptionRecord", inceptionRecord);
 		result.addObject("historyId", historyId);
 		result.addObject("message", message);
@@ -131,6 +179,16 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		result = new ModelAndView("inceptionRecord/brotherhood/edit");
+
+		int id = 0;
+		if (inceptionRecord.getId() != 0) {
+			final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
+		result.addObject("id", id);
+
 		result.addObject("inceptionRecord", inceptionRecord);
 		result.addObject("messageError", message);
 		result.addObject("banner", banner);

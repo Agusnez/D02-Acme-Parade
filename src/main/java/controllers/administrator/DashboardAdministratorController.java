@@ -26,6 +26,7 @@ import services.MemberService;
 import services.ParadeService;
 import services.PositionService;
 import services.RequestService;
+import services.SponsorshipService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
@@ -73,6 +74,9 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private ChapterService			chapterService;
+
+	@Autowired
+	private SponsorshipService		sponsorshipService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -606,7 +610,25 @@ public class DashboardAdministratorController extends AbstractController {
 
 		final Collection<Brotherhood> brotherhoodsMoreThanAverage = this.historyService.brotherhoodsMoreThanAverage();
 		result.addObject("brotherhoodsMoreThanAverage", brotherhoodsMoreThanAverage);
+		//-------------------------------------------------------------------------------------------------
 
+		final Double averageActiveSponsorshipsPerSponsor = this.sponsorshipService.averageActiveSponsorshipsPerSponsor();
+		result.addObject("averageActiveSponsorshipsPerSponsor", averageActiveSponsorshipsPerSponsor);
+		final Integer minActiveSponsorshipsPerSponsor = this.sponsorshipService.minActiveSponsorshipsPerSponsor();
+		result.addObject("minActiveSponsorshipsPerSponsor", minActiveSponsorshipsPerSponsor);
+		final Integer maxActiveSponsorshipsPerSponsor = this.sponsorshipService.maxActiveSponsorshipsPerSponsor();
+		result.addObject("maxActiveSponsorshipsPerSponsor", maxActiveSponsorshipsPerSponsor);
+		final Double standartDeviationOfActiveSponsorshipsPerSponsor = this.sponsorshipService.standartDeviationOfActiveSponsorshipsPerSponsor();
+		result.addObject("standartDeviationOfActiveSponsorshipsPerSponsor", standartDeviationOfActiveSponsorshipsPerSponsor);
+
+		try {
+			final Double ratioOfActiveSponsorships = this.sponsorshipService.ratioOfActiveSponsorships();
+			result.addObject("ratioOfActiveSponsorships", ratioOfActiveSponsorships);
+		} catch (final Throwable oops) {
+			result.addObject("ratioOfActiveSponsorships", "N/A");
+		}
+
+		//RESTANTE
 		final String banner = this.configurationService.findConfiguration().getBanner();
 		result.addObject("banner", banner);
 
