@@ -67,6 +67,7 @@ public class LegalRecord extends DomainEntity {
 	}
 
 	@ElementCollection
+	//TODO: comprobar si pasa algo con un script
 	public Collection<String> getLaws() {
 		return this.laws;
 	}
