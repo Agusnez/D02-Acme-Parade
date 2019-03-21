@@ -36,21 +36,21 @@
 <acme:display code="history.legalRecords" property=""/>
 <fieldset>
 <div>
-<display:table pagesize="5" name="history.legalRecords" id="row" 
+<display:table pagesize="5" name="history.legalRecords" id="row1" 
 requestURI="${requestURI }" class="displaytag">
 
-	<acme:column property="title" titleKey="legalRecord.title" value= "${row.title}: "/>
+	<acme:column property="title" titleKey="legalRecord.title" value= "${row1.title}: "/>
 	
-	<acme:column property="description" titleKey="legalRecord.description" value= "${row.description}: "/>
+	<acme:column property="description" titleKey="legalRecord.description" value= "${row1.description}: "/>
 	
-	<acme:column property="legalName" titleKey="legalRecord.legalName" value= "${row.legalName}: "/>
+	<acme:column property="legalName" titleKey="legalRecord.legalName" value= "${row1.legalName}: "/>
 	
-	<acme:column property="VATNumber" titleKey="legalRecord.VATNumber" value= "${row.VATNumber}: "/>
+	<acme:column property="VATNumber" titleKey="legalRecord.VATNumber" value= "${row1.VATNumber}: "/>
 	
-	<acme:column property="laws" titleKey="legalRecord.laws" value= "${row.laws}: "/>
+	<acme:column property="laws" titleKey="legalRecord.laws" value= "${row1.laws}: "/>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
-	<acme:url href="legalRecord/brotherhood/edit.do?legalRecordId=${row.id}" code="legalRecord.edit"/>
+	<acme:url href="legalRecord/brotherhood/edit.do?legalRecordId=${row1.id}" code="legalRecord.edit"/>
 	</security:authorize>	
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">
@@ -63,21 +63,21 @@ requestURI="${requestURI }" class="displaytag">
 <acme:display code="history.periodRecords" property=""/>
 <fieldset>
 <div>
-<display:table pagesize="5" name="history.periodRecords" id="row" 
+<display:table pagesize="5" name="history.periodRecords" id="row2" 
 requestURI="${requestURI }" class="displaytag">
 
-	<acme:column property="title" titleKey="periodRecord.title" value= "${row.title}: "/>
+	<acme:column property="title" titleKey="periodRecord.title" value= "${row2.title}: "/>
 	
-	<acme:column property="description" titleKey="periodRecord.description" value= "${row.description}: "/>
+	<acme:column property="description" titleKey="periodRecord.description" value= "${row2.description}: "/>
 	
-	<acme:column property="startYear" titleKey="periodRecord.startYear" value= "${row.startYear}: "/>
+	<acme:column property="startYear" titleKey="periodRecord.startYear" value= "${row2.startYear}: "/>
 	
-	<acme:column property="endYear" titleKey="periodRecord.endYear" value= "${row.endYear}: "/>
+	<acme:column property="endYear" titleKey="periodRecord.endYear" value= "${row2.endYear}: "/>
 	
-	<acme:column property="photos" titleKey="periodRecord.photos" value= "${row.photos}: "/>
+	<acme:column property="photos" titleKey="periodRecord.photos" value= "${row2.photos}: "/>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
-	<acme:url href="periodRecord/brotherhood/edit.do?periodRecordId=${row.id}" code="periodRecord.edit"/>
+	<acme:url href="periodRecord/brotherhood/edit.do?periodRecordId=${row2.id}" code="periodRecord.edit"/>
 	</security:authorize>	
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">
@@ -89,16 +89,16 @@ requestURI="${requestURI }" class="displaytag">
 <acme:display code="history.linkRecords" property=""/>
 <fieldset>
 <div>
-<display:table pagesize="5" name="history.linkRecords" id="row" 
+<display:table pagesize="5" name="history.linkRecords" id="row3" 
 requestURI="${requestURI }" class="displaytag">
 
-	<acme:column property="title" titleKey="linkRecord.title" value= "${row.title}: "/>
+	<acme:column property="title" titleKey="linkRecord.title" value= "${row3.title}: "/>
 	
-	<acme:column property="description" titleKey="linkRecord.description" value= "${row.description}: "/>
+	<acme:column property="description" titleKey="linkRecord.description" value= "${row3.description}: "/>
 	
-	<acme:column property="link" titleKey="linkRecord.link" value= "${row.link}: "/>
+	<acme:column property="link" titleKey="linkRecord.link" value= "${row3.link}: "/>
 	<security:authorize access="hasRole('BROTHERHOOD')">	
-	<acme:url href="linkRecord/brotherhood/edit.do?linkRecordId=${row.id}" code="linkRecord.edit"/>
+	<acme:url href="linkRecord/brotherhood/edit.do?linkRecordId=${row3.id}" code="linkRecord.edit"/>
 	</security:authorize>	
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">
@@ -111,14 +111,14 @@ requestURI="${requestURI }" class="displaytag">
 <acme:display code="history.miscellaneousRecords" property=""/>
 <fieldset>
 <div>
-<display:table pagesize="5" name="history.miscellaneousRecords" id="row" 
+<display:table pagesize="5" name="history.miscellaneousRecords" id="row4" 
 requestURI="${requestURI }" class="displaytag">
 
-	<acme:column property="title" titleKey="miscellaneousRecord.title" value= "${row.title}: "/>
+	<acme:column property="title" titleKey="miscellaneousRecord.title" value= "${row4.title}: "/>
 	
-	<acme:column property="description" titleKey="miscellaneousRecord.description" value= "${row.description}: "/>
+	<acme:column property="description" titleKey="miscellaneousRecord.description" value= "${row4.description}: "/>
 	<security:authorize access="hasRole('BROTHERHOOD')">
-	<acme:url href="miscellaneousRecord/brotherhood/edit.do?miscellaneousRecordId=${row.id}" code="miscellaneousRecord.edit"/>
+	<acme:url href="miscellaneousRecord/brotherhood/edit.do?miscellaneousRecordId=${row4.id}" code="miscellaneousRecord.edit"/>
 	</security:authorize>
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">

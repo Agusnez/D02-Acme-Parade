@@ -17,8 +17,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<input type="text" hidden="true" value="${historyId }"
-		name="historyId" />
+	<%-- <input type="text" hidden="true" value="${historyId }" name="historyId" /> --%>
 	
 	<acme:textbox code="inceptionRecord.title" path="title" obligatory="true"/>
 	
@@ -34,7 +33,7 @@
 	<acme:submit name="save2" code="inceptionRecord.save2" />
 	</jstl:if>
 
-	<acme:cancel code="inceptionRecord.cancel" url="/history/display.do?brotherhoodId=${id}" />
+	<acme:cancel code="inceptionRecord.cancel" url="/history/display.do?brotherhoodId=${id2}" />
 
 
 </form:form>
