@@ -25,7 +25,7 @@
 	<acme:submit name="save" code="miscellaneousRecord.save" />
 	
 	
-	<acme:cancel code="miscellaneousRecord.cancel" url="history/display.do"/>
+	<acme:cancel code="periodRecord.cancel" url="/history/display.do?brotherhoodId=${id}" />
 
 	<jstl:if test="${miscellaneousRecord.id != 0}">
 	<acme:submit name="delete" code="miscellaneousRecord.delete" />

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.HistoryService;
 import services.PeriodRecordService;
 import controllers.AbstractController;
+import domain.History;
 import domain.PeriodRecord;
 
 @Controller
@@ -32,6 +34,9 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private HistoryService			historyService;
+
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
 
 
 	// Creation ---------------------------------------------------
@@ -80,12 +85,20 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 
 		ModelAndView result;
 
+		int id = 0;
+		if (periodRecord.getId() != 0) {
+			final History history = this.historyService.historyPerPeriodRecordId(periodRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(periodRecord);
 		else
 			try {
 				this.periodRecordService.save(periodRecord);
-				result = new ModelAndView("redirect:/brotherhood/display.do");
+
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(periodRecord, "periodRecord.commit.error");
 			}
@@ -103,14 +116,16 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 		if (periodRecordFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else
+		} else {
+			final History history = this.historyService.historyPerPeriodRecordId(periodRecord.getId());
+			final int id = history.getBrotherhood().getId();
 			try {
 				this.periodRecordService.delete(periodRecordFind);
-				result = new ModelAndView("redirect:/brotherhood/display.do");
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(periodRecordFind, "periodRecord.commit.error");
 			}
-
+		}
 		return result;
 	}
 
@@ -131,6 +146,14 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		result = new ModelAndView("periodRecord/brotherhood/edit");
+		int id = 0;
+		if (periodRecord.getId() != 0) {
+			final History history = this.historyService.historyPerPeriodRecordId(periodRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
+		result.addObject("id", id);
 		result.addObject("periodRecord", periodRecord);
 		result.addObject("messageError", message);
 		result.addObject("banner", banner);

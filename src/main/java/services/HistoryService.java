@@ -191,6 +191,34 @@ public class HistoryService {
 
 	}
 
+	public History historyPerPeriodRecordId(final int periodRecordId) {
+
+		final History result = this.historyRepository.historyPerPeriodRecordId(periodRecordId);
+
+		return result;
+	}
+
+	public History historyPerLegalRecordId(final int legalRecordId) {
+
+		final History result = this.historyRepository.historyPerLegalRecordId(legalRecordId);
+
+		return result;
+	}
+
+	public History historyPerLinkRecordId(final int linkRecordId) {
+
+		final History result = this.historyRepository.historyPerLinkRecordId(linkRecordId);
+
+		return result;
+	}
+
+	public History historyPerMiscellaneousRecordId(final int miscellaneousRecordId) {
+
+		final History result = this.historyRepository.historyPerMiscellaneousRecordId(miscellaneousRecordId);
+
+		return result;
+	}
+
 	//	public History reconstruct(final History history, final BindingResult binding) {
 	//
 	//		History result;

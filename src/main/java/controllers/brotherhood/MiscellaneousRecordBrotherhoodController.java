@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.HistoryService;
 import services.MiscellaneousRecordService;
 import controllers.AbstractController;
+import domain.History;
 import domain.MiscellaneousRecord;
 
 @Controller
@@ -32,6 +34,9 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 
 	@Autowired
 	private HistoryService				historyService;
+
+	@Autowired
+	private BrotherhoodService			brotherhoodService;
 
 
 	// Creation ---------------------------------------------------
@@ -80,12 +85,20 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 
 		ModelAndView result;
 
+		int id = 0;
+		if (miscellaneousRecord.getId() != 0) {
+			final History history = this.historyService.historyPerMiscellaneousRecordId(miscellaneousRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(miscellaneousRecord);
 		else
 			try {
 				this.miscellaneousRecordService.save(miscellaneousRecord);
-				result = new ModelAndView("redirect:/brotherhood/display.do");
+
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(miscellaneousRecord, "miscellaneousRecord.commit.error");
 			}
@@ -103,14 +116,16 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 		if (miscellaneousRecordFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else
+		} else {
+			final History history = this.historyService.historyPerMiscellaneousRecordId(miscellaneousRecord.getId());
+			final int id = history.getBrotherhood().getId();
 			try {
 				this.miscellaneousRecordService.delete(miscellaneousRecordFind);
-				result = new ModelAndView("redirect:/brotherhood/display.do");
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(miscellaneousRecordFind, "miscellaneousRecord.commit.error");
 			}
-
+		}
 		return result;
 	}
 
@@ -131,6 +146,16 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		result = new ModelAndView("miscellaneousRecord/brotherhood/edit");
+
+		int id = 0;
+		if (miscellaneousRecord.getId() != 0) {
+			final History history = this.historyService.historyPerMiscellaneousRecordId(miscellaneousRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
+		result.addObject("id", id);
+
 		result.addObject("miscellaneousRecord", miscellaneousRecord);
 		result.addObject("messageError", message);
 		result.addObject("banner", banner);

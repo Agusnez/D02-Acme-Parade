@@ -18,13 +18,13 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	@Query("select s from Sponsorship s where s.activated = true and s.parade.id = ?1")
 	Collection<Sponsorship> findAllByParadeId(int paradeId);
 
-	@Query("select (select count(s1) from Sponsorship s1 where s1.activated = true)/count(a2)*1.0 from Sponsorship s2")
+	@Query("select (select count(s1) from Sponsorship s1 where s1.activated = true)/count(s2)*1.0 from Sponsorship s2")
 	Double ratioOfActiveSponsorships();
 
 	@Query("select count(s1)/(select count(s2) from Sponsor s2)*1.0 from Sponsorship s1 where s1.activated=true")
 	Double averageActiveSponsorshipsPerSponsor();
 
-	@Query("select s1 from Sponsorship s where s.activated=true and s.sponsor.id =?1")
+	@Query("select s from Sponsorship s where s.activated=true and s.sponsor.id =?1")
 	Collection<Sponsorship> activeSponsorshipsPerSponsorId(final int sponsorId);
 
 }

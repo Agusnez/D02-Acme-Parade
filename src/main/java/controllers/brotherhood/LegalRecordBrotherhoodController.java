@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.HistoryService;
 import services.LegalRecordService;
 import controllers.AbstractController;
+import domain.History;
 import domain.LegalRecord;
 
 @Controller
@@ -32,6 +34,9 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private HistoryService			historyService;
+
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
 
 
 	// Creation ---------------------------------------------------
@@ -80,16 +85,47 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 
 		ModelAndView result;
 
+		int id = 0;
+		if (legalRecord.getId() != 0) {
+			final History history = this.historyService.historyPerLegalRecordId(legalRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(legalRecord);
 		else
 			try {
 				this.legalRecordService.save(legalRecord);
-				result = new ModelAndView("redirect:/brotherhood/display.do");
+
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(legalRecord, "legalRecord.commit.error");
 			}
 
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final LegalRecord legalRecord) {
+		ModelAndView result;
+
+		final LegalRecord legalRecordFind = this.legalRecordService.findOne(legalRecord.getId());
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (legalRecordFind == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
+			final History history = this.historyService.historyPerLegalRecordId(legalRecord.getId());
+			final int id = history.getBrotherhood().getId();
+			try {
+				this.legalRecordService.delete(legalRecordFind);
+				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(legalRecordFind, "legalRecord.commit.error");
+			}
+		}
 		return result;
 	}
 
@@ -110,6 +146,16 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		result = new ModelAndView("legalRecord/brotherhood/edit");
+
+		int id = 0;
+		if (legalRecord.getId() != 0) {
+			final History history = this.historyService.historyPerLegalRecordId(legalRecord.getId());
+			id = history.getBrotherhood().getId();
+		} else
+			id = this.brotherhoodService.findByPrincipal().getId();
+
+		result.addObject("id", id);
+
 		result.addObject("legalRecord", legalRecord);
 		result.addObject("messageError", message);
 		result.addObject("banner", banner);

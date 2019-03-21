@@ -30,7 +30,7 @@
 	<acme:submit name="save" code="legalRecord.save" />
 	
 	
-	<acme:cancel code="legalRecord.cancel" url="history/display.do"/>
+	<acme:cancel code="periodRecord.cancel" url="/history/display.do?brotherhoodId=${id}" />
 	
 	<jstl:if test="${legalRecord.id != 0}">
 	<acme:submit name="delete" code="legalRecord.delete" />
