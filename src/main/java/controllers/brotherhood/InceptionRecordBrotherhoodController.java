@@ -148,14 +148,14 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 		ModelAndView result;
 		result = new ModelAndView("inceptionRecord/brotherhood/edit");
 
-		int id = 0;
+		int id2 = 0;
 		if (inceptionRecord.getId() != 0) {
 			final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
-			id = history.getBrotherhood().getId();
+			id2 = history.getBrotherhood().getId();
 		} else
-			id = this.brotherhoodService.findByPrincipal().getId();
+			id2 = this.brotherhoodService.findByPrincipal().getId();
 
-		result.addObject("id", id);
+		result.addObject("id2", id2);
 
 		result.addObject("inceptionRecord", inceptionRecord);
 		result.addObject("historyId", historyId);
@@ -180,14 +180,14 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 
 		result = new ModelAndView("inceptionRecord/brotherhood/edit");
 
-		int id = 0;
+		int id2 = 0;
 		if (inceptionRecord.getId() != 0) {
 			final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
-			id = history.getBrotherhood().getId();
+			id2 = history.getBrotherhood().getId();
 		} else
-			id = this.brotherhoodService.findByPrincipal().getId();
+			id2 = this.brotherhoodService.findByPrincipal().getId();
 
-		result.addObject("id", id);
+		result.addObject("id2", id2);
 
 		result.addObject("inceptionRecord", inceptionRecord);
 		result.addObject("messageError", message);
