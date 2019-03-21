@@ -31,6 +31,7 @@ public class InceptionRecord extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
