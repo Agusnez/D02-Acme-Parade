@@ -17,8 +17,6 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<%-- <input type="text" hidden="true" value="${historyId }" name="historyId" /> --%>
-	
 	<acme:textbox code="inceptionRecord.title" path="title" obligatory="true"/>
 	
 	<acme:textbox code="inceptionRecord.description" path="description" obligatory="true"/>

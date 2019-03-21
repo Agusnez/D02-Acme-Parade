@@ -109,7 +109,7 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save2")
-	public ModelAndView save2(@Valid final InceptionRecord inceptionRecord, final BindingResult binding, @RequestParam final int historyId) {
+	public ModelAndView save2(@Valid final InceptionRecord inceptionRecord, final BindingResult binding) {
 
 		ModelAndView result;
 
@@ -121,13 +121,13 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 			id = this.brotherhoodService.findByPrincipal().getId();
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(inceptionRecord, historyId);
+			result = this.createEditModelAndView(inceptionRecord);
 		else
 			try {
 				this.inceptionRecordService.save(inceptionRecord);
 				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(inceptionRecord, "inceptionRecord.commit.error", historyId);
+				result = this.createEditModelAndView(inceptionRecord, "inceptionRecord.commit.error");
 			}
 
 		return result;
@@ -135,15 +135,15 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final InceptionRecord inceptionRecord, final int historyId) {
+	protected ModelAndView createEditModelAndView(final InceptionRecord inceptionRecord) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(inceptionRecord, null, historyId);
+		result = this.createEditModelAndView(inceptionRecord, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final InceptionRecord inceptionRecord, final String message, final int historyId) {
+	protected ModelAndView createEditModelAndView(final InceptionRecord inceptionRecord, final String message) {
 
 		ModelAndView result;
 		result = new ModelAndView("inceptionRecord/brotherhood/edit");
@@ -158,7 +158,6 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 		result.addObject("id2", id2);
 
 		result.addObject("inceptionRecord", inceptionRecord);
-		result.addObject("historyId", historyId);
 		result.addObject("message", message);
 
 		return result;

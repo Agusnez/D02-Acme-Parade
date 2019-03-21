@@ -12,20 +12,21 @@
 <acme:display code="history.inceptionRecord" property=""/>
 <fieldset>
 <div>
-<acme:display code="history.inceptionRecord.title" property="${history.inceptionRecord.title }" />
-
-<acme:display code="history.inceptionRecord.description" property="${history.inceptionRecord.description }" />
-
-<acme:display code="history.inceptionRecord.photos" property="${history.inceptionRecord.photos}" />
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<jstl:if test="${history.id==0}">
+<jstl:if test="${history == null}">
 	<acme:button name="create" code="inceptionRecord.create" onclick="javascript: relativeRedir('inceptionRecord/brotherhood/create.do');"/>
 	</jstl:if>
 </security:authorize>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<jstl:if test="${history.id!=0}">
+<jstl:if test="${history.id!=0 and history != null}">
+	
+<acme:display code="history.inceptionRecord.title" property="${history.inceptionRecord.title }" />
+
+<acme:display code="history.inceptionRecord.description" property="${history.inceptionRecord.description }" />
+
+<acme:display code="history.inceptionRecord.photos" property="${history.inceptionRecord.photos}" />
 	<acme:button name="edit" code="inceptionRecord.edit" onclick="javascript: relativeRedir('inceptionRecord/brotherhood/edit.do?inceptionRecordId=${history.inceptionRecord.id}');"/>
 	</jstl:if>
 </security:authorize>
