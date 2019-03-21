@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -60,7 +61,6 @@ public class SponsorshipService {
 
 		final Sponsorship sponsorship;
 		sponsorship = this.sponsorshipRepository.findOne(sponsorshipId);
-		Assert.notNull(sponsorship);
 		return sponsorship;
 
 	}
@@ -101,7 +101,7 @@ public class SponsorshipService {
 
 		final Sponsor login = this.sponsorService.findByPrincipal();
 
-		if (sponsorhip.getSponsor().equals(login))
+		if (login.equals(sponsorhip.getSponsor()))
 			res = true;
 
 		return res;
@@ -223,4 +223,22 @@ public class SponsorshipService {
 
 		return result;
 	}
+
+	public Integer deactivateExpiredCardSponsorships() {
+		final int actualMonth = Calendar.MONTH + 1;
+		final int actualYear = Calendar.YEAR;
+
+		Integer result = 0;
+
+		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findCreditCardExpired(actualMonth, actualYear);
+
+		for (final Sponsorship s : sponsorships) {
+			this.deactivate(s.getId());
+			result++;
+		}
+
+		return result;
+
+	}
+
 }

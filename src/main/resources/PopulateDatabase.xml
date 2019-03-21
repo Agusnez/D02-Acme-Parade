@@ -2750,6 +2750,7 @@
 	<bean id="sponsorship2" class="domain.Sponsorship">
 		<property name="banner" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
 		<property name="targetUrl" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="creditCard" ref="creditCard2"/>
 		<property name="activated" value="true"/>
 		<property name="sponsor" ref="sponsor2"/>
 		<property name="Parade" ref="parade5"/>
@@ -2759,6 +2760,7 @@
 	<bean id="sponsorship3" class="domain.Sponsorship">
 		<property name="banner" value="http://clipart-library.com/images/LidoMaKET.png"/>
 		<property name="targetUrl" value="http://clipart-library.com/images/LidoMaKET.png"/>
+		<property name="creditCard" ref="creditCard1"/>
 		<property name="activated" value="true"/>
 		<property name="Sponsor" ref="sponsor1"/>
 		<property name="Parade" ref="parade6"/>
@@ -2768,6 +2770,7 @@
 	<bean id="sponsorship4" class="domain.Sponsorship">
 		<property name="banner" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
 		<property name="targetUrl" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="creditCard" ref="creditCard2"/>
 		<property name="activated" value="false"/>
 		<property name="Sponsor" ref="sponsor2"/>
 		<property name="Parade" ref="parade6"/>
