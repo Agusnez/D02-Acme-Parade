@@ -270,20 +270,72 @@ public class ChapterServiceTest extends AbstractTest {
 
 	/*
 	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
-	 * 2. Browse the proclaims of the chapters.
+	 * 1. List the chapters that are registered in the system.
 	 * Negative cases:
-	 * b)
+	 * b)2. Esperamos un resultado incorrecto
 	 * c) Sentence coverage
 	 * -findAll()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * 0%
 	 */
+
 	@Test
-	public void testListChapters() {
-		final Integer expected = 3;
-		final Integer result = this.chapterService.findAll().size();
-		Assert.isTrue(expected == result);
+	public void driverListChapters() {
+		final Object testingData[][] = {
+
+			{
+				3, null
+			//1. Todo bien
+			}, {
+				28, IllegalArgumentException.class
+			//2. Esperamos un resultado incorrecto
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListChapters((Integer) testingData[i][0], (Class<?>) testingData[i][1]);
+
+	}
+
+	protected void templateListChapters(final Integer expectedInt, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+
+			final Chapter chapter = this.chapterService.create();
+
+			chapter.setTitle("title1");
+			chapter.setName("name1");
+			chapter.setMiddleName("middleName1");
+			chapter.setSurname("surname1");
+			chapter.setPhoto("https://google.com");
+			chapter.setEmail("email1@gmail.com");
+			chapter.setPhone("672195205");
+			chapter.setAddress("address1");
+
+			chapter.getUserAccount().setUsername("chapter56");
+			chapter.getUserAccount().setPassword("chapter56");
+
+			this.startTransaction();
+
+			this.chapterService.save(chapter);
+			this.chapterService.flush();
+
+			final Integer result = this.chapterService.findAll().size();
+			Assert.isTrue(expectedInt + 1 == result);
+
+			this.rollbackTransaction();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
 	}
 
 	/*
