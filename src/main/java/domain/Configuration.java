@@ -98,6 +98,7 @@ public class Configuration extends DomainEntity {
 
 	@NotBlank
 	@Pattern(regexp = "^\\+\\d{1,3}$")
+	@SafeHtml
 	public String getCountryCode() {
 		return this.countryCode;
 	}
