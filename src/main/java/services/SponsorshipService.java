@@ -101,7 +101,7 @@ public class SponsorshipService {
 
 		final Sponsor login = this.sponsorService.findByPrincipal();
 
-		if (sponsorhip.getSponsor().equals(login))
+		if (login.equals(sponsorhip.getSponsor()))
 			res = true;
 
 		return res;

@@ -159,8 +159,12 @@ public class SponsorshipSponsorController {
 		ModelAndView result;
 
 		final Sponsorship sponsorship = this.sponsorshipService.reconstruct(sponsorshipform, binding);
+		Boolean security;
 
-		final Boolean security = this.sponsorshipService.sponsorshipSponsorSecurity(sponsorship.getId());
+		if (sponsorship.getId() == 0)
+			security = true;
+		else
+			security = this.sponsorshipService.sponsorshipSponsorSecurity(sponsorship.getId());
 
 		if (security) {
 
@@ -169,7 +173,7 @@ public class SponsorshipSponsorController {
 			else
 				try {
 					this.sponsorshipService.save(sponsorship);
-					result = new ModelAndView("redirect:/welcome/index.do");
+					result = new ModelAndView("redirect:/sponsorship/sponsor/list.do");
 				} catch (final Throwable oops) {
 					result = this.createEditModelAndView(sponsorshipform, "sponsorship.commit.error");
 
