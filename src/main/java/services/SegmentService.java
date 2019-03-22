@@ -111,6 +111,7 @@ public class SegmentService {
 
 		return result;
 	}
+
 	public void delete(final Segment segment) {
 
 		Assert.isTrue(segment.getId() != 0);
