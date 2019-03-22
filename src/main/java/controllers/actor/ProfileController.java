@@ -241,7 +241,6 @@ public class ProfileController extends AbstractController {
 			result = this.createEditModelAndViewAdmin(adminReconstruct);
 		else
 			try {
-				Assert.isTrue(false);
 				this.administratorService.save(adminReconstruct);
 				final Credentials credentials = new Credentials();
 				credentials.setJ_username(adminReconstruct.getUserAccount().getUsername());
