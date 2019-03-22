@@ -205,7 +205,6 @@ public class ProfileController extends AbstractController {
 			}
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndViewBrotherhood(final Brotherhood brotherhood) {
 		ModelAndView result;
 
@@ -242,6 +241,7 @@ public class ProfileController extends AbstractController {
 			result = this.createEditModelAndViewAdmin(adminReconstruct);
 		else
 			try {
+				Assert.isTrue(false);
 				this.administratorService.save(adminReconstruct);
 				final Credentials credentials = new Credentials();
 				credentials.setJ_username(adminReconstruct.getUserAccount().getUsername());

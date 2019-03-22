@@ -64,9 +64,9 @@
 <acme:display code="actor.address" property="${actor.address }" />
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<acme:display code="actor.title" property="${actor.title }" />
-<acme:display code="actor.pictures" property="${actor.pictures }" />
-<div><spring:message code="actor.establishment" />: <fmt:formatDate value="${actor.establishment}" pattern="yyyy/MM/dd" /></div>
+<acme:display code="brotherhood.title" property="${actor.title }" />
+<acme:display code="brotherhood.pictures" property="${actor.pictures }" />
+<div><spring:message code="brotherhood.establishment" />: <fmt:formatDate value="${actor.establishment}" pattern="yyyy/MM/dd" /></div>
 </security:authorize> 
 
 <security:authorize access="hasAnyRole('BROTHERHOOD', 'CHAPTER')" >
