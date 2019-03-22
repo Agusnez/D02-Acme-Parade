@@ -17,6 +17,7 @@ import org.springframework.validation.Validator;
 
 import repositories.SponsorshipRepository;
 import security.Authority;
+import domain.Parade;
 import domain.Sponsor;
 import domain.Sponsorship;
 import forms.SponsorshipForm;
@@ -54,6 +55,10 @@ public class SponsorshipService {
 
 		final SponsorshipForm sponsorshipForm = new SponsorshipForm();
 
+		final Parade parade = this.paradeService.findOne(paradeId);
+
+		Assert.isTrue(parade != null && parade.getStatus().equals("ACCEPTED"));
+
 		sponsorshipForm.setParadeId(paradeId);
 
 		return sponsorshipForm;
@@ -78,6 +83,14 @@ public class SponsorshipService {
 	}
 
 	public Sponsorship save(final Sponsorship sponsorship) {
+
+		final Sponsor sponsor = this.sponsorService.findByPrincipal();
+		Assert.notNull(sponsor);
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.SPONSOR);
+		Assert.isTrue(sponsor.getUserAccount().getAuthorities().contains(authority));
+
+		Assert.isTrue(sponsorship.getSponsor() == sponsor);
 
 		final Date now = new Date(System.currentTimeMillis() - 1000);
 
@@ -244,9 +257,13 @@ public class SponsorshipService {
 
 		if (sponsorship.getId() == 0) {
 
+			final Parade parade = this.paradeService.findOne(sponsorship.getParadeId());
+
+			Assert.isTrue(parade != null && parade.getStatus() == "ACCEPTED");
+
 			result.setActivated(true);
 			result.setSponsor(this.sponsorService.findByPrincipal());
-			result.setParade(this.paradeService.findOne(sponsorship.getParadeId()));
+			result.setParade(parade);
 			result.setCost(0.0);
 
 		} else {
@@ -345,6 +362,12 @@ public class SponsorshipService {
 		}
 
 		return result;
+
+	}
+
+	public void flush() {
+
+		this.sponsorshipRepository.flush();
 
 	}
 
