@@ -43,9 +43,9 @@
 		<put-attribute name="body" value="/views/request/reject.jsp" />
 	</definition>
 	
-	<definition name="request/listProcessions" extends="master.page">	
+	<definition name="request/listParades" extends="master.page">	
 		<put-attribute name="title" value="Request to march" />
-		<put-attribute name="body" value="/views/request/listProcessions.jsp" />
+		<put-attribute name="body" value="/views/request/listParades.jsp" />
 	</definition>
 	
 

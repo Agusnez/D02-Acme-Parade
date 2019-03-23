@@ -157,7 +157,7 @@ public class FinderService {
 
 		//Casos de keyWord
 		if (finder.getKeyWord() != null && finder.getKeyWord() != "")
-			keyWordFind = (p.getTicker().contains(keyWord) || p.getDescription().contains(keyWord) || p.getBrotherhood().getTitle().contains(keyWord));
+			keyWordFind = (p.getTicker().contains(keyWord) || p.getDescription().contains(keyWord) || p.getBrotherhood().getTitle().contains(keyWord) || p.getTitle().contains(keyWord));
 		else
 			keyWordFind = true;
 

@@ -400,12 +400,15 @@ public class BrotherhoodService {
 
 		final Brotherhood brotherhoodBBDD = this.findOne(brotherhood.getId());
 
-		brotherhood.setUserAccount(brotherhoodBBDD.getUserAccount());
-		brotherhood.setArea(brotherhoodBBDD.getArea());
-		brotherhood.setScore(brotherhoodBBDD.getScore());
-		brotherhood.setSpammer(brotherhoodBBDD.getSpammer());
+		if (brotherhoodBBDD != null) {
 
-		this.validator.validate(brotherhood, binding);
+			brotherhood.setUserAccount(brotherhoodBBDD.getUserAccount());
+			brotherhood.setArea(brotherhoodBBDD.getArea());
+			brotherhood.setScore(brotherhoodBBDD.getScore());
+			brotherhood.setSpammer(brotherhoodBBDD.getSpammer());
+			this.validator.validate(brotherhood, binding);
+
+		}
 
 		result = brotherhood;
 

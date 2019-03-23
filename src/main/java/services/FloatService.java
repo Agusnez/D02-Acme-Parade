@@ -150,7 +150,7 @@ public class FloatService {
 
 		parade.setFloats(floats);
 
-		this.paradeService.save(parade);
+		this.paradeService.saveByEditBrotherhood(parade);
 
 		Assert.isTrue(parade.getFloats().contains(floatt));
 

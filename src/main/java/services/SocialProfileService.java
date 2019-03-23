@@ -145,14 +145,17 @@ public class SocialProfileService {
 
 			final SocialProfile socialProfileBBDD = this.findOne(socialProfile.getId());
 
-			socialProfile.setActor(socialProfileBBDD.getActor());
+			if (socialProfileBBDD != null) {
 
-			this.validator.validate(socialProfile, binding);
+				socialProfile.setActor(socialProfileBBDD.getActor());
+
+				this.validator.validate(socialProfile, binding);
+			}
 
 			result = socialProfile;
+
 		}
 
 		return result;
-
 	}
 }

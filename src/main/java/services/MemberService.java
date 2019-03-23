@@ -74,7 +74,6 @@ public class MemberService {
 
 		Member member;
 		member = this.memberRepository.findOne(memberId);
-		Assert.notNull(member);
 		return member;
 
 	}
@@ -290,18 +289,19 @@ public class MemberService {
 
 		final Member memberBBDD = this.findOne(member.getId());
 
-		member.setUserAccount(memberBBDD.getUserAccount());
-		member.setScore(memberBBDD.getScore());
-		member.setSpammer(memberBBDD.getSpammer());
+		if (memberBBDD != null) {
 
-		this.validator.validate(member, binding);
+			member.setUserAccount(memberBBDD.getUserAccount());
+			member.setScore(memberBBDD.getScore());
+			member.setSpammer(memberBBDD.getSpammer());
 
+			this.validator.validate(member, binding);
+
+		}
 		result = member;
-
 		return result;
 
 	}
-
 	public boolean existId(final int memberId) {
 		Boolean res = false;
 
