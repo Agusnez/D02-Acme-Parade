@@ -179,7 +179,7 @@
 	a .txt file with your data.</p>
 <h2> Deleting messages </h2>
 	<p> We inform you that when you delete a message that you have sent, you will only delete this message from your boxes, not from the complete system.
-	That is, the recipient of the message will keep a copy of it.</p>>
+	That is, the recipient of the message will keep a copy of it.</p>
 <h2> </h2>
 	<p> </p>	
 </jstl:if>

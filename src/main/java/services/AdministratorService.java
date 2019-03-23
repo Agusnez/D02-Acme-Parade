@@ -85,7 +85,6 @@ public class AdministratorService {
 		Assert.notNull(administratorId);
 		Administrator result;
 		result = this.administratorRepository.findOne(administratorId);
-		Assert.notNull(result);
 		return result;
 	}
 
@@ -330,12 +329,15 @@ public class AdministratorService {
 
 		final Administrator adminBBDD = this.findOne(admin.getId());
 
-		admin.setUserAccount(adminBBDD.getUserAccount());
-		admin.setScore(adminBBDD.getScore());
-		admin.setSpammer(adminBBDD.getSpammer());
+		if (adminBBDD != null) {
 
-		this.validator.validate(admin, binding);
+			admin.setUserAccount(adminBBDD.getUserAccount());
+			admin.setScore(adminBBDD.getScore());
+			admin.setSpammer(adminBBDD.getSpammer());
 
+			this.validator.validate(admin, binding);
+
+		}
 		result = admin;
 
 		return result;
