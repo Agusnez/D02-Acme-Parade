@@ -68,43 +68,49 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverCreateMiscellaneousRecord() {
 		final Object testingData[][] = {
-			{
-				"title1", "descrption1", null
-			},//1.Todo bien
-			{
-				null, "descrption1", ConstraintViolationException.class
-			},//2.Title = null
-			{
-				"title1", null, ConstraintViolationException.class
-			},//3.Description = null
+			{//1.Todo bien
+				"brotherhood1", "title1", "descrption1", null
+			}, {//2.Title = null
+				"brotherhood1", null, "descrption1", ConstraintViolationException.class
+			}, {//3.Description = null
+				"brotherhood1", "title1", null, ConstraintViolationException.class
+			}, {//4.Description = ""
+				"brotherhood1", "title1", "", ConstraintViolationException.class
+			}, {//5.Title = ""
+				"brotherhood1", "", "descrption1", ConstraintViolationException.class
+			},
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateCreateMiscellaneousRecord((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.templateCreateMiscellaneousRecord((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
 	}
-	protected void templateCreateMiscellaneousRecord(final String title, final String description, final Class<?> expected) {
+	protected void templateCreateMiscellaneousRecord(final String username, final String title, final String description, final Class<?> expected) {
 
 		Class<?> caught;
 
 		caught = null;
 		try {
 
+			this.startTransaction();
+
+			super.authenticate(username);
+
 			final MiscellaneousRecord miscellaneousRecord = this.miscellaneousRecordService.create();
 
 			miscellaneousRecord.setTitle(title);
 			miscellaneousRecord.setDescription(description);
 
-			this.startTransaction();
-
 			this.miscellaneousRecordService.save(miscellaneousRecord);
 			this.miscellaneousRecordService.flush();
-
-			this.rollbackTransaction();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
+
+		this.rollbackTransaction();
+
+		this.unauthenticate();
 
 		super.checkExceptions(expected, caught);
 
