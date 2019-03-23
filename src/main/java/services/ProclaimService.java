@@ -14,6 +14,7 @@ import org.springframework.validation.Validator;
 
 import repositories.ProclaimRepository;
 import security.Authority;
+import domain.Actor;
 import domain.Chapter;
 import domain.Proclaim;
 
@@ -29,17 +30,20 @@ public class ProclaimService {
 	private ChapterService		chapterService;
 
 	@Autowired
+	private ActorService		actorService;
+
+	@Autowired
 	private Validator			validator;
 
 
 	//Create
 	public Proclaim create() {
 
-		final Chapter chapter = this.chapterService.findByPrincipal();
-		Assert.notNull(chapter);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.CHAPTER);
-		Assert.isTrue(chapter.getUserAccount().getAuthorities().contains(authority));
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
 
 		final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
 
@@ -48,7 +52,7 @@ public class ProclaimService {
 		result = new Proclaim();
 
 		result.setMoment(currentMoment);
-		result.setChapter(chapter);
+		result.setChapter(this.chapterService.findByPrincipal());
 
 		return result;
 
@@ -124,6 +128,10 @@ public class ProclaimService {
 		final Collection<Proclaim> result = this.proclaimRepository.proclaimsPerChapter(actorId);
 
 		return result;
+	}
+
+	public void flush() {
+		this.proclaimRepository.flush();
 	}
 
 }

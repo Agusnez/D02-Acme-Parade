@@ -26,8 +26,6 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
 
-	@Autowired
-	private AreaService			areaService;
 
 
 	/*
