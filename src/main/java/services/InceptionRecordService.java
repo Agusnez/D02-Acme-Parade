@@ -98,4 +98,8 @@ public class InceptionRecordService {
 
 		return res;
 	}
+
+	public void flush() {
+		this.inceptionRecordRepository.flush();
+	}
 }

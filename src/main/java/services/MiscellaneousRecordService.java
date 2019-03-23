@@ -132,4 +132,8 @@ public class MiscellaneousRecordService {
 
 		return res;
 	}
+
+	public void flush() {
+		this.miscellaneousRecordRepository.flush();
+	}
 }
