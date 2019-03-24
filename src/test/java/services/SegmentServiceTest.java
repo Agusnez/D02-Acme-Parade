@@ -64,10 +64,10 @@ public class SegmentServiceTest extends AbstractTest {
 	 * a) Requirement: Brotherhood manage paths of their parades : Create
 	 * 
 	 * b) Negative cases:
-	 * 1. The origin pattern is wrong
-	 * 2. The origin is null
-	 * 3. The destination pattern is wrong
-	 * 4. The destination is null
+	 * 2. The origin pattern is wrong
+	 * 3. The origin is null
+	 * 4. The destination pattern is wrong
+	 * 5. The destination is null
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 1 passed cases / 5 total cases = 20%
@@ -84,19 +84,19 @@ public class SegmentServiceTest extends AbstractTest {
 
 			{
 				"12,-8", "32,4", "2019/12/23 11:30", "2019/12/23 12:30", "parade5", null
-			}, //All fine
+			}, //1. All fine
 			{
 				"ert,89", "32,4", "2019/12/23 11:30", "2019/12/23 12:30", "parade5", ConstraintViolationException.class
-			}, //The origin pattern is wrong
+			}, //2. The origin pattern is wrong
 			{
 				null, "32,4", "2019/12/23 11:30", "2019/12/23 12:30", "parade5", ConstraintViolationException.class
-			}, //Origin = null
+			}, //3. Origin = null
 			{
 				"12,-8", "32,400", "2019/12/23 11:30", "2019/12/23 12:30", "parade5", ConstraintViolationException.class
-			}, //The destination pattern is wrong
+			}, //4. The destination pattern is wrong
 			{
 				"12,-8", null, "2019/12/23 11:30", "2019/12/23 12:30", "parade5", ConstraintViolationException.class
-			}, //Destination = null
+			}, //5. Destination = null
 
 		};
 
@@ -129,11 +129,11 @@ public class SegmentServiceTest extends AbstractTest {
 			this.segmentService.save(segment);
 			this.segmentService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
+
+		this.rollbackTransaction();
 
 		super.checkExceptions(expected, caught);
 	}
@@ -142,10 +142,10 @@ public class SegmentServiceTest extends AbstractTest {
 	 * a) Requirement: Brotherhood manage paths of their parades : Edit
 	 * 
 	 * b) Negative cases:
-	 * 1. The time origin before contiguous time origin
-	 * 2. The time origin before organisation moment
-	 * 3. The time origin pattern is wrong
-	 * 4. Time origin = null
+	 * 2. The time origin before contiguous time origin
+	 * 3. The time origin before organisation moment
+	 * 4. The time origin pattern is wrong
+	 * 5. Time origin = null
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 2 passed cases / 5 total cases = 40%
@@ -162,19 +162,19 @@ public class SegmentServiceTest extends AbstractTest {
 
 			{
 				"segment2", "-90.0, 180.0", "90.0, 180.0", "2019/08/08 17:01", "2019/08/08 17:30", "segment1", "parade1", null
-			}, //All fine
+			}, //1. All fine
 			{
 				"segment2", "-90.0, 180.0", "90.0, 180.0", "2019/08/08 15:00", "2019/08/08 17:30", "segment1", "parade1", IllegalArgumentException.class
-			}, //The time origin before contiguous time origin
+			}, //2. The time origin before contiguous time origin
 			{
 				"segment2", "-90.0, 180.0", "90.0, 180.0", "2019/08/08 12:00", "2019/08/08 17:30", "segment1", "parade1", IllegalArgumentException.class
-			}, //The time origin before organisation moment
+			}, //3. The time origin before organisation moment
 			{
 				"segment2", "-90.0, 180.0", "90.0, 180.0", "08/08/2019 17:01", "2019/08/08 17:30", "segment1", "parade1", IllegalArgumentException.class
-			}, //The time origin pattern is wrong
+			}, //4. The time origin pattern is wrong
 			{
 				"segment2", "-90.0, 180.0", "90.0, 180.0", null, "2019/08/08 17:30", "segment1", "parade1", NullPointerException.class
-			}, //Time origin = null
+			}, //5. Time origin = null
 
 		};
 
@@ -209,11 +209,11 @@ public class SegmentServiceTest extends AbstractTest {
 			this.segmentService.save(segment);
 			this.segmentService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
+
+		this.rollbackTransaction();
 
 		super.checkExceptions(expected, caught);
 	}
@@ -234,10 +234,10 @@ public class SegmentServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Brotherhood manage paths of their parades : Edit
+	 * a) Requirement: Brotherhood manage paths of their parades : Delete
 	 * 
 	 * b) Negative cases:
-	 * 1. Not last segment
+	 * 2. Not last segment
 	 * 
 	 * c) Sentence coverage
 	 * -delete(): 1 passed cases / 1 total cases = 100%
@@ -254,10 +254,10 @@ public class SegmentServiceTest extends AbstractTest {
 
 			{
 				"segment2", null
-			}, //Last segment
+			}, //1. Last segment
 			{
 				"segment1", IllegalArgumentException.class
-			}, //Not last segment
+			}, //2. Not last segment
 
 		};
 
@@ -280,11 +280,11 @@ public class SegmentServiceTest extends AbstractTest {
 			this.segmentService.delete(segment);
 			this.segmentService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
+
+		this.rollbackTransaction();
 
 		super.checkExceptions(expected, caught);
 	}
