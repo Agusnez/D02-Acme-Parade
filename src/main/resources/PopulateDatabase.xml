@@ -2561,7 +2561,7 @@
 		<property name="finderTime" value="1" />
 		<property name="finderResult" value="10" />
 		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Parade! Tu sitio para organizar desfiles" />
-		<property name="banner" value="https://tinyurl.com/acme-madruga" />
+		<property name="banner" value="https://i.imgur.com/m8sLf8M.jpg" />
 		<property name="welcomeMessage" value="Welcome to Acme Parade, the site to organise your parades" />
 		<property name="vatTax" value="0.21" />
 		<property name="fare" value="0.11" />
