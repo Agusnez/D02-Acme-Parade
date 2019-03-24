@@ -208,7 +208,7 @@ public class ParadeBrotherhoodController extends AbstractController {
 				try {
 					this.paradeService.save(parade);
 
-					if (parade.getFinalMode())
+					if (parade.getFinalMode() && parade.getStatus().equals("ACCEPTED"))
 						this.messageService.NotificationNewParade(parade);
 
 					result = new ModelAndView("redirect:list.do");
@@ -236,7 +236,7 @@ public class ParadeBrotherhoodController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/copy", method = RequestMethod.GET)
 	public ModelAndView copy(@RequestParam final int paradeId) {
 		final ModelAndView result;
@@ -255,9 +255,9 @@ public class ParadeBrotherhoodController extends AbstractController {
 			owner = paradeFound.getBrotherhood();
 
 			if (login.getId() == owner.getId()) {
-				
+
 				this.paradeService.copy(paradeFound.getId());
-				
+
 				result = new ModelAndView("redirect:list.do");
 				result.addObject("banner", banner);
 
