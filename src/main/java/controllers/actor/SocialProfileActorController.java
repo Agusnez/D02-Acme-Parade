@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ActorService;
 import services.ConfigurationService;
 import services.SocialProfileService;
+import controllers.AbstractController;
 import domain.Actor;
 import domain.SocialProfile;
 
@@ -155,13 +154,17 @@ public class SocialProfileActorController extends AbstractController {
 		if (socialProfileFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else
+		} else if (socialProfileFind.getActor() == this.actorService.findByPrincipal())
 			try {
 				this.socialProfileService.delete(socialProfileFind);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(socialProfileFind, "float.commit.error");
 			}
+		else {
+			result = new ModelAndView("redirect:/welcome/index.do");
+			result.addObject("banner", banner);
+		}
 
 		return result;
 	}
