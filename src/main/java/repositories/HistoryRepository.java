@@ -35,6 +35,21 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
 	History findByBrotherhoodId(int brotherhoodId);
 
 	@Query("select ((h.legalRecords.size + h.periodRecords.size + h.linkRecords.size + h.miscellaneousRecords.size) + 1) from History h where h.brotherhood.id = ?1")
-	double recordsPerBrotherhoodId(int id);
+	Double recordsPerBrotherhoodId(int id);
+
+	@Query("select h from History h join h.periodRecords pr where pr.id=?1")
+	History historyPerPeriodRecordId(int periodRecordId);
+
+	@Query("select h from History h join h.linkRecords lr where lr.id=?1")
+	History historyPerLinkRecordId(int linkRecordId);
+
+	@Query("select h from History h join h.legalRecords lr where lr.id=?1")
+	History historyPerLegalRecordId(int legalRecordId);
+
+	@Query("select h from History h join h.miscellaneousRecords mr where mr.id=?1")
+	History historyPerMiscellaneousRecordId(int miscellaneousRecordId);
+
+	@Query("select h from History h where h.inceptionRecord.id=?1")
+	History historyPerInceptionRecordId(int inceptionRecordId);
 
 }

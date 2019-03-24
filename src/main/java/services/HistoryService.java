@@ -39,6 +39,9 @@ public class HistoryService {
 	private BrotherhoodService		brotherhoodService;
 
 
+	//	@Autowired
+	//	private Validator				validator;
+
 	//Simple CRUD methods--------------------------------
 	public History create(final InceptionRecord inceptionRecord) {
 
@@ -172,17 +175,6 @@ public class HistoryService {
 
 		return result;
 	}
-	//
-	//	public Curriculum findByPersonalRecordId(final int personalRecordId) {
-	//
-	//		Assert.notNull(personalRecordId);
-	//
-	//		final Curriculum result = this.curriculumRepository.findByPersonalRecordId(personalRecordId);
-	//
-	//		Assert.notNull(result);
-	//
-	//		return result;
-	//	}
 
 	public Boolean securityHistory() {
 
@@ -198,4 +190,69 @@ public class HistoryService {
 		return res;
 
 	}
+
+	public History historyPerPeriodRecordId(final int periodRecordId) {
+
+		final History result = this.historyRepository.historyPerPeriodRecordId(periodRecordId);
+
+		return result;
+	}
+
+	public History historyPerLegalRecordId(final int legalRecordId) {
+
+		final History result = this.historyRepository.historyPerLegalRecordId(legalRecordId);
+
+		return result;
+	}
+
+	public History historyPerLinkRecordId(final int linkRecordId) {
+
+		final History result = this.historyRepository.historyPerLinkRecordId(linkRecordId);
+
+		return result;
+	}
+
+	public History historyPerMiscellaneousRecordId(final int miscellaneousRecordId) {
+
+		final History result = this.historyRepository.historyPerMiscellaneousRecordId(miscellaneousRecordId);
+
+		return result;
+	}
+
+	public History historyPerInceptionRecordId(final int inceptionRecordId) {
+
+		final History result = this.historyRepository.historyPerInceptionRecordId(inceptionRecordId);
+
+		return result;
+	}
+
+	//	public History reconstruct(final History history, final BindingResult binding) {
+	//
+	//		History result;
+	//
+	//		if (history.getId() == 0 || history == null) {
+	//
+	//			final InceptionRecord ir = this.inceptionRecordService.create();
+	//
+	//			final History historyNew = this.create(ir);
+	//
+	//			history.setBrotherhood(historyNew.getBrotherhood());
+	//
+	//			this.validator.validate(history, binding);
+	//
+	//			result = history;
+	//		} else {
+	//
+	//			final History historyBBDD = this.findOne(history.getId());
+	//
+	//			history.setBrotherhood(historyBBDD.getBrotherhood());
+	//
+	//			this.validator.validate(history, binding);
+	//
+	//			result = history;
+	//		}
+	//
+	//		return result;
+	//
+	//	}
 }

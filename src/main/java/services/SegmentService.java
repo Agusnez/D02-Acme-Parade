@@ -111,6 +111,7 @@ public class SegmentService {
 
 		return result;
 	}
+
 	public void delete(final Segment segment) {
 
 		Assert.isTrue(segment.getId() != 0);
@@ -234,6 +235,10 @@ public class SegmentService {
 			result = true;
 
 		return result;
+	}
+
+	public void flush() {
+		this.segmentRepository.flush();
 	}
 
 }

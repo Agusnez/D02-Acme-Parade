@@ -31,7 +31,7 @@
 
 <acme:display code="sponsorship.creditCard.expYear" property="${sponsorship.creditCard.expYear}" />
 
-<acme:button name="back" code="sponsorship.back" onclick="javascript: relativeRedir('welcome/index.do');" />
+<acme:button name="back" code="sponsorship.back" onclick="javascript: relativeRedir('sponsorship/sponsor/list.do');" />
 
 <jstl:if test="${sponsorship.activated }">
 <acme:button name="edit" code="sponsorship.deactivate" onclick="javascript: relativeRedir('sponsorship/sponsor/deactivate.do?sponsorshipId=${sponsorship.id }');" />

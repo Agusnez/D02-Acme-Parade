@@ -27,13 +27,15 @@
 <fmt:formatDate value="${parade.organisationMoment}" pattern="yyyy/MM/dd HH:mm"/>
 <br> 
 
+<security:authorize access="hasRole('BROTHERHOOD')">
 <acme:display property="${parade.finalMode }" code="parade.finalMode" />
 
 <jstl:if test="${!parade.finalMode }">
 <acme:button name="edit" code="parade.edit" onclick="javascript: relativeRedir('parade/brotherhood/edit.do?paradeId=${parade.id }');" />
 </jstl:if>
+</security:authorize>
 
-<acme:button name="back" code="parade.back" onclick="javascript: relativeRedir('parade/brotherhood/list.do');" />
+<acme:button name="back" code="parade.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 
 <jstl:if test="${find}">
 	<fieldset>

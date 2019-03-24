@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.EnrolmentService;
 import services.MemberService;
 import services.MessageService;
+import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
@@ -102,7 +101,7 @@ public class EnrolmentMemberController extends AbstractController {
 		final Enrolment enrolment = this.enrolmentService.findOne(enrolmentId);
 
 		try {
-			Assert.isTrue(this.enrolmentService.enrolmentMemberSecurity(enrolmentId) && this.enrolmentService.enrolmentBrotherhoodSecurity(enrolmentId));
+			Assert.isTrue(this.enrolmentService.enrolmentMemberSecurity(enrolmentId) || this.enrolmentService.enrolmentBrotherhoodSecurity(enrolmentId));
 			final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
 			enrolment.setDropOutMoment(currentMoment);
 

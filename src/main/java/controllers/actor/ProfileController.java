@@ -205,7 +205,6 @@ public class ProfileController extends AbstractController {
 			}
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndViewBrotherhood(final Brotherhood brotherhood) {
 		ModelAndView result;
 

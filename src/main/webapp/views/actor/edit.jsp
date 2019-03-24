@@ -36,7 +36,7 @@
 </jstl:choose>
 	<acme:textbox code="actor.address" path="address" />
 	
-	<acme:textbox code="actor.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/> 
+	<acme:textbox code="actor.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<acme:textbox code="brotherhood.pictures" path="pictures" obligatory="true"/>
@@ -60,7 +60,7 @@
 		var input = target.value;
 		var regExp1 = new RegExp("(^[+]([1-9]{1,3})) ([(][1-9]{1,3}[)]) (\\d{4,}$)");
 		var regExp2 = new RegExp("(^[+]([1-9]{1,3})) (\\d{4,}$)");
-		var regExp3 = new RegExp("(^\\d{4,}$)");
+		var regExp3 = new RegExp("(^\\d{4}$)");
 
 		if ('${phone}' != input && regExp1.test(input) == false && regExp2.test(input) == false && regExp3.test(input) == false) {
 			if (confirm('<spring:message code="actor.phone.wrong" />') == false) {

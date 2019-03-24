@@ -15,7 +15,7 @@
 	
 	<acme:column property="title" titleKey="brotherhood.title" value= "${row.title}: "/>
 	
-	<acme:column property="establishment" titleKey="brotherhood.establishment" value= "${row.establishment}: "/>
+	<acme:dateFormat titleKey="brotherhood.establishment" pattern="yyyy/MM/dd HH:mm" value="${row.establishment}"/>
 	
 	<acme:column property="pictures" titleKey="brotherhood.pictures" value= "${row.pictures}: "/>
 	
@@ -24,6 +24,8 @@
 	<acme:url href="parade/list.do?brotherhoodId=${row.id }" code="brotherhood.parades" />
 	
 	<acme:url href="float/list.do?brotherhoodId=${row.id }" code="brotherhood.floats" />
+	
+	<acme:url href="history/display.do?brotherhoodId=${row.id }" code="brotherhood.history" />
 	
 	<security:authorize access="hasRole('MEMBER')">
 	<acme:url href="enrolment/member/enrol.do?brotherhoodId=${row.id }" code="brotherhood.enrol" />

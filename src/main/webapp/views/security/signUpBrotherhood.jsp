@@ -10,7 +10,7 @@
 
 <form:form action="register/editBrotherhood.do" modelAttribute="brotherhood">
 	
-	<acme:textbox code="actor.title" path="title" obligatory="true"/>
+	<acme:textbox code="actor.titlee" path="title" obligatory="true"/>
 	
 	<acme:textbox code="brotherhood.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http(s)://____.___,http(s)://___.___,..." path="pictures" obligatory="true"/>
 	

@@ -2560,9 +2560,9 @@
 		<property name="countryCode" value="+34" />
 		<property name="finderTime" value="1" />
 		<property name="finderResult" value="10" />
-		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones" />
+		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Parade! Tu sitio para organizar desfiles" />
 		<property name="banner" value="https://tinyurl.com/acme-madruga" />
-		<property name="welcomeMessage" value="Welcome to Acme Madrugá, the site to organise your parades" />
+		<property name="welcomeMessage" value="Welcome to Acme Parade, the site to organise your parades" />
 		<property name="vatTax" value="0.21" />
 		<property name="fare" value="0.11" />
 
@@ -2639,6 +2639,8 @@
 		<property name="description" value="description2" />
 		<property name="photos">
 			<list>
+				<value>photo3.com</value>
+				<value>photo4.com</value>
 			</list>
 		</property>
 	</bean>
@@ -2750,6 +2752,7 @@
 	<bean id="sponsorship2" class="domain.Sponsorship">
 		<property name="banner" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
 		<property name="targetUrl" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="creditCard" ref="creditCard2"/>
 		<property name="activated" value="true"/>
 		<property name="sponsor" ref="sponsor2"/>
 		<property name="Parade" ref="parade5"/>
@@ -2759,6 +2762,7 @@
 	<bean id="sponsorship3" class="domain.Sponsorship">
 		<property name="banner" value="http://clipart-library.com/images/LidoMaKET.png"/>
 		<property name="targetUrl" value="http://clipart-library.com/images/LidoMaKET.png"/>
+		<property name="creditCard" ref="creditCard1"/>
 		<property name="activated" value="true"/>
 		<property name="Sponsor" ref="sponsor1"/>
 		<property name="Parade" ref="parade6"/>
@@ -2768,6 +2772,7 @@
 	<bean id="sponsorship4" class="domain.Sponsorship">
 		<property name="banner" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
 		<property name="targetUrl" value="http://www.okclipart.com/img360/ipzjuaubrbgrtrzvgcdi.jpg"/>
+		<property name="creditCard" ref="creditCard2"/>
 		<property name="activated" value="false"/>
 		<property name="Sponsor" ref="sponsor2"/>
 		<property name="Parade" ref="parade6"/>
