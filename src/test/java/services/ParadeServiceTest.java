@@ -31,7 +31,7 @@ public class ParadeServiceTest extends AbstractTest {
 	/*
 	 * ----CALCULATE SENTENCE COVERAGE----
 	 * To calculate the sentence coverage, we have to look at each "service's method"
-	 * we are testing and we have to analyse its composition (if, for, ...) and Asserts.
+	 * we are testing and we have to analyse its composition (if, for, Assert...) and Asserts.
 	 * Then, we calculate the number of total cases which our code can execute. The equation will be:
 	 * 
 	 * (nº passed cases / nº total cases)*100 = coverage(%)
@@ -59,10 +59,10 @@ public class ParadeServiceTest extends AbstractTest {
 	 * a)(Level B)Requirement 2.2:Manage the parades that are published by the brotherhoods in the area that they co-ordinate.
 	 * This includes listing them grouped by status and making decisions on the parades that have status
 	 * submitted. When a parade is rejected by a chapter, the chapter must jot down the reason why.
-	 * Negative cases:
-	 * b) 2. Un cabildo que no coordina una procession, decide sobre ella.
-	 * c)
-	 * d)
+	 * Negative cases: 2
+	 * c) Sentence coverage:
+	 * -save(): 4 passed cases /13 total cases = 30,77%
+	 * d) Data coverage: 0%
 	 */
 	@Test
 	public void driverDecideParade() {
@@ -72,6 +72,7 @@ public class ParadeServiceTest extends AbstractTest {
 				"chapter1", "parade1", "ACCEPTED", null
 			}, {
 				"chapter2", "parade1", "REJECTED", IllegalArgumentException.class
+			//2. Un cabildo que no coordina una procession, decide sobre ella.
 			}
 		};
 
@@ -91,6 +92,7 @@ public class ParadeServiceTest extends AbstractTest {
 
 			parade.setStatus(decision);
 
+			this.startTransaction();
 			this.paradeService.save(parade);
 			this.paradeService.flush();
 
@@ -101,6 +103,7 @@ public class ParadeServiceTest extends AbstractTest {
 		}
 
 		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
 	}
 
 	/*
@@ -214,5 +217,17 @@ public class ParadeServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * -------Coverage ChapterService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * save()=30,77%
+	 * findParadeCanBeSeenOfBrotherhoodIdForChapter()=100%
+	 * findParadeCanBeSeenOfBrotherhoodId()=100%
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Parade=0%
+	 */
 
 }
