@@ -48,7 +48,7 @@ public class RegisterAdministratorController {
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(form);
-		else if (!form.checkPassword())
+		else if (!form.checkPassword() || !form.getCheckbox())
 			result = this.createEditModelAndView(form, "administrator.commit.error");
 		else
 			try {
