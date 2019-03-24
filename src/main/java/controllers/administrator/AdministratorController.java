@@ -41,9 +41,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
-	
+
 	@Autowired
-	private SponsorshipService 		sponsorshipService;
+	private SponsorshipService		sponsorshipService;
 
 
 	//Methods
@@ -120,18 +120,19 @@ public class AdministratorController extends AbstractController {
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		actor = this.actorService.findOne(actorId);
-
 		if (!exist) {
 			result = new ModelAndView("misc/notExist");
-			result.addObject("id", actorId);
-		} else if (actor.getScore() < -0.5) {
-			this.actorService.banOrUnBanActor(actor);
-
-			result = new ModelAndView("redirect:/actor/administrator/score/list.do");
 			result.addObject("banner", banner);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+		} else {
+			actor = this.actorService.findOne(actorId);
+			if (actor.getScore() < -0.5) {
+				this.actorService.banOrUnBanActor(actor);
+
+				result = new ModelAndView("redirect:/actor/administrator/score/list.do");
+				result.addObject("banner", banner);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return result;
 
@@ -240,14 +241,12 @@ public class AdministratorController extends AbstractController {
 
 		return result;
 	}
-	
-	
-	
+
 	@RequestMapping(value = "sponsorship/deactivateExpired", method = RequestMethod.GET)
 	public ModelAndView deactivateExpired() {
 		ModelAndView result;
-		
-		Integer numberOfDeactivatedSponsorships = this.sponsorshipService.deactivateExpiredCardSponsorships();
+
+		final Integer numberOfDeactivatedSponsorships = this.sponsorshipService.deactivateExpiredCardSponsorships();
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 		result = new ModelAndView("administrator/processSuccess");
@@ -255,5 +254,5 @@ public class AdministratorController extends AbstractController {
 		result.addObject("banner", banner);
 		return result;
 	}
-	
+
 }
