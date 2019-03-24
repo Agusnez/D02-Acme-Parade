@@ -257,9 +257,8 @@ public class ParadeBrotherhoodController extends AbstractController {
 			if (login.getId() == owner.getId()) {
 
 				this.paradeService.copy(paradeFound.getId());
-
-				result = new ModelAndView("redirect:list.do");
-				result.addObject("banner", banner);
+				
+				result = new ModelAndView("redirect:/parade/brotherhood/list.do");
 
 			} else
 				result = new ModelAndView("redirect:/welcome/index.do");
