@@ -259,7 +259,7 @@ public class SponsorshipService {
 
 			final Parade parade = this.paradeService.findOne(sponsorship.getParadeId());
 
-			Assert.isTrue(parade != null && parade.getStatus() == "ACCEPTED");
+			Assert.isTrue(parade != null && parade.getStatus().equals("ACCEPTED"));
 
 			result.setActivated(true);
 			result.setSponsor(this.sponsorService.findByPrincipal());
@@ -369,6 +369,11 @@ public class SponsorshipService {
 
 		this.sponsorshipRepository.flush();
 
+	}
+
+	public Integer findSponsorshipByParadeAndSponsorId(final int paradeId, final int id) {
+
+		return this.sponsorshipRepository.findSponsorshipByParadeAndSponsorId(paradeId, id);
 	}
 
 }
