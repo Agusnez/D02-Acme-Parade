@@ -9,6 +9,7 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -46,7 +47,8 @@ public class PeriodRecord extends DomainEntity {
 	}
 
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@Past
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getStartYear() {
 		return this.startYear;
 	}
@@ -56,7 +58,8 @@ public class PeriodRecord extends DomainEntity {
 	}
 
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@Past
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getEndYear() {
 		return this.endYear;
 	}

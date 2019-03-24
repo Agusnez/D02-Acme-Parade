@@ -80,12 +80,16 @@ public class MiscellaneousRecordService {
 		authority.setAuthority(Authority.BROTHERHOOD);
 		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
 
+		//		final History h = this.historyService.historyPerMiscellaneousRecordId(miscellaneousRecord.getId());
+		//		final Brotherhood owner = h.getBrotherhood();
+		//
+		//		Assert.isTrue(actor.getId() == owner.getId());
+
 		result = this.miscellaneousRecordRepository.save(miscellaneousRecord);
 
 		if (miscellaneousRecord.getId() == 0) {
 
-			final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-			Assert.notNull(brotherhood);
+			final Brotherhood brotherhood = (Brotherhood) actor;
 
 			final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
 			Assert.notNull(history);

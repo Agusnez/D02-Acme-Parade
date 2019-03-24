@@ -5,7 +5,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +47,7 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 
 		security = this.historyService.securityHistory();
 
-		if (!security) {
+		if (security) {
 
 			final String banner = this.configurationService.findConfiguration().getBanner();
 
@@ -65,17 +64,22 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int inceptionRecordId) {
 		ModelAndView result;
 		InceptionRecord inceptionRecord;
-
 		Boolean security;
-		security = this.inceptionRecordService.securityInception(inceptionRecordId);
 
-		if (security) {
+		final InceptionRecord find = this.inceptionRecordService.findOne(inceptionRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 			inceptionRecord = this.inceptionRecordService.findOne(inceptionRecordId);
-			Assert.notNull(inceptionRecord);
-			result = this.create2ModelAndView(inceptionRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.inceptionRecordService.securityInception(inceptionRecordId);
+			if (security)
+				result = this.create2ModelAndView(inceptionRecord);
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return result;
 	}
@@ -146,6 +150,9 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final InceptionRecord inceptionRecord, final String message) {
 
 		ModelAndView result;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
 		result = new ModelAndView("inceptionRecord/brotherhood/edit");
 
 		int id2 = 0;
@@ -159,6 +166,7 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 
 		result.addObject("inceptionRecord", inceptionRecord);
 		result.addObject("message", message);
+		result.addObject("banner", banner);
 
 		return result;
 	}

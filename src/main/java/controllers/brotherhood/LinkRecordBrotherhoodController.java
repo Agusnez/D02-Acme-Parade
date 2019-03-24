@@ -65,17 +65,26 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int linkRecordId) {
 		ModelAndView result;
 		LinkRecord linkRecord;
-
 		Boolean security;
-		security = this.linkRecordService.securityLink(linkRecordId);
 
-		if (security) {
+		final LinkRecord find = this.linkRecordService.findOne(linkRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 
 			linkRecord = this.linkRecordService.findOne(linkRecordId);
-			Assert.notNull(linkRecord);
-			result = this.createEditModelAndView(linkRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.linkRecordService.securityLink(linkRecordId);
+
+			if (security) {
+				Assert.notNull(linkRecord);
+				result = this.createEditModelAndView(linkRecord);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}

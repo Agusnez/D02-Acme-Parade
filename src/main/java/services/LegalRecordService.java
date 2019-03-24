@@ -76,15 +76,26 @@ public class LegalRecordService {
 
 	public LegalRecord save(final LegalRecord legalRecord) {
 
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
 		Assert.notNull(legalRecord);
+
+		//		final History h = this.historyService.historyPerLegalRecordId(legalRecord.getId());
+		//		final Brotherhood owner = h.getBrotherhood();
+		//
+		//		Assert.isTrue(actor.getId() == owner.getId());
+
 		LegalRecord result;
 
 		result = this.legalRecordRepository.save(legalRecord);
 
 		if (legalRecord.getId() == 0) {
 
-			final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-			Assert.notNull(brotherhood);
+			final Brotherhood brotherhood = (Brotherhood) actor;
 
 			final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
 			Assert.notNull(history);

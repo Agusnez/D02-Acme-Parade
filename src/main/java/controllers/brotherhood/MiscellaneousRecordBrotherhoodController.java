@@ -65,17 +65,26 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 	public ModelAndView edit(@RequestParam final int miscellaneousRecordId) {
 		ModelAndView result;
 		MiscellaneousRecord miscellaneousRecord;
-
 		Boolean security;
-		security = this.miscellaneousRecordService.securityMiscellaneous(miscellaneousRecordId);
 
-		if (security) {
+		final MiscellaneousRecord find = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 
 			miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
-			Assert.notNull(miscellaneousRecord);
-			result = this.createEditModelAndView(miscellaneousRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.miscellaneousRecordService.securityMiscellaneous(miscellaneousRecordId);
+
+			if (security) {
+				Assert.notNull(miscellaneousRecord);
+				result = this.createEditModelAndView(miscellaneousRecord);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}

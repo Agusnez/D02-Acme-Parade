@@ -17,7 +17,7 @@
 <tiles-definitions>
 	
 	<definition name="linkRecord/brotherhood/edit" extends="master.page">
-		<put-attribute name="title" value="Edit link record" />
+		<put-attribute name="title" value="Link record" />
 		<put-attribute name="body" value="/views/linkRecord/edit.jsp" />
 	</definition>
 	
