@@ -259,7 +259,7 @@ public class FloatBrotherhoodController extends AbstractController {
 		else
 			try {
 				this.floatService.save(floatt);
-				result = new ModelAndView("redirect:/welcome/index.do");
+				result = new ModelAndView("redirect:/float/brotherhood/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(floatt, "float.commit.error");
 
@@ -279,7 +279,7 @@ public class FloatBrotherhoodController extends AbstractController {
 		try {
 			Assert.isTrue(actor.getId() == floatt.getBrotherhood().getId());
 			this.floatService.delete(floatt);
-			result = new ModelAndView("redirect:/welcome/index.do");
+			result = new ModelAndView("redirect:/float/brotherhood/list.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(floatt, "float.commit.error");
 		}

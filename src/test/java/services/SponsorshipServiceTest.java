@@ -1,6 +1,9 @@
 
 package services;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
@@ -13,6 +16,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.CreditCard;
+import domain.Parade;
 import domain.Sponsorship;
 import forms.SponsorshipForm;
 
@@ -30,6 +34,9 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 	@Autowired
 	private SponsorService		sponsorService;
+
+	@Autowired
+	private ParadeService		paradeService;
 
 
 	/*
@@ -303,13 +310,74 @@ public class SponsorshipServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * a) Requirement: Every time a parade with sponsorships is displayed, a random sponsorship must be selected and its banner must be shown as little intrusively as possible.
+	 * 
+	 * b) Negative cases:
+	 * 2. Wrong return
+	 * 
+	 * c) Sentence coverage
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -ramdomSponsorship(): 5 passed cases / 6 total cases = 83.33333%
+	 * 
+	 * d) Data coverage
+	 * -Sponsorship: 0 passed cases / 4 total cases = 0%
+	 */
+
+	@Test
+	public void driverRandomSponsorship() {
+		final Object testingData[][] = {
+
+			{
+				"parade5", "sponsorship1", "sponsorship2", null
+			//1. All fine
+			}, {
+				"parade5", "sponsorship3", "sponsorship4", IllegalArgumentException.class
+			//2. Wrong return
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateRandomSponsorship((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+
+	}
+
+	protected void templateRandomSponsorship(final String pardeBean, final String sponsorshipBean1, final String sponsorshipBean2, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+
+			final Parade parade = this.paradeService.findOne(super.getEntityId(pardeBean));
+
+			final Collection<Sponsorship> sponsorships = new HashSet<>();
+			final Sponsorship s1 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean1));
+			sponsorships.add(s1);
+			final Sponsorship s2 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean1));
+			sponsorships.add(s2);
+
+			final Sponsorship s = this.sponsorshipService.ramdomSponsorship(parade.getId());
+
+			Assert.isTrue(sponsorships.contains(s));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+	}
+	/*
 	 * -------Coverage SponsorshipService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save()=100%
-	 * create()=100%
-	 * findAll()=100%
-	 * list()=100%
+	 * save() = 100%
+	 * create() = 100%
+	 * findAll() = 100%
+	 * list() = 100%
+	 * findOne() = 100%
+	 * ramdomSponsorship() = 83.33333%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * -Sponsorship: 33,3%

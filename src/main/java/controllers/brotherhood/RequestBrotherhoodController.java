@@ -90,13 +90,13 @@ public class RequestBrotherhoodController extends AbstractController {
 		ModelAndView result;
 		final Request request;
 		final Brotherhood owner;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		owner = this.brotherhoodService.findByPrincipal();
 		try {
 			request = this.requestService.findOne(requestId);
 
-			if (request.getParade().getBrotherhood().getId() == owner.getId()) {
-				final String banner = this.configurationService.findConfiguration().getBanner();
+			if (request.getParade().getBrotherhood().getId() == owner.getId() && request.getStatus().equals("PENDING")) {
 				result = new ModelAndView("request/reject");
 				result.addObject("request", request);
 				result.addObject("banner", banner);
@@ -104,6 +104,7 @@ public class RequestBrotherhoodController extends AbstractController {
 				result = new ModelAndView("redirect:/welcome/index.do");
 		} catch (final IllegalArgumentException e) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
 		}
 		return result;
 	}
@@ -113,9 +114,11 @@ public class RequestBrotherhoodController extends AbstractController {
 		ModelAndView result;
 		final Brotherhood owner;
 		owner = this.brotherhoodService.findByPrincipal();
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		
 		try {
 			final Request another = this.requestService.findOne(request.getId());
-			if (another.getParade().getBrotherhood().getId() == owner.getId()) {
+			if (another.getParade().getBrotherhood().getId() == owner.getId() && request.getStatus().equals("PENDING")) {
 
 				request = this.requestService.reconstruct(request, binding);
 
@@ -150,6 +153,7 @@ public class RequestBrotherhoodController extends AbstractController {
 
 		} catch (final IllegalArgumentException e) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
 		}
 
 		return result;
@@ -159,12 +163,12 @@ public class RequestBrotherhoodController extends AbstractController {
 		ModelAndView result;
 		Request request;
 		final Brotherhood owner;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 		try {
 			owner = this.brotherhoodService.findByPrincipal();
 			request = this.requestService.findOne(requestId);
 
-			if (request.getParade().getBrotherhood().getId() == owner.getId()) {
-				final String banner = this.configurationService.findConfiguration().getBanner();
+			if (request.getParade().getBrotherhood().getId() == owner.getId() && request.getStatus().equals("PENDING")) {
 				request = this.requestService.suggestNextRow(request.getParade().getId(), request);
 				result = new ModelAndView("request/accept");
 				result.addObject("request", request);
@@ -174,6 +178,7 @@ public class RequestBrotherhoodController extends AbstractController {
 				result = new ModelAndView("redirect:/welcome/index.do");
 		} catch (final IllegalArgumentException e) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
 		}
 		return result;
 	}
@@ -191,7 +196,7 @@ public class RequestBrotherhoodController extends AbstractController {
 			try {
 				if (this.requestService.hasRequestIn(request.getColumnNumber(), request.getRowNumber(), request.getParade().getId()))
 					result = this.createEditModelAndViewAccept(request, "error.position");
-				else if (request.getParade().getBrotherhood().getId() == owner.getId()) {
+				else if (request.getParade().getBrotherhood().getId() == owner.getId() && request.getStatus().equals("PENDING")) {
 					request.setStatus("APPROVED");
 					this.requestService.save(request);
 

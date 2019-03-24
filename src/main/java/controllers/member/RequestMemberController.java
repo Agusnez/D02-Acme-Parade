@@ -89,13 +89,15 @@ public class RequestMemberController extends AbstractController {
 		ModelAndView result;
 		final Request request;
 		final Member owner;
+		final String banner = this.configurationService.findConfiguration().getBanner();
+		
 
 		try {
 			owner = this.memberService.findByPrincipal();
 			request = this.requestService.findOne(requestId);
 
 			if (request.getMember().getId() == owner.getId()) {
-				final String banner = this.configurationService.findConfiguration().getBanner();
+				
 
 				result = new ModelAndView("request/display");
 				result.addObject("request", request);
@@ -105,6 +107,7 @@ public class RequestMemberController extends AbstractController {
 				result = new ModelAndView("redirect:/welcome/index.do");
 		} catch (final IllegalArgumentException e) {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
 		}
 
 		return result;
