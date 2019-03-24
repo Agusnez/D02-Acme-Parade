@@ -257,10 +257,10 @@ public class ActorService {
 		authMember.setAuthority(Authority.MEMBER);
 
 		final Authority authChapter = new Authority();
-		authMember.setAuthority(Authority.CHAPTER);
+		authChapter.setAuthority(Authority.CHAPTER);
 
 		final Authority authSponsor = new Authority();
-		authMember.setAuthority(Authority.SPONSOR);
+		authSponsor.setAuthority(Authority.SPONSOR);
 
 		if (authorities.contains(authAdmin)) {
 			final Administrator administrator = this.administratorService.findOne(actor.getId());

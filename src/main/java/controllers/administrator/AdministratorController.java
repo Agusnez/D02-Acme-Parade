@@ -151,7 +151,7 @@ public class AdministratorController extends AbstractController {
 			if (actor.getSpammer() != null && actor.getSpammer()) {
 				this.actorService.banOrUnBanActor(actor);
 
-				result = new ModelAndView("redirect:/actor/administrator/score/list.do");
+				result = new ModelAndView("redirect:/actor/administrator/spammer/list.do");
 
 			} else
 				result = new ModelAndView("redirect:/welcome/index.do");
