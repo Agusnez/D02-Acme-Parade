@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.EnrolmentService;
 import services.MemberService;
 import services.MessageService;
 import services.PositionService;
+import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
@@ -118,8 +117,10 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int enrolmentId) {
 		ModelAndView result;
-		Enrolment enrolment;
+		Enrolment enrolment = null;
 		Boolean security;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Brotherhood b;
 		b = this.brotherhoodService.findByPrincipal();
@@ -127,13 +128,36 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 		if (b.getArea() == null)
 			result = new ModelAndView("misc/noArea");
 		else {
-			enrolment = this.enrolmentService.findOne(enrolmentId);
-			security = this.enrolmentService.enrolmentBrotherhoodSecurity(enrolmentId);
 
-			if (security)
-				result = this.createEditModelAndView(enrolment, null);
-			else
-				result = new ModelAndView("redirect:/welcome/index.do");
+			try {
+
+				enrolment = this.enrolmentService.findOne(enrolmentId);
+
+			} catch (final Exception e) {
+
+			}
+
+			if (enrolment == null) {
+
+				result = new ModelAndView("misc/notExist");
+				result.addObject("banner", banner);
+
+			} else {
+
+				security = this.enrolmentService.enrolmentBrotherhoodSecurity(enrolmentId);
+
+				if (security) {
+
+					result = this.createEditModelAndView(enrolment, null);
+					if (enrolment.getPosition() == null)
+						result.addObject("type", "newEnrolment");
+					else
+						result.addObject("type", "editEnrolment");
+
+				} else
+					result = new ModelAndView("redirect:/welcome/index.do");
+
+			}
 
 		}
 
@@ -186,7 +210,9 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/dropout", method = RequestMethod.GET)
 	public ModelAndView dropOut(@RequestParam final int enrolmentId) {
 		ModelAndView result;
-		final Enrolment enrolment = this.enrolmentService.findOne(enrolmentId);
+		Enrolment enrolment = null;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Brotherhood b;
 		b = this.brotherhoodService.findByPrincipal();
@@ -195,28 +221,52 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 			result = new ModelAndView("misc/noArea");
 		else {
 
-			final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
-			enrolment.setDropOutMoment(currentMoment);
-
 			try {
 
-				final Brotherhood brotherhood = this.brotherhoodService.findOne(enrolment.getBrotherhood().getId());
+				enrolment = this.enrolmentService.findOne(enrolmentId);
 
-				final Collection<Member> members = brotherhood.getMembers();
-				members.remove(this.memberService.findOne(enrolment.getMember().getId()));
-				brotherhood.setMembers(members);
+			} catch (final Exception e) {
 
-				this.brotherhoodService.editMemberList(brotherhood);
+			}
 
-				this.enrolmentService.save(enrolment);
+			if (enrolment == null) {
 
-				this.messageService.NotificationDropOutBrotherhood(enrolment);
+				result = new ModelAndView("misc/notExist");
+				result.addObject("banner", banner);
 
-				result = new ModelAndView("redirect:/enrolment/brotherhood/list.do");
+			} else {
 
-			} catch (final Throwable oops) {
+				final Boolean security = this.enrolmentService.enrolmentBrotherhoodSecurity(enrolmentId);
 
-				result = new ModelAndView("redirect:/welcome/index.do");
+				if (security) {
+
+					final Date currentMoment = new Date(System.currentTimeMillis() - 1000);
+					enrolment.setDropOutMoment(currentMoment);
+
+					try {
+
+						final Brotherhood brotherhood = this.brotherhoodService.findOne(enrolment.getBrotherhood().getId());
+
+						final Collection<Member> members = brotherhood.getMembers();
+						members.remove(this.memberService.findOne(enrolment.getMember().getId()));
+						brotherhood.setMembers(members);
+
+						this.brotherhoodService.editMemberList(brotherhood);
+
+						this.enrolmentService.save(enrolment);
+
+						this.messageService.NotificationDropOutBrotherhood(enrolment);
+
+						result = new ModelAndView("redirect:/enrolment/brotherhood/list.do");
+
+					} catch (final Throwable oops) {
+
+						result = new ModelAndView("redirect:/welcome/index.do");
+
+					}
+
+				} else
+					result = new ModelAndView("redirect:/welcome/index.do");
 
 			}
 

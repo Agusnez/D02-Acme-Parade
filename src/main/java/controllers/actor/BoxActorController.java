@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ActorService;
 import services.BoxService;
 import services.ConfigurationService;
+import controllers.AbstractController;
 import domain.Actor;
 import domain.Box;
 
@@ -129,7 +128,7 @@ public class BoxActorController extends AbstractController {
 			try {
 
 				this.boxService.save(boxReconstruct);
-				result = new ModelAndView("redirect:/welcome/index.do");
+				result = new ModelAndView("redirect:/box/actor/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(box, "box.commit.error");
 				result.addObject("boxes", boxes);
@@ -143,7 +142,7 @@ public class BoxActorController extends AbstractController {
 
 		try {
 			this.boxService.delete(boxReconstruct);
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:/box/actor/list.do");
 		} catch (final Throwable oops) {
 
 			final Collection<Box> boxes;

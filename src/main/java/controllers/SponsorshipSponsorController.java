@@ -110,11 +110,24 @@ public class SponsorshipSponsorController {
 
 		} else {
 
-			final SponsorshipForm sponsorship = this.sponsorshipService.create(paradeId);
+			final Integer sponsorshipId = this.sponsorshipService.findSponsorshipByParadeAndSponsorId(paradeId, this.sponsorService.findByPrincipal().getId());
 
-			result = new ModelAndView("sponsorship/edit");
-			result.addObject("sponsorship", sponsorship);
-			result.addObject("banner", banner);
+			if (sponsorshipId != null) {
+
+				final Sponsorship sponsorship = this.sponsorshipService.findOne(sponsorshipId);
+
+				final SponsorshipForm sponsorshipForm = this.sponsorshipService.editForm(sponsorship);
+				result = this.createEditModelAndView(sponsorshipForm, null);
+
+			} else {
+
+				final SponsorshipForm sponsorship = this.sponsorshipService.create(paradeId);
+
+				result = new ModelAndView("sponsorship/edit");
+				result.addObject("sponsorship", sponsorship);
+				result.addObject("banner", banner);
+
+			}
 
 		}
 

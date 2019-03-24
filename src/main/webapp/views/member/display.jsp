@@ -49,7 +49,7 @@
 
 <input type="button" name="back"
 	value="<spring:message code="member.back" />"
-	onclick="javascript: relativeRedir('welcome/index.do');" />
+	onclick="javascript: relativeRedir('enrolment/brotherhood/list.do');" />
 <br />
 <br />
 

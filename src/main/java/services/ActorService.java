@@ -17,7 +17,9 @@ import security.UserAccountService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
+import domain.Chapter;
 import domain.Member;
+import domain.Sponsor;
 
 @Service
 @Transactional
@@ -81,6 +83,9 @@ public class ActorService {
 
 	@Autowired
 	private SponsorshipService		sponsorshipService;
+
+	@Autowired
+	private SponsorService			sponsorService;
 
 
 	//Simple CRUD methods --------------------------------------------------
@@ -251,6 +256,12 @@ public class ActorService {
 		final Authority authMember = new Authority();
 		authMember.setAuthority(Authority.MEMBER);
 
+		final Authority authChapter = new Authority();
+		authChapter.setAuthority(Authority.CHAPTER);
+
+		final Authority authSponsor = new Authority();
+		authSponsor.setAuthority(Authority.SPONSOR);
+
 		if (authorities.contains(authAdmin)) {
 			final Administrator administrator = this.administratorService.findOne(actor.getId());
 			final UserAccount userAccount = administrator.getUserAccount();
@@ -266,6 +277,18 @@ public class ActorService {
 		} else if (authorities.contains(authMember)) {
 			final Member member = this.memberService.findOne(actor.getId());
 			final UserAccount userAccount = member.getUserAccount();
+			userAccount.setIsNotBanned(!userAccount.getIsNotBanned());
+			this.userAccountService.save(userAccount);
+
+		} else if (authorities.contains(authChapter)) {
+			final Chapter chapter = this.chapterService.findOne(actor.getId());
+			final UserAccount userAccount = chapter.getUserAccount();
+			userAccount.setIsNotBanned(!userAccount.getIsNotBanned());
+			this.userAccountService.save(userAccount);
+
+		} else if (authorities.contains(authSponsor)) {
+			final Sponsor sponsor = this.sponsorService.findOne(actor.getId());
+			final UserAccount userAccount = sponsor.getUserAccount();
 			userAccount.setIsNotBanned(!userAccount.getIsNotBanned());
 			this.userAccountService.save(userAccount);
 

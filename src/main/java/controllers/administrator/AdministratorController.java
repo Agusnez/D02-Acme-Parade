@@ -125,7 +125,7 @@ public class AdministratorController extends AbstractController {
 			result.addObject("banner", banner);
 		} else {
 			actor = this.actorService.findOne(actorId);
-			if (actor.getScore() < -0.5) {
+			if (actor.getScore() != null && actor.getScore() < -0.5) {
 				this.actorService.banOrUnBanActor(actor);
 
 				result = new ModelAndView("redirect:/actor/administrator/score/list.do");
@@ -148,10 +148,10 @@ public class AdministratorController extends AbstractController {
 
 		if (exist) {
 			actor = this.actorService.findOne(actorId);
-			if (actor.getSpammer()) {
+			if (actor.getSpammer() != null && actor.getSpammer()) {
 				this.actorService.banOrUnBanActor(actor);
 
-				result = new ModelAndView("redirect:/actor/administrator/score/list.do");
+				result = new ModelAndView("redirect:/actor/administrator/spammer/list.do");
 
 			} else
 				result = new ModelAndView("redirect:/welcome/index.do");
