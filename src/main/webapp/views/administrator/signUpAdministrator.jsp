@@ -35,6 +35,7 @@
 
 	<acme:password code="actor.confirmPassword" path="confirmPassword" obligatory="true"/>
 
+	<acme:checkbox path="checkbox" code1="actor.checkBox1" code2="actor.checkBox2" href="termsAndConditions/show.do" />
 	
 	<acme:submit name="save" code="actor.save" />
 	

@@ -21,7 +21,7 @@
 
 	<acme:submit name="save" code="box.save" />
 	
-	<acme:cancel code="box.cancel" url="welcome/index.do" />
+	<acme:cancel code="box.cancel" url="box/actor/list.do" />
 	
 	<jstl:if test="${box.id != 0}">
 	<acme:submit name="delete" code="box.delete" />

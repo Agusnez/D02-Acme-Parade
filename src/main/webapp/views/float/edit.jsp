@@ -24,7 +24,7 @@
 	
 	<acme:submit name="save" code="float.save" />
 	
-	<acme:cancel code="float.cancel" url="welcome/index.do" />
+	<acme:cancel code="float.cancel" url="/float/brotherhood/list.do" />
 	
 	<jstl:if test="${floatt.id != 0}">
 	<acme:submit name="delete" code="float.delete" />

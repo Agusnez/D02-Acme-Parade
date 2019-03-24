@@ -33,4 +33,7 @@ public interface SponsorshipRepository extends JpaRepository<Sponsorship, Intege
 	@Query("select s.sponsor.name from Sponsorship s where s.activated = true group by s.sponsor order by count(s) desc")
 	Collection<String> rankingSporsorsActivedSponsorships();
 
+	@Query("select s.id from Sponsorship s where s.parade.id = ?1 and s.sponsor.id = ?2")
+	Integer findSponsorshipByParadeAndSponsorId(int paradeId, int id);
+
 }

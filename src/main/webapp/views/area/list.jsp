@@ -14,7 +14,7 @@
 	
 	<acme:column property="pictures" titleKey="area.pictures" value="${row.pictures}" />
 
-	<security:authorize access="hasRole('ADMINISTRATOR')">
+	<security:authorize access="hasRole('ADMIN')">
 	<acme:url href="area/administrator/edit.do?areaId=${row.id }" code="area.edit" />
 	</security:authorize>
 	<security:authorize access="hasRole('BROTHERHOOD')">

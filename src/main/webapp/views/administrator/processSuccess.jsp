@@ -11,10 +11,9 @@
 <jstl:if test="${numOfDeactivations > 0}">
 <p><spring:message code="sponsorship.success.begin" /> <jstl:out value="${numOfDeactivations}" /> <spring:message code="sponsorship.success.end" /></p>
 
-<iframe src="https://giphy.com/embed/4xpB3eE00FfBm" width="480" height="458" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 </jstl:if>
 
 <jstl:if test="${numOfDeactivations == 0}">
 <p><spring:message code="sponsorship.success.empty" /></p>
-<iframe src="https://giphy.com/embed/6uGhT1O4sxpi8" width="480" height="240" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
 </jstl:if>

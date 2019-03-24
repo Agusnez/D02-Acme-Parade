@@ -33,7 +33,7 @@ public class ChapterServiceTest extends AbstractTest {
 	/*
 	 * ----CALCULATE SENTENCE COVERAGE----
 	 * To calculate the sentence coverage, we have to look at each "service's method"
-	 * we are testing and we have to analyse its composition (if, for, ...) and Asserts.
+	 * we are testing and we have to analyse its composition (if, for, Assert...) and Asserts.
 	 * Then, we calculate the number of total cases which our code can execute. The equation will be:
 	 * 
 	 * (nº passed cases / nº total cases)*100 = coverage(%)
@@ -60,10 +60,7 @@ public class ChapterServiceTest extends AbstractTest {
 	/*
 	 * a) Requirement: Actor manage his/her profile
 	 * 
-	 * b) Negative cases:
-	 * 2. The user who is logged, It's not the same as the user who is being edited
-	 * 3. The email pattern is wrong
-	 * 4. The email attribute is null
+	 * b) Negative cases: 2,3,4
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 2 passed cases / 8 total cases = 25%
@@ -119,8 +116,6 @@ public class ChapterServiceTest extends AbstractTest {
 			this.chapterService.save(chapter);
 			this.chapterService.flush();
 
-			this.rollbackTransaction();
-
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -128,18 +123,17 @@ public class ChapterServiceTest extends AbstractTest {
 		}
 
 		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
 	}
 
 	/*
 	 * a)(Level B)Requirement 7 :An actor who is not authenticated must be able to:
 	 * 1. Register to the system as a chapter.
-	 * Negative cases:
-	 * b)2, 3, 4, 5, 6
-	 * c) Sentence coverage
+	 * b)Negative cases: 2, 3, 4, 5, 6
+	 * c) Sentence coverage:
 	 * -save(): 1 probado / 8 totales = 12,5%
 	 * 
-	 * 
-	 * d) Data coverage
+	 * d) Data coverage:
 	 * -Chapter: 5 probado / 10 totales = 50% NO ES ASI, PREGUNTAME
 	 */
 	@Test
@@ -199,13 +193,12 @@ public class ChapterServiceTest extends AbstractTest {
 			this.chapterService.save(chapter);
 			this.chapterService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
 		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
 
 	}
 
@@ -213,13 +206,12 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 
 	 * a)(Level B)Requirement 2.1: Self-assing an area to co-ordinate. Once an area is
 	 * self-assigned, it cannot be changed.
-	 * b)Negative cases:
-	 * 3. A Chapter who have an area, self-assing another area.
-	 * c) Sentence coverage
+	 * b)Negative cases: 2
+	 * c) Sentence coverage:
 	 * 
 	 * -save(): 1 passed cases / 8 total cases = 12,5%
 	 * 
-	 * d) Data coverage
+	 * d) Data coverage:
 	 * 0%
 	 */
 
@@ -231,6 +223,7 @@ public class ChapterServiceTest extends AbstractTest {
 				"chapter3", "area3", null
 			}, {
 				"chapter1", "area3", IllegalArgumentException.class
+			//2. A Chapter who have an area, self-assing another area.
 			}
 
 		};
@@ -258,25 +251,24 @@ public class ChapterServiceTest extends AbstractTest {
 			this.chapterService.save(chapter);
 			this.chapterService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
 		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
 
 	}
 
 	/*
 	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
 	 * 1. List the chapters that are registered in the system.
-	 * Negative cases:
-	 * b)2. Esperamos un resultado incorrecto
-	 * c) Sentence coverage
-	 * -findAll()= 1 passed cases / 2 total cases = 50%
 	 * 
-	 * d) Data coverage
+	 * b)Negative cases: 2
+	 * c) Sentence coverage:
+	 * -findAll()= 2 passed cases / 2 total cases = 100%
+	 * 
+	 * d) Data coverage:
 	 * 0%
 	 */
 
@@ -328,13 +320,12 @@ public class ChapterServiceTest extends AbstractTest {
 			final Integer result = this.chapterService.findAll().size();
 			Assert.isTrue(expectedInt + 1 == result);
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
 		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
 
 	}
 
@@ -342,12 +333,12 @@ public class ChapterServiceTest extends AbstractTest {
 	 * -------Coverage ChapterService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save()=37,5%
+	 * save()=50%
 	 * findOne()=100%
 	 * findAll()=100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Chapter=
+	 * Chapter=11,1%
 	 */
 
 }

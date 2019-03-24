@@ -26,12 +26,12 @@
 	</definition>
 	
 	<definition name="float/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar pasos" />
+		<put-attribute name="title" value="Paso" />
 		<put-attribute name="body" value="/views/float/edit.jsp" />
 	</definition>
 	
 	<definition name="float/listAdd" extends="master.page">	
-		<put-attribute name="title" value="Lista para añadir paso a una procesión" />
+		<put-attribute name="title" value="Lista para añadir paso a un desfile" />
 		<put-attribute name="body" value="/views/float/listAdd.jsp" />
 	</definition>
 	

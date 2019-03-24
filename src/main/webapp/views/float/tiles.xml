@@ -32,7 +32,7 @@
 	</definition>
 	
 	<definition name="float/listAdd" extends="master.page">	
-		<put-attribute name="title" value="List to add float to procession" />
+		<put-attribute name="title" value="List to add float to parade" />
 		<put-attribute name="body" value="/views/float/listAdd.jsp" />
 	</definition>
 	

@@ -1,6 +1,7 @@
 
 package forms;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -24,6 +25,7 @@ public class RegisterAdministratorForm {
 	private String	username;
 	private String	password;
 	private String	confirmPassword;
+	private Boolean	checkbox;
 
 
 	public int getId() {
@@ -136,6 +138,15 @@ public class RegisterAdministratorForm {
 
 	public void setConfirmPassword(final String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	@NotNull
+	public Boolean getCheckbox() {
+		return this.checkbox;
+	}
+
+	public void setCheckbox(final Boolean checkbox) {
+		this.checkbox = checkbox;
 	}
 
 	//Business metohds--------------------------------------------

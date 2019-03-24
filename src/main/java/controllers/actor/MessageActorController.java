@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ActorService;
 import services.BoxService;
 import services.ConfigurationService;
 import services.MessageService;
+import controllers.AbstractController;
 import domain.Message;
 import forms.MessageForm;
 
@@ -44,6 +44,8 @@ public class MessageActorController extends AbstractController {
 		final Collection<Message> messages;
 		Boolean security;
 
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
 		final Boolean exist = this.boxService.existId(boxId);
 
 		if (exist) {
@@ -54,19 +56,20 @@ public class MessageActorController extends AbstractController {
 
 				messages = this.messageService.findMessagesByBoxId(boxId);
 
-				final String banner = this.configurationService.findConfiguration().getBanner();
-
 				result = new ModelAndView("message/list");
 				result.addObject("messages", messages);
 				result.addObject("banner", banner);
 				result.addObject("boxId", boxId);
 				result.addObject("requestURI", "message/actor/list.do");
 
-			} else
+			} else {
 				result = new ModelAndView("redirect:/welcome/index.do");
-		} else
+				result.addObject("banner", banner);
+			}
+		} else {
 			result = new ModelAndView("misc/notExist");
-
+			result.addObject("banner", banner);
+		}
 		return result;
 	}
 
@@ -75,6 +78,8 @@ public class MessageActorController extends AbstractController {
 		ModelAndView result;
 		final Message message1;
 		final Boolean security;
+
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Boolean existMessage = this.messageService.existId(messageId);
 		final Boolean existBox = this.boxService.existId(boxId);
@@ -85,8 +90,6 @@ public class MessageActorController extends AbstractController {
 
 			if (security) {
 
-				final String banner = this.configurationService.findConfiguration().getBanner();
-
 				message1 = this.messageService.findOne(messageId);
 
 				result = new ModelAndView("message/display");
@@ -95,26 +98,32 @@ public class MessageActorController extends AbstractController {
 				result.addObject("banner", banner);
 				result.addObject("requestURI", "message/actor/display.do");
 
-			} else
+			} else {
 				result = new ModelAndView("redirect:/welcome/index.do");
+				result.addObject("banner", banner);
+			}
 
-		} else
+		} else {
 			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		}
 
 		return result;
 	}
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int actorId) {
 		final ModelAndView result;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Boolean exist = this.actorService.existActor(actorId);
 		if (exist) {
 			final MessageForm message2 = this.messageService.create(actorId);
 
 			result = this.createEditModelAndView(message2);
-		} else
+		} else {
 			result = new ModelAndView("misc/notExist");
-
+			result.addObject("banner", banner);
+		}
 		return result;
 	}
 
@@ -126,6 +135,10 @@ public class MessageActorController extends AbstractController {
 			result = this.createEditModelAndView(message2);
 		else
 			try {
+
+				Assert.isTrue(message3.getSender() == this.actorService.findByPrincipal());
+				Assert.isTrue(message3.getRecipient() != this.actorService.findByPrincipal());
+
 				this.messageService.save(message3);
 				result = new ModelAndView("redirect:/box/actor/list.do");
 			} catch (final Throwable oops) {

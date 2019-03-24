@@ -95,6 +95,14 @@ public class DashboardServiceTest extends AbstractTest {
 				"chaptersCoordinatesMoreThan10Percent", 1.0, null
 			}, {
 				"ratioAreasNotCoordinatedAnyChapters", 0.33333, null
+			}, {
+				"ratioDraftFinalModeParade", 0.33333, null
+			}, {
+				"ratioAccepted", 0.33333, null
+			}, {
+				"ratioRejected", 0.33333, null
+			}, {
+				"ratioSubmitted", 0.33333, null
 			}
 		};
 
@@ -150,6 +158,14 @@ public class DashboardServiceTest extends AbstractTest {
 				test = this.paradeService.chaptersCoordinatesMoreThan10Percent().size() * 1.0;
 			else if (method == "ratioAreasNotCoordinatedAnyChapters")
 				test = this.areaService.ratioAreasNotCoordinatedAnyChapters();
+			else if (method == "ratioDraftFinalModeParade")
+				test = this.paradeService.ratioDraftFinalModeParade();
+			else if (method == "ratioAccepted")
+				test = this.paradeService.ratioAccepted();
+			else if (method == "ratioRejected")
+				test = this.paradeService.ratioRejected();
+			else if (method == "ratioSubmitted")
+				test = this.paradeService.ratioSubmitted();
 			Assert.isTrue(test.equals(value));
 
 		} catch (final Throwable oops) {
