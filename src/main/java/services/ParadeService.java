@@ -100,7 +100,7 @@ public class ParadeService {
 
 		final int paradeSameTicker = this.paradeRepository.countParadeWithTicker(ticker);
 
-		//nos aseguramos que que sea único
+		//nos aseguramos que que sea ï¿½nico
 		while (paradeSameTicker > 0)
 			this.generateTicker(moment);
 
@@ -151,7 +151,7 @@ public class ParadeService {
 		Assert.isTrue(brotherhood != null || chapter != null);
 
 		/*
-		 * Aquí pasamos el status a SUBMITTED si se le pusiera en el create o el edit
+		 * Aquï¿½ pasamos el status a SUBMITTED si se le pusiera en el create o el edit
 		 * el FINAL MODE a TRUE
 		 */
 		if (parade.getId() != 0) {
@@ -177,8 +177,8 @@ public class ParadeService {
 		return result;
 
 	}
-	//Esto es una solución debido a que si editamos una brotherhood, hay que editar
-	//las parades. Si hay parades que ya pasaron daría fallo en el de arriba
+	//Esto es una soluciï¿½n debido a que si editamos una brotherhood, hay que editar
+	//las parades. Si hay parades que ya pasaron darï¿½a fallo en el de arriba
 	//por el Assert de fechas. Aqui no lo tenemos. Solo es empleado el metodo cuando se edita Brotherhood
 	public Parade saveByEditBrotherhood(final Parade parade) {
 		//hasta que no tenga el brotherhood area no pueden organizarse parades
@@ -263,15 +263,16 @@ public class ParadeService {
 		final Parade copy = this.create();
 
 		copy.setDescription(original.getDescription());
+		copy.setBrotherhood(original.getBrotherhood());
 		copy.setMaxColumn(original.getMaxColumn());
 		copy.setMaxRow(original.getMaxRow());
 		copy.setOrganisationMoment(original.getOrganisationMoment());
 		copy.setRejectedComment(null);
-		copy.setStatus("SUBMITTED");
+		copy.setStatus(null);
 		copy.setTicker(ticker);
 		copy.setTitle(original.getTitle());
 
-		result = this.saveByEditBrotherhood(copy);
+		result = this.paradeRepository.save(copy);
 
 		return result;
 
