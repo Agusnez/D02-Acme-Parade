@@ -30,4 +30,4 @@
 	
 </display:table>
 
-	<acme:button name="back" code="enrolment.back" onclick="javascript: relativeRedir('welcome/index.do');" />
+	<acme:button name="back" code="enrolment.back" onclick="javascript: relativeRedir('box/actor/list.do');" />

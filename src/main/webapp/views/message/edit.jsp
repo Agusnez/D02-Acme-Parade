@@ -32,7 +32,7 @@
 	
 	<acme:submit name="save" code="message.save" />
 	
-	<acme:cancel code="message.cancel" url="welcome/index.do" />
+	<acme:cancel code="message.cancel" url="box/actor/list.do" />
 	
 	<jstl:if test="${message.id != 0}">
 	<acme:submit name="delete" code="message.delete" />
