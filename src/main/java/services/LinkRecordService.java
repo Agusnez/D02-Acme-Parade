@@ -79,6 +79,12 @@ public class LinkRecordService {
 		Assert.notNull(linkRecord);
 		LinkRecord result;
 
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
 		result = this.linkRecordRepository.save(linkRecord);
 
 		if (linkRecord.getId() == 0) {
@@ -136,5 +142,9 @@ public class LinkRecordService {
 				res = true;
 
 		return res;
+	}
+
+	public void flush() {
+		this.linkRecordRepository.flush();
 	}
 }

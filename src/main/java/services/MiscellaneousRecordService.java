@@ -74,6 +74,12 @@ public class MiscellaneousRecordService {
 		Assert.notNull(miscellaneousRecord);
 		MiscellaneousRecord result;
 
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
 		result = this.miscellaneousRecordRepository.save(miscellaneousRecord);
 
 		if (miscellaneousRecord.getId() == 0) {

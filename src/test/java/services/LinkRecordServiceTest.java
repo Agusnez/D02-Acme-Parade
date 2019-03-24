@@ -12,18 +12,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.MiscellaneousRecord;
+import domain.LinkRecord;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class MiscellaneousRecordServiceTest extends AbstractTest {
+public class LinkRecordServiceTest extends AbstractTest {
 
 	//The SUT----------------------------------------------------
 	@Autowired
-	private MiscellaneousRecordService	miscellaneousRecordService;
+	private LinkRecordService	linkRecordService;
 
 
 	/*
@@ -57,39 +57,45 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
 	 * 1. Manage their history ... (create)
 	 * Negative cases:
-	 * b)2,3,4,5,6,7
+	 * b)2,3,4,5,6,7,8,9
 	 * c) Sentence coverage
 	 * -create(): 3 tested cases / 3 total cases = 100%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -MiscellaneousRecord: 2 tested cases / 2 total cases = 100%
+	 * -LinkRecord: 2 tested cases / 2 total cases = 100%
 	 */
 
 	@Test
-	public void driverCreateMiscellaneousRecord() {
+	public void driverCreateLinkRecord() {
 		final Object testingData[][] = {
 			{//1.All fine
-				"brotherhood1", "title1", "descrption1", null
+				"brotherhood1", "title1", "descrption1", "http://link1.com", null
 			}, {//2.Title = null
-				"brotherhood1", null, "descrption1", ConstraintViolationException.class
+				"brotherhood1", null, "descrption1", "link1", ConstraintViolationException.class
 			}, {//3.Description = null
-				"brotherhood1", "title1", null, ConstraintViolationException.class
+				"brotherhood1", "title1", null, "link1", ConstraintViolationException.class
 			}, {//4.Description = ""
-				"brotherhood1", "title1", "", ConstraintViolationException.class
+				"brotherhood1", "title1", "", "link1", ConstraintViolationException.class
 			}, {//5.Title = ""
-				"brotherhood1", "", "descrption1", ConstraintViolationException.class
-			}, {//6.Not authority
-				"null", "title1", "descrption1", IllegalArgumentException.class
-			}, {//7.Not a Brotherhood
-				"member1", "title1", "descrption1", IllegalArgumentException.class
+				"brotherhood1", "", "descrption1", "link1", ConstraintViolationException.class
+			}, {//6.Link = null
+				"brotherhood1", "title1", "description1", null, ConstraintViolationException.class
+			}, {//7.Link = ""
+				"brotherhood1", "title1", "description1", "", ConstraintViolationException.class
+			}, {//8.Link not URL
+				"brotherhood1", "title1", "description1", "link1", ConstraintViolationException.class
+			}, {//9.Not authority
+				null, "title1", "descrption1", "link1", IllegalArgumentException.class
+			}, {//10.Not a Brotherhood
+				"member1", "title1", "descrption1", "link1", IllegalArgumentException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateCreateMiscellaneousRecord((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+			this.templateCreateLinkRecord((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
 	}
-	protected void templateCreateMiscellaneousRecord(final String username, final String title, final String description, final Class<?> expected) {
+	protected void templateCreateLinkRecord(final String username, final String title, final String description, final String link, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -100,13 +106,14 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 			super.authenticate(username);
 
-			final MiscellaneousRecord miscellaneousRecord = this.miscellaneousRecordService.create();
+			final LinkRecord linkRecord = this.linkRecordService.create();
 
-			miscellaneousRecord.setTitle(title);
-			miscellaneousRecord.setDescription(description);
+			linkRecord.setTitle(title);
+			linkRecord.setDescription(description);
+			linkRecord.setLink(link);
 
-			this.miscellaneousRecordService.save(miscellaneousRecord);
-			this.miscellaneousRecordService.flush();
+			this.linkRecordService.save(linkRecord);
+			this.linkRecordService.flush();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -134,21 +141,21 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 */
 
 	@Test
-	public void driverEditMiscellaneousRecord() {
+	public void driverEditLinkRecord() {
 		final Object testingData[][] = {
 			{//1.All fine
-				"brotherhood1", "miscellaneousRecord1", "title1", "descrption1", null
+				"brotherhood1", "linkRecord1", "title1", "descrption1", "http://link1.com", null
 			}, {//2.Not authority
-				null, "miscellaneousRecord1", "title1", "descrption1", IllegalArgumentException.class
+				null, "linkRecord1", "title1", "descrption1", "http://link1.com", IllegalArgumentException.class
 			}, {//3.Not a Brotherhood
-				"member1", "miscellaneousRecord1", "title1", "descrption1", IllegalArgumentException.class
+				"member1", "linkRecord1", "title1", "descrption1", "http://link1.com", IllegalArgumentException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateEditMiscellaneousRecord((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
+			this.templateEditLinkRecord((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Class<?>) testingData[i][5]);
 	}
-	protected void templateEditMiscellaneousRecord(final String username, final int miscellaneousRecordId, final String title, final String description, final Class<?> expected) {
+	protected void templateEditLinkRecord(final String username, final int linkRecordId, final String title, final String description, final String link, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -159,13 +166,14 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 			super.authenticate(username);
 
-			final MiscellaneousRecord miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
+			final LinkRecord linkRecord = this.linkRecordService.findOne(linkRecordId);
 
-			miscellaneousRecord.setTitle(title);
-			miscellaneousRecord.setDescription(description);
+			linkRecord.setTitle(title);
+			linkRecord.setDescription(description);
+			linkRecord.setLink(link);
 
-			this.miscellaneousRecordService.save(miscellaneousRecord);
-			this.miscellaneousRecordService.flush();
+			this.linkRecordService.save(linkRecord);
+			this.linkRecordService.flush();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -193,26 +201,26 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 */
 
 	@Test
-	public void driverDeleteMiscellaneousRecord() {
+	public void driverDeleteLinkRecord() {
 		final Object testingData[][] = {
 
 			{
-				"brotherhood1", "miscellaneousRecord1", null
+				"brotherhood1", "linkRecord1", null
 			//1. All fine
 			}, {
-				null, "miscellaneousRecord1", IllegalArgumentException.class
+				null, "linkRecord1", IllegalArgumentException.class
 			//2. Not Authority
 			}, {
-				"member2", "miscellaneousRecord1", IllegalArgumentException.class
+				"member2", "linkRecord1", IllegalArgumentException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateDeleteMiscellaneousRecord((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (Class<?>) testingData[i][2]);
+			this.templateDeleteLinkRecord((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (Class<?>) testingData[i][2]);
 
 	}
 
-	protected void templateDeleteMiscellaneousRecord(final String username, final int miscellaneousRecordId, final Class<?> expected) {
+	protected void templateDeleteLinkRecord(final String username, final int linkRecordId, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -223,10 +231,10 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 			super.authenticate(username);
 
-			final MiscellaneousRecord miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
+			final LinkRecord linkRecord = this.linkRecordService.findOne(linkRecordId);
 
-			this.miscellaneousRecordService.delete(miscellaneousRecord);
-			this.miscellaneousRecordService.flush();
+			this.linkRecordService.delete(linkRecord);
+			this.linkRecordService.flush();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -254,32 +262,32 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 */
 
 	@Test
-	public void driverListMiscellaneousRecord() {
+	public void driverListLinkRecord() {
 		final Object testingData[][] = {
 
 			{
-				3, null
+				2, null
 			//1. All fine
 			}, {
-				2867, IllegalArgumentException.class
+				1651, IllegalArgumentException.class
 			//2. Incorrect result
 			}
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateListMiscellaneousRecord((Integer) testingData[i][0], (Class<?>) testingData[i][1]);
+			this.templateListLinkRecord((Integer) testingData[i][0], (Class<?>) testingData[i][1]);
 
 	}
 
-	protected void templateListMiscellaneousRecord(final Integer expectedInt, final Class<?> expected) {
+	protected void templateListLinkRecord(final Integer expectedInt, final Class<?> expected) {
 
 		Class<?> caught;
 
 		caught = null;
 		try {
 
-			final Integer result = this.miscellaneousRecordService.findAll().size();
+			final Integer result = this.linkRecordService.findAll().size();
 			Assert.isTrue(expectedInt == result);
 
 		} catch (final Throwable oops) {
