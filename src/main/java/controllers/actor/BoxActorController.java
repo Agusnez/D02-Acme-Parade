@@ -142,7 +142,7 @@ public class BoxActorController extends AbstractController {
 
 		try {
 			this.boxService.delete(boxReconstruct);
-			result = new ModelAndView("redirect:box/actor/list.do");
+			result = new ModelAndView("redirect:/box/actor/list.do");
 		} catch (final Throwable oops) {
 
 			final Collection<Box> boxes;

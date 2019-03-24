@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,15 +113,17 @@ public class MessageActorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int actorId) {
 		final ModelAndView result;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Boolean exist = this.actorService.existActor(actorId);
 		if (exist) {
 			final MessageForm message2 = this.messageService.create(actorId);
 
 			result = this.createEditModelAndView(message2);
-		} else
+		} else {
 			result = new ModelAndView("misc/notExist");
-
+			result.addObject("banner", banner);
+		}
 		return result;
 	}
 
@@ -132,6 +135,10 @@ public class MessageActorController extends AbstractController {
 			result = this.createEditModelAndView(message2);
 		else
 			try {
+
+				Assert.isTrue(message3.getSender() == this.actorService.findByPrincipal());
+				Assert.isTrue(message3.getRecipient() != this.actorService.findByPrincipal());
+
 				this.messageService.save(message3);
 				result = new ModelAndView("redirect:/box/actor/list.do");
 			} catch (final Throwable oops) {
