@@ -23,7 +23,13 @@
 	
 	<acme:submit name="save" code="enrolment.save" />
 	
-	<acme:cancel code="enrolment.cancel" url="welcome/index.do" />
+	<jstl:if test="${type == 'newEnrolment' }">
+		<acme:cancel code="enrolment.cancel" url="enrolment/brotherhood/listNoPosition.do" />
+	</jstl:if>
+	
+	<jstl:if test="${type == 'editEnrolment' }">
+		<acme:cancel code="enrolment.cancel" url="enrolment/brotherhood/list.do" />
+	</jstl:if>
 
 
 </form:form>    
