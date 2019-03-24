@@ -42,18 +42,18 @@ public class FloatService {
 
 	// Simple CRUD methods
 	public Float create() {
-		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		Assert.notNull(brotherhood);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.BROTHERHOOD);
-		Assert.isTrue(brotherhood.getUserAccount().getAuthorities().contains(authority));
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
 
 		final Float result = new Float();
 
 		final Collection<String> pictures = new ArrayList<>();
 
 		result.setPictures(pictures);
-		result.setBrotherhood(brotherhood);
+		result.setBrotherhood(this.brotherhoodService.findByPrincipal());
 
 		return result;
 
@@ -196,6 +196,9 @@ public class FloatService {
 			Assert.isTrue(checkUrl);
 
 		}
+	}
+	public void flush() {
+		this.floatRepository.flush();
 	}
 
 }

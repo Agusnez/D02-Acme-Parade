@@ -108,7 +108,7 @@ public class ParadeServiceTest extends AbstractTest {
 
 	/*
 	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
-	 * 1. Navigate to the parades that an area organise
+	 * 1. Navigate to the parades that a brotherhood organise
 	 * Negative cases:
 	 * b)2. El parade no pertenece a la brotherhood
 	 * 3. El parade es del brotherhood pero no está en estado ACCEPTED
