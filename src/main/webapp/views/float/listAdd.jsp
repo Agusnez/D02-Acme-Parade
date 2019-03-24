@@ -25,4 +25,4 @@
 
 </display:table>
 		
-	<acme:button name="back" code="float.back" onclick="javascript: relativeRedir('welcome/index.do');"/>
+	<acme:button name="back" code="float.back" onclick="javascript: relativeRedir('/parade/brotherhood/list.do');"/>
