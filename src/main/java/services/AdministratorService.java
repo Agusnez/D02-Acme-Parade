@@ -320,6 +320,9 @@ public class AdministratorService {
 				this.actorService.save(actor);
 			}
 
+			if (messages.isEmpty())
+				actor.setSpammer(false);
+
 		}
 	}
 
