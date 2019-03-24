@@ -18,7 +18,7 @@
 
 
 	<definition name="inceptionRecord/brotherhood/edit" extends="master.page">
-		<put-attribute name="title" value="Registrar historia" />
+		<put-attribute name="title" value="Registro de comienzo" />
 		<put-attribute name="body" value="/views/inceptionRecord/edit.jsp" />
 	</definition>
 	

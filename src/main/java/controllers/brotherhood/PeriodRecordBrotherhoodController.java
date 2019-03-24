@@ -65,17 +65,26 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int periodRecordId) {
 		ModelAndView result;
 		PeriodRecord periodRecord;
-
 		Boolean security;
-		security = this.periodRecordService.securityPeriod(periodRecordId);
 
-		if (security) {
+		final PeriodRecord find = this.periodRecordService.findOne(periodRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 
 			periodRecord = this.periodRecordService.findOne(periodRecordId);
-			Assert.notNull(periodRecord);
-			result = this.createEditModelAndView(periodRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.periodRecordService.securityPeriod(periodRecordId);
+
+			if (security) {
+				Assert.notNull(periodRecord);
+				result = this.createEditModelAndView(periodRecord);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}

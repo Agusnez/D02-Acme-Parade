@@ -19,14 +19,17 @@
 	</jstl:if>
 </security:authorize>
 
-<security:authorize access="hasRole('BROTHERHOOD')">
-<jstl:if test="${history.id!=0 and history != null}">
-	
+<jstl:if test="${history != null}">
 <acme:display code="history.inceptionRecord.title" property="${history.inceptionRecord.title }" />
 
 <acme:display code="history.inceptionRecord.description" property="${history.inceptionRecord.description }" />
 
 <acme:display code="history.inceptionRecord.photos" property="${history.inceptionRecord.photos}" />
+</jstl:if>
+
+<security:authorize access="hasRole('BROTHERHOOD')">
+<jstl:if test="${history.id!=0 and history != null}">
+	
 	<acme:button name="edit" code="inceptionRecord.edit" onclick="javascript: relativeRedir('inceptionRecord/brotherhood/edit.do?inceptionRecordId=${history.inceptionRecord.id}');"/>
 	</jstl:if>
 </security:authorize>
@@ -127,3 +130,5 @@ requestURI="${requestURI }" class="displaytag">
 	</security:authorize>
 </div>
 </fieldset>
+
+<acme:cancel code="history.back" url="/brotherhood/list.do" />

@@ -65,17 +65,26 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int legalRecordId) {
 		ModelAndView result;
 		LegalRecord legalRecord;
-
 		Boolean security;
-		security = this.legalRecordService.securityLegal(legalRecordId);
 
-		if (security) {
+		final LegalRecord find = this.legalRecordService.findOne(legalRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 
 			legalRecord = this.legalRecordService.findOne(legalRecordId);
-			Assert.notNull(legalRecord);
-			result = this.createEditModelAndView(legalRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.legalRecordService.securityLegal(legalRecordId);
+
+			if (security) {
+				Assert.notNull(legalRecord);
+				result = this.createEditModelAndView(legalRecord);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}

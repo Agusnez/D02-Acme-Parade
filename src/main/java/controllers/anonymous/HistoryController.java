@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.HistoryService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.History;
 
 @Controller
@@ -23,6 +25,9 @@ public class HistoryController extends AbstractController {
 	private HistoryService			historyService;
 
 	@Autowired
+	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
 	private ConfigurationService	configurationService;
 
 
@@ -32,22 +37,21 @@ public class HistoryController extends AbstractController {
 	public ModelAndView display(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
 		History history;
-		//		Boolean security;
-		//
-		//		security = this.historyService.securityHistory();
-
-		//		if (security) {
-
-		history = this.historyService.findByBrotherhoodId(brotherhoodId);
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = new ModelAndView("history/display");
-		result.addObject("history", history);
-		result.addObject("banner", banner);
-		result.addObject("requestURI", "history/display.do");
-		//		} else
-		//			result = new ModelAndView("redirect:/welcome/index.do");
+		final Brotherhood find = this.brotherhoodService.findOne(brotherhoodId);
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
+			history = this.historyService.findByBrotherhoodId(brotherhoodId);
+			result = new ModelAndView("history/display");
+			result.addObject("history", history);
+			result.addObject("banner", banner);
+			result.addObject("requestURI", "history/display.do");
+		}
 
 		return result;
 

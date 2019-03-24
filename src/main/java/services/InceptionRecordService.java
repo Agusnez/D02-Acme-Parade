@@ -60,17 +60,20 @@ public class InceptionRecordService {
 
 	public InceptionRecord findOne(final int inceptionRecordId) {
 
-		final InceptionRecord inceptionRecords = this.inceptionRecordRepository.findOne(inceptionRecordId);
+		final InceptionRecord inceptionRecord = this.inceptionRecordRepository.findOne(inceptionRecordId);
 
-		Assert.notNull(inceptionRecords);
-
-		return inceptionRecords;
+		return inceptionRecord;
 	}
 
 	public InceptionRecord save(final InceptionRecord inceptionRecord) {
 		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
 		Assert.notNull(brotherhood);
 		Assert.notNull(inceptionRecord);
+
+		//		final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
+		//		final Brotherhood owner = history.getBrotherhood();
+		//
+		//		Assert.isTrue(brotherhood.getId() == owner.getId());
 
 		InceptionRecord result;
 
@@ -97,5 +100,9 @@ public class InceptionRecordService {
 				res = true;
 
 		return res;
+	}
+
+	public void flush() {
+		this.inceptionRecordRepository.flush();
 	}
 }
