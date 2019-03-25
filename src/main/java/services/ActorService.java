@@ -247,6 +247,10 @@ public class ActorService {
 	public void banOrUnBanActor(final Actor actor) {
 		final Collection<Authority> authorities = actor.getUserAccount().getAuthorities();
 
+		final Actor principal = this.findByPrincipal();
+
+		Assert.isTrue(!actor.equals(principal));
+
 		final Authority authAdmin = new Authority();
 		authAdmin.setAuthority(Authority.ADMIN);
 
@@ -433,5 +437,9 @@ public class ActorService {
 
 		this.actorRepository.delete(actor);
 
+	}
+
+	public void flush() {
+		this.actorRepository.flush();
 	}
 }
