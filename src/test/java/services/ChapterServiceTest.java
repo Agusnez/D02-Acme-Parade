@@ -134,7 +134,7 @@ public class ChapterServiceTest extends AbstractTest {
 	 * -save(): 1 probado / 8 totales = 12,5%
 	 * 
 	 * d) Data coverage:
-	 * -Chapter: 5 probado / 10 totales = 50% NO ES ASI, PREGUNTAME
+	 * -Chapter: 5 probado / 10 totales = 50%
 	 */
 	@Test
 	public void driverRegisterChapter() {
@@ -143,14 +143,14 @@ public class ChapterServiceTest extends AbstractTest {
 				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56", null
 			},//1.Todo bien
 			{
-				null, "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
-			},//2.Title = null
+				"", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
+			},//2.Title = blank
 			{
-				"title1", null, "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
-			},//3.Name = null
+				"title1", "", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
+			},//3.Name = blank
 			{
-				"title1", "name1", null, "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
-			},//4.Middle name = null
+				"title1", "name1", "", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
+			},//4.Middle name = blank
 			{
 				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
 			},//5.Photo = no URL

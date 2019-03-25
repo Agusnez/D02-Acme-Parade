@@ -256,6 +256,14 @@ public class AdministratorService {
 		return res;
 	}
 	public void calculateScore() {
+
+		final Actor admin = this.actorService.findByPrincipal();
+
+		final Authority authAdmin = new Authority();
+		authAdmin.setAuthority(Authority.ADMIN);
+
+		Assert.isTrue(admin.getUserAccount().getAuthorities().contains(authAdmin));
+
 		Double res;
 		final Collection<Actor> actors = this.actorService.findAll();
 
@@ -280,6 +288,14 @@ public class AdministratorService {
 	}
 
 	public void spammer() {
+
+		final Actor admin = this.actorService.findByPrincipal();
+
+		final Authority authAdmin = new Authority();
+		authAdmin.setAuthority(Authority.ADMIN);
+
+		Assert.isTrue(admin.getUserAccount().getAuthorities().contains(authAdmin));
+
 		final Collection<Actor> actors = this.actorService.findAll();
 
 		for (final Actor actor : actors) {
@@ -342,5 +358,9 @@ public class AdministratorService {
 
 		return result;
 
+	}
+
+	public void flush() {
+		this.administratorRepository.flush();
 	}
 }

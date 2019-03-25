@@ -79,12 +79,26 @@ public class LinkRecordService {
 		Assert.notNull(linkRecord);
 		LinkRecord result;
 
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
+		if (linkRecord.getId() != 0) {
+
+			final History h = this.historyService.historyPerLinkRecordId(linkRecord.getId());
+			final Brotherhood owner = h.getBrotherhood();
+
+			Assert.isTrue(actor.getId() == owner.getId());
+
+		}
+
 		result = this.linkRecordRepository.save(linkRecord);
 
 		if (linkRecord.getId() == 0) {
 
-			final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-			Assert.notNull(brotherhood);
+			final Brotherhood brotherhood = (Brotherhood) actor;
 
 			final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
 			Assert.notNull(history);
@@ -136,5 +150,9 @@ public class LinkRecordService {
 				res = true;
 
 		return res;
+	}
+
+	public void flush() {
+		this.linkRecordRepository.flush();
 	}
 }

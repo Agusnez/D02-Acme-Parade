@@ -313,4 +313,8 @@ public class MemberService {
 		return res;
 	}
 
+	public void flush() {
+		this.memberRepository.flush();
+	}
+
 }

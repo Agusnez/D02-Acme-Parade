@@ -28,6 +28,47 @@ public class PositionServiceTest extends AbstractTest {
 	private PositionService	positionService;
 
 
+	/*
+	 * ----CALCULATE SENTENCE COVERAGE----
+	 * To calculate the sentence coverage, we have to look at each "service's method"
+	 * we are testing and we have to analyse its composition (if, for, ...) and Asserts.
+	 * Then, we calculate the number of total cases which our code can execute. The equation will be:
+	 * 
+	 * (nº passed cases / nº total cases)*100 = coverage(%)
+	 * 
+	 * In the end of the class, we conclude with the total coverage of the service's methods
+	 * which means the service's coverage.
+	 * 
+	 * 
+	 * ----CALCULATE DATA COVERAGE----
+	 * To calculate the data coverage, we have look at
+	 * each object's attributes, we analyse in each one of them
+	 * the domain's restrictions and the business rules
+	 * about the attribute. If we have tested all types of cases
+	 * in a attribute, that is called "proven attribute".
+	 * 
+	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
+	 * 
+	 * ----Note:
+	 * It's clear that if we have tested all cases about a method in a test
+	 * and now It have already had a 100% of coverage, we don't have to
+	 * mention its coverage in other test.
+	 */
+
+	/*
+	 * ACME-MADRUGÁ
+	 * a) Requirement: Administrator manage the catalogue of positions: List
+	 * 
+	 * b) Negative cases:
+	 * 2. Wrong return
+	 * 
+	 * c) Sentence coverage
+	 * -findAll(): 1 passed cases / 3 total cases = 33.3%
+	 * 
+	 * d) Data coverage
+	 * -Position: 0 passed cases / 2 total cases = 0%
+	 */
+
 	@Test
 	public void driverListPosition() {
 
@@ -35,10 +76,10 @@ public class PositionServiceTest extends AbstractTest {
 
 			{
 				"7", null
-			}, //All fine
+			}, //1. All fine
 			{
 				"8", IllegalArgumentException.class
-			}, //
+			}, //2. Wrong return
 
 		};
 
@@ -61,14 +102,85 @@ public class PositionServiceTest extends AbstractTest {
 
 			Assert.isTrue(positions.size() == size);
 
-			this.rollbackTransaction();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.rollbackTransaction();
+
+		super.checkExceptions(expected, caught);
+	}
+
+	/*
+	 * ACME-MADRUGÁ
+	 * a) Requirement: Administrator manage the catalogue of positions: Display
+	 * 
+	 * b) Negative cases:
+	 * 2. Not position
+	 * 
+	 * c) Sentence coverage
+	 * -findOne(): 1 passed cases / 2 total cases = 50%
+	 * 
+	 * d) Data coverage
+	 * -Position: 0 passed cases / 2 total cases = 0%
+	 */
+
+	@Test
+	public void driverDisplayPosition() {
+
+		final Object testingData[][] = {
+
+			{
+				"position1", null
+			}, //1. All fine
+			{
+				"message1", IllegalArgumentException.class
+			}, //2. Not position
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateDisplayPosition((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void templateDisplayPosition(final String positionBean, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+
+			this.startTransaction();
+
+			final Position position = this.positionService.findOne(super.getEntityId(positionBean));
+			this.positionService.flush();
+
+			Assert.isTrue(position != null);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
 	}
+	/*
+	 * ACME-MADRUGÁ
+	 * a) Requirement: Administrator manage the catalogue of positions: Create
+	 * 
+	 * b) Negative cases:
+	 * 2. English name = null
+	 * 3. English name = blank
+	 * 
+	 * c) Sentence coverage
+	 * -create(): 1 passed cases / 1 total cases = 100%
+	 * -save(): 1 passed cases / 1 total cases = 100%
+	 * 
+	 * d) Data coverage
+	 * -Position: 1 passed cases / 2 total cases = 50%
+	 */
 
 	@Test
 	public void driverCreatePosition() {
@@ -77,13 +189,13 @@ public class PositionServiceTest extends AbstractTest {
 
 			{
 				"Example", "Example", null
-			}, //All fine
+			}, //1. All fine
 			{
 				null, "Example", ConstraintViolationException.class
-			}, //English name = null
+			}, //2. English name = null
 			{
 				"		", "Example", ConstraintViolationException.class
-			}, //English name = blank
+			}, //3. English name = blank
 
 		};
 
@@ -109,14 +221,30 @@ public class PositionServiceTest extends AbstractTest {
 			this.positionService.save(position);
 			this.positionService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * ACME-MADRUGÁ
+	 * a) Requirement: Administrator manage the catalogue of positions: Edit
+	 * 
+	 * b) Negative cases:
+	 * 2. Spanish name = null
+	 * 3. Spanish name = blank
+	 * 
+	 * c) Sentence coverage
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -save(): 1 passed cases / 1 total cases = 100%
+	 * 
+	 * d) Data coverage
+	 * -Position: 1 passed cases / 2 total cases = 50%
+	 */
 
 	@Test
 	public void driverEditPosition() {
@@ -125,13 +253,13 @@ public class PositionServiceTest extends AbstractTest {
 
 			{
 				"position6", "Fundraiser", "Example", null
-			}, //All fine
+			}, //1. All fine
 			{
 				"position6", "Fundraiser", null, ConstraintViolationException.class
-			}, //Spanish name = null
+			}, //2. Spanish name = null
 			{
 				"position6", "Fundraiser", "		", ConstraintViolationException.class
-			}, //Spanish name = blank
+			}, //3. Spanish name = blank
 
 		};
 
@@ -157,14 +285,29 @@ public class PositionServiceTest extends AbstractTest {
 			this.positionService.save(position);
 			this.positionService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * ACME-MADRUGÁ
+	 * a) Requirement: Administrator manage the catalogue of positions: Delete
+	 * 
+	 * b) Negative cases:
+	 * 2. Used position
+	 * 
+	 * c) Sentence coverage
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -delete(): 2 passed cases / 4 total cases = 50%
+	 * 
+	 * d) Data coverage
+	 * -Position: 0 passed cases / 2 total cases = 0%
+	 */
 
 	@Test
 	public void driverDeletePosition() {
@@ -172,11 +315,11 @@ public class PositionServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			{
-				"position6", null
-			}, //Not used
+				"position4", null
+			}, //1. Not used
 			{
 				"position2", IllegalArgumentException.class
-			}, //Used
+			}, //2. Used
 
 		};
 
@@ -199,13 +342,27 @@ public class PositionServiceTest extends AbstractTest {
 			this.positionService.delete(position);
 			this.positionService.flush();
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * -------Coverage PositionService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * save() = 100%
+	 * findOne() = 100%
+	 * findAll() = 100%
+	 * create() = 100%
+	 * delete() = 50%
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Position = 100%%
+	 */
 
 }

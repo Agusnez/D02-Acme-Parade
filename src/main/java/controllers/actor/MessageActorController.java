@@ -138,6 +138,7 @@ public class MessageActorController extends AbstractController {
 
 				Assert.isTrue(message3.getSender() == this.actorService.findByPrincipal());
 				Assert.isTrue(message3.getRecipient() != this.actorService.findByPrincipal());
+				Assert.isTrue(message3.getId() == 0);
 
 				this.messageService.save(message3);
 				result = new ModelAndView("redirect:/box/actor/list.do");

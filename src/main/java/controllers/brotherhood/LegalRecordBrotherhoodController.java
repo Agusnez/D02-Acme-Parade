@@ -1,6 +1,8 @@
 
 package controllers.brotherhood;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +46,11 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-		Boolean security;
 
-		security = this.historyService.securityHistory();
+		final LegalRecord legalRecord;
+		legalRecord = this.legalRecordService.create();
 
-		if (security) {
-			final LegalRecord legalRecord;
-			legalRecord = this.legalRecordService.create();
-
-			result = this.createEditModelAndView(legalRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+		result = this.createEditModelAndView(legalRecord);
 
 		return result;
 	}
@@ -65,17 +61,26 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int legalRecordId) {
 		ModelAndView result;
 		LegalRecord legalRecord;
-
 		Boolean security;
-		security = this.legalRecordService.securityLegal(legalRecordId);
 
-		if (security) {
+		final LegalRecord find = this.legalRecordService.findOne(legalRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 
 			legalRecord = this.legalRecordService.findOne(legalRecordId);
-			Assert.notNull(legalRecord);
-			result = this.createEditModelAndView(legalRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.legalRecordService.securityLegal(legalRecordId);
+
+			if (security) {
+				Assert.notNull(legalRecord);
+				result = this.createEditModelAndView(legalRecord);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}
@@ -98,7 +103,7 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 			try {
 				this.legalRecordService.save(legalRecord);
 
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(legalRecord, "legalRecord.commit.error");
 			}
@@ -113,22 +118,24 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 		final LegalRecord legalRecordFind = this.legalRecordService.findOne(legalRecord.getId());
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
+		final History history = this.historyService.historyPerLegalRecordId(legalRecord.getId());
+
 		if (legalRecordFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else {
-			final History history = this.historyService.historyPerLegalRecordId(legalRecord.getId());
+		} else if (history.getBrotherhood().getId() != this.brotherhoodService.findByPrincipal().getId())
+			result = new ModelAndView("redirect:/welcome/index.do");
+		else {
 			final int id = history.getBrotherhood().getId();
 			try {
 				this.legalRecordService.delete(legalRecordFind);
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(legalRecordFind, "legalRecord.commit.error");
 			}
 		}
 		return result;
 	}
-
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final LegalRecord legalRecord) {
@@ -156,7 +163,10 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 
 		result.addObject("id", id);
 
+		final Collection<String> laws = legalRecord.getLaws();
+
 		result.addObject("legalRecord", legalRecord);
+		result.addObject("laws", laws);
 		result.addObject("messageError", message);
 		result.addObject("banner", banner);
 

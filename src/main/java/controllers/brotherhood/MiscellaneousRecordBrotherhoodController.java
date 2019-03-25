@@ -44,17 +44,11 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-		Boolean security;
 
-		security = this.historyService.securityHistory();
+		final MiscellaneousRecord miscellaneousRecord;
+		miscellaneousRecord = this.miscellaneousRecordService.create();
 
-		if (security) {
-			final MiscellaneousRecord miscellaneousRecord;
-			miscellaneousRecord = this.miscellaneousRecordService.create();
-
-			result = this.createEditModelAndView(miscellaneousRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+		result = this.createEditModelAndView(miscellaneousRecord);
 
 		return result;
 	}
@@ -65,17 +59,26 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 	public ModelAndView edit(@RequestParam final int miscellaneousRecordId) {
 		ModelAndView result;
 		MiscellaneousRecord miscellaneousRecord;
-
 		Boolean security;
-		security = this.miscellaneousRecordService.securityMiscellaneous(miscellaneousRecordId);
 
-		if (security) {
+		final MiscellaneousRecord find = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 
 			miscellaneousRecord = this.miscellaneousRecordService.findOne(miscellaneousRecordId);
-			Assert.notNull(miscellaneousRecord);
-			result = this.createEditModelAndView(miscellaneousRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.miscellaneousRecordService.securityMiscellaneous(miscellaneousRecordId);
+
+			if (security) {
+				Assert.notNull(miscellaneousRecord);
+				result = this.createEditModelAndView(miscellaneousRecord);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}
@@ -98,7 +101,7 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 			try {
 				this.miscellaneousRecordService.save(miscellaneousRecord);
 
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(miscellaneousRecord, "miscellaneousRecord.commit.error");
 			}
@@ -113,15 +116,19 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 		final MiscellaneousRecord miscellaneousRecordFind = this.miscellaneousRecordService.findOne(miscellaneousRecord.getId());
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
+		final History history = this.historyService.historyPerMiscellaneousRecordId(miscellaneousRecord.getId());
+
 		if (miscellaneousRecordFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else {
-			final History history = this.historyService.historyPerMiscellaneousRecordId(miscellaneousRecord.getId());
+		} else if (history.getBrotherhood().getId() != this.brotherhoodService.findByPrincipal().getId())
+			result = new ModelAndView("redirect:/welcome/index.do");
+		else {
+
 			final int id = history.getBrotherhood().getId();
 			try {
 				this.miscellaneousRecordService.delete(miscellaneousRecordFind);
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(miscellaneousRecordFind, "miscellaneousRecord.commit.error");
 			}

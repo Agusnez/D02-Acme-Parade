@@ -27,7 +27,7 @@
 	<acme:submit name="save" code="linkRecord.save" />
 	
 	
-	<acme:cancel code="periodRecord.cancel" url="/history/display.do?brotherhoodId=${id}" />
+	<acme:cancel code="periodRecord.cancel" url="/history/brotherhood/display.do?brotherhoodId=${id}" />
 
 	<jstl:if test="${linkRecord.id != 0}">
 	<acme:submit name="delete" code="linkRecord.delete" />

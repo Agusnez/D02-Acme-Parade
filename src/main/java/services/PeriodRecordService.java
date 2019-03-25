@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -76,15 +77,35 @@ public class PeriodRecordService {
 
 	public PeriodRecord save(final PeriodRecord periodRecord) {
 
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		final Authority authority = new Authority();
+		authority.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
+
 		Assert.notNull(periodRecord);
 		PeriodRecord result;
+
+		final Date startDate = periodRecord.getStartYear();
+		final Date endDate = periodRecord.getEndYear();
+		Assert.isTrue(startDate.before(endDate));
+
+		if (periodRecord.getId() != 0) {
+
+			final History h = this.historyService.historyPerPeriodRecordId(periodRecord.getId());
+			final Brotherhood owner = h.getBrotherhood();
+
+			Assert.isTrue(actor.getId() == owner.getId());
+
+		}
+
+		this.checkPictures(periodRecord.getPhotos());
 
 		result = this.periodRecordRepository.save(periodRecord);
 
 		if (periodRecord.getId() == 0) {
 
-			final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-			Assert.notNull(brotherhood);
+			final Brotherhood brotherhood = (Brotherhood) actor;
 
 			final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
 			Assert.notNull(history);
@@ -136,5 +157,14 @@ public class PeriodRecordService {
 				res = true;
 
 		return res;
+	}
+
+	public void checkPictures(final Collection<String> attachments) {
+
+		for (final String url : attachments) {
+			final boolean checkUrl = url.matches("^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:])+[a-zA-Z0-9/]+$");
+			Assert.isTrue(checkUrl);
+
+		}
 	}
 }

@@ -44,17 +44,11 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-		Boolean security;
 
-		security = this.historyService.securityHistory();
+		final LinkRecord linkRecord;
+		linkRecord = this.linkRecordService.create();
 
-		if (security) {
-			final LinkRecord linkRecord;
-			linkRecord = this.linkRecordService.create();
-
-			result = this.createEditModelAndView(linkRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+		result = this.createEditModelAndView(linkRecord);
 
 		return result;
 	}
@@ -65,17 +59,26 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int linkRecordId) {
 		ModelAndView result;
 		LinkRecord linkRecord;
-
 		Boolean security;
-		security = this.linkRecordService.securityLink(linkRecordId);
 
-		if (security) {
+		final LinkRecord find = this.linkRecordService.findOne(linkRecordId);
+		final String banner = this.configurationService.findConfiguration().getBanner();
+
+		if (find == null) {
+			result = new ModelAndView("misc/notExist");
+			result.addObject("banner", banner);
+		} else {
 
 			linkRecord = this.linkRecordService.findOne(linkRecordId);
-			Assert.notNull(linkRecord);
-			result = this.createEditModelAndView(linkRecord);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+			security = this.linkRecordService.securityLink(linkRecordId);
+
+			if (security) {
+				Assert.notNull(linkRecord);
+				result = this.createEditModelAndView(linkRecord);
+			} else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}
@@ -98,7 +101,7 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 			try {
 				this.linkRecordService.save(linkRecord);
 
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(linkRecord, "linkRecord.commit.error");
 			}
@@ -113,15 +116,18 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 		final LinkRecord linkRecordFind = this.linkRecordService.findOne(linkRecord.getId());
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
+		final History history = this.historyService.historyPerLinkRecordId(linkRecord.getId());
+
 		if (linkRecordFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else {
-			final History history = this.historyService.historyPerLinkRecordId(linkRecord.getId());
+		} else if (history.getBrotherhood().getId() != this.brotherhoodService.findByPrincipal().getId())
+			result = new ModelAndView("redirect:/welcome/index.do");
+		else {
 			final int id = history.getBrotherhood().getId();
 			try {
 				this.linkRecordService.delete(linkRecordFind);
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(linkRecordFind, "linkRecord.commit.error");
 			}

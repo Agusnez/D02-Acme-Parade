@@ -60,24 +60,32 @@ public class InceptionRecordService {
 
 	public InceptionRecord findOne(final int inceptionRecordId) {
 
-		final InceptionRecord inceptionRecords = this.inceptionRecordRepository.findOne(inceptionRecordId);
+		final InceptionRecord inceptionRecord = this.inceptionRecordRepository.findOne(inceptionRecordId);
 
-		Assert.notNull(inceptionRecords);
-
-		return inceptionRecords;
+		return inceptionRecord;
 	}
 
 	public InceptionRecord save(final InceptionRecord inceptionRecord) {
+
 		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
 		Assert.notNull(brotherhood);
 		Assert.notNull(inceptionRecord);
 
+		if (inceptionRecord.getId() != 0) {
+			final History historyPerInceptionRecord = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
+			if (historyPerInceptionRecord != null)
+				Assert.isTrue(historyPerInceptionRecord.getBrotherhood().getId() == brotherhood.getId());
+		}
+
 		InceptionRecord result;
+
+		this.checkPictures(inceptionRecord.getPhotos());
 
 		result = this.inceptionRecordRepository.save(inceptionRecord);
 
 		return result;
 	}
+	//Other business methods----
 
 	public Boolean securityInception(final int inceptionId) {
 
@@ -97,5 +105,18 @@ public class InceptionRecordService {
 				res = true;
 
 		return res;
+	}
+
+	public void flush() {
+		this.inceptionRecordRepository.flush();
+	}
+
+	public void checkPictures(final Collection<String> attachments) {
+
+		for (final String url : attachments) {
+			final boolean checkUrl = url.matches("^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:])+[a-zA-Z0-9/]+$");
+			Assert.isTrue(checkUrl);
+
+		}
 	}
 }
