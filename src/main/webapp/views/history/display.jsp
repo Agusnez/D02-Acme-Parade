@@ -14,7 +14,7 @@
 <div>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<jstl:if test="${history == null}">
+<jstl:if test="${history == null and owner}">
 	<acme:button name="create" code="inceptionRecord.create" onclick="javascript: relativeRedir('inceptionRecord/brotherhood/create.do');"/>
 	</jstl:if>
 </security:authorize>
@@ -28,7 +28,7 @@
 </jstl:if>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
-<jstl:if test="${history.id!=0 and history != null}">
+<jstl:if test="${history.id!=0 and history != null and owner}">
 	
 	<acme:button name="edit" code="inceptionRecord.edit" onclick="javascript: relativeRedir('inceptionRecord/brotherhood/edit.do?inceptionRecordId=${history.inceptionRecord.id}');"/>
 	</jstl:if>
@@ -54,11 +54,15 @@ requestURI="${requestURI }" class="displaytag">
 	<acme:column property="laws" titleKey="legalRecord.laws" value= "${row1.laws}: "/>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">
 	<acme:url href="legalRecord/brotherhood/edit.do?legalRecordId=${row1.id}" code="legalRecord.edit"/>
+	</jstl:if>
 	</security:authorize>	
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">
 	<acme:button name="create" code="legalRecord.create" onclick="javascript: relativeRedir('legalRecord/brotherhood/create.do');"/>
+	</jstl:if>
 	</security:authorize>
 </div>
 </fieldset>
@@ -81,11 +85,15 @@ requestURI="${requestURI }" class="displaytag">
 	<acme:column property="photos" titleKey="periodRecord.photos" value= "${row2.photos}: "/>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">
 	<acme:url href="periodRecord/brotherhood/edit.do?periodRecordId=${row2.id}" code="periodRecord.edit"/>
+	</jstl:if>
 	</security:authorize>	
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">
 	<acme:button name="create" code="periodRecord.create" onclick="javascript: relativeRedir('periodRecord/brotherhood/create.do');"/>
+	</jstl:if>
 	</security:authorize>
 </div>
 </fieldset>
@@ -101,12 +109,16 @@ requestURI="${requestURI }" class="displaytag">
 	<acme:column property="description" titleKey="linkRecord.description" value= "${row3.description}: "/>
 	
 	<acme:column property="link" titleKey="linkRecord.link" value= "${row3.link}: "/>
-	<security:authorize access="hasRole('BROTHERHOOD')">	
+	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">	
 	<acme:url href="linkRecord/brotherhood/edit.do?linkRecordId=${row3.id}" code="linkRecord.edit"/>
+	</jstl:if>
 	</security:authorize>	
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">
 	<acme:button name="create" code="linkRecord.create" onclick="javascript: relativeRedir('linkRecord/brotherhood/create.do');"/>
+	</jstl:if>
 	</security:authorize>
 </div>
 </fieldset>
@@ -122,11 +134,15 @@ requestURI="${requestURI }" class="displaytag">
 	
 	<acme:column property="description" titleKey="miscellaneousRecord.description" value= "${row4.description}: "/>
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">
 	<acme:url href="miscellaneousRecord/brotherhood/edit.do?miscellaneousRecordId=${row4.id}" code="miscellaneousRecord.edit"/>
+	</jstl:if>
 	</security:authorize>
 </display:table>
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<jstl:if test="${owner }">
 	<acme:button name="create" code="miscellaneousRecord.create" onclick="javascript: relativeRedir('miscellaneousRecord/brotherhood/create.do');"/>
+	</jstl:if>
 	</security:authorize>
 </div>
 </fieldset>
