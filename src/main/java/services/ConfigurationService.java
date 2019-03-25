@@ -137,4 +137,8 @@ public class ConfigurationService {
 
 		return result;
 	}
+
+	public void flush() {
+		this.configurationRepository.flush();
+	}
 }

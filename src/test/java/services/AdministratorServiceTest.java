@@ -179,4 +179,70 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	}
 
+	@Test
+	public void SpammerTest() {
+		final Object testingData[][] = {
+			{
+				"admin", null
+			},//1. All fine
+			{
+				"member1", IllegalArgumentException.class
+			},//2. Invalid authority
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.AuthoritySpammerTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void AuthoritySpammerTemplate(final String username, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate(username);
+
+			this.adminService.spammer();
+
+			this.unauthenticate();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+	}
+
+	@Test
+	public void ScoreTest() {
+		final Object testingData[][] = {
+			{
+				"admin", null
+			},//1. All fine
+			{
+				"member1", IllegalArgumentException.class
+			},//2. Invalid authority
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.AuthorityScoreTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void AuthorityScoreTemplate(final String username, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate(username);
+
+			this.adminService.calculateScore();
+
+			this.unauthenticate();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+	}
+
 }
