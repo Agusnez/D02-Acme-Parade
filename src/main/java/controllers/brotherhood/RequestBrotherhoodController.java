@@ -118,7 +118,7 @@ public class RequestBrotherhoodController extends AbstractController {
 
 		try {
 			final Request another = this.requestService.findOne(request.getId());
-			if (another.getParade().getBrotherhood().getId() == owner.getId() && request.getStatus().equals("PENDING")) {
+			if (another.getParade().getBrotherhood().getId() == owner.getId() && another.getStatus().equals("PENDING")) {
 
 				request = this.requestService.reconstruct(request, binding);
 
