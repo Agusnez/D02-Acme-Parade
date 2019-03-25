@@ -23,14 +23,14 @@
 	
 	<acme:textbox code="legalRecord.legalName" path="legalName" obligatory="true"/>
 	
-	<acme:textbox code="legalRecord.VATNumber" path="VATNumber" obligatory="true"/>
+	<acme:textbox code="legalRecord.VATNumber" path="VATNumber" obligatory="true" placeholder="0.0" pattern="^([0-9]){0,}\.([0-9]){0,}$"/>
 	
 	<acme:textbox code="legalRecord.laws" size="100" path="laws" obligatory="false"/>
 
 	<acme:submit name="save" code="legalRecord.save" />
 	
 	
-	<acme:cancel code="periodRecord.cancel" url="/history/display.do?brotherhoodId=${id}" />
+	<acme:cancel code="periodRecord.cancel" url="/history/brotherhood/display.do?brotherhoodId=${id}" />
 	
 	<jstl:if test="${legalRecord.id != 0}">
 	<acme:submit name="delete" code="legalRecord.delete" />

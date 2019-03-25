@@ -51,7 +51,9 @@ requestURI="${requestURI }" class="displaytag">
 	
 	<acme:column property="VATNumber" titleKey="legalRecord.VATNumber" value= "${row1.VATNumber}: "/>
 	
-	<acme:column property="laws" titleKey="legalRecord.laws" value= "${row1.laws}: "/>
+	<display:column>
+	<jstl:out value="${row1.laws }"></jstl:out>
+	</display:column>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<jstl:if test="${owner }">
@@ -78,9 +80,9 @@ requestURI="${requestURI }" class="displaytag">
 	
 	<acme:column property="description" titleKey="periodRecord.description" value= "${row2.description}: "/>
 	
-	<acme:column property="startYear" titleKey="periodRecord.startYear" value= "${row2.startYear}: "/>
+	<acme:dateFormat titleKey="periodRecord.startYear" pattern="yyyy/MM/dd" value="${row2.startYear}"/>
 	
-	<acme:column property="endYear" titleKey="periodRecord.endYear" value= "${row2.endYear}: "/>
+	<acme:dateFormat titleKey="periodRecord.endYear" pattern="yyyy/MM/dd" value="${row2.endYear}"/>
 	
 	<acme:column property="photos" titleKey="periodRecord.photos" value= "${row2.photos}: "/>
 	
