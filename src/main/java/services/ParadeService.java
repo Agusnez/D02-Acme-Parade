@@ -64,17 +64,17 @@ public class ParadeService {
 
 	public Parade create() {
 
-		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		Assert.notNull(brotherhood);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.BROTHERHOOD);
-		Assert.isTrue(brotherhood.getUserAccount().getAuthorities().contains(authority));
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
 
 		final Parade result = new Parade();
 
 		final Collection<Float> floatt = new HashSet<>();
 		result.setFloats(floatt);
-		result.setBrotherhood(brotherhood);
+		result.setBrotherhood(this.brotherhoodService.findByPrincipal());
 
 		result.setFinalMode(false);
 		result.setStatus(null);

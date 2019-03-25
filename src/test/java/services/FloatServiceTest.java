@@ -82,7 +82,7 @@ public class FloatServiceTest extends AbstractTest {
 			//1. Todo bien sin nadie autenticado
 
 			}, {
-				null, "float1", "brotherhood1", IllegalArgumentException.class
+				null, "float2", "brotherhood1", IllegalArgumentException.class
 			//2. El float no pertenece a la brotherhood
 			}, {
 				"brotherhood1", "float4", "brotherhood1", null
@@ -141,7 +141,7 @@ public class FloatServiceTest extends AbstractTest {
 	/*
 	 * ACME-MADRUGA
 	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. List their floats
+	 * 1. List their floats
 	 * 
 	 * b)Negative cases: 2
 	 * 
@@ -160,7 +160,7 @@ public class FloatServiceTest extends AbstractTest {
 				"float4", "brotherhood1", null
 			//1. Todo bien
 			}, {
-				"float1", "brotherhood1", IllegalArgumentException.class
+				"float2", "brotherhood1", IllegalArgumentException.class
 			//2. El float no pertenece a la brotherhood
 			}
 
@@ -198,7 +198,7 @@ public class FloatServiceTest extends AbstractTest {
 	/*
 	 * ACME-MADRUGA
 	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. Create a Float
+	 * 1. Create a Float
 	 * 
 	 * b)Negative cases: 2, 3, 4, 5
 	 * 
@@ -270,7 +270,7 @@ public class FloatServiceTest extends AbstractTest {
 	/*
 	 * ACME-MADRUGA
 	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. Update a Float
+	 * 1. Update a Float
 	 * 
 	 * b)Negative cases:
 	 * 
@@ -334,7 +334,7 @@ public class FloatServiceTest extends AbstractTest {
 	/*
 	 * ACME-MADRUGA
 	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. Delete a Float
+	 * 1. Delete a Float
 	 * 
 	 * b)Negative cases:
 	 * 

@@ -1011,6 +1011,25 @@
 		<property name="rejectedComment" value="" />
 	</bean>
 	
+	<bean id="parade16" class="domain.Parade">
+		<property name="title" value="parade16" />
+		<property name="description" value="Procesión bonita" />
+		<property name="organisationMoment" value="2019/12/12 15:00" />
+		<property name="ticker" value="190411-KERHH5" />
+		<property name="maxColumn" value="3" />
+		<property name="maxRow" value="10" />
+		<property name="brotherhood">
+			<ref bean="brotherhood1"/>		
+		</property>
+		<property name="floats">
+			<list>
+			</list>
+		</property>
+		<property name="finalMode" value="false" />
+		<property name="status" value="SUBMITTED" />
+		<property name="rejectedComment" value="" />
+	</bean>
+	
 	<!-- Segments -->
 	<bean id="segment1" class="domain.Segment">
 		<property name="origin" value="90.0, -180.0" />
@@ -1303,6 +1322,12 @@
 		<property name="socialName" value="Hermandad Jesus del Gran Poder" />
 		<property name="link" value="http://www.facebook.com/link4/" />
 		<property name="actor" ref="brotherhood1" />
+	</bean>
+	<bean id="socialProfile5" class="domain.SocialProfile">
+		<property name="nick" value="sevillaLoMejor" />
+		<property name="socialName" value="Hermandad Jesus Despojao" />
+		<property name="link" value="http://www.facebook.com/link4/" />
+		<property name="actor" ref="brotherhood2" />
 	</bean>
 
 	<!-- Requests -->
