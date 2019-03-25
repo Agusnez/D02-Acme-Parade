@@ -56,13 +56,14 @@ public class PositionServiceTest extends AbstractTest {
 	 */
 
 	/*
+	 * ACME-MADRUGÁ
 	 * a) Requirement: Administrator manage the catalogue of positions: List
 	 * 
 	 * b) Negative cases:
 	 * 2. Wrong return
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 passed cases / 1 total cases = 100%
+	 * -findAll(): 1 passed cases / 3 total cases = 33.3%
 	 * 
 	 * d) Data coverage
 	 * -Position: 0 passed cases / 2 total cases = 0%
@@ -111,13 +112,14 @@ public class PositionServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-MADRUGÁ
 	 * a) Requirement: Administrator manage the catalogue of positions: Display
 	 * 
 	 * b) Negative cases:
 	 * 2. Not position
 	 * 
 	 * c) Sentence coverage
-	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Position: 0 passed cases / 2 total cases = 0%
@@ -165,6 +167,7 @@ public class PositionServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 	}
 	/*
+	 * ACME-MADRUGÁ
 	 * a) Requirement: Administrator manage the catalogue of positions: Create
 	 * 
 	 * b) Negative cases:
@@ -228,6 +231,7 @@ public class PositionServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-MADRUGÁ
 	 * a) Requirement: Administrator manage the catalogue of positions: Edit
 	 * 
 	 * b) Negative cases:
@@ -291,6 +295,7 @@ public class PositionServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-MADRUGÁ
 	 * a) Requirement: Administrator manage the catalogue of positions: Delete
 	 * 
 	 * b) Negative cases:

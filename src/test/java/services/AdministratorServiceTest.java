@@ -179,6 +179,19 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	}
 
+	/*
+	 * ACME-MADRUGÁ
+	 * a) Requirement: Administrator launch a process to set spammers
+	 * 
+	 * b) Negative cases:
+	 * -specified before every one of them
+	 * 
+	 * c) Sentence coverage
+	 * -spammer(): 9 passed cases / 16 total cases = 56,25%
+	 * 
+	 * d) Data coverage
+	 * 0%
+	 */
 	@Test
 	public void SpammerTest() {
 		final Object testingData[][] = {
@@ -212,6 +225,20 @@ public class AdministratorServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
+	/*
+	 * ACME-MADRUGÁ
+	 * a) Requirement: Administrator launch a process to set scores
+	 * 
+	 * b) Negative cases:
+	 * -specified before every one of them
+	 * 
+	 * c) Sentence coverage
+	 * -calculateScore(): 7 passed cases / 9 total cases = 77,8%
+	 * 
+	 * d) Data coverage
+	 * 0%
+	 */
+
 	@Test
 	public void ScoreTest() {
 		final Object testingData[][] = {
@@ -244,5 +271,20 @@ public class AdministratorServiceTest extends AbstractTest {
 
 		this.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * -------Coverage SponsorshipService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * -save() = 60%
+	 * -findOne() = 50%
+	 * -create() = 33.3%
+	 * -findOne() = 50%
+	 * -spammer() = 56,25%
+	 * -calculateScore() = 77,8%
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * 0%
+	 */
 
 }
