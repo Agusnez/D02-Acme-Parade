@@ -343,4 +343,8 @@ public class AdministratorService {
 		return result;
 
 	}
+
+	public void flush() {
+		this.administratorRepository.flush();
+	}
 }

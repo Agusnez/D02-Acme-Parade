@@ -134,7 +134,7 @@ public class ChapterServiceTest extends AbstractTest {
 	 * -save(): 1 probado / 8 totales = 12,5%
 	 * 
 	 * d) Data coverage:
-	 * -Chapter: 5 probado / 10 totales = 50% NO ES ASI, PREGUNTAME
+	 * -Chapter: 5 probado / 10 totales = 50%
 	 */
 	@Test
 	public void driverRegisterChapter() {
