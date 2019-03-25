@@ -203,6 +203,8 @@ public class AdministratorServiceTest extends AbstractTest {
 
 			this.adminService.spammer();
 
+			this.unauthenticate();
+
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -233,6 +235,8 @@ public class AdministratorServiceTest extends AbstractTest {
 			super.authenticate(username);
 
 			this.adminService.calculateScore();
+
+			this.unauthenticate();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
