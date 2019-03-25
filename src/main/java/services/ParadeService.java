@@ -277,7 +277,7 @@ public class ParadeService {
 	
 			result = this.paradeRepository.save(copy);
 		} else {
-			
+			throw new IllegalArgumentException("Security exception.");
 		}
 
 		return result;
