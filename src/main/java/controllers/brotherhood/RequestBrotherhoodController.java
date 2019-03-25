@@ -115,7 +115,7 @@ public class RequestBrotherhoodController extends AbstractController {
 		final Brotherhood owner;
 		owner = this.brotherhoodService.findByPrincipal();
 		final String banner = this.configurationService.findConfiguration().getBanner();
-		
+
 		try {
 			final Request another = this.requestService.findOne(request.getId());
 			if (another.getParade().getBrotherhood().getId() == owner.getId() && request.getStatus().equals("PENDING")) {
@@ -169,6 +169,8 @@ public class RequestBrotherhoodController extends AbstractController {
 			request = this.requestService.findOne(requestId);
 
 			if (request.getParade().getBrotherhood().getId() == owner.getId() && request.getStatus().equals("PENDING")) {
+				request.setRowNumber(null);
+				request.setColumnNumber(null);
 				request = this.requestService.suggestNextRow(request.getParade().getId(), request);
 				result = new ModelAndView("request/accept");
 				result.addObject("request", request);
