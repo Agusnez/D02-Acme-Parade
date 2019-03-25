@@ -90,10 +90,14 @@ public class PeriodRecordService {
 		final Date endDate = periodRecord.getEndYear();
 		Assert.isTrue(startDate.compareTo(endDate) <= 0);
 
-		//		final History h = this.historyService.historyPerPeriodRecordId(periodRecord.getId());
-		//		final Brotherhood owner = h.getBrotherhood();
-		//
-		//		Assert.isTrue(actor.getId() == owner.getId());
+		if (periodRecord.getId() != 0) {
+
+			final History h = this.historyService.historyPerPeriodRecordId(periodRecord.getId());
+			final Brotherhood owner = h.getBrotherhood();
+
+			Assert.isTrue(actor.getId() == owner.getId());
+
+		}
 
 		result = this.periodRecordRepository.save(periodRecord);
 

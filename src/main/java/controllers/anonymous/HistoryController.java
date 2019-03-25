@@ -48,9 +48,11 @@ public class HistoryController extends AbstractController {
 		} else {
 			history = this.historyService.findByBrotherhoodId(brotherhoodId);
 			result = new ModelAndView("history/display");
+
 			result.addObject("history", history);
 			result.addObject("banner", banner);
 			result.addObject("requestURI", "history/display.do");
+
 		}
 
 		return result;

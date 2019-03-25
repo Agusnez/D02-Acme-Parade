@@ -70,11 +70,6 @@ public class InceptionRecordService {
 		Assert.notNull(brotherhood);
 		Assert.notNull(inceptionRecord);
 
-		//		final History history = this.historyService.historyPerInceptionRecordId(inceptionRecord.getId());
-		//		final Brotherhood owner = history.getBrotherhood();
-		//
-		//		Assert.isTrue(brotherhood.getId() == owner.getId());
-
 		InceptionRecord result;
 
 		result = this.inceptionRecordRepository.save(inceptionRecord);
