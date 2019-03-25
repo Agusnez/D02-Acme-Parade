@@ -153,4 +153,8 @@ public class LegalRecordService {
 		return res;
 	}
 
+	public void flush() {
+		this.legalRecordRepository.flush();
+	}
+
 }

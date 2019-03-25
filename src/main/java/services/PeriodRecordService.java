@@ -156,4 +156,9 @@ public class PeriodRecordService {
 
 		return res;
 	}
+
+	public void flush() {
+		this.periodRecordRepository.flush();
+	}
+
 }

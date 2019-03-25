@@ -112,11 +112,11 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 
-		this.rollbackTransaction();
-
 		this.unauthenticate();
 
 		super.checkExceptions(expected, caught);
+
+		this.rollbackTransaction();
 
 	}
 
@@ -126,7 +126,7 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * Negative cases:
 	 * b)2,3
 	 * c) Sentence coverage
-	 * -save(): 3 tested cases / 7 total cases = 42.85%
+	 * -save(): 3 tested cases / 8 total cases = 37.5%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -171,11 +171,11 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 
-		this.rollbackTransaction();
-
 		this.unauthenticate();
 
 		super.checkExceptions(expected, caught);
+
+		this.rollbackTransaction();
 
 	}
 
@@ -232,11 +232,11 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 
-		this.rollbackTransaction();
-
 		this.unauthenticate();
 
 		super.checkExceptions(expected, caught);
+
+		this.rollbackTransaction();
 
 	}
 

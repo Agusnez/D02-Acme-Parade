@@ -39,9 +39,6 @@ public class HistoryService {
 	private BrotherhoodService		brotherhoodService;
 
 
-	//	@Autowired
-	//	private Validator				validator;
-
 	//Simple CRUD methods--------------------------------
 	public History create(final InceptionRecord inceptionRecord) {
 
@@ -226,33 +223,7 @@ public class HistoryService {
 		return result;
 	}
 
-	//	public History reconstruct(final History history, final BindingResult binding) {
-	//
-	//		History result;
-	//
-	//		if (history.getId() == 0 || history == null) {
-	//
-	//			final InceptionRecord ir = this.inceptionRecordService.create();
-	//
-	//			final History historyNew = this.create(ir);
-	//
-	//			history.setBrotherhood(historyNew.getBrotherhood());
-	//
-	//			this.validator.validate(history, binding);
-	//
-	//			result = history;
-	//		} else {
-	//
-	//			final History historyBBDD = this.findOne(history.getId());
-	//
-	//			history.setBrotherhood(historyBBDD.getBrotherhood());
-	//
-	//			this.validator.validate(history, binding);
-	//
-	//			result = history;
-	//		}
-	//
-	//		return result;
-	//
-	//	}
+	public void flush() {
+		this.historyRepository.flush();
+	}
 }
