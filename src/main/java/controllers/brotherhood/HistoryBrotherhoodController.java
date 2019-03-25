@@ -1,5 +1,5 @@
 
-package controllers.anonymous;
+package controllers.brotherhood;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +16,8 @@ import domain.Brotherhood;
 import domain.History;
 
 @Controller
-@RequestMapping("/history")
-public class HistoryController extends AbstractController {
+@RequestMapping("/history/brotherhood")
+public class HistoryBrotherhoodController extends AbstractController {
 
 	// Services ---------------------------------------------------
 
@@ -37,18 +37,22 @@ public class HistoryController extends AbstractController {
 	public ModelAndView display(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
 		History history;
+		Boolean owner = false;
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
 		final Brotherhood find = this.brotherhoodService.findOne(brotherhoodId);
 
+		if (this.brotherhoodService.findByPrincipal().getId() == brotherhoodId){
+			owner = true;
+		}
 		if (find == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
 		} else {
 			history = this.historyService.findByBrotherhoodId(brotherhoodId);
 			result = new ModelAndView("history/display");
-			result.addObject("owner", false);
+			result.addObject("owner", owner);
 			result.addObject("history", history);
 			result.addObject("banner", banner);
 			result.addObject("requestURI", "history/display.do");

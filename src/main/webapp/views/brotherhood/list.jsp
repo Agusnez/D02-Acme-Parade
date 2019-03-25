@@ -25,7 +25,15 @@
 	
 	<acme:url href="float/list.do?brotherhoodId=${row.id }" code="brotherhood.floats" />
 	
+	<security:authorize access="isAnonymous()">
 	<acme:url href="history/display.do?brotherhoodId=${row.id }" code="brotherhood.history" />
+	</security:authorize>
+	<security:authorize access="hasAnyRole('MEMBER','ADMIN','SPONSOR','CHAPTER')">
+	<acme:url href="history/display.do?brotherhoodId=${row.id }" code="brotherhood.history" />
+	</security:authorize>
+	<security:authorize access="hasRole('BROTHERHOOD')">
+	<acme:url href="history/brotherhood/display.do?brotherhoodId=${row.id }" code="brotherhood.history" />
+	</security:authorize>
 	
 	<security:authorize access="hasRole('MEMBER')">
 	<acme:url href="enrolment/member/enrol.do?brotherhoodId=${row.id }" code="brotherhood.enrol" />
