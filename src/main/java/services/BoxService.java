@@ -237,4 +237,8 @@ public class BoxService {
 
 		return res;
 	}
+
+	public void flush() {
+		this.boxRepository.flush();
+	}
 }
