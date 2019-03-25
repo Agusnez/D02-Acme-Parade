@@ -31,7 +31,7 @@
 	<acme:submit name="save2" code="inceptionRecord.save2" />
 	</jstl:if>
 
-	<acme:cancel code="inceptionRecord.cancel" url="/history/display.do?brotherhoodId=${id2}" />
+	<acme:cancel code="inceptionRecord.cancel" url="/history/brotherhood/display.do?brotherhoodId=${id2}" />
 
 
 </form:form>

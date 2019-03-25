@@ -1,6 +1,8 @@
 
 package services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -176,7 +178,8 @@ public class BrotherhoodServiceTest extends AbstractTest {
 			final Collection<String> pictures = new ArrayList<>();
 			pictures.add("https://docs.google.com/document/d/1mAOEp0duzbBYUXV0/edit");
 			brotherhood.setPictures(pictures);
-			final Date date = new Date("1997/03/05");
+			final DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+			final Date date = format.parse("1997/03/05");
 			brotherhood.setEstablishment(date);
 			brotherhood.setName("name1");
 			brotherhood.setMiddleName("middleName1");

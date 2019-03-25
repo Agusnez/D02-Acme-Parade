@@ -1,6 +1,9 @@
 
 package services;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -10,17 +13,18 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
+import domain.Configuration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @Transactional
-public class AdministratorServiceTtest extends AbstractTest {
+public class ConfigurationServiceTest extends AbstractTest {
 
-	//The SUT----------------------------------------------------
+	//The SUT--------------------------------------------------
 	@Autowired
-	private AdministratorService	administratorService;
+	private ConfigurationService	configurationService;
 
 
 	/*
@@ -50,64 +54,65 @@ public class AdministratorServiceTtest extends AbstractTest {
 	 * mention its coverage in other test.
 	 */
 
+	/*
+	 * a) Requirement: Administrator manage the lists of positive and negative words
+	 * 
+	 * b) Negative cases:
+	 * 2. Not administrator
+	 * 
+	 * c) Sentence coverage
+	 * -save(): 1 passed cases / 4 total cases = 25%
+	 * -findConfiguration(): 1 passed cases / 2 total cases = 50%
+	 * 
+	 * d) Data coverage
+	 * -Configuration: 2 passed cases / 12 total cases = 16,66667%
+	 */
+
 	@Test
-	public void SpammerTest() {
+	public void PositiveNegativeWordsTest() {
 		final Object testingData[][] = {
 			{
-				"admin", null
+				"admin", "good", "excellent", "bad", null
 			},//1. All fine
 			{
-				"member1", IllegalArgumentException.class
-			},//2. Invalid authority
+				"member1", "good", "excellent", "bad", IllegalArgumentException.class
+			},//2. Not administrator
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.AuthoritySpammerTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
+			this.AuthorityPositiveNegativeWordsTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
 	}
 
-	protected void AuthoritySpammerTemplate(final String username, final Class<?> expected) {
+	protected void AuthorityPositiveNegativeWordsTemplate(final String username, final String positive1, final String positive2, final String negative1, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
 			super.authenticate(username);
 
-			this.administratorService.spammer();
+			final Collection<String> positives = new HashSet<>();
+			positives.add(positive1);
+			positives.add(positive2);
+			final Collection<String> negatives = new HashSet<>();
+			negatives.add(negative1);
+
+			final Configuration config = this.configurationService.findConfiguration();
+
+			config.setPositiveWords(positives);
+			config.setNegativeWords(negatives);
+
+			this.startTransaction();
+
+			this.configurationService.save(config);
+			this.configurationService.flush();
+
+			this.unauthenticate();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
-		this.checkExceptions(expected, caught);
-	}
-
-	@Test
-	public void ScoreTest() {
-		final Object testingData[][] = {
-			{
-				"admin", null
-			},//1. All fine
-			{
-				"member1", IllegalArgumentException.class
-			},//2. Invalid authority
-		};
-
-		for (int i = 0; i < testingData.length; i++)
-			this.AuthorityScoreTemplate((String) testingData[i][0], (Class<?>) testingData[i][1]);
-	}
-
-	protected void AuthorityScoreTemplate(final String username, final Class<?> expected) {
-		Class<?> caught;
-
-		caught = null;
-		try {
-			super.authenticate(username);
-
-			this.administratorService.calculateScore();
-
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
+		this.rollbackTransaction();
 
 		this.checkExceptions(expected, caught);
 	}

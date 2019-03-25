@@ -127,6 +127,8 @@ public class LegalRecordService {
 		final History history = this.historyService.findByBrotherhoodId(actor.getId());
 		Assert.notNull(history);
 
+		Assert.isTrue(history.getBrotherhood().getId() == actor.getId());
+
 		history.getLegalRecords().remove(legalRecord);
 		this.legalRecordRepository.delete(legalRecord);
 	}

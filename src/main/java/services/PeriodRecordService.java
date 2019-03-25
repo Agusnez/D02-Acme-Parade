@@ -88,7 +88,7 @@ public class PeriodRecordService {
 
 		final Date startDate = periodRecord.getStartYear();
 		final Date endDate = periodRecord.getEndYear();
-		Assert.isTrue(startDate.compareTo(endDate) <= 0);
+		Assert.isTrue(startDate.before(endDate));
 
 		if (periodRecord.getId() != 0) {
 
@@ -98,6 +98,8 @@ public class PeriodRecordService {
 			Assert.isTrue(actor.getId() == owner.getId());
 
 		}
+
+		this.checkPictures(periodRecord.getPhotos());
 
 		result = this.periodRecordRepository.save(periodRecord);
 
@@ -157,8 +159,19 @@ public class PeriodRecordService {
 		return res;
 	}
 
+<<<<<<< HEAD
 	public void flush() {
 		this.periodRecordRepository.flush();
 	}
 
+=======
+	public void checkPictures(final Collection<String> attachments) {
+
+		for (final String url : attachments) {
+			final boolean checkUrl = url.matches("^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:])+[a-zA-Z0-9/]+$");
+			Assert.isTrue(checkUrl);
+
+		}
+	}
+>>>>>>> master
 }

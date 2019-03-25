@@ -1,7 +1,10 @@
 
 package services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -34,7 +37,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * we are testing and we have to analyse its composition (if, for, Assert...) and Asserts.
 	 * Then, we calculate the number of total cases which our code can execute. The equation will be:
 	 * 
-	 * (nº passed cases / nº total cases)*100 = coverage(%)
+	 * (nï¿½ passed cases / nï¿½ total cases)*100 = coverage(%)
 	 * 
 	 * In the end of the class, we conclude with the total coverage of the service's methods
 	 * which means the service's coverage.
@@ -47,7 +50,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * about the attribute. If we have tested all types of cases
 	 * in a attribute, that is called "proven attribute".
 	 * 
-	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
+	 * (nï¿½ proven attributes/ nï¿½ total attributes)*100 = coverage(%)
 	 * 
 	 * ----Note:
 	 * It's clear that if we have tested all cases about a method in a test
@@ -111,7 +114,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 1. Navigate to the parades that a brotherhood organise
 	 * Negative cases:
 	 * b)2. El parade no pertenece a la brotherhood
-	 * 3. El parade es del brotherhood pero no está en estado ACCEPTED
+	 * 3. El parade es del brotherhood pero no estï¿½ en estado ACCEPTED
 	 * c) Sentence coverage
 	 * findParadeCanBeSeenOfBrotherhoodId()=100%
 	 * 
@@ -132,7 +135,7 @@ public class ParadeServiceTest extends AbstractTest {
 			//2. El parade no pertenece a la brotherhood
 			}, {
 				"parade1", "brotherhood1", IllegalArgumentException.class
-			//3. El parade es del brotherhood pero no está en estado ACCEPTED
+			//3. El parade es del brotherhood pero no estï¿½ en estado ACCEPTED
 			}
 
 		};
@@ -217,6 +220,285 @@ public class ParadeServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+	
+	/*
+	 * a) (Level B) Requirement 3. An actor who is authenticated as a brotherhood must be able to:
+	 * 2. Make a copy of one of their parades. When a parade is copied, a new ticker is generated,
+	 *	  its status is cleared, the rejection reason is cleared, and it changes to draft mode.
+	 *	
+	 * b) Positive test case
+	 * 
+	 * c) Sentence coverage:
+	 * 
+	 * d) Data coverage: 0%
+	 * 
+	 */
+	@Test
+	public void copyParade() {
+		
+	}
+	
+	//---------------------------------------------------------------------------------------------------------------------------------
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
+	 * 2. List their parades
+	 * 
+	 * b)Negative cases: 2
+	 * 
+	 * c) Sentence coverage
+	 * -findParadeByBrotherhoodId()=100%
+	 * findOne()=100%
+	 * 
+	 * d) Data coverage
+	 * 0%
+	 */
+
+	@Test
+	public void driverListParadesOfABrotherhood() {
+		final Object testingData[][] = {
+
+			{
+				"parade1", "brotherhood1", null
+			//1. Todo bien
+			}, {
+				"parade2", "brotherhood1", IllegalArgumentException.class
+			//2. El parade no pertenece a la brotherhood
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListParadesOfABrotherhood((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+
+	}
+	protected void templateListParadesOfABrotherhood(final String paradeId, final String brotherhoodUsername, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+
+			super.authenticate(brotherhoodUsername);
+			final Integer paradeIdInteger = super.getEntityId(paradeId);
+			final Integer brotherhoodIdInteger = super.getEntityId(brotherhoodUsername);
+
+			final Parade parade = this.paradeService.findOne(paradeIdInteger);
+
+			final Collection<Parade> parades = this.paradeService.findParadeByBrotherhoodId(brotherhoodIdInteger);
+			super.unauthenticate();
+			Assert.isTrue(parades.contains(parade));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+	}
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
+	 * 2. Create a Parade
+	 * 
+	 * b)Negative cases: 2
+	 * 
+	 * c) Sentence coverage
+	 * create()=2 passed cases/3 total cases=66.6%
+	 * save()=1 passed cases/14 total cases= 7,14%
+	 * findAll()=1 passed cases/2 total cases=50%
+	 * 
+	 * d) Data coverage
+	 * -Parade = 0%
+	 */
+
+	@Test
+	public void driverCreateParade() {
+		final Object testingData[][] = {
+
+			{
+				"brotherhood1", "description1", "title1", "2019/09/25 11:00", true, 5, 5, "190925-KPPRM4", null
+			//1. Todo bien
+			}, {
+				"chapter1", "description1", "title1", "2019/09/25 11:00", true, 5, 5, "190925-PSPRM4", IllegalArgumentException.class
+			//2. Intenta crearlo un Chapter
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateCreateParade((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Boolean) testingData[i][4], (int) testingData[i][5], (int) testingData[i][6],
+				(String) testingData[i][7], (Class<?>) testingData[i][8]);
+
+	}
+	protected void templateCreateParade(final String actor, final String description, final String title, final String organisationMoment, final Boolean finalMode, final int maxColumn, final int maxRow, final String ticker, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+			super.authenticate(actor);
+
+			final Parade parade = this.paradeService.create();
+
+			parade.setDescription(description);
+			parade.setTitle(title);
+
+			final DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			final Date date = format.parse(organisationMoment);
+
+			parade.setOrganisationMoment(date);
+			parade.setFinalMode(finalMode);
+			parade.setMaxColumn(maxColumn);
+			parade.setMaxRow(maxRow);
+			parade.setTicker(ticker);
+
+			final Parade saved = this.paradeService.save(parade);
+			//this.paradeService.flush();
+
+			final Collection<Parade> parades = this.paradeService.findAll();
+			super.unauthenticate();
+			Assert.isTrue(parades.contains(saved));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		} finally {
+			this.rollbackTransaction();
+		}
+		super.checkExceptions(expected, caught);
+
+	}
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
+	 * 2. Update a Float
+	 * 
+	 * b)Negative cases:
+	 * 
+	 * c) Sentence coverage
+	 * findOne()=1 passed cases/1 total cases=100%
+	 * save()=2 passed cases/14 total cases= 14,28%
+	 * findAll()=1 passed cases/2 total cases=50%
+	 * 
+	 * d) Data coverage
+	 * 0%
+	 */
+
+	@Test
+	public void driverUpdateParade() {
+		final Object testingData[][] = {
+
+			{
+				"brotherhood1", "parade16", "description1", null
+			//1. Todo bien
+			}, {
+				"member1", "parade16", "description1", IllegalArgumentException.class
+			//2. Intenta actualizarlo un member
+			}, {
+				"brotherhood1", "parade2", "description1", IllegalArgumentException.class
+			//3. El parade no pertenece al brotherhood
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateUpdateParade((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+
+	}
+	protected void templateUpdateParade(final String actor, final String paradeId, final String description, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate(actor);
+
+			final Parade parade = this.paradeService.findOne(super.getEntityId(paradeId));
+			parade.setDescription(description);
+
+			this.startTransaction();
+			final Parade saved = this.paradeService.save(parade);
+			this.paradeService.flush();
+
+			final Collection<Parade> parades = this.paradeService.findAll();
+			super.unauthenticate();
+			Assert.isTrue(parades.contains(saved));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
+	}
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
+	 * 2. Delete a Parade
+	 * 
+	 * b)Negative cases:
+	 * 
+	 * c) Sentence coverage
+	 * findOne()=1 passed cases/1 total cases=100%
+	 * findAll()=1 passed cases/2 total cases=50%
+	 * delete()=1 passed cases/8 total cases= 12,5%
+	 * 
+	 * d) Data coverage
+	 * 0%
+	 */
+
+	@Test
+	public void driverDeleteParade() {
+		final Object testingData[][] = {
+
+			{
+				"brotherhood1", "parade16", null
+			//1. Todo bien
+			}, {
+				"chapter1", "parade16", IllegalArgumentException.class
+			//2. Intenta borrarlo un Chapter
+			}, {
+				"brotherhood1", "parade2", IllegalArgumentException.class
+			//3. El parade no pertenece al brotherhood
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateDeleteParade((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+
+	}
+	protected void templateDeleteParade(final String actor, final String paradeId, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate(actor);
+
+			final Parade parade = this.paradeService.findOne(super.getEntityId(paradeId));
+
+			//this.startTransaction();
+			this.paradeService.delete(parade);
+			this.paradeService.flush();
+
+			final Collection<Parade> parades = this.paradeService.findAll();
+			super.unauthenticate();
+			Assert.isTrue(!parades.contains(parade));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+		//this.rollbackTransaction();
+
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
 
 	/*
 	 * -------Coverage ChapterService-------

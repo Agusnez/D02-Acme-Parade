@@ -55,4 +55,4 @@
 <br/>
 <br/>
 
-<acme:button name="back" code="box.back" onclick="javascript: relativeRedir('welcome/index.do');" />
+<acme:button name="back" code="box.back" onclick="javascript: relativeRedir('box/actor/list.do');" />

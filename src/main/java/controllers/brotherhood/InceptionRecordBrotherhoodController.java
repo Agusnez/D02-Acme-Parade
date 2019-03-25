@@ -43,19 +43,12 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		InceptionRecord inceptionRecord;
-		Boolean security;
 
-		security = this.historyService.securityHistory();
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		if (security) {
-
-			final String banner = this.configurationService.findConfiguration().getBanner();
-
-			inceptionRecord = this.inceptionRecordService.create();
-			result = this.create2ModelAndView(inceptionRecord);
-			result.addObject("banner", banner);
-		} else
-			result = new ModelAndView("redirect:/welcome/index.do");
+		inceptionRecord = this.inceptionRecordService.create();
+		result = this.create2ModelAndView(inceptionRecord);
+		result.addObject("banner", banner);
 
 		return result;
 	}
@@ -104,7 +97,7 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 				final History history;
 				history = this.historyService.create(ir);
 				this.historyService.save(history);
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.create2ModelAndView(inceptionRecord, "inceptionRecord.commit.error");
 			}
@@ -129,7 +122,7 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 		else
 			try {
 				this.inceptionRecordService.save(inceptionRecord);
-				result = new ModelAndView("redirect:/history/display.do" + "?brotherhoodId=" + id);
+				result = new ModelAndView("redirect:/history/brotherhood/display.do" + "?brotherhoodId=" + id);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(inceptionRecord, "inceptionRecord.commit.error");
 			}
@@ -165,7 +158,7 @@ public class InceptionRecordBrotherhoodController extends AbstractController {
 		result.addObject("id2", id2);
 
 		result.addObject("inceptionRecord", inceptionRecord);
-		result.addObject("message", message);
+		result.addObject("messageError", message);
 		result.addObject("banner", banner);
 
 		return result;

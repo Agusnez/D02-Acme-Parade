@@ -64,17 +64,17 @@ public class ParadeService {
 
 	public Parade create() {
 
-		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		Assert.notNull(brotherhood);
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.BROTHERHOOD);
-		Assert.isTrue(brotherhood.getUserAccount().getAuthorities().contains(authority));
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
 
 		final Parade result = new Parade();
 
 		final Collection<Float> floatt = new HashSet<>();
 		result.setFloats(floatt);
-		result.setBrotherhood(brotherhood);
+		result.setBrotherhood(this.brotherhoodService.findByPrincipal());
 
 		result.setFinalMode(false);
 		result.setStatus(null);
@@ -257,22 +257,28 @@ public class ParadeService {
 		Parade result;
 
 		final Parade original = this.paradeRepository.findOne(paradeId);
+		final Brotherhood owner = this.brotherhoodService.findByPrincipal();
+		
+		if (owner.getId() == original.getBrotherhood().getId()) {
 
-		final String ticker = this.generateTicker(original.getOrganisationMoment());
-
-		final Parade copy = this.create();
-
-		copy.setDescription(original.getDescription());
-		copy.setBrotherhood(original.getBrotherhood());
-		copy.setMaxColumn(original.getMaxColumn());
-		copy.setMaxRow(original.getMaxRow());
-		copy.setOrganisationMoment(original.getOrganisationMoment());
-		copy.setRejectedComment(null);
-		copy.setStatus(null);
-		copy.setTicker(ticker);
-		copy.setTitle(original.getTitle());
-
-		result = this.paradeRepository.save(copy);
+			final String ticker = this.generateTicker(original.getOrganisationMoment());
+	
+			final Parade copy = this.create();
+	
+			copy.setDescription(original.getDescription());
+			copy.setBrotherhood(original.getBrotherhood());
+			copy.setMaxColumn(original.getMaxColumn());
+			copy.setMaxRow(original.getMaxRow());
+			copy.setOrganisationMoment(original.getOrganisationMoment());
+			copy.setRejectedComment(null);
+			copy.setStatus(null);
+			copy.setTicker(ticker);
+			copy.setTitle(original.getTitle());
+	
+			result = this.paradeRepository.save(copy);
+		} else {
+			throw new IllegalArgumentException("Security exception.");
+		}
 
 		return result;
 
