@@ -84,10 +84,14 @@ public class LegalRecordService {
 
 		Assert.notNull(legalRecord);
 
-		//		final History h = this.historyService.historyPerLegalRecordId(legalRecord.getId());
-		//		final Brotherhood owner = h.getBrotherhood();
-		//
-		//		Assert.isTrue(actor.getId() == owner.getId());
+		if (legalRecord.getId() != 0) {
+
+			final History h = this.historyService.historyPerLegalRecordId(legalRecord.getId());
+			final Brotherhood owner = h.getBrotherhood();
+
+			Assert.isTrue(actor.getId() == owner.getId());
+
+		}
 
 		LegalRecord result;
 

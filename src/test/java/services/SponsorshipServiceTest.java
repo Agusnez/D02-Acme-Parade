@@ -354,7 +354,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 			final Collection<Sponsorship> sponsorships = new HashSet<>();
 			final Sponsorship s1 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean1));
 			sponsorships.add(s1);
-			final Sponsorship s2 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean1));
+			final Sponsorship s2 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean2));
 			sponsorships.add(s2);
 
 			final Sponsorship s = this.sponsorshipService.ramdomSponsorship(parade.getId());

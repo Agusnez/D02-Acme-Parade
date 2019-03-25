@@ -85,10 +85,14 @@ public class LinkRecordService {
 		authority.setAuthority(Authority.BROTHERHOOD);
 		Assert.isTrue(actor.getUserAccount().getAuthorities().contains(authority));
 
-		//		final History h = this.historyService.historyPerLinkRecordId(linkRecord.getId());
-		//		final Brotherhood owner = h.getBrotherhood();
-		//
-		//		Assert.isTrue(actor.getId() == owner.getId());
+		if (linkRecord.getId() != 0) {
+
+			final History h = this.historyService.historyPerLinkRecordId(linkRecord.getId());
+			final Brotherhood owner = h.getBrotherhood();
+
+			Assert.isTrue(actor.getId() == owner.getId());
+
+		}
 
 		result = this.linkRecordRepository.save(linkRecord);
 
