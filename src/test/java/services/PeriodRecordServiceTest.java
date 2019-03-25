@@ -76,19 +76,19 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	public void driverCreatePeriodRecord() {
 		final Object testingData[][] = {
 			{//1.All fine
-				"brotherhood1", "title1", "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", null
+				"brotherhood1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", null
 			}, {//2.Title = null
-				"brotherhood1", null, "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", ConstraintViolationException.class
+				"brotherhood1", null, "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
 			}, {//3.Description = null
-				"brotherhood1", "title1", null, "1812/10/12", "1817/11/15", "photo1", "photo2", ConstraintViolationException.class
+				"brotherhood1", "title1", null, "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
 			}, {//4.Description = ""
-				"brotherhood1", "title1", "", "1812/10/12", "1817/11/15", "photo1", "photo2", ConstraintViolationException.class
+				"brotherhood1", "title1", "", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
 			}, {//5.Title = ""
-				"brotherhood1", "", "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", ConstraintViolationException.class
+				"brotherhood1", "", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
 			}, {//6.Not authority
-				null, "title1", "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", IllegalArgumentException.class
+				null, "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
 			}, {//7.Not a Brotherhood
-				"member1", "title1", "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", IllegalArgumentException.class
+				"member1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
 			}
 		};
 
@@ -151,11 +151,11 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	public void driverEditPeriodRecord() {
 		final Object testingData[][] = {
 			{//1.All fine
-				"brotherhood1", "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", null
+				"brotherhood1", "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", null
 			}, {//2.Not authority
-				null, "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", IllegalArgumentException.class
+				null, "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
 			}, {//3.Not a Brotherhood
-				"member1", "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "photo1", "photo2", IllegalArgumentException.class
+				"member1", "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
 			}
 		};
 

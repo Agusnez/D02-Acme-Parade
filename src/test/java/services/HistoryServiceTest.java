@@ -86,10 +86,10 @@ public class HistoryServiceTest extends AbstractTest {
 	public void driverCreateHistory() {
 		final Object testingData[][] = {
 			{//1.All fine
-				"brotherhood3", "title1", "descrption1", "photo1", "photo2", null
+				"brotherhood3", "title1", "descrption1", "http://photo1.com", "http://photo2.com", null
 
 			}, {//2.Not a Brotherhood
-				"member1", "title1", "descrption1", "photo1", "photo2", IllegalArgumentException.class
+				"member1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
 			}
 		};
 

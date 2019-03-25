@@ -159,12 +159,10 @@ public class PeriodRecordService {
 		return res;
 	}
 
-<<<<<<< HEAD
 	public void flush() {
 		this.periodRecordRepository.flush();
 	}
 
-=======
 	public void checkPictures(final Collection<String> attachments) {
 
 		for (final String url : attachments) {
@@ -173,5 +171,5 @@ public class PeriodRecordService {
 
 		}
 	}
->>>>>>> master
+
 }
