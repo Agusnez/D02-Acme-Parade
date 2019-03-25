@@ -2465,6 +2465,13 @@
 		<property name="actor" ref="sponsor2" />
 	</bean>
 	
+	<bean id="box111" class="domain.Box">
+		<property name="name" value="files" />
+		<property name="byDefault" value="False" />
+		<property name="actor" ref="administrator1" />
+		
+	</bean>
+	
 		
 	
 	<!-- Messages -->
