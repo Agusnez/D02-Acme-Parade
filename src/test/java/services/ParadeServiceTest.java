@@ -37,7 +37,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * we are testing and we have to analyse its composition (if, for, Assert...) and Asserts.
 	 * Then, we calculate the number of total cases which our code can execute. The equation will be:
 	 * 
-	 * (nº passed cases / nº total cases)*100 = coverage(%)
+	 * (nï¿½ passed cases / nï¿½ total cases)*100 = coverage(%)
 	 * 
 	 * In the end of the class, we conclude with the total coverage of the service's methods
 	 * which means the service's coverage.
@@ -50,7 +50,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * about the attribute. If we have tested all types of cases
 	 * in a attribute, that is called "proven attribute".
 	 * 
-	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
+	 * (nï¿½ proven attributes/ nï¿½ total attributes)*100 = coverage(%)
 	 * 
 	 * ----Note:
 	 * It's clear that if we have tested all cases about a method in a test
@@ -114,7 +114,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 1. Navigate to the parades that a brotherhood organise
 	 * Negative cases:
 	 * b)2. El parade no pertenece a la brotherhood
-	 * 3. El parade es del brotherhood pero no está en estado ACCEPTED
+	 * 3. El parade es del brotherhood pero no estï¿½ en estado ACCEPTED
 	 * c) Sentence coverage
 	 * findParadeCanBeSeenOfBrotherhoodId()=100%
 	 * 
@@ -135,7 +135,7 @@ public class ParadeServiceTest extends AbstractTest {
 			//2. El parade no pertenece a la brotherhood
 			}, {
 				"parade1", "brotherhood1", IllegalArgumentException.class
-			//3. El parade es del brotherhood pero no está en estado ACCEPTED
+			//3. El parade es del brotherhood pero no estï¿½ en estado ACCEPTED
 			}
 
 		};
@@ -220,6 +220,24 @@ public class ParadeServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+	
+	/*
+	 * a) (Level B) Requirement 3. An actor who is authenticated as a brotherhood must be able to:
+	 * 2. Make a copy of one of their parades. When a parade is copied, a new ticker is generated,
+	 *	  its status is cleared, the rejection reason is cleared, and it changes to draft mode.
+	 *	
+	 * b) Positive test case
+	 * 
+	 * c) Sentence coverage:
+	 * 
+	 * d) Data coverage: 0%
+	 * 
+	 */
+	@Test
+	public void copyParade() {
+		
+	}
+	
 	//---------------------------------------------------------------------------------------------------------------------------------
 
 	/*

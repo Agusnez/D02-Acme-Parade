@@ -257,22 +257,28 @@ public class ParadeService {
 		Parade result;
 
 		final Parade original = this.paradeRepository.findOne(paradeId);
+		final Brotherhood owner = this.brotherhoodService.findByPrincipal();
+		
+		if (owner.getId() == original.getBrotherhood().getId()) {
 
-		final String ticker = this.generateTicker(original.getOrganisationMoment());
-
-		final Parade copy = this.create();
-
-		copy.setDescription(original.getDescription());
-		copy.setBrotherhood(original.getBrotherhood());
-		copy.setMaxColumn(original.getMaxColumn());
-		copy.setMaxRow(original.getMaxRow());
-		copy.setOrganisationMoment(original.getOrganisationMoment());
-		copy.setRejectedComment(null);
-		copy.setStatus(null);
-		copy.setTicker(ticker);
-		copy.setTitle(original.getTitle());
-
-		result = this.paradeRepository.save(copy);
+			final String ticker = this.generateTicker(original.getOrganisationMoment());
+	
+			final Parade copy = this.create();
+	
+			copy.setDescription(original.getDescription());
+			copy.setBrotherhood(original.getBrotherhood());
+			copy.setMaxColumn(original.getMaxColumn());
+			copy.setMaxRow(original.getMaxRow());
+			copy.setOrganisationMoment(original.getOrganisationMoment());
+			copy.setRejectedComment(null);
+			copy.setStatus(null);
+			copy.setTicker(ticker);
+			copy.setTitle(original.getTitle());
+	
+			result = this.paradeRepository.save(copy);
+		} else {
+			
+		}
 
 		return result;
 
