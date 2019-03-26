@@ -89,9 +89,8 @@ public class AdministratorAreaController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute(value = "area") Area area, final BindingResult binding) {
 		ModelAndView result;
-
+		
 		area = this.areaService.reconstruct(area, binding);
-
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(area, null);
 		else

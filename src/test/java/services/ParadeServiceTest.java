@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Brotherhood;
 import domain.Parade;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -226,15 +227,65 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 2. Make a copy of one of their parades. When a parade is copied, a new ticker is generated,
 	 *	  its status is cleared, the rejection reason is cleared, and it changes to draft mode.
 	 *	
-	 * b) Positive test case
+	 * b) Negative test case: 1
+	 * 		- Brothehood doesn't own the parade
 	 * 
 	 * c) Sentence coverage:
+	 * 		- copy() = 100%
 	 * 
 	 * d) Data coverage: 0%
 	 * 
 	 */
 	@Test
-	public void copyParade() {
+	public void driverCopyParade() {
+		final Object testingData[][] = {
+
+				{
+					"parade5", "brotherhood1", null
+				//1. OK
+
+				}, {
+					"parade2", "brotherhood1", IllegalArgumentException.class
+				//2. Brothehood doesn't own the parade
+				}
+			};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateCopyParade((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	
+	protected void templateCopyParade(final String paradeId, final String brotherhoodId, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			
+			this.authenticate(brotherhoodId);
+			
+			final Integer paradeIdInteger = super.getEntityId(paradeId);
+			//final Integer brotherhoodIdInteger = super.getEntityId(brotherhoodId);
+
+			final Parade parade = this.paradeService.findOne(paradeIdInteger);
+			
+			
+
+			final Parade paradeCopy = this.paradeService.copy(paradeIdInteger);
+
+			this.paradeService.flush();
+			
+			super.unauthenticate();
+			Assert.isTrue(parade.getTitle().equals(paradeCopy.getTitle()));
+			Assert.isTrue(parade.getDescription().equals(paradeCopy.getDescription()));
+			Assert.isTrue(parade.getOrganisationMoment().equals(paradeCopy.getOrganisationMoment()));
+			Assert.isTrue(paradeCopy.getFinalMode().equals(false));
+			Assert.isNull(paradeCopy.getRejectedComment());
+			Assert.isNull(paradeCopy.getStatus());
+			Assert.isTrue(!parade.getTicker().equals(paradeCopy.getTicker()));
+			
+		}catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
 		
 	}
 	
