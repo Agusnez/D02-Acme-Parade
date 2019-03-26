@@ -368,7 +368,7 @@ public class AreaServiceTest extends AbstractTest {
 	 * a)(Level B) Requirement 20.1: Brotherhood select the area in which it was settled.
 	 * 
 	 * b) Negative cases:
-	 * 2. A brotherhood who have an area, self-assing another area.
+	 * 2. Not area
 	 * 
 	 * c) Sentence coverage
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
@@ -383,11 +383,11 @@ public class AreaServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			{
-				"", "area3", null
+				"brotherhood8", "area3", null
 			},//1. All fine
 			{
-				"", "area3", IllegalArgumentException.class
-			},//2. A brotherhood who have an area, self-assing another area.
+				"brotherhood1", "brotherhood1", IllegalArgumentException.class
+			},//2. Not area
 
 		};
 
@@ -402,23 +402,30 @@ public class AreaServiceTest extends AbstractTest {
 		caught = null;
 		try {
 
+			this.authenticate(username);
+
 			final Area area = this.areaService.findOne(super.getEntityId(areaBean));
 
 			final Brotherhood brotherhood = this.brotherhoodService.findOne(super.getEntityId(username));
 
 			brotherhood.setArea(area);
 
-			final Collection<Brotherhood> brotherhoods = area.getBrotherhoods();
+			if (area != null) {
+				final Collection<Brotherhood> brotherhoods = area.getBrotherhoods();
 
-			brotherhoods.add(brotherhood);
+				brotherhoods.add(brotherhood);
 
-			area.setBrotherhoods(brotherhoods);
+				area.setBrotherhoods(brotherhoods);
+			}
 
 			this.startTransaction();
 
-			this.brotherhoodService.save(brotherhood);
 			this.areaService.save(area);
+			this.brotherhoodService.save(brotherhood);
 			this.areaService.flush();
+			this.brotherhoodService.flush();
+
+			this.unauthenticate();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
