@@ -18,6 +18,9 @@
 		<form:hidden path="paradeId" />
 	</jstl:if>	
 	
+	<h3><spring:message code="segment.date"/>${moment}</h3>
+	<br/>
+	
 	<jstl:if test="${complete}">
 		<acme:textbox path="origin" code="segment.origin" placeholder="-90,180" obligatory="true"/>
 	</jstl:if>	
