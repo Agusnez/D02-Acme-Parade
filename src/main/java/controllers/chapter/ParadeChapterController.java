@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ChapterService;
 import services.ConfigurationService;
+import services.MessageService;
 import services.ParadeService;
 import controllers.AbstractController;
 import domain.Brotherhood;
@@ -35,6 +36,9 @@ public class ParadeChapterController extends AbstractController {
 
 	@Autowired
 	private ParadeService			paradeService;
+
+	@Autowired
+	private MessageService			messageService;
 
 
 	//Listar parades publicados(finalMode=true) por los brotherhoods del area del chapter
@@ -85,6 +89,7 @@ public class ParadeChapterController extends AbstractController {
 			if (security) {
 				parade.setStatus("ACCEPTED");
 				this.paradeService.save(parade);
+				this.messageService.NotificationNewParade(parade, parade.getBrotherhood());
 				result = new ModelAndView("redirect:/parade/chapter/list.do");
 
 			} else

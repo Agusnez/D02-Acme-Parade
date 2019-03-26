@@ -265,9 +265,14 @@ public class MessageService {
 		return messages;
 	}
 
-	public void NotificationNewParade(final Parade parade) {
+	public void NotificationNewParade(final Parade parade, Brotherhood brotherhood) {
 
-		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
+		if (brotherhood == null) {
+
+			brotherhood = this.brotherhoodService.findByPrincipal();
+			
+		}
+		
 		final Collection<Member> members = brotherhood.getMembers();
 
 		for (final Member member : members) {
@@ -406,4 +411,9 @@ public class MessageService {
 
 		return result;
 	}
+
+	public void flush() {
+		this.messageRepository.flush();
+	}
+
 }

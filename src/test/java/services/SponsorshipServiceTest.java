@@ -67,10 +67,24 @@ public class SponsorshipServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a) Requirement: Sponsor manage his/her sponsorships (edit)
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 16.1: Sponsor manage his/her sponsorships: Edit
 	 * 
 	 * b) Negative cases:
-	 * -specified before every one of them
+	 * 2. Wrong user, same authority
+	 * 3. Wrong authority
+	 * 4. No authority
+	 * 5. No register user
+	 * 6. Credit Card expired year
+	 * 7. Credit Card expired month
+	 * 8. Credit Card expired both month and year
+	 * 9. Incorrect banner URL
+	 * 10. Incorrect target URL
+	 * 11. Null banner URL
+	 * 12. Null target URL
+	 * 13. Null holder name
+	 * 14. Null number
+	 * 15. Incorrect number
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 6 passed cases / 6 total cases = 100%
@@ -80,66 +94,81 @@ public class SponsorshipServiceTest extends AbstractTest {
 	 * -Sponsorship: 2 passed cases / 6 total cases = 33,3%
 	 * -CreditCard: 4 passed cases / 6 total cases = 66,6%
 	 */
+
 	@Test
 	public void driverEditSponsorsip() {
 		final Object testingData[][] = {
 
-			{//1. All fine
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12, 2020, 123, true, 0.0, null
-			}, {//2. Wrong user, same authority
+			},//1. All fine
+			{
 				"sponsor2", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12, 2020, 123, true, 0.0,
 				IllegalArgumentException.class
-			}, {//3. Wrong authority
+			},//2. Wrong user, same authority
+			{
 				"brotherhood1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12, 2020, 123, true, 0.0,
 				IllegalArgumentException.class
-			}, {//4. No authority
+			},//3. Wrong authority
+			{
 				"", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12, 2020, 123, true, 0.0,
 				IllegalArgumentException.class
-			}, {//5. No register user
+			},//4. No authority 
+			{
 				"sponsorNoExistTest", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12, 2020, 123, true, 0.0,
 				IllegalArgumentException.class
-			}, {//6. Credit Card expired year
+			},//5. No register user
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12, 2018, 123, true, 0.0,
 				IllegalArgumentException.class
-			}, {//7. Credit Card expired month
+			},//6. Credit Card expired year
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 01, 2019, 123, true, 0.0,
 				IllegalArgumentException.class
-			}, {//8. Credit Card expired both month and year
+			},//7. Credit Card expired month
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 01, 2018, 123, true, 0.0,
 				IllegalArgumentException.class
-			}, {//9. Incorrect banner URL
+			},//8. Credit Card expired both month and year 
+			{
 				"sponsor1", "sponsorship1", "test", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12,
 				2020, 123, true, 0.0, ConstraintViolationException.class
-			}, {//10. Incorrect target URL
+			},//9. Incorrect banner URL
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "test", "José", "VISA", "1111222233334444", 12,
 				2020, 123, true, 0.0, ConstraintViolationException.class
-			}, {//11. null banner URL
+			},//10. Incorrect target URL
+			{
 				"sponsor1", "sponsorship1", null, "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1111222233334444", 12,
 				2020, 123, true, 0.0, ConstraintViolationException.class
-			}, {//12. null target URL
+			},//11. Null banner URL
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", null, "José", "VISA", "1111222233334444", 12,
 				2020, 123, true, 0.0, ConstraintViolationException.class
-			}, {//13. Null holder name
+			},//12. Null target URL
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", null, "VISA", "1111222233334444", 12, 2020, 123, true, 0.0,
 				ConstraintViolationException.class
-			}, {//14. Null number
+			},//13. Null holder name
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", null, 12, 2020, 123, true, 0.0,
 				ConstraintViolationException.class
-			}, {//15. Incorrect number
+			},//14. Null number
+			{
 				"sponsor1", "sponsorship1", "http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png",
 				"http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png", "José", "VISA", "1234", 12, 2020, 123, true, 0.0,
 				ConstraintViolationException.class
-			}
+			},//15. Incorrect number
 
 		};
 
@@ -192,34 +221,44 @@ public class SponsorshipServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Sponsor manage his/her sponsorships (create)
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 16.1: Sponsor manage his/her sponsorships : Create
 	 * 
 	 * b) Negative cases:
-	 * -specified before every one of them
+	 * 2. Wrong authority
+	 * 3. No authority
+	 * 4. No register user
+	 * 5. Parade not accepted
+	 * 6. Parade not exists
 	 * 
 	 * c) Sentence coverage
 	 * -create(): 6 passed cases / 6 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -Sponsorship: 0 passed cases / 4 total cases = 0%s
 	 */
 	@Test
 	public void driverCreateSponsorship() {
 		final Object testingData[][] = {
 
-			{//1. All fine
+			{
 				"sponsor1", "parade6", null
-			}, {//2. Wrong authority
+			},//1. All fine
+			{
 				"brotherhood", "parade5", IllegalArgumentException.class
-			}, {//3. No authority
+			},//2. Wrong authority
+			{
 				null, "parade5", IllegalArgumentException.class
-			}, {//4. No register user
+			},//3. No authority
+			{
 				"sponsorNoTest", "parade5", IllegalArgumentException.class
-			}, {//5. Parade not accepted
+			},//4. No register user
+			{
 				"sponsor1", "parade1", IllegalArgumentException.class
-			}, {//5. Parade not exists
+			},//5. Parade not accepted
+			{
 				"sponsor1", "paradeNoTest", AssertionError.class
-			}
+			},//6. Parade not exists
 
 		};
 
@@ -256,16 +295,17 @@ public class SponsorshipServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Sponsor manage his/her sponsorships (list)
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 16.1: Sponsor manage his/her sponsorships: List
 	 * 
 	 * b) Negative cases:
-	 * -specified before every one of them
+	 * 2. Incorrect results
 	 * 
 	 * c) Sentence coverage
 	 * -findAllBySponsorId(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -Sponsorship: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -274,11 +314,10 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 			{
 				"sponsor1", 2, null
-			//1. All fine
-			}, {
+			},//1. All fine 
+			{
 				"sponsor1", 28, IllegalArgumentException.class
-			//2. Incorrect result
-			}
+			},//2. Incorrect results
 
 		};
 
@@ -310,7 +349,8 @@ public class SponsorshipServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Every time a parade with sponsorships is displayed, a random sponsorship must be selected and its banner must be shown as little intrusively as possible.
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 20: Every time a parade with sponsorships is displayed, a random sponsorship must be selected and its banner must be shown as little intrusively as possible.
 	 * 
 	 * b) Negative cases:
 	 * 2. Wrong return
@@ -368,6 +408,64 @@ public class SponsorshipServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 18.1: Administrator must be able to: Launch a process that automatically de-activates the sponsorships whose credit cards have expired.
+	 * 
+	 * b) Negative cases:
+	 * 2. 2. Invalid authority
+	 * 
+	 * c) Sentence coverage
+	 * -deactivateExpiredCardSponsorships(): 2 passed cases / 5 total cases = 40%
+	 * 
+	 * d) Data coverage
+	 * -Sponsorship: 0 passed cases / 4 total cases = 0%
+	 */
+
+	@Test
+	public void driverDeactivateExpiredCardSponsorships() {
+
+		final Object testingData[][] = {
+
+			{
+				"admin", null
+			}, //1. All fine
+			{
+				"member1", IllegalArgumentException.class
+			},//2. Invalid authority
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateDeactivateExpiredCardSponsorships((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void templateDeactivateExpiredCardSponsorships(final String username, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+
+			super.authenticate(username);
+
+			this.startTransaction();
+
+			this.sponsorshipService.deactivateExpiredCardSponsorships();
+			this.sponsorshipService.flush();
+
+			this.unauthenticate();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.rollbackTransaction();
+
+		super.checkExceptions(expected, caught);
+	}
 	/*
 	 * -------Coverage SponsorshipService-------
 	 * 
@@ -378,6 +476,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 	 * list() = 100%
 	 * findOne() = 100%
 	 * ramdomSponsorship() = 83.33333%
+	 * deactivateExpiredCardSponsorships = 40 %
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * -Sponsorship: 33,3%

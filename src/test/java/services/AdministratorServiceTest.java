@@ -54,24 +54,26 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 9: Actor who is authenticated
-	 * 2.Edit personal data
-	 * b) Negative cases: 2
+	 * a)(Level C) Requirement 9.2: Actor who is authenticated: Edit personal data
+	 * 
+	 * b) Negative cases:
+	 * 2. The user who is logged, It's not the same as the user who is being edited
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 2 passed cases / 5 total cases = 40%
 	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Administrator = 0 passed cases / 7 total cases = 0%
 	 */
+
 	@Test
 	public void driverEditAdmin() {
 		final Object testingData[][] = {
 
 			{
 				"admin", "administrator1", "name1", null
-			}, //1.All fine
+			}, //1. All fine
 			{
 				"chapter1", "administrator1", "name1", IllegalArgumentException.class
 			}, //2. The user who is logged, It's not the same as the user who is being edited
@@ -109,15 +111,19 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 8 :An actor who is authenticated as an administrator must be able to:
-	 * 1. Create user accounts for new administrators.
-	 * b)Negative cases: 2, 3 ,4
+	 * a)(Level C) Requirement 12.1: An actor who is authenticated as an administrator must be able to: Create user accounts for new administrators.
+	 * 
+	 * b)Negative cases:
+	 * 2. Name = blank
+	 * 3. Name = html
+	 * 4. The actor who is authenticated is not an Administrator
+	 * 
 	 * c) Sentence coverage:
-	 * -save(): 1 probado / 5 totales = 20%
-	 * -create(): 2 probado/ 3 totales = 33.3%
+	 * -save(): 1 passed cases / 5 total cases = 20%
+	 * -create(): 2 passed cases / 3 total cases = 33.3%
 	 * 
 	 * d) Data coverage:
-	 * -Administrator: 1 probado / 7 totales = 14,28%
+	 * -Administrator: 1 passed cases / 7 total cases = 14,28%
 	 */
 
 	@Test
@@ -125,16 +131,16 @@ public class AdministratorServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				"admin", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "admin55", "admin55", null
-			},//1.Todo bien
+			},//1. All fine
 			{
 				"admin", "", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "admin55", "admin55", ConstraintViolationException.class
-			},//2.Name = blank
+			},//2. Name = blank
 			{
 				"admin", "<script>alert('hola')</script>", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "admin55", "admin55", ConstraintViolationException.class
-			},//3.name = html
+			},//3. Name = html
 			{
 				"brotherhood1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "admin55", "admin55", IllegalArgumentException.class
-			},//4.The actor who is authenticated is not an Administrator
+			},//4. The actor who is authenticated is not an Administrator
 
 		};
 
@@ -181,17 +187,18 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Administrator launch a process to set spammers
+	 * a)(Level A) Requirement 28.2: Administrator launch a process to set spammers
 	 * 
 	 * b) Negative cases:
-	 * -specified before every one of them
+	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
 	 * -spammer(): 9 passed cases / 16 total cases = 56,25%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Administrator: 0 passed cases / 7 total cases = 0%
 	 */
+
 	@Test
 	public void SpammerTest() {
 		final Object testingData[][] = {
@@ -227,16 +234,16 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Administrator launch a process to set scores
+	 * a)(Level A) Requirement 28.2: Administrator launch a process to set scores
 	 * 
 	 * b) Negative cases:
-	 * -specified before every one of them
+	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
 	 * -calculateScore(): 7 passed cases / 9 total cases = 77,8%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Administrator: 0 passed cases / 7 total cases = 0%
 	 */
 
 	@Test
@@ -273,7 +280,7 @@ public class AdministratorServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * -------Coverage SponsorshipService-------
+	 * -------Coverage AdministratorService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
 	 * -save() = 60%
@@ -284,7 +291,7 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * -calculateScore() = 77,8%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * 0%
+	 * Administrator = 14,28%
 	 */
 
 }

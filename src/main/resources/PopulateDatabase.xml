@@ -306,6 +306,71 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount23" class="security.UserAccount">
+		<property name="username" value="sponsor3" />
+		<property name="password" value="857a54956061fdc1b88d7722cafe6519" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount24" class="security.UserAccount">
+		<property name="username" value="sponsor4" />
+		<property name="password" value="a8be034fe44a453e912feadc414dc803" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount25" class="security.UserAccount">
+		<property name="username" value="sponsor5" />
+		<property name="password" value="d6d7f85c15bbb451ef50b704b3693033" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount26" class="security.UserAccount">
+		<property name="username" value="sponsor6" />
+		<property name="password" value="214a700672abaf88da097fbf5f246252" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount27" class="security.UserAccount">
+		<property name="username" value="brotherhood8" />
+		<property name="password" value="c92210f17cded1e676c7298eee3fa0ea" />
+		<property name="isNotBanned"  value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHERHOOD" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	
 	<!-- Administrators -->	
 	
@@ -382,6 +447,7 @@
 		</property>
 		<property name="members">
 			<list>
+				<ref bean="member1"/>
 				<ref bean="member2"/>
 				<ref bean="member6"/>
 			</list>
@@ -411,6 +477,7 @@
 		</property>
 		<property name="members">
 			<list>
+				<ref bean="member1"/>
 				<ref bean="member2"/>
 			</list>
 		</property>
@@ -534,6 +601,30 @@
 		</property>
 		<property name="area">
 			<ref bean="area3"/>
+		</property>
+	</bean>
+	
+	<bean id="brotherhood8" class="domain.Brotherhood">
+		<property name="name" value="Marco" />
+		<property name="surname" value="Molina" />
+		<property name="photo" value="http://www.dropbox.com/La ultima cena/" />
+		<property name="email" value="laultimacena@gmail.com" />
+		<property name="phone" value="+34 654287024" />
+		<property name="address" value="Pantalla 55" />
+		<property name="userAccount" ref="userAccount27" />
+		<property name="title" value="La ultima cena" />
+		<property name="establishment" value="1999/09/16" />
+		<property name="pictures">
+			<list>
+				<value>http://www.dropbox.com/fhwgrn/</value>
+				<value>http://www.dropbox.com/gdgbgdsnsbdgr2/</value>
+				<value>http://www.dropbox.com/gsdgsdfgsdger3/</value>
+				<value>http://www.dropbox.com/gradfgsdodsdbsdfber4/</value>
+			</list>
+		</property>
+		<property name="members">
+			<list>
+			</list>
 		</property>
 	</bean>
 	
@@ -682,8 +773,8 @@
 		<property name="name" value="David" />
 		<property name="middleName" value="de" />
 		<property name="surname" value="MiguelÁngel" />
-		<property name="photo" value="http://www.sponse.com" />
-		<property name="email" value="sponse@mail.com" />
+		<property name="photo" value="http://www.sponsor.com" />
+		<property name="email" value="sponsor@mail.com" />
 		<property name="phone" value="+34 672008675" />
 		<property name="address" value="Las Navas" />
 		<property name="userAccount" ref="userAccount21" />
@@ -693,11 +784,55 @@
 		<property name="name" value="José" />
 		<property name="middleName" value="Rodolfo" />
 		<property name="surname" value="García" />
-		<property name="photo" value="http://www.sponse2.com" />
-		<property name="email" value="sponse2@mail.com" />
+		<property name="photo" value="http://www.sponsor2.com" />
+		<property name="email" value="sponsor2@mail.com" />
 		<property name="phone" value="+34 672012675" />
 		<property name="address" value="Las Navajas" />
 		<property name="userAccount" ref="userAccount22" />
+	</bean>
+	
+	<bean id="sponsor3" class="domain.Sponsor">
+		<property name="name" value="Pedro" />
+		<property name="middleName" value="García" />
+		<property name="surname" value="García" />
+		<property name="photo" value="http://www.sponsor3.com" />
+		<property name="email" value="sponsor3@mail.com" />
+		<property name="phone" value="+34 666012675" />
+		<property name="address" value="Hytasa" />
+		<property name="userAccount" ref="userAccount23" />
+	</bean>
+	
+	<bean id="sponsor4" class="domain.Sponsor">
+		<property name="name" value="Raul" />
+		<property name="middleName" value="García" />
+		<property name="surname" value="Moreno" />
+		<property name="photo" value="http://www.sponsor4.com" />
+		<property name="email" value="sponsor4@mail.com" />
+		<property name="phone" value="+34 672015175" />
+		<property name="address" value="Hytasa" />
+		<property name="userAccount" ref="userAccount24" />
+	</bean>
+	
+	<bean id="sponsor5" class="domain.Sponsor">
+		<property name="name" value="Sergio" />
+		<property name="middleName" value="García" />
+		<property name="surname" value="Moreno" />
+		<property name="photo" value="http://www.sponsor5.com" />
+		<property name="email" value="sponsor5@mail.com" />
+		<property name="phone" value="+34 672012675" />
+		<property name="address" value="Ramon y Cajal" />
+		<property name="userAccount" ref="userAccount25" />
+	</bean>
+	
+	<bean id="sponsor6" class="domain.Sponsor">
+		<property name="name" value="María" />
+		<property name="middleName" value="García" />
+		<property name="surname" value="Maya" />
+		<property name="photo" value="http://www.sponsor6.com" />
+		<property name="email" value="sponsor6@mail.com" />
+		<property name="phone" value="+34 625012675" />
+		<property name="address" value="Betis" />
+		<property name="userAccount" ref="userAccount26" />
 	</bean>
 	
 	<!-- Parades -->
@@ -746,7 +881,7 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
-		<property name="status" value="SUBMITTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="rejectedComment" value="" />
 	</bean>
 	
@@ -766,7 +901,7 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
-		<property name="status" value="SUBMITTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="rejectedComment" value="" />
 	</bean>
 	
@@ -786,7 +921,7 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
-		<property name="status" value="SUBMITTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="rejectedComment" value="" />
 	</bean>
 
@@ -846,8 +981,8 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
-		<property name="status" value="SUBMITTED" />
-		<property name="rejectedComment" value="" />
+		<property name="status" value="REJECTED" />
+		<property name="rejectedComment" value="There's no enough time between segments" />
 	</bean>
 	
 	<bean id="parade8" class="domain.Parade">
@@ -866,7 +1001,7 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
-		<property name="status" value="SUBMITTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="rejectedComment" value="" />
 	</bean>
 	
@@ -947,8 +1082,8 @@
 			</list>
 		</property>
 		<property name="finalMode" value="true" />
-		<property name="status" value="SUBMITTED" />
-		<property name="rejectedComment" value="" />
+		<property name="status" value="REJECTED" />
+		<property name="rejectedComment" value="No" />
 	</bean>
 	
 	<bean id="parade13" class="domain.Parade">
@@ -1296,6 +1431,15 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="area4" class="domain.Area">
+		<property name="name" value="Poligono Navisa" />
+		<property name="pictures">
+			<list>
+				<value>http://www.dp.com</value>
+				<value>http://www.lsi.com</value>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Social profiles -->
 	
@@ -1613,6 +1757,32 @@
 		</property>
 		<property name="brotherhood">
 			<ref bean="brotherhood4"/>		
+		</property>
+		<property name="position">
+			<ref bean="position6"/>		
+		</property>
+	</bean>
+	
+	<bean id="enrolment16" class="domain.Enrolment">
+		<property name="moment" value="2019/01/03 21:30" />
+		<property name="member">
+			<ref bean="member1"/>		
+		</property>
+		<property name="brotherhood">
+			<ref bean="brotherhood2"/>		
+		</property>
+		<property name="position">
+			<ref bean="position6"/>		
+		</property>
+	</bean>
+	
+	<bean id="enrolment17" class="domain.Enrolment">
+		<property name="moment" value="2019/01/03 21:30" />
+		<property name="member">
+			<ref bean="member1"/>		
+		</property>
+		<property name="brotherhood">
+			<ref bean="brotherhood3"/>		
 		</property>
 		<property name="position">
 			<ref bean="position6"/>		
@@ -2494,6 +2664,176 @@
 		<property name="name" value="files" />
 		<property name="byDefault" value="False" />
 		<property name="actor" ref="administrator1" />
+	</bean>
+	
+	<bean id="box112" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor3" />
+		
+	</bean>
+
+	<bean id="box113" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor3" />
+	
+	</bean>
+
+	<bean id="box114" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor3" />
+		
+	</bean>
+
+	<bean id="box115" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor3" />
+		
+	</bean>
+	
+	<bean id="box116" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor3" />
+	</bean>
+	
+	<bean id="box117" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor4" />
+		
+	</bean>
+
+	<bean id="box118" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor4" />
+	
+	</bean>
+
+	<bean id="box119" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor4" />
+		
+	</bean>
+
+	<bean id="box120" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor4" />
+		
+	</bean>
+	
+	<bean id="box121" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor4" />
+	</bean>
+	
+	<bean id="box122" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor5" />
+		
+	</bean>
+
+	<bean id="box123" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor5" />
+	
+	</bean>
+
+	<bean id="box124" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor5" />
+		
+	</bean>
+
+	<bean id="box125" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor5" />
+		
+	</bean>
+	
+	<bean id="box126" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor5" />
+	</bean>
+	
+	<bean id="box127" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor6" />
+		
+	</bean>
+
+	<bean id="box128" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor6" />
+	
+	</bean>
+
+	<bean id="box129" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor6" />
+		
+	</bean>
+
+	<bean id="box130" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor6" />
+		
+	</bean>
+	
+	<bean id="box131" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="sponsor6" />
+	</bean>
+	
+	<bean id="box132" class="domain.Box">
+		<property name="name" value="in box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="brotherhood8" />
+		
+	</bean>
+
+	<bean id="box133" class="domain.Box">
+		<property name="name" value="out box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="brotherhood8" />
+	
+	</bean>
+
+	<bean id="box134" class="domain.Box">
+		<property name="name" value="trash box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="brotherhood8" />
+		
+	</bean>
+
+	<bean id="box135" class="domain.Box">
+		<property name="name" value="spam box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="brotherhood8" />
+		
+	</bean>
+	
+	<bean id="box136" class="domain.Box">
+		<property name="name" value="notification box" />
+		<property name="byDefault" value="True" />
+		<property name="actor" ref="brotherhood8" />
 		
 	</bean>
 	
@@ -2811,6 +3151,96 @@
 		<property name="Cost" value="1.19"/>
 	</bean>
 	
+	<bean id="sponsorship5" class="domain.Sponsorship">
+		<property name="banner" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png"/>
+		<property name="targetUrl" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png"/>
+		<property name="creditCard" ref="creditCard3"/>
+		<property name="activated" value="false"/>
+		<property name="Sponsor" ref="sponsor3"/>
+		<property name="Parade" ref="parade1"/>
+		<property name="Cost" value="1.19"/>
+	</bean>
+	
+	<bean id="sponsorship6" class="domain.Sponsorship">
+		<property name="banner" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png"/>
+		<property name="targetUrl" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png"/>
+		<property name="creditCard" ref="creditCard3"/>
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor3"/>
+		<property name="Parade" ref="parade5"/>
+		<property name="Cost" value="1.19"/>
+	</bean>
+	
+	<bean id="sponsorship7" class="domain.Sponsorship">
+		<property name="banner" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png"/>
+		<property name="targetUrl" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/logo-clip-art-vector-online-royalty-free-public-domain-latest-copyright-logos-valuable-3.png"/>
+		<property name="creditCard" ref="creditCard3"/>
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor3"/>
+		<property name="Parade" ref="parade8"/>
+		<property name="Cost" value="0.00"/>
+	</bean>
+	
+	<bean id="sponsorship8" class="domain.Sponsorship">
+		<property name="banner" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="targetUrl" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor4"/>
+		<property name="Parade" ref="parade8"/>
+		<property name="Cost" value="0.00"/>
+	</bean>
+	
+	<bean id="sponsorship9" class="domain.Sponsorship">
+		<property name="banner" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="targetUrl" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor4"/>
+		<property name="Parade" ref="parade1"/>
+		<property name="Cost" value="0.00"/>
+	</bean>
+	
+	<bean id="sponsorship10" class="domain.Sponsorship">
+		<property name="banner" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="targetUrl" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor4"/>
+		<property name="Parade" ref="parade5"/>
+		<property name="Cost" value="0.00"/>
+	</bean>
+	
+	<bean id="sponsorship11" class="domain.Sponsorship">
+		<property name="banner" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="targetUrl" value="https://banner2.kisspng.com/20180417/yjq/kisspng-logo-royalty-free-falcon-5ad685e92ca4c4.9973054715240084251829.jpg"/>
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="activated" value="true"/>
+		<property name="Sponsor" ref="sponsor4"/>
+		<property name="Parade" ref="parade6"/>
+		<property name="Cost" value="0.00"/>
+	</bean>
+	
+	<bean id="sponsorship12" class="domain.Sponsorship">
+		<property name="banner" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
+		<property name="targetUrl" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="activated" value="false"/>
+		<property name="Sponsor" ref="sponsor5"/>
+		<property name="Parade" ref="parade5"/>
+		<property name="Cost" value="2.00"/>
+	</bean>
+	
+	<bean id="sponsorship13" class="domain.Sponsorship">
+		<property name="banner" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
+		<property name="targetUrl" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="activated" value="false"/>
+		<property name="Sponsor" ref="sponsor5"/>
+		<property name="Parade" ref="parade8"/>
+		<property name="Cost" value="2.00"/>
+	</bean>
+	
 	<!-- creditCards -->
 	
 	<bean id="creditCard1" class="domain.CreditCard">
@@ -2824,6 +3254,42 @@
 	
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holderName" value="José"/>
+		<property name="make" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expMonth" value="12"/>
+		<property name="expYear" value="2020"/>
+		<property name="cvv" value="123"/>
+	</bean>
+	
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="Pedro"/>
+		<property name="make" value="MASTERCARD"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expMonth" value="12"/>
+		<property name="expYear" value="2020"/>
+		<property name="cvv" value="123"/>
+	</bean>
+	
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="Raul"/>
+		<property name="make" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expMonth" value="12"/>
+		<property name="expYear" value="2020"/>
+		<property name="cvv" value="123"/>
+	</bean>
+	
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="Sergio"/>
+		<property name="make" value="MASTERCARD"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expMonth" value="12"/>
+		<property name="expYear" value="2020"/>
+		<property name="cvv" value="123"/>
+	</bean>
+	
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="María"/>
 		<property name="make" value="VISA"/>
 		<property name="number" value="1111222233334444"/>
 		<property name="expMonth" value="12"/>
