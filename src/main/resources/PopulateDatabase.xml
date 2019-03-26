@@ -1296,6 +1296,15 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="area4" class="domain.Area">
+		<property name="name" value="Poligono Navisa" />
+		<property name="pictures">
+			<list>
+				<value>http://www.dp.com</value>
+				<value>http://www.lsi.com</value>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Social profiles -->
 	
