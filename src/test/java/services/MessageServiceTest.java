@@ -15,7 +15,10 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Box;
+import domain.Enrolment;
 import domain.Message;
+import domain.Parade;
+import domain.Request;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -26,13 +29,22 @@ public class MessageServiceTest extends AbstractTest {
 
 	//The SUT----------------------------------------------------
 	@Autowired
-	private MessageService	messageService;
+	private MessageService		messageService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private BoxService		boxService;
+	private BoxService			boxService;
+
+	@Autowired
+	private ParadeService		paradeService;
+
+	@Autowired
+	private EnrolmentService	enrolmentService;
+
+	@Autowired
+	private RequestService		requestService;
 
 
 	/*
@@ -194,4 +206,312 @@ public class MessageServiceTest extends AbstractTest {
 
 	}
 
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level A)Requirement 32 : System notifications (new parade)
+	 * 
+	 * b)Negative cases: Wrong destination
+	 * 
+	 * c) Sentence coverage:
+	 * -NotificationNewParade()= 1 passed cases / 3 total cases = 33.3%
+	 * 
+	 * 
+	 * d) Data coverage:
+	 * 0%
+	 */
+	@Test
+	public void driverNotificationNewParade() {
+		final Object testingData[][] = {
+			{
+				"parade1", "box20", null
+			},//1.All rigth
+			{
+				"parade1", "box22", IllegalArgumentException.class
+			},//1.Wrong destination
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateNotificationNewParadeMessage((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	protected void templateNotificationNewParadeMessage(final String parade, final String box, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+
+			super.authenticate("admin");
+
+			Collection<Message> messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			final Integer oldSize = messages.size();
+
+			final Parade paradeFind = this.paradeService.findOne(super.getEntityId(parade));
+			this.messageService.NotificationNewParade(paradeFind, paradeFind.getBrotherhood());
+
+			messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			Assert.isTrue(messages.size() == oldSize + 1);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+
+		this.rollbackTransaction();
+
+	}
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level A)Requirement 32 : System notifications (new enrolment)
+	 * 
+	 * b)Negative cases: Wrong destination
+	 * 
+	 * c) Sentence coverage:
+	 * -NotificationNewEnrolment()= 1 passed cases / 1 total cases = 100%
+	 * 
+	 * 
+	 * d) Data coverage:
+	 * 0%
+	 */
+	@Test
+	public void NotificationNewEnrolment() {
+		final Object testingData[][] = {
+			{
+				"enrolment2", "box20", null
+			},//1.All rigth
+			{
+				"enrolment2", "box22", IllegalArgumentException.class
+			},//1.Wrong destination
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateNotificationNewEnrolment((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	protected void templateNotificationNewEnrolment(final String enrolment, final String box, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+
+			super.authenticate("admin");
+
+			Collection<Message> messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			final Integer oldSize = messages.size();
+
+			final Enrolment enrolmentFind = this.enrolmentService.findOne(super.getEntityId(enrolment));
+
+			this.messageService.NotificationNewEnrolment(enrolmentFind);
+
+			messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			Assert.isTrue(messages.size() == oldSize + 1);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+
+		this.rollbackTransaction();
+
+	}
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level A)Requirement 32 : System notifications (dropOut member)
+	 * 
+	 * b)Negative cases: Wrong destination
+	 * 
+	 * c) Sentence coverage:
+	 * -NotificationDropOutMember()= 1 passed cases / 1 total cases = 100%
+	 * 
+	 * 
+	 * d) Data coverage:
+	 * 0%
+	 */
+	@Test
+	public void NotificationDropOutMember() {
+		final Object testingData[][] = {
+			{
+				"enrolment2", "box10", null
+			},//1.All rigth
+			{
+				"enrolment2", "box22", IllegalArgumentException.class
+			},//1.Wrong destination
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateNotificationDropOutMember((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	protected void templateNotificationDropOutMember(final String enrolment, final String box, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+
+			super.authenticate("admin");
+
+			Collection<Message> messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			final Integer oldSize = messages.size();
+
+			final Enrolment enrolmentFind = this.enrolmentService.findOne(super.getEntityId(enrolment));
+
+			this.messageService.NotificationDropOutMember(enrolmentFind);
+
+			messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			Assert.isTrue(messages.size() == oldSize + 1);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+
+		this.rollbackTransaction();
+
+	}
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level A)Requirement 32 : System notifications (dropOut brotherhood)
+	 * 
+	 * b)Negative cases: Wrong destination
+	 * 
+	 * c) Sentence coverage:
+	 * -NotificationDropOutBrotherhood()= 1 passed cases / 1 total cases = 100%
+	 * 
+	 * 
+	 * d) Data coverage:
+	 * 0%
+	 */
+	@Test
+	public void NotificationDropOutBrotherhood() {
+		final Object testingData[][] = {
+			{
+				"enrolment2", "box20", null
+			},//1.All rigth
+			{
+				"enrolment2", "box22", IllegalArgumentException.class
+			},//1.Wrong destination
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateNotificationDropOutBrotherhood((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	protected void templateNotificationDropOutBrotherhood(final String enrolment, final String box, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+
+			super.authenticate("admin");
+
+			Collection<Message> messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			final Integer oldSize = messages.size();
+
+			final Enrolment enrolmentFind = this.enrolmentService.findOne(super.getEntityId(enrolment));
+
+			this.messageService.NotificationDropOutBrotherhood(enrolmentFind);
+
+			messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			Assert.isTrue(messages.size() == oldSize + 1);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+
+		this.rollbackTransaction();
+
+	}
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level A)Requirement 32 : System notifications (request status)
+	 * 
+	 * b)Negative cases: Wrong destination
+	 * 
+	 * c) Sentence coverage:
+	 * -NotificationRequestStatus()= 1 passed cases / 1 total cases = 100%
+	 * 
+	 * 
+	 * d) Data coverage:
+	 * 0%
+	 */
+	@Test
+	public void NotificationRequestStatus() {
+		final Object testingData[][] = {
+			{
+				"request2", "box20", null
+			},//1.All rigth
+			{
+				"request2", "box22", IllegalArgumentException.class
+			},//1.Wrong destination
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateNotificationRequestStatus((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	protected void templateNotificationRequestStatus(final String request, final String box, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+
+			super.authenticate("admin");
+
+			Collection<Message> messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			final Integer oldSize = messages.size();
+
+			final Request requestFind = this.requestService.findOne(super.getEntityId(request));
+
+			this.messageService.NotificationRequestStatus(requestFind);
+
+			messages = this.messageService.findMessagesByBoxId(super.getEntityId(box));
+
+			Assert.isTrue(messages.size() == oldSize + 1);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+
+		this.rollbackTransaction();
+
+	}
 }
