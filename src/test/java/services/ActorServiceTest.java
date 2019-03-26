@@ -52,7 +52,8 @@ public class ActorServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a) Requirement: Administrator can unban an actor
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 28.5: Administrator can ban an actor
 	 * 
 	 * b) Negative cases:
 	 * 2. Ban yourself
@@ -111,10 +112,11 @@ public class ActorServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Administrator can unban an actor
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 28.6: Administrator can unban an actor
 	 * 
 	 * b) Negative cases:
-	 * 2. Ban yourself
+	 * 2. Unban yourself
 	 * 
 	 * c) Sentence coverage
 	 * -banOrUnBanActor() = 2 passed cases / 6 total cases = 28,57%
@@ -133,7 +135,7 @@ public class ActorServiceTest extends AbstractTest {
 			}, //1. All fine
 			{
 				"administrator1", IllegalArgumentException.class
-			}, //2. Ban yourself
+			}, //2. Unban yourself
 
 		};
 
@@ -173,7 +175,7 @@ public class ActorServiceTest extends AbstractTest {
 	 * -------Coverage ActorService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * banOrUnBanActor = 28,57%
+	 * banOrUnBanActor = 42,9%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Actor = 0%

@@ -1296,6 +1296,15 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="area4" class="domain.Area">
+		<property name="name" value="Poligono Navisa" />
+		<property name="pictures">
+			<list>
+				<value>http://www.dp.com</value>
+				<value>http://www.lsi.com</value>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Social profiles -->
 	
@@ -2593,7 +2602,7 @@
 		<property name="finderTime" value="1" />
 		<property name="finderResult" value="10" />
 		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Parade! Tu sitio para organizar desfiles" />
-		<property name="banner" value="https://i.imgur.com/m8sLf8M.jpg" />
+		<property name="banner" value="https://i.imgur.com/zalKRGo.png" />
 		<property name="welcomeMessage" value="Welcome to Acme Parade, the site to organise your parades" />
 		<property name="vatTax" value="0.21" />
 		<property name="fare" value="0.11" />

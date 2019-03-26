@@ -27,7 +27,7 @@
 	</jstl:if>
 	
 	
-	<acme:cancel code="cancel" url="welcome/index.do" />
+	<acme:cancel code="cancel" url="area/administrator/list.do" />
 	
 
 </form:form>  
