@@ -61,7 +61,8 @@ public class AreaServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a) Requirement: Administrator manage areas : List
+	 * ACME-MADRUGÁ
+	 * a)(Level B) Requirement 22.1: Administrator manage areas : List
 	 * 
 	 * b) Negative cases:
 	 * 2. Wrong return
@@ -116,7 +117,8 @@ public class AreaServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Administrator manage areas : Display
+	 * ACME-MADRUGÁ
+	 * a)(Level B) Requirement 22.1: Administrator manage areas : Display
 	 * 
 	 * b) Negative cases:
 	 * 2. Wrong return
@@ -171,7 +173,8 @@ public class AreaServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Administrator manage areas : Create
+	 * ACME-MADRUGÁ
+	 * a)(Level B) Requirement 22.1: Administrator manage areas : Create
 	 * 
 	 * b) Negative cases:
 	 * 2. Name = null
@@ -237,7 +240,8 @@ public class AreaServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Administrator manage areas : List
+	 * ACME-MADRUGÁ
+	 * a)(Level B) Requirement 22.1: Administrator manage areas : List
 	 * 
 	 * b) Negative cases:
 	 * 2. Name = null
@@ -303,10 +307,11 @@ public class AreaServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Administrator manage areas : Delete
+	 * ACME-MADRUGÁ
+	 * a)(Level B) Requirement 22.1: Administrator manage areas : Delete
 	 * 
 	 * b) Negative cases:
-	 * 2. Asigned area
+	 * 2. Assigned area
 	 * 
 	 * c) Sentence coverage
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
@@ -358,16 +363,31 @@ public class AreaServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 	}
 
+	/*
+	 * ACME-MADRUGÁ
+	 * a)(Level B) Requirement 20.1: Brotherhood select the area in which it was settled.
+	 * 
+	 * b) Negative cases:
+	 * 2. A brotherhood who have an area, self-assing another area.
+	 * 
+	 * c) Sentence coverage
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -save():
+	 * 
+	 * d) Data coverage
+	 * -Area: 0 passed cases / 3 total cases = 0%
+	 */
+
 	@Test
 	public void driverAssignArea() {
 		final Object testingData[][] = {
 
 			{
 				"", "area3", null
-			}, {
+			},//1. All fine
+			{
 				"", "area3", IllegalArgumentException.class
-			//2. A brotherhood who have an area, self-assing another area.
-			}
+			},//2. A brotherhood who have an area, self-assing another area.
 
 		};
 
