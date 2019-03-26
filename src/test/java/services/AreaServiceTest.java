@@ -68,7 +68,7 @@ public class AreaServiceTest extends AbstractTest {
 	 * 2. Wrong return
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 passed cases / 1 total cases = 100%
+	 * -findAll(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Area: 0 passed cases / 3 total cases = 0%
@@ -248,8 +248,8 @@ public class AreaServiceTest extends AbstractTest {
 	 * 3. Name = blank
 	 * 
 	 * c) Sentence coverage
-	 * -findOne(): 1 passed cases / 1 total cases = 100%
-	 * -save():
+	 * -save(): 1 passed cases / 5 total cases = 20%
+	 * 
 	 * 
 	 * d) Data coverage
 	 * -Area: 1 passed cases / 3 total cases = 33,33333%
@@ -314,8 +314,7 @@ public class AreaServiceTest extends AbstractTest {
 	 * 2. Assigned area
 	 * 
 	 * c) Sentence coverage
-	 * -findOne(): 1 passed cases / 1 total cases = 100%
-	 * -delete():
+	 * -delete(): 2 passed cases / 3 total cases = 66.6%
 	 * 
 	 * d) Data coverage
 	 * -Area: 0 passed cases / 3 total cases = 0%
@@ -371,8 +370,7 @@ public class AreaServiceTest extends AbstractTest {
 	 * 2. Not area
 	 * 
 	 * c) Sentence coverage
-	 * -findOne(): 1 passed cases / 1 total cases = 100%
-	 * -save():
+	 * -save(): 1 passed cases / 5 total cases = 20%
 	 * 
 	 * d) Data coverage
 	 * -Area: 0 passed cases / 3 total cases = 0%
@@ -435,4 +433,17 @@ public class AreaServiceTest extends AbstractTest {
 		this.rollbackTransaction();
 
 	}
+
+	/*
+	 * -------Coverage AreaService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * save() = 20%
+	 * findOne() = 100%
+	 * create() = 100%
+	 * delete() = 66.66%
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Area = 33,33%
+	 */
 }

@@ -70,7 +70,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * -findAllBoxByActor(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -Box: 0 passed cases / 4 total cases = 25%
+	 * -Box: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -181,7 +181,6 @@ public class BoxServiceTest extends AbstractTest {
 	 * 4.
 	 * 
 	 * c) Sentence coverage
-	 * -save():
 	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
@@ -258,7 +257,6 @@ public class BoxServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 3 passes cases / 13 total cases = 23,07%
-	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
 	 * -Box: 0 passed cases / 4 total cases = 0%
@@ -376,10 +374,10 @@ public class BoxServiceTest extends AbstractTest {
 	 * -------Coverage BoxService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save() =
+	 * save() = 23,07
 	 * findOne() = 100%
 	 * create() = 100%
-	 * delete() = 100%
+	 * delete() = 33.33%
 	 * findAllBoxByActor = 100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
