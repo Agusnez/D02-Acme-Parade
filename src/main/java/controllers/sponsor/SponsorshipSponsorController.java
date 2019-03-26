@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.sponsor;
 
 import java.util.Collection;
 

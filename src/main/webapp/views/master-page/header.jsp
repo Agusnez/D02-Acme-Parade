@@ -135,6 +135,9 @@
 				<ul>
 					<li><a href="profile/displayPrincipal.do"><spring:message code="master.page.profile" /></a></li>				
 					<li><a href="box/actor/list.do"><spring:message code="master.page.box" /> </a></li>			
+					<security:authorize access="hasRole('ADMIN')">
+					<li><a href="data/administrator/get.do"><spring:message code="master.page.get.data" /> </a></li>	
+					</security:authorize>
 					<security:authorize access="hasRole('MEMBER')">
 					<li><a href="data/member/get.do"><spring:message code="master.page.get.data" /> </a></li>	
 					</security:authorize>
