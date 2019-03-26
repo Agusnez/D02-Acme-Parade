@@ -122,6 +122,10 @@ public class RequestService {
 		return request;
 	}
 
+	public void flush() {
+		this.requestRepository.flush();
+	}
+
 	// Other business methods -----------------------
 
 	public Collection<Request> findRequestsByMemberId(final int memberId) {

@@ -133,7 +133,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 */
 
 	@Test
-	public void driverDisplayBox() {
+	public void driverDisplaySegment() {
 
 		final Object testingData[][] = {
 
