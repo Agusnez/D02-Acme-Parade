@@ -32,5 +32,5 @@
 
 	<a href="segment/brotherhood/create.do?paradeId=${paradeId }"><spring:message code="segment.create"/></a>
 	
-	<acme:button name="back" code="back" onclick="javascript: relativeRedir('welcome/index.do');" />
+	<acme:button name="back" code="back" onclick="javascript: relativeRedir('parade/brotherhood/list.do');" />
 	

@@ -209,7 +209,7 @@ public class ParadeBrotherhoodController extends AbstractController {
 					this.paradeService.save(parade);
 
 					if (parade.getFinalMode() && parade.getStatus().equals("ACCEPTED"))
-						this.messageService.NotificationNewParade(parade);
+						this.messageService.NotificationNewParade(parade, b);
 
 					result = new ModelAndView("redirect:list.do");
 				} catch (final Throwable oops) {
@@ -257,7 +257,7 @@ public class ParadeBrotherhoodController extends AbstractController {
 			if (login.getId() == owner.getId()) {
 
 				this.paradeService.copy(paradeFound.getId());
-				
+
 				result = new ModelAndView("redirect:/parade/brotherhood/list.do");
 
 			} else

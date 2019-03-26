@@ -50,18 +50,15 @@ public class SegmentBrotherhoodController {
 		if (parade == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else {
+		} else if (parade.getBrotherhood().equals(member)) {
+			final Collection<Segment> segments = this.segmentService.findByParade(paradeId);
 
-			if (parade.getBrotherhood().equals(member)) {
-				final Collection<Segment> segments = this.segmentService.findByParade(paradeId);
-	
-				result = new ModelAndView("segment/path");
-				result.addObject("segments", segments);
-				result.addObject("paradeId", paradeId);
-				result.addObject("banner", banner);
-			} else
-				result = new ModelAndView("redirect:/welcome/index.do");
-		}
+			result = new ModelAndView("segment/path");
+			result.addObject("segments", segments);
+			result.addObject("paradeId", paradeId);
+			result.addObject("banner", banner);
+		} else
+			result = new ModelAndView("redirect:/welcome/index.do");
 
 		return result;
 	}
@@ -119,16 +116,13 @@ public class SegmentBrotherhoodController {
 		if (segment == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else {
+		} else if (this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId())) {
 
-			if (this.paradeService.paradeBrotherhoodSecurity(segment.getParade().getId())) {
-	
-				result = new ModelAndView("segment/display");
-				result.addObject("segment", segment);
-				result.addObject("banner", banner);
-			} else
-				result = new ModelAndView("redirect:/welcome/index.do");
-		}
+			result = new ModelAndView("segment/display");
+			result.addObject("segment", segment);
+			result.addObject("banner", banner);
+		} else
+			result = new ModelAndView("redirect:/welcome/index.do");
 
 		return result;
 	}
@@ -301,6 +295,7 @@ public class SegmentBrotherhoodController {
 		if (contiguousAfter == null)
 			delete = true;
 
+		final Parade parade = this.paradeService.findOne(segment.getParadeId());
 		result = new ModelAndView("segment/edit");
 		result.addObject("segment", segment);
 		result.addObject("banner", banner);
@@ -308,6 +303,7 @@ public class SegmentBrotherhoodController {
 		result.addObject("edit", false);
 		result.addObject("name", "saveComplete");
 		result.addObject("delete", delete);
+		result.addObject("moment", parade.getOrganisationMoment());
 		result.addObject("messageError", messageCode);
 
 		return result;
@@ -331,6 +327,8 @@ public class SegmentBrotherhoodController {
 		if (contiguousAfter == null)
 			delete = true;
 
+		final Parade parade = this.paradeService.findOne(segment.getParadeId());
+
 		result = new ModelAndView("segment/edit");
 		result.addObject("segment", segment);
 		result.addObject("banner", banner);
@@ -338,6 +336,7 @@ public class SegmentBrotherhoodController {
 		result.addObject("edit", false);
 		result.addObject("name", "saveParcial");
 		result.addObject("delete", delete);
+		result.addObject("moment", parade.getOrganisationMoment());
 		result.addObject("messageError", messageCode);
 
 		return result;
@@ -368,6 +367,7 @@ public class SegmentBrotherhoodController {
 		result.addObject("edit", true);
 		result.addObject("name", "saveEdit");
 		result.addObject("delete", delete);
+		result.addObject("moment", segment.getParade().getOrganisationMoment());
 		result.addObject("messageError", messageCode);
 
 		return result;

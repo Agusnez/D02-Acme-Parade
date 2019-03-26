@@ -84,25 +84,25 @@ public class DashboardServiceTest extends AbstractTest {
 			//test negativos porque el error va ser siempre el mismo
 			//(IllegalArgumentException)
 			{
-				"avgParadesCoordinatedByChapters", 0.93333, null
+				"avgParadesCoordinatedByChapters", 0.94118, null
 			}, {
 				"minParadesCoordinatedByChapters", 1.0, null
 			}, {
-				"maxParadesCoordinatedByChapters", 13.0, null
+				"maxParadesCoordinatedByChapters", 15.0, null
 			}, {
-				"stddevParadesCoordinatedByChapters", 6.966801508530774, null
+				"stddevParadesCoordinatedByChapters", 8.116934552419815, null
 			}, {
 				"chaptersCoordinatesMoreThan10Percent", 1.0, null
 			}, {
 				"ratioAreasNotCoordinatedAnyChapters", 0.33333, null
 			}, {
-				"ratioDraftFinalModeParade", 0.33333, null
+				"ratioDraftFinalModeParade", 0.0625, null
 			}, {
-				"ratioAccepted", 0.33333, null
+				"ratioAccepted", 0.1875, null
 			}, {
-				"ratioRejected", 0.33333, null
+				"ratioRejected", 0.0625, null
 			}, {
-				"ratioSubmitted", 0.33333, null
+				"ratioSubmitted", 0.75, null
 			}
 		};
 
