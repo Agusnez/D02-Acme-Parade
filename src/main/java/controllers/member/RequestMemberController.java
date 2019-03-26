@@ -69,7 +69,7 @@ public class RequestMemberController extends AbstractController {
 
 		m = this.memberService.findByPrincipal();
 
-		parades = this.paradeService.findMemberParades(m.getId());
+		parades = this.paradeService.findParadesInWhichThisMemberCanApplyWithoutAnyProblem(m.getId());
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
@@ -118,13 +118,13 @@ public class RequestMemberController extends AbstractController {
 		ModelAndView result;
 		final Request request;
 		final Member owner;
-		if (!this.requestService.hasAcceptedOrPendingRequestsOfMemberIn(this.memberService.findByPrincipal().getId(), paradeId))
+		//if (!this.requestService.hasAcceptedOrPendingRequestsOfMemberIn(this.memberService.findByPrincipal().getId(), paradeId))
 			try {
 
 				owner = this.memberService.findByPrincipal();
 				final Parade parade = this.paradeService.findOne(paradeId);
 
-				final Collection<Parade> parades = this.paradeService.findMemberParades(owner.getId());
+				final Collection<Parade> parades = this.paradeService.findParadesInWhichThisMemberCanApplyWithoutAnyProblem(owner.getId());
 
 				if (parades.contains(parade)) {
 
@@ -143,8 +143,8 @@ public class RequestMemberController extends AbstractController {
 			} catch (final IllegalArgumentException e) {
 				result = new ModelAndView("misc/notExist");
 			}
-		else
-			result = new ModelAndView("redirect:/request/member/list.do");
+		//else
+			//result = new ModelAndView("redirect:/request/member/list.do");
 
 		return result;
 	}
