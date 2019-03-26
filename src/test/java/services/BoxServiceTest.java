@@ -257,7 +257,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * 2. Edit by default
 	 * 
 	 * c) Sentence coverage
-	 * -save():
+	 * -save(): 3 passes cases / 13 total cases = 23,07%
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
@@ -320,8 +320,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * 2. Delete by default
 	 * 
 	 * c) Sentence coverage
-	 * -save():
-	 * -create(): 1 passed cases / 1 total cases = 100%
+	 * -delete(): 3 passed cases / 9 total cases = 33.3%
 	 * 
 	 * d) Data coverage
 	 * -Box: 1 passed cases / 4 total cases = 25%
