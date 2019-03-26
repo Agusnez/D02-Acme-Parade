@@ -258,7 +258,8 @@ public class BrotherhoodServiceTest extends AbstractTest {
 			final Collection<String> pictures = new ArrayList<>();
 			pictures.add(picture);
 			brotherhood.setPictures(pictures);
-			final Date datee = new Date(date);
+			final DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+			final Date datee = format.parse(date);
 			brotherhood.setEstablishment(datee);
 			brotherhood.setName(name);
 			brotherhood.setMiddleName(middleName);

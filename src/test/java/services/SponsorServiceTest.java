@@ -131,8 +131,6 @@ public class SponsorServiceTest extends AbstractTest {
 			this.sponsorService.save(sponsor);
 			this.sponsorService.flush();
 
-			this.rollbackTransaction();
-
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -140,5 +138,6 @@ public class SponsorServiceTest extends AbstractTest {
 		}
 
 		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
 	}
 }
