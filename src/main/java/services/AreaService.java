@@ -111,6 +111,10 @@ public class AreaService {
 
 		return area;
 	}
+
+	public void flush() {
+		this.areaRepository.flush();
+	}
 	// Other business methods
 
 	public Collection<Double> statsOfBrotherhoodPerArea() {
