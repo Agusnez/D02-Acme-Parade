@@ -68,12 +68,15 @@ public class AdministratorAreaController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int areaId) {
 		ModelAndView result;
 		final Area area;
-
 		final String banner = this.configurationService.findConfiguration().getBanner();
 		try {
 			area = this.areaService.findOne(areaId);
-
-			result = this.createEditModelAndView(area, null);
+			if (area != null) {
+				result = this.createEditModelAndView(area, null);
+			} else {
+				result = new ModelAndView("misc/notExist");
+				result.addObject("banner", banner);
+			}
 		} catch (final IllegalArgumentException e) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
