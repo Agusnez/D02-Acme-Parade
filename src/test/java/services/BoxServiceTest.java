@@ -60,7 +60,8 @@ public class BoxServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a) Requirement: Actors manage their boxes : List
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 27.2: Actors manage their boxes : List
 	 * 
 	 * b) Negative cases:
 	 * 2. Wrong return
@@ -117,7 +118,7 @@ public class BoxServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Actors manage their boxes : Create
+	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Create
 	 * 
 	 * b) Negative cases:
 	 * 2. Not box
@@ -172,7 +173,7 @@ public class BoxServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Actors manage their boxes : Create
+	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Create
 	 * 
 	 * b) Negative cases:
 	 * 2. Name = null
@@ -250,12 +251,10 @@ public class BoxServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Actors manage their boxes : Edit
+	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Edit
 	 * 
 	 * b) Negative cases:
-	 * 2. Name = null
-	 * 3. Name = blank
-	 * 4.
+	 * 2. Edit by default
 	 * 
 	 * c) Sentence coverage
 	 * -save():
@@ -315,12 +314,10 @@ public class BoxServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Actors manage their boxes : Delete
+	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Delete
 	 * 
 	 * b) Negative cases:
-	 * 2. Name = null
-	 * 3. Name = blank
-	 * 4.
+	 * 2. Delete by default
 	 * 
 	 * c) Sentence coverage
 	 * -save():
@@ -340,7 +337,7 @@ public class BoxServiceTest extends AbstractTest {
 			}, //1. All fine
 			{
 				"box4", "admin", IllegalArgumentException.class
-			}, //2. Edit by default
+			}, //2. Delete by default
 
 		};
 
