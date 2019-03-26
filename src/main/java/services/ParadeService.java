@@ -540,5 +540,9 @@ public class ParadeService {
 
 		return res;
 	}
+	
+	public Collection<Parade> findParadesInWhichThisMemberCanApplyWithoutAnyProblem(int memberId) {
+		return this.paradeRepository.findParadesInWhichThisMemberCanApplyWithoutAnyProblem(memberId);
+	}
 
 }
