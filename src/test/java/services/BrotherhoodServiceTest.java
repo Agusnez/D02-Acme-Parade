@@ -114,18 +114,17 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 8 :An actor who is not authenticated must be able to:
-	 * 2. List the brotherhoods in the system.
+	 * a)(Level C)Requirement 8.2 and 9.1 :An actor who is not authenticated must be able to: List the brotherhoods in the system.
+	 * An actor who is authenticated must be able to: Do the same as an actor who is not authenticated, but register to the system.
 	 * 
-	 * Requirement 9 :An actor who is authenticated must be able to:
-	 * 1. Do the same as an actor who is not authenticated, but register to the system.
+	 * b)Negative cases:
+	 * 2. Wrong return
 	 * 
-	 * b)Negative cases: 2
 	 * c) Sentence coverage:
 	 * -findAll()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Brotherhood: 0 passed cases / 10 total cases = 0%
 	 */
 
 	@Test
@@ -134,26 +133,25 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 			{
 				7, null, null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				28, null, IllegalArgumentException.class
-			//2. Esperamos un resultado incorrecto
-			}, {
+			},//2. Wrong return
+			{
 				7, "brotherhood1", null
-			//1. Todo bien con brotherhood autenticado
-			}, {
+			},//3. All fine(authenticated brotherhood)
+			{
 				7, "sponsor1", null
-			//1. Todo bien con sponsor autenticado
-			}, {
+			},//4. All fine(authenticated sponsor) 
+			{
 				7, "chapter1", null
-			//1. Todo bien con chapter autenticado
-			}, {
+			},//5. All fine(authenticated chapter)
+			{
 				7, "member1", null
-			//1. Todo bien con member autenticado
-			}, {
+			},//6. All fine(authenticated member)
+			{
 				7, "admin", null
-			//1. Todo bien con admin autenticado
-			}
+			},//7. All fine(authenticated administrator)
 
 		};
 
@@ -212,30 +210,33 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 8 :An actor who is not authenticated must be able to:
-	 * 1. Register to the system as a Brotherhood.
-	 * b)Negative cases: 2, 3
+	 * a)(Level C) Requirement 8.1: An actor who is not authenticated must be able to: Register to the system as a Brotherhood
+	 * 
+	 * b)Negative cases:
+	 * 2. Title = blank
+	 * 3. Title = javaScript
+	 * 
 	 * c) Sentence coverage:
-	 * -save(): 1 probado / 6 totales = 16,67%
-	 * -create(): 1 probado/1 totales = 100%
+	 * -save(): 1 passed cases / 6 total cases = 16,67%
+	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * -Brotherhood: 1 probado / 10 totales = 10%
+	 * -Brotherhood: 1 passed cases / 10 total cases = 10%
 	 */
 	@Test
 	public void driverRegisterBrotherhood() {
 		final Object testingData[][] = {
 			{
 				"title1", "https://docs.google.com/document/d/1mAOEp0duzbBYUXV0/edit", "1997/03/05", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56", null
-			},//1.Todo bien
+			},//1. All fine
 			{
 				"", "https://docs.google.com/document/d/1mAOEp0duzbBYUXV0/edit", "1997/03/05", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56",
 				ConstraintViolationException.class
-			},//2.Title = blank
+			},//2. Title = blank
 			{
 				"<script>alert('hola')</script>", "https://docs.google.com/document/d/1mAOEp0duzbBYUXV0/edit", "1997/03/05", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56",
 				ConstraintViolationException.class
-			},//3.Title = html
+			},//3. Title = javaScript
 
 		};
 
@@ -286,17 +287,19 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 9: Actor who is authenticated
-	 * 2.Edit personal data
-	 * b) Negative cases: 2
+	 * a)(Level C)Requirement 9.2: Actor who is authenticated: Edit personal data
+	 * 
+	 * b) Negative cases:
+	 * 2. The user who is logged, It's not the same as the user who is being edited
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 2 passed cases / 8 total cases = 25%
 	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Brotherhood: 0 passed cases / 10 total cases = 0%
 	 */
+
 	@Test
 	public void driverEditBrotherhood() {
 		final Object testingData[][] = {
