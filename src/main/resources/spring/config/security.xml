@@ -136,6 +136,9 @@
 		
 		<security:intercept-url pattern="/data/member/get.do" access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/data/brotherhood/get.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/data/chapter/get.do" access="hasRole('CHAPTER')" />
+		<security:intercept-url pattern="/data/sponsor/get.do" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/data/administrator/get.do" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/request/brotherhood/listPending.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/request/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
