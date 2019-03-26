@@ -17,6 +17,7 @@ import org.springframework.validation.Validator;
 
 import repositories.SponsorshipRepository;
 import security.Authority;
+import domain.Actor;
 import domain.Parade;
 import domain.Sponsor;
 import domain.Sponsorship;
@@ -29,8 +30,8 @@ public class SponsorshipService {
 	@Autowired
 	private SponsorshipRepository	sponsorshipRepository;
 
-	//	@Autowired
-	//	private ActorService			actorService;
+	@Autowired
+	private ActorService			actorService;
 
 	@Autowired
 	private Validator				validator;
@@ -349,6 +350,13 @@ public class SponsorshipService {
 	}
 
 	public Integer deactivateExpiredCardSponsorships() {
+		final Authority authAdmin = new Authority();
+		authAdmin.setAuthority(Authority.ADMIN);
+
+		final Actor admin = this.actorService.findByPrincipal();
+
+		Assert.isTrue(admin.getUserAccount().getAuthorities().contains(authAdmin));
+
 		final int actualMonth = Calendar.MONTH + 1;
 		final int actualYear = Calendar.YEAR;
 
@@ -364,7 +372,6 @@ public class SponsorshipService {
 		return result;
 
 	}
-
 	public void flush() {
 
 		this.sponsorshipRepository.flush();

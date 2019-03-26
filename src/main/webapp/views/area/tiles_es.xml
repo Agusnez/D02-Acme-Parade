@@ -22,7 +22,7 @@
 	</definition>
 	
 	<definition name="area/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar" />
+		<put-attribute name="title" value="Area" />
 		<put-attribute name="body" value="/views/area/edit.jsp" />
 	</definition>
 	

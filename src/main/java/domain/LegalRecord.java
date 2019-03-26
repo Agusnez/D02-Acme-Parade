@@ -12,6 +12,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
@@ -67,6 +68,7 @@ public class LegalRecord extends DomainEntity {
 	}
 
 	@ElementCollection
+	@NotEmpty
 	//TODO: comprobar si pasa algo con un script
 	public Collection<String> getLaws() {
 		return this.laws;

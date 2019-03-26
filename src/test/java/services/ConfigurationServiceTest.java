@@ -55,7 +55,8 @@ public class ConfigurationServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a) Requirement: Administrator manage the lists of positive and negative words
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 28.2: Administrator manage the lists of positive and negative words
 	 * 
 	 * b) Negative cases:
 	 * 2. Not administrator

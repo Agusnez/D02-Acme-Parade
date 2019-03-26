@@ -123,14 +123,27 @@ public class DashboardServiceTest extends AbstractTest {
 			}, {//Negative
 				"brotherhoodsMoreThanAverage", 111.111, IllegalArgumentException.class
 			}, {
+<<<<<<< HEAD
 				"avgParadesCoordinatedByChapters", 0.93333, null
 			}, {//Negative
 				"avgParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
+=======
+				"min", 0.0, IllegalArgumentException.class
+			}, {
+				"stddev", 0.0, IllegalArgumentException.class
+			},
+			//En los siguientes escenarios no hacemos uso de
+			//test negativos porque el error va ser siempre el mismo
+			//(IllegalArgumentException)
+			{
+				"avgParadesCoordinatedByChapters", 0.94118, null
+>>>>>>> master
 			}, {
 				"minParadesCoordinatedByChapters", 1.0, null
 			}, {//Negative
 				"minParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
 			}, {
+<<<<<<< HEAD
 				"maxParadesCoordinatedByChapters", 13.0, null
 			}, {//Negative
 				"maxParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
@@ -138,6 +151,11 @@ public class DashboardServiceTest extends AbstractTest {
 				"stddevParadesCoordinatedByChapters", 6.966801508530774, null
 			}, {//Negative
 				"stddevParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
+=======
+				"maxParadesCoordinatedByChapters", 15.0, null
+			}, {
+				"stddevParadesCoordinatedByChapters", 8.116934552419815, null
+>>>>>>> master
 			}, {
 				"chaptersCoordinatesMoreThan10Percent", 1.0, null
 			}, {//Negative
@@ -147,6 +165,7 @@ public class DashboardServiceTest extends AbstractTest {
 			}, {//Negative
 				"ratioAreasNotCoordinatedAnyChapters", 111.111, IllegalArgumentException.class
 			}, {
+<<<<<<< HEAD
 				"ratioDraftFinalModeParade", 0.33333, null
 			}, {//Negative
 				"ratioDraftFinalModeParade", 111.111, IllegalArgumentException.class
@@ -246,6 +265,15 @@ public class DashboardServiceTest extends AbstractTest {
 				"ratioEmptyFinders", 111.111, null
 			}, {//Negative
 				"ratioEmptyFinders", 111.111, IllegalArgumentException.class
+=======
+				"ratioDraftFinalModeParade", 0.0625, null
+			}, {
+				"ratioAccepted", 0.1875, null
+			}, {
+				"ratioRejected", 0.0625, null
+			}, {
+				"ratioSubmitted", 0.75, null
+>>>>>>> master
 			}
 		};
 

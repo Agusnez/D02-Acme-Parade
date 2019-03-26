@@ -3,6 +3,7 @@ package services;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Parade;
@@ -59,6 +61,118 @@ public class SegmentServiceTest extends AbstractTest {
 	 * and now It have already had a 100% of coverage, we don't have to
 	 * mention its coverage in other test.
 	 */
+
+	/*
+	 * a) Requirement: Brotherhood manage paths of their parades : List
+	 * 
+	 * b) Negative cases:
+	 * 2. Wrong return
+	 * 
+	 * c) Sentence coverage
+	 * -findByParade(): 1 passed cases / 1 total cases = 100%
+	 * 
+	 * d) Data coverage
+	 * -Segment: 0 passed cases / 4 total cases = 0%
+	 */
+
+	@Test
+	public void driverListSegment() {
+
+		final Object testingData[][] = {
+
+			{
+				"parade1", "2", null
+			}, //1. All fine
+			{
+				"parade1", "8", IllegalArgumentException.class
+			}, //2. Wrong return
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListSegment((String) testingData[i][0], (int) Integer.valueOf((String) testingData[i][1]), (Class<?>) testingData[i][2]);
+	}
+
+	protected void templateListSegment(final String paradeBean, final int size, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+
+			final Parade parade = this.paradeService.findOne(super.getEntityId(paradeBean));
+
+			this.startTransaction();
+
+			final Collection<Segment> segments = this.segmentService.findByParade(parade.getId());
+			this.segmentService.flush();
+
+			Assert.isTrue(segments.size() == size);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.rollbackTransaction();
+
+		super.checkExceptions(expected, caught);
+	}
+
+	/*
+	 * a) Requirement: Brotherhood manage paths of their parades : Display
+	 * 
+	 * b) Negative cases:
+	 * 2. Wrong return
+	 * 
+	 * c) Sentence coverage
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * 
+	 * d) Data coverage
+	 * -Segment: 0 passed cases / 4 total cases = 0%
+	 */
+
+	@Test
+	public void driverDisplaySegment() {
+
+		final Object testingData[][] = {
+
+			{
+				"segment1", null
+			}, //1. All fine
+			{
+				"message1", IllegalArgumentException.class
+			}, //2. Not segment
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateDisplaySegment((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void templateDisplaySegment(final String boxBean, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+
+			this.startTransaction();
+
+			final Segment segment = this.segmentService.findOne(super.getEntityId(boxBean));
+			this.segmentService.flush();
+
+			Assert.isTrue(segment != null);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.rollbackTransaction();
+
+		super.checkExceptions(expected, caught);
+	}
 
 	/*
 	 * a) Requirement: Brotherhood manage paths of their parades : Create
