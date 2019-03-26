@@ -80,7 +80,7 @@ public class ChapterServiceTest extends AbstractTest {
 				"brotherhood1", "chapter1", "calle 13", "a@a.com", "+34 333 3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
 			}, //2. The user who is logged, It's not the same as the user who is being edited
 			{
-				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
+				"chapter1", "chapter1", "calle 13", "aa.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", ConstraintViolationException.class
 			}, //3. The email pattern is wrong
 			{
 				"chapter1", "chapter1", "calle 13", null, "3333", "middleName", "surname", "name", "http://www.photo.com", "title", NullPointerException.class
@@ -100,6 +100,7 @@ public class ChapterServiceTest extends AbstractTest {
 		caught = null;
 		try {
 
+			this.startTransaction();
 			this.authenticate(username);
 			final Chapter chapter = this.chapterService.findOne(chapterId);
 
@@ -110,8 +111,6 @@ public class ChapterServiceTest extends AbstractTest {
 			chapter.setName(name);
 			chapter.setPhoto(photo);
 			chapter.setTitle(title);
-
-			this.startTransaction();
 
 			this.chapterService.save(chapter);
 			this.chapterService.flush();

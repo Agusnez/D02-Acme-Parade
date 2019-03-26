@@ -112,13 +112,12 @@ public class ProclaimServiceTest extends AbstractTest {
 			final Integer result = this.proclaimService.findAll().size();
 			Assert.isTrue(expectedNumOfProclaims + 1 == result);
 
-			this.rollbackTransaction();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
 		super.checkExceptions(expected, caught);
+		this.rollbackTransaction();
 
 	}
 
@@ -184,6 +183,8 @@ public class ProclaimServiceTest extends AbstractTest {
 
 		caught = null;
 		try {
+			this.startTransaction();
+
 			super.authenticate(chapterRegistered);
 
 			final Proclaim proclaim = this.proclaimService.create();
@@ -193,19 +194,18 @@ public class ProclaimServiceTest extends AbstractTest {
 			proclaim.setChapter(chapter);
 			proclaim.setDescription(description);
 
-			this.startTransaction();
-
 			final Proclaim saved = this.proclaimService.save(proclaim);
 			this.proclaimService.flush();
 
 			final Collection<Proclaim> proclaims = this.proclaimService.findAll();
 			Assert.isTrue(proclaims.contains(saved));
 
-			this.rollbackTransaction();
 			super.unauthenticate();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
+		} finally {
+			this.rollbackTransaction();
 		}
 
 		super.checkExceptions(expected, caught);
