@@ -121,7 +121,7 @@ public class AreaServiceTest extends AbstractTest {
 	 * a)(Level B) Requirement 22.1: Administrator manage areas : Display
 	 * 
 	 * b) Negative cases:
-	 * 2. Wrong return
+	 * 2. Not area
 	 * 
 	 * c) Sentence coverage
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
