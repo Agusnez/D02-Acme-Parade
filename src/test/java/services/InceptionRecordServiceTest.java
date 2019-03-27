@@ -57,10 +57,17 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (create)
-	 * Negative cases:
-	 * b)2,3,4,5,6,7
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
+	 * 
+	 * b)Negative cases:
+	 * 2. Title = null
+	 * 3. Description = null
+	 * 4. Description = ""
+	 * 5. Title = ""
+	 * 6. Not authority
+	 * 7. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
 	 * -create(): 3 tested cases / 3 total cases = 100%
 	 * 
@@ -72,26 +79,33 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverCreateInceptionRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", null
-			}, {//2.Title = null
+			},//1. All fine
+			{
 				"brotherhood1", null, "descrption1", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//3.Description = null
+			},//2. Title = null
+			{
 				"brotherhood1", "title1", null, "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//4.Description = ""
+			},//3. Description = null
+			{
 				"brotherhood1", "title1", "", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//5.Title = ""
+			},//4. Description = ""
+			{
 				"brotherhood1", "", "descrption1", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//6.Not authority
+			},//5. Title = ""
+			{
 				null, "title1", "descrption1", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}, {//7.Not a Brotherhood
+			},//6. Not authority
+			{
 				"member1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}
+			},//7. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateCreateInceptionRecord((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Class<?>) testingData[i][5]);
 	}
+
 	protected void templateCreateInceptionRecord(final String username, final String title, final String description, final String photo1, final String photo2, final Class<?> expected) {
 
 		Class<?> caught;
@@ -129,10 +143,13 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (edit)
-	 * Negative cases:
-	 * b)2,3
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Edit
+	 * 
+	 * b)Negative cases:
+	 * 2. Not authority
+	 * 3. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
 	 * -save(): 3 tested cases / 3 total cases = 100%
 	 * 
@@ -144,13 +161,15 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverEditInceptionRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood1", "inceptionRecord1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", null
-			}, {//2.Not authority
+			},//1. All fine
+			{
 				null, "inceptionRecord1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}, {//3.Not a Brotherhood
+			},//2. Not authority
+			{
 				"member1", "inceptionRecord1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}
+			},//3. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -194,10 +213,12 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (list)
-	 * Negative cases:
-	 * b)2
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: List
+	 * 
+	 * b)Negative cases:
+	 * 2. Incorrect result
+	 * 
 	 * c) Sentence coverage
 	 * -findAll(): 1 tested case / 1 total case = 100%
 	 * 
@@ -212,11 +233,10 @@ public class InceptionRecordServiceTest extends AbstractTest {
 
 			{
 				2, null
-			//1. All fine
-			}, {
+			},//1. All fine
+			{
 				1651, IllegalArgumentException.class
-			//2. Incorrect result
-			}
+			},//2. Incorrect result
 
 		};
 
@@ -242,5 +262,15 @@ public class InceptionRecordServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * -------Coverage InceptionRecordService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * InceptionRecord =
+	 */
 
 }

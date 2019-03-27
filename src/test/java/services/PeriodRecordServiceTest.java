@@ -60,13 +60,19 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (create)
-	 * Negative cases:
-	 * b)2,3,4,5,6,7
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
+	 * 
+	 * b)Negative cases:
+	 * 2. Title = null
+	 * 3. Description = null
+	 * 4. Description = ""
+	 * 5. Title = ""
+	 * 6. Not authority
+	 * 7. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
 	 * -create(): 3 tested cases / 3 total cases = 100%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -PeriodRecord: 2 tested cases / 5 total cases = 40%
@@ -75,27 +81,34 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverCreatePeriodRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", null
-			}, {//2.Title = null
+			},//1. All fine
+			{
 				"brotherhood1", null, "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//3.Description = null
+			},//2. Title = null
+			{
 				"brotherhood1", "title1", null, "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//4.Description = ""
+			},//3. Description = null
+			{
 				"brotherhood1", "title1", "", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//5.Title = ""
+			},//4. Description = ""
+			{
 				"brotherhood1", "", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", ConstraintViolationException.class
-			}, {//6.Not authority
+			},//5. Title = ""
+			{
 				null, "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}, {//7.Not a Brotherhood
+			},//6. Not authority
+			{
 				"member1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}
+			},//7. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateCreatePeriodRecord((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], this.convertStringToDate((String) testingData[i][3]), this.convertStringToDate((String) testingData[i][4]),
 				(String) testingData[i][5], (String) testingData[i][6], (Class<?>) testingData[i][7]);
 	}
+
 	protected void templateCreatePeriodRecord(final String username, final String title, final String description, final Date startYear, final Date endYear, final String photo1, final String photo2, final Class<?> expected) {
 
 		Class<?> caught;
@@ -135,10 +148,13 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (edit)
-	 * Negative cases:
-	 * b)2,3
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Edit
+	 * 
+	 * b)Negative cases:
+	 * 2. Not authority
+	 * 3. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
 	 * -save(): 3 tested cases / 9 total cases = 33.34%
 	 * 
@@ -150,19 +166,22 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverEditPeriodRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood1", "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", null
-			}, {//2.Not authority
+			},//1. All fine
+			{
 				null, "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}, {//3.Not a Brotherhood
+			},//2. Not authority
+			{
 				"member1", "periodRecord1", "title1", "descrption1", "1812/10/12", "1817/11/15", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}
+			},//3. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateEditPeriodRecord((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (String) testingData[i][2], (String) testingData[i][3], this.convertStringToDate((String) testingData[i][4]),
 				this.convertStringToDate((String) testingData[i][5]), (String) testingData[i][6], (String) testingData[i][7], (Class<?>) testingData[i][8]);
 	}
+
 	protected void templateEditPeriodRecord(final String username, final int periodRecordId, final String title, final String description, final Date startYear, final Date endYear, final String photo1, final String photo2, final Class<?> expected) {
 
 		Class<?> caught;
@@ -202,10 +221,12 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (list)
-	 * Negative cases:
-	 * b)2
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1 :An actor who is authenticated as a brotherhood must be able to: Manage their history: List
+	 * 
+	 * b)Negative cases:
+	 * 2. Incorrect result
+	 * 
 	 * c) Sentence coverage
 	 * -findAll(): 1 tested case / 1 total case = 100%
 	 * 
@@ -220,11 +241,10 @@ public class PeriodRecordServiceTest extends AbstractTest {
 
 			{
 				1, null
-			//1. All fine
-			}, {
+			},//1. All fine
+			{
 				1651, IllegalArgumentException.class
-			//2. Incorrect result
-			}
+			},//2. Incorrect result
 
 		};
 
@@ -252,10 +272,13 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (delete)
-	 * Negative cases:
-	 * b)2,3
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Delete
+	 * 
+	 * b)Negative cases:
+	 * 2. Not Authority
+	 * 3. Invalid authority
+	 * 
 	 * c) Sentence coverage
 	 * -delete(): 3 tested cases / 5 total cases = 60%
 	 * 
@@ -270,13 +293,13 @@ public class PeriodRecordServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "periodRecord1", null
-			//1. All fine
-			}, {
+			},//1. All fine
+			{
 				null, "periodRecord1", IllegalArgumentException.class
-			//2. Not Authority
-			}, {
+			},//2. Not Authority
+			{
 				"member2", "periodRecord1", IllegalArgumentException.class
-			}
+			},//3. Invalid authority
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -326,5 +349,15 @@ public class PeriodRecordServiceTest extends AbstractTest {
 
 		return date;
 	}
+
+	/*
+	 * -------Coverage PeriodRecordService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * PeriodRecord =
+	 */
 
 }
