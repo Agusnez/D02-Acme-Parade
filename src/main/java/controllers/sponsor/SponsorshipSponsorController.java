@@ -2,6 +2,8 @@
 package controllers.sponsor;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -85,7 +87,15 @@ public class SponsorshipSponsorController {
 
 			if (login == sponsorship.getSponsor()) {
 
+				final Collection<String> makes = this.configurationService.findConfiguration().getMakes();
+
+				final Map<String, String> makesMap = new HashMap<>();
+
+				for (final String string : makes)
+					makesMap.put(string, string);
+
 				result = new ModelAndView("sponsorship/display");
+				result.addObject("makes", makesMap);
 				result.addObject("sponsorship", sponsorship);
 				result.addObject("banner", banner);
 
@@ -270,10 +280,18 @@ public class SponsorshipSponsorController {
 
 		final String banner = this.configurationService.findConfiguration().getBanner();
 
+		final Collection<String> makes = this.configurationService.findConfiguration().getMakes();
+
+		final Map<String, String> makesMap = new HashMap<>();
+
+		for (final String string : makes)
+			makesMap.put(string, string);
+
 		result = new ModelAndView("sponsorship/edit");
 		result.addObject("sponsorship", sponsorship);
 		result.addObject("messageError", messageCode);
 		result.addObject("banner", banner);
+		result.addObject("makes", makesMap);
 		result.addObject("language", LocaleContextHolder.getLocale().getLanguage());
 
 		return result;

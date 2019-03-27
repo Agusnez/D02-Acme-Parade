@@ -34,6 +34,7 @@ public class Configuration extends DomainEntity {
 	private String				welcomeMessageEs;
 	private Double				vatTax;
 	private Double				fare;
+	Collection<String>			makes;
 
 
 	//Getters y Setters-----------------------------------------------------
@@ -154,6 +155,16 @@ public class Configuration extends DomainEntity {
 
 	public void setFare(final Double fare) {
 		this.fare = fare;
+	}
+
+	@ElementCollection
+	@NotEmpty
+	public Collection<String> getMakes() {
+		return this.makes;
+	}
+
+	public void setMakes(final Collection<String> makes) {
+		this.makes = makes;
 	}
 
 	// Relationships ----------------------------------------------------------

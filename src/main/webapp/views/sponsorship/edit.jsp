@@ -22,7 +22,14 @@
 	
 	<acme:textbox code="sponsorship.creditCard.holderName" path="creditCard.holderName" obligatory="true"/>
 	
-	<acme:textbox code="sponsorship.creditCard.make" path="creditCard.make" obligatory="true"/>
+	<form:label path="creditCard.make">
+		<spring:message code="sponsorship.creditCard.make"></spring:message>
+	</form:label>
+	<form:select path="creditCard.make" >
+		<form:options items="${makes}"/>
+	</form:select>
+	<form:errors cssClass="error" path="creditCard.make"></form:errors>
+	<br />
 	
 	<acme:textbox code="sponsorship.creditCard.number" path="creditCard.number" obligatory="true"/>
 	

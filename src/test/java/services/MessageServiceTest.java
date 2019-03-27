@@ -140,28 +140,29 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 28 : An actor who is authenticated as an administrator must be able to:
-	 * 1. Broadcast a notification to the actors of the system
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 28.1: An actor who is authenticated as an administrator must be able to: Broadcast a notification to the actors of the system
 	 * 
-	 * b)Negative cases:2
+	 * b)Negative cases:
+	 * 2. Not authenticated actor
+	 * 
 	 * c) Sentence coverage:
 	 * -create3()=100%
 	 * -broadcastSystem()=66,6%
 	 * -save()=1/·=33,3%
 	 * 
-	 * 
 	 * d) Data coverage:
 	 */
+
 	@Test
 	public void driverBroadcastMessage() {
 		final Object testingData[][] = {
 			{
 				"admin", "chapter1", null
-			},//1.Todo bien
+			},//1. All fine
 			{
 				null, "brotherhood1", IllegalArgumentException.class
-			},//1.No está registrado el que envía el mensaje
+			},//2. Not authenticated actor
 
 		};
 
@@ -207,27 +208,28 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 32 : System notifications (new parade)
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 32: System notifications (new parade)
 	 * 
-	 * b)Negative cases: Wrong destination
+	 * b)Negative cases:
+	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
 	 * -NotificationNewParade()= 1 passed cases / 3 total cases = 33.3%
 	 * 
-	 * 
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
 	public void driverNotificationNewParade() {
 		final Object testingData[][] = {
 			{
 				"parade1", "box20", null
-			},//1.All rigth
+			},//1.All fine
 			{
 				"parade1", "box22", IllegalArgumentException.class
-			},//1.Wrong destination
+			},//2. Wrong destination
 
 		};
 
@@ -268,33 +270,35 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 32 : System notifications (new enrolment)
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 32 : System notifications (new enrolment)
 	 * 
-	 * b)Negative cases: Wrong destination
+	 * b)Negative cases:
+	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
 	 * -NotificationNewEnrolment()= 1 passed cases / 1 total cases = 100%
 	 * 
-	 * 
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
-	public void NotificationNewEnrolment() {
+	public void notificationNewEnrolment() {
 		final Object testingData[][] = {
 			{
 				"enrolment2", "box20", null
-			},//1.All rigth
+			},//1. All fine
 			{
 				"enrolment2", "box22", IllegalArgumentException.class
-			},//1.Wrong destination
+			},//2. Wrong destination
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateNotificationNewEnrolment((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+
 	protected void templateNotificationNewEnrolment(final String enrolment, final String box, final Class<?> expected) {
 
 		Class<?> caught;
@@ -330,33 +334,35 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 32 : System notifications (dropOut member)
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 32: System notifications (dropOut member)
 	 * 
-	 * b)Negative cases: Wrong destination
+	 * b)Negative cases:
+	 * 2. Wrong destination
 	 * 
-	 * c) Sentence coverage:
+	 * c)Sentence coverage:
 	 * -NotificationDropOutMember()= 1 passed cases / 1 total cases = 100%
-	 * 
 	 * 
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
-	public void NotificationDropOutMember() {
+	public void notificationDropOutMember() {
 		final Object testingData[][] = {
 			{
 				"enrolment2", "box10", null
-			},//1.All rigth
+			},//1. All fine
 			{
 				"enrolment2", "box22", IllegalArgumentException.class
-			},//1.Wrong destination
+			},//2. Wrong destination
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateNotificationDropOutMember((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+
 	protected void templateNotificationDropOutMember(final String enrolment, final String box, final Class<?> expected) {
 
 		Class<?> caught;
@@ -392,27 +398,28 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
+	 * ACME-MADRUGÁ
 	 * a)(Level A)Requirement 32 : System notifications (dropOut brotherhood)
 	 * 
-	 * b)Negative cases: Wrong destination
+	 * b)Negative cases:
+	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
 	 * -NotificationDropOutBrotherhood()= 1 passed cases / 1 total cases = 100%
 	 * 
-	 * 
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
-	public void NotificationDropOutBrotherhood() {
+	public void notificationDropOutBrotherhood() {
 		final Object testingData[][] = {
 			{
 				"enrolment2", "box20", null
-			},//1.All rigth
+			},//1.All fine
 			{
 				"enrolment2", "box22", IllegalArgumentException.class
-			},//1.Wrong destination
+			},//2. Wrong destination
 
 		};
 
@@ -454,33 +461,35 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 32 : System notifications (request status)
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 32 : System notifications (request status)
 	 * 
-	 * b)Negative cases: Wrong destination
+	 * b)Negative cases:
+	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
 	 * -NotificationRequestStatus()= 1 passed cases / 1 total cases = 100%
 	 * 
-	 * 
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
-	public void NotificationRequestStatus() {
+	public void notificationRequestStatus() {
 		final Object testingData[][] = {
 			{
 				"request2", "box20", null
-			},//1.All rigth
+			},//1. All fine
 			{
 				"request2", "box22", IllegalArgumentException.class
-			},//1.Wrong destination
+			},//2. Wrong destination
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateNotificationRequestStatus((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+
 	protected void templateNotificationRequestStatus(final String request, final String box, final Class<?> expected) {
 
 		Class<?> caught;
@@ -514,4 +523,14 @@ public class MessageServiceTest extends AbstractTest {
 		this.rollbackTransaction();
 
 	}
+
+	/*
+	 * -------Coverage MessageService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Message =
+	 */
 }

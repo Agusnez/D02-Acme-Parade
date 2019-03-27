@@ -131,14 +131,14 @@ public class DownloadDataMemberController {
 			myString += "\r\n\r\n";
 			myString += "Enrolamiento:\r\n\r\n";
 			for (final Enrolment e : ens)
-				myString += "Nombre Brotherhood: " + e.getBrotherhood().getName() + " Momento: " + e.getMoment() + " Momento de salida: " + e.getDropOutMoment() + " Posición: " + e.getPosition().getEnglishName() + "\r\n";
+				myString += "Nombre Brotherhood: " + e.getBrotherhood().getName() + " Momento: " + e.getMoment() + " Momento de salida: " + e.getDropOutMoment() + " Posicion: " + e.getPosition().getEnglishName() + "\r\n";
 			myString += "\r\n\r\n";
 			myString += "Solicitudes:\r\n\r\n";
 			for (final Request r : rqs)
-				myString += "Título desfile: " + r.getParade().getTitle() + " Estado: " + r.getStatus() + " Número columna: " + r.getColumnNumber() + " Número fila: " + r.getRowNumber() + " Comentario: " + r.getComment() + "\r\n";
+				myString += "Titulo desfile: " + r.getParade().getTitle() + " Estado: " + r.getStatus() + " Numero columna: " + r.getColumnNumber() + " Numero fila: " + r.getRowNumber() + " Comentario: " + r.getComment() + "\r\n";
 			myString += "\r\n\r\n";
 			myString += "Buscador:\r\n\r\n";
-			myString += "Última actualización: " + f.getLastUpdate() + " Palabra clave: " + f.getKeyWord() + " Area: " + f.getArea();
+			myString += "Ultima actualizacion: " + f.getLastUpdate() + " Palabra clave: " + f.getKeyWord() + " Area: " + f.getArea();
 
 			response.setContentType("text/plain");
 			response.setHeader("Content-Disposition", "attachment;filename=my_data_as_member.txt");
