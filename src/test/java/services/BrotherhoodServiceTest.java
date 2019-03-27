@@ -60,15 +60,17 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
-	 * 1. Navigate to the brotherhood that have settle in an area
-	 * Negative cases:
-	 * b)2. Area no contiene ese brotherhood
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 14.1: An actor who is not authenticated must be able to: Navigate to the brotherhood that have settle in an area
+	 * 
+	 * b)Negative cases:
+	 * 2. Area not contain this brotherhood
+	 * 
 	 * c) Sentence coverage
-	 * -findBrotherhoodsByAreaId(areaId)=100%
+	 * -findBrotherhoodsByAreaId = 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Brotherhood: 0 passed cases / 15 total cases
 	 */
 
 	@Test
@@ -77,10 +79,10 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 			{
 				"area1", "brotherhood1", null
-			//1. Todo bien
+			//1. All fine 
 			}, {
 				"area1", "brotherhood3", IllegalArgumentException.class
-			//2. Area no contiene ese brotherhood
+			//2. Area not contain this brotherhood
 			}
 
 		};
@@ -114,7 +116,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 8.2 and 9.1 :An actor who is not authenticated must be able to: List the brotherhoods in the system.
+	 * a)(Level C) Requirement 8.2 and 9.1 :An actor who is not authenticated must be able to: List the brotherhoods in the system.
 	 * An actor who is authenticated must be able to: Do the same as an actor who is not authenticated, but register to the system.
 	 * 
 	 * b)Negative cases:
@@ -124,7 +126,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -findAll()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage:
-	 * -Brotherhood: 0 passed cases / 10 total cases = 0%
+	 * -Brotherhood: 0 passed cases / 15 total cases = 0%
 	 */
 
 	@Test
@@ -132,25 +134,25 @@ public class BrotherhoodServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			{
-				7, null, null
+				8, null, null
 			},//1. All fine
 			{
 				28, null, IllegalArgumentException.class
 			},//2. Wrong return
 			{
-				7, "brotherhood1", null
+				8, "brotherhood1", null
 			},//3. All fine(authenticated brotherhood)
 			{
-				7, "sponsor1", null
+				8, "sponsor1", null
 			},//4. All fine(authenticated sponsor) 
 			{
-				7, "chapter1", null
+				8, "chapter1", null
 			},//5. All fine(authenticated chapter)
 			{
-				7, "member1", null
+				8, "member1", null
 			},//6. All fine(authenticated member)
 			{
-				7, "admin", null
+				8, "admin", null
 			},//7. All fine(authenticated administrator)
 
 		};
@@ -221,8 +223,9 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * -Brotherhood: 1 passed cases / 10 total cases = 10%
+	 * -Brotherhood: 1 passed cases / 15 total cases = 6,66667%%
 	 */
+
 	@Test
 	public void driverRegisterBrotherhood() {
 		final Object testingData[][] = {
@@ -288,7 +291,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 9.2: Actor who is authenticated: Edit personal data
+	 * a)(Level C) Requirement 9.2: Actor who is authenticated: Edit personal data
 	 * 
 	 * b) Negative cases:
 	 * 2. The user who is logged, It's not the same as the user who is being edited
@@ -298,7 +301,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -Brotherhood: 0 passed cases / 10 total cases = 0%
+	 * -Brotherhood: 0 passed cases / 15 total cases = 0%
 	 */
 
 	@Test
@@ -342,5 +345,15 @@ public class BrotherhoodServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 		this.rollbackTransaction();
 	}
+
+	/*
+	 * -------Coverage BrotherhoodService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Brotherhood =
+	 */
 
 }

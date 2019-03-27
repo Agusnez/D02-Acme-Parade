@@ -166,6 +166,7 @@ public class PositionServiceTest extends AbstractTest {
 
 		super.checkExceptions(expected, caught);
 	}
+
 	/*
 	 * ACME-MADRUGÁ
 	 * a) Requirement: Administrator manage the catalogue of positions: Create

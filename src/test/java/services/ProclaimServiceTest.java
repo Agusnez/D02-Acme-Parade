@@ -60,15 +60,18 @@ public class ProclaimServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
-	 * 2. Browse the proclaims of the chapters
-	 * Negative cases:
-	 * b)2. The expected result is incorrect
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 14.2: An actor who is not authenticated must be able to: Browse the proclaims of the chapters
+	 * 
+	 * b)Negative cases:
+	 * 2. The expected result is incorrect
+	 * 
 	 * c) Sentence coverage
-	 * findAll()=100%
+	 * -findAll() = 1 passed cases / 2 total cases = 50%
+	 * -save()
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Proclaim: 0 passed cases / 3 total cases = 0%
 	 */
 
 	@Test
@@ -77,11 +80,10 @@ public class ProclaimServiceTest extends AbstractTest {
 
 			{
 				5, null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				28, IllegalArgumentException.class
-			//2. Esperamos un resultado incorrecto
-			}
+			},//2. The expected result is incorrect
 
 		};
 
@@ -122,19 +124,20 @@ public class ProclaimServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level A)Requirement 17 :An actor who is authenticated as a chapter must be able to:
-	 * 1. Publish a proclaim. Note that once a proclaim is published,there's no way to update or delete it,
-	 * so double confirmation prior to publication is a must.
-	 * Negative cases:
-	 * b)2.A brotherhood is registered on the system
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 17.1: An actor who is authenticated as a chapter must be able to: Publish a proclaim
+	 * 
+	 * b)Negative cases:
+	 * 2. A brotherhood is registered on the system
 	 * 3. Description = null
 	 * 4. Description = more than 250 characters (251)
+	 * 
 	 * c) Sentence coverage
-	 * create()=100%
-	 * save()=100%
+	 * create() =
+	 * save() =
 	 * 
 	 * d) Data coverage
-	 * Proclaim: 1 passed cases / 1total cases = 100%
+	 * -Proclaim: 1 passed cases / 3 total cases = 33.33333%
 	 */
 
 	@Test
@@ -143,34 +146,28 @@ public class ProclaimServiceTest extends AbstractTest {
 
 			{
 				"chapter1", "Hola Mundo", null
-			//1. Todo bien
-			},
+			},//1. All fine
 			{
 				"brotherhood1", "Hola Mundo", IllegalArgumentException.class
-			//2. A brotherhood is registered on the system
-			},
+			},//2. A brotherhood is registered on the system
 			{
 				"chapter1", null, ConstraintViolationException.class
-			//3. Description = null
-			},
+			},//3. Description = null
 			{
 				"chapter1",
 				"DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDP" + "DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPD" + "PDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPD" + "PDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPD"
 					+ "PDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPD", ConstraintViolationException.class
-			//4. Description = more than 250 characters (251)
-			},
+			},//4. Description = more than 250 characters (251)
 			{
 				"chapter1",
 				"DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDP" + "DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPD" + "PDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDP"
 					+ "DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDDPDPDPDPDP", null
-			//5. Description =249 characters
-			},
+			},//5. Description = 249 characters
 			{
 				"chapter1",
 				"DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDP" + "DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPD" + "PDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDP"
 					+ "DPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDPDDPDPDPDPDPD", null
-			//6. Description =250 characters
-			}
+			},//6. Description = 250 characters
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -213,15 +210,13 @@ public class ProclaimServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * -------Coverage ChapterService-------
+	 * -------Coverage ProclaimService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save()=37,5%
-	 * findOne()=100%
-	 * findAll()=100%
+	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Chapter=
+	 * Proclaim =
 	 */
 
 }

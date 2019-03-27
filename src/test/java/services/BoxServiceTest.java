@@ -118,7 +118,7 @@ public class BoxServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Create
+	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Display
 	 * 
 	 * b) Negative cases:
 	 * 2. Not box
@@ -178,10 +178,11 @@ public class BoxServiceTest extends AbstractTest {
 	 * b) Negative cases:
 	 * 2. Name = null
 	 * 3. Name = blank
-	 * 4.
+	 * 4. Name = default name
 	 * 
 	 * c) Sentence coverage
 	 * -create(): 1 passed cases / 1 total cases = 100%
+	 * -save(): 2 passed cases / 11 total cases = 100%
 	 * 
 	 * d) Data coverage
 	 * -Box: 1 passed cases / 4 total cases = 25%
@@ -203,7 +204,7 @@ public class BoxServiceTest extends AbstractTest {
 			}, //3. Name = blank
 			{
 				"in box", false, null, "member1", IllegalArgumentException.class
-			}, //4. 
+			}, //4. Name = default name
 
 		};
 
@@ -256,10 +257,11 @@ public class BoxServiceTest extends AbstractTest {
 	 * 2. Edit by default
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 3 passes cases / 13 total cases = 23,07%
+	 * -findOne(): 1 passed cases / 2 total cases = 50%
+	 * -save(): 2 passes cases / 11 total cases = 27,27273%
 	 * 
 	 * d) Data coverage
-	 * -Box: 0 passed cases / 4 total cases = 0%
+	 * -Box: 1 passed cases / 4 total cases = 25%
 	 */
 
 	@Test
@@ -321,7 +323,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * -delete(): 3 passed cases / 9 total cases = 33.3%
 	 * 
 	 * d) Data coverage
-	 * -Box: 1 passed cases / 4 total cases = 25%
+	 * -Box: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -374,7 +376,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * -------Coverage BoxService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save() = 23,07
+	 * save() = 27,27273%
 	 * findOne() = 100%
 	 * create() = 100%
 	 * delete() = 33.33%

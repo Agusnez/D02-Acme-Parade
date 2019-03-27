@@ -58,17 +58,22 @@ public class ChapterServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a) Requirement: Actor manage his/her profile
+	 * ACME.MADRUGÁ
+	 * a)(Level C) Requirement 9.2: Actor manage his/her profile
 	 * 
-	 * b) Negative cases: 2,3,4
+	 * b) Negative cases:
+	 * 2. The user who is logged, It's not the same as the user who is being edited
+	 * 3. The email pattern is wrong
+	 * 4. The email attribute is null
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 2 passed cases / 8 total cases = 25%
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -Chapter: 1 passed cases / 9 total cases = 11,1%
+	 * -Chapter: 1 passed cases / 12 total cases = 8,33333%
 	 */
+
 	@Test
 	public void driverEditChapter() {
 		final Object testingData[][] = {
@@ -84,8 +89,7 @@ public class ChapterServiceTest extends AbstractTest {
 			}, //3. The email pattern is wrong
 			{
 				"chapter1", "chapter1", "calle 13", null, "3333", "middleName", "surname", "name", "http://www.photo.com", "title", NullPointerException.class
-			}
-		//4. The email attribute is null
+			},//4. The email attribute is null
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -126,38 +130,45 @@ public class ChapterServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level B)Requirement 7 :An actor who is not authenticated must be able to:
-	 * 1. Register to the system as a chapter.
-	 * b)Negative cases: 2, 3, 4, 5, 6
+	 * ACME-PARADE
+	 * a)(Level B)Requirement 7.1: An actor who is not authenticated must be able to: Register to the system as a chapter
+	 * 
+	 * b)Negative cases:
+	 * 2. Title = blank
+	 * 3. Name = blank
+	 * 4. Middle name = blank
+	 * 5. Photo = no URL
+	 * 6 .Email = no pattern
+	 * 
 	 * c) Sentence coverage:
-	 * -save(): 1 probado / 8 totales = 12,5%
+	 * -save(): 1 passed cases / 8 total cases = 12,5%
 	 * 
 	 * d) Data coverage:
-	 * -Chapter: 5 probado / 10 totales = 50%
+	 * -Chapter: 5 passed cases / 12 total cases = 41,66667%
 	 */
+
 	@Test
 	public void driverRegisterChapter() {
 		final Object testingData[][] = {
 			{
 				"title1", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56", null
-			},//1.Todo bien
+			},//1. All fine
 			{
 				"", "name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
-			},//2.Title = blank
+			},//2. Title = blank
 			{
 				"title1", "", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
-			},//3.Name = blank
+			},//3. Name = blank
 			{
 				"title1", "name1", "", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
-			},//4.Middle name = blank
+			},//4. Middle name = blank
 			{
 				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
-			},//5.Photo = no URL
+			},//5. Photo = no URL
 
 			{
 				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
-			},
-		//6.Email = no pattern
+			},//6. Email = no pattern
 
 		};
 
@@ -202,16 +213,17 @@ public class ChapterServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
+	 * a)(Level B) Requirement 2.1: Self-assing an area to co-ordinate. Once an area is self-assigned, it cannot be changed
 	 * 
-	 * a)(Level B)Requirement 2.1: Self-assing an area to co-ordinate. Once an area is
-	 * self-assigned, it cannot be changed.
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. A Chapter who have an area, self-assing another area
+	 * 
 	 * c) Sentence coverage:
-	 * 
 	 * -save(): 1 passed cases / 8 total cases = 12,5%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Chapter: 0 passed cases / 12 total cases = 0%
 	 */
 
 	@Test
@@ -220,10 +232,10 @@ public class ChapterServiceTest extends AbstractTest {
 
 			{
 				"chapter3", "area3", null
-			}, {
+			},//1. All fine
+			{
 				"chapter1", "area3", IllegalArgumentException.class
-			//2. A Chapter who have an area, self-assing another area.
-			}
+			},//2. A Chapter who have an area, self-assing another area
 
 		};
 
@@ -260,15 +272,17 @@ public class ChapterServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
-	 * 1. List the chapters that are registered in the system.
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 14.1 :An actor who is not authenticated must be able to: List the chapters that are registered in the system.
 	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. Wrong return
+	 * 
 	 * c) Sentence coverage:
 	 * -findAll()= 2 passed cases / 2 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Chapter: 0 passed cases / 12 total cases = 0%
 	 */
 
 	@Test
@@ -277,11 +291,10 @@ public class ChapterServiceTest extends AbstractTest {
 
 			{
 				3, null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				28, IllegalArgumentException.class
-			//2. Esperamos un resultado incorrecto
-			}
+			},//2. Wrong return
 
 		};
 
@@ -332,12 +345,12 @@ public class ChapterServiceTest extends AbstractTest {
 	 * -------Coverage ChapterService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save()=50%
-	 * findOne()=100%
-	 * findAll()=100%
+	 * save() = 50%
+	 * findOne() = 100%
+	 * findAll() = 100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Chapter=11,1%
+	 * Chapter =
 	 */
 
 }

@@ -57,14 +57,12 @@ public class FloatServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 8 :An actor who is not authenticated must be able to:
-	 * 2. List the floats that a brotherhood owns
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 8.2 and 9.2 :An actor who is not authenticated must be able to: List the floats that a brotherhood owns.
+	 * An actor who is authenticated must be able to: Do the same as an actor who is not authenticated, but register to the system.
 	 * 
-	 * Requirement 9 :An actor who is authenticated must be able to:
-	 * 1. Do the same as an actor who is not authenticated, but register to the system.
-	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. The float not contains the brotherhood
 	 * 
 	 * c) Sentence coverage
 	 * -findFloatsByBrotherhoodId()=50%
@@ -79,32 +77,26 @@ public class FloatServiceTest extends AbstractTest {
 
 			{
 				null, "float4", "brotherhood1", null
-			//1. Todo bien sin nadie autenticado
-
-			}, {
+			},//1. All fine(not authenticated)
+			{
 				null, "float2", "brotherhood1", IllegalArgumentException.class
-			//2. El float no pertenece a la brotherhood
-			}, {
+
+			},//2. The float not contains the brotherhood
+			{
 				"brotherhood1", "float4", "brotherhood1", null
-			//3. Todo bien con brotherhood autenticado
-
-			}, {
+			},//3. All fine (authenticated brotherhood)
+			{
 				"chapter1", "float4", "brotherhood1", null
-			//4. Todo bien con chapter autenticado
-
-			}, {
+			},//4. All fine (authenticated chapter)
+			{
 				"admin", "float4", "brotherhood1", null
-			//5. Todo bien con admin autenticado
-
-			}, {
+			},//5. All fine (authenticated administrator)
+			{
 				"member1", "float4", "brotherhood1", null
-			//6. Todo bien con member autenticado
-
-			}, {
+			},//6. All fine (authenticated member)
+			{
 				"sponsor1", "float4", "brotherhood1", null
-			//7. Todo bien con brotherhood autenticado
-
-			}
+			}, //7. All fine (authenticated sponsor)
 
 		};
 
@@ -139,11 +131,11 @@ public class FloatServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. List their floats
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.1: An actor who is authenticated as a brotherhood must be able to: List their floats
 	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. The float not contains the brotherhood
 	 * 
 	 * c) Sentence coverage
 	 * -findFloatsByBrotherhoodId()=50%
@@ -158,11 +150,10 @@ public class FloatServiceTest extends AbstractTest {
 
 			{
 				"float4", "brotherhood1", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"float2", "brotherhood1", IllegalArgumentException.class
-			//2. El float no pertenece a la brotherhood
-			}
+			},//2. The float not contains the brotherhood
 
 		};
 
@@ -197,10 +188,13 @@ public class FloatServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Create a Float
+	 * a)(Level C)Requirement 10.1: An actor who is authenticated as a brotherhood must be able to: Create a Float
 	 * 
-	 * b)Negative cases: 2, 3, 4, 5
+	 * b)Negative cases:
+	 * 2. Invalid authority
+	 * 3. Description = Not Safe Html
+	 * 4. Title = blank
+	 * 5. Pictures = no URL
 	 * 
 	 * c) Sentence coverage
 	 * create()=3 passed cases/4 total cases=75%
@@ -217,20 +211,19 @@ public class FloatServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "description1", "title1", "https://www.youtube.com", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"chapter1", "description1", "title1", "https://www.youtube.com", IllegalArgumentException.class
-			//2. Intenta crearlo un Chapter
-			}, {
+			},//2. Invalid authority 
+			{
 				"brotherhood1", "<script>alert('hola')</script>", "title1", "https://www.youtube.com", ConstraintViolationException.class
-			//3. Description = Not Safe Html
-			}, {
+			},//3. Description = Not Safe Html
+			{
 				"brotherhood1", "description1", "", "https://www.youtube.com", ConstraintViolationException.class
-			//4. Title=blank
-			}, {
+			},//4. Title = blank
+			{
 				"brotherhood1", "description1", "title1", "hola", IllegalArgumentException.class
-			//5. Pictures = no URL
-			}
+			},//5. Pictures = no URL
 
 		};
 
@@ -246,6 +239,8 @@ public class FloatServiceTest extends AbstractTest {
 		try {
 			super.authenticate(actor);
 
+			this.startTransaction();
+
 			final Float floatt = this.floatService.create();
 			floatt.setDescription(description);
 			floatt.setTitle(title);
@@ -257,22 +252,26 @@ public class FloatServiceTest extends AbstractTest {
 			this.floatService.flush();
 
 			final Collection<Float> floats = this.floatService.findAll();
-			super.unauthenticate();
 			Assert.isTrue(floats.contains(saved));
+
+			super.unauthenticate();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
+
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
 
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Update a Float
+	 * ACME-MADRUGÁ
+	 * a)(Level C)Requirement 10.1 :An actor who is authenticated as a brotherhood must be able to: Update a Float
 	 * 
 	 * b)Negative cases:
+	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
 	 * findOne()=1 passed cases/1 total cases=100%
@@ -289,14 +288,16 @@ public class FloatServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "float4", "description1", null
-			//1. Todo bien
-			}, {
+
+			},//1. All fine
+			{
 				"chapter1", "float4", "description1", IllegalArgumentException.class
-			//2. Intenta actualizarlo un Chapter
-			}, {
+
+			},//2. Invalid authority
+			{
 				"brotherhood1", "float3", "description1", IllegalArgumentException.class
-			//3. El float no pertenece al brotherhood
-			}
+
+			},//3. The float not belongs to brotherhood
 
 		};
 
@@ -315,7 +316,7 @@ public class FloatServiceTest extends AbstractTest {
 			final Float floatt = this.floatService.findOne(super.getEntityId(floatId));
 			floatt.setDescription(description);
 
-			//this.startTransaction();
+			this.startTransaction();
 			final Float saved = this.floatService.save(floatt);
 			this.floatService.flush();
 
@@ -327,21 +328,23 @@ public class FloatServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
-		//this.rollbackTransaction();
 
 	}
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Delete a Float
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.1 :An actor who is authenticated as a brotherhood must be able to: Delete a Float
 	 * 
 	 * b)Negative cases:
+	 * 2. Invalid authority
+	 * 3. The float not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * findOne()=1 passed cases/1 total cases=100%
-	 * findAll()=1 passed cases/2 total cases=50%
-	 * delete()=1 passed cases/8 total cases= 12,5%
+	 * -findOne() = 1 passed cases / 1 total cases = 100%
+	 * -findAll() = 1 passed cases / 2 total cases = 50%
+	 * -delete()= 1 passed cases / 8 total cases = 12,5%
 	 * 
 	 * d) Data coverage
 	 * 0%
@@ -353,14 +356,13 @@ public class FloatServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "float4", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"chapter1", "float4", IllegalArgumentException.class
-			//2. Intenta borrarlo un Chapter
-			}, {
+			},//2. Invalid authority
+			{
 				"brotherhood1", "float3", IllegalArgumentException.class
-			//3. El float no pertenece al brotherhood
-			}
+			},//3. The float not belongs to brotherhood
 
 		};
 
@@ -378,7 +380,8 @@ public class FloatServiceTest extends AbstractTest {
 
 			final Float floatt = this.floatService.findOne(super.getEntityId(floatId));
 
-			//this.startTransaction();
+			this.startTransaction();
+
 			this.floatService.delete(floatt);
 			this.floatService.flush();
 
@@ -390,8 +393,19 @@ public class FloatServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
-		//this.rollbackTransaction();
 
 	}
+
+	/*
+	 * -------Coverage FloatService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Float =
+	 */
 }

@@ -64,7 +64,7 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -Administrator = 0 passed cases / 7 total cases = 0%
+	 * -Administrator = 0 passed cases / 10 total cases = 0%
 	 */
 
 	@Test
@@ -111,7 +111,7 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C) Requirement 12.1: An actor who is authenticated as an administrator must be able to: Create user accounts for new administrators.
+	 * a)(Level C) Requirement 12.1: An actor who is authenticated as an administrator must be able to: Create user accounts for new administrators
 	 * 
 	 * b)Negative cases:
 	 * 2. Name = blank
@@ -120,10 +120,10 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage:
 	 * -save(): 1 passed cases / 5 total cases = 20%
-	 * -create(): 2 passed cases / 3 total cases = 33.3%
+	 * -create(): 2 passed cases / 3 total cases = 66.66667%
 	 * 
 	 * d) Data coverage:
-	 * -Administrator: 1 passed cases / 7 total cases = 14,28%
+	 * -Administrator: 1 passed cases / 10 total cases = 10%
 	 */
 
 	@Test
@@ -196,7 +196,7 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * -spammer(): 9 passed cases / 16 total cases = 56,25%
 	 * 
 	 * d) Data coverage
-	 * -Administrator: 0 passed cases / 7 total cases = 0%
+	 * -Administrator: 0 passed cases / 10 total cases = 0%
 	 */
 
 	@Test
@@ -243,7 +243,7 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * -calculateScore(): 7 passed cases / 9 total cases = 77,8%
 	 * 
 	 * d) Data coverage
-	 * -Administrator: 0 passed cases / 7 total cases = 0%
+	 * -Administrator: 0 passed cases / 10 total cases = 0%
 	 */
 
 	@Test
@@ -283,15 +283,14 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * -------Coverage AdministratorService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -save() = 60%
+	 * -save() = 40%
 	 * -findOne() = 50%
-	 * -create() = 33.3%
-	 * -findOne() = 50%
+	 * -create() = 66.66667%
 	 * -spammer() = 56,25%
 	 * -calculateScore() = 77,8%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Administrator = 14,28%
+	 * Administrator = 10%
 	 */
 
 }
