@@ -45,48 +45,62 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * To calculate the data coverage, we have look at
 	 * each object's attributes, we analyse in each one of them
 	 * the domain's restrictions and the business rules
-	 * about the attribute. If we have tested all types of cases
+	 * about the attribute. If we have passed all types of cases
 	 * in a attribute, that is called "proven attribute".
 	 * 
 	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
 	 * 
 	 * ----Note:
-	 * It's clear that if we have tested all cases about a method in a test
+	 * It's clear that if we have passed all cases about a method in a test
 	 * and now It have already had a 100% of coverage, we don't have to
 	 * mention its coverage in other test.
 	 */
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (create)
-	 * Negative cases:
-	 * b)2,3,4,5,6,7
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
+	 * 
+	 * b)Negative cases:
+	 * 2. Title = null
+	 * 3. Description = null
+	 * 4. Description = ""
+	 * 5. Title = ""
+	 * 6. Not authority
+	 * 7. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
-	 * -create(): 3 tested cases / 3 total cases = 100%
+	 * -create(): 3 passed cases / 3 total cases = 100%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -LegalRecord: 2 tested cases / 5 total cases = 40%
+	 * -LegalRecord: 2 passed cases / 5 total cases = 40%
 	 */
 
 	@Test
 	public void driverCreateLegalRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+
+			{
 				"brotherhood1", "title1", "descrption1", 21.0, "legalName1", "law1", "law2", null
-			}, {//2.Title = null
+			},//1. All fine
+			{
 				"brotherhood1", null, "descrption1", 21.0, "legalName1", "law1", "law2", ConstraintViolationException.class
-			}, {//3.Description = null
+			},//2. Title = null
+			{
 				"brotherhood1", "title1", null, 21.0, "legalName1", "law1", "law2", ConstraintViolationException.class
-			}, {//4.Description = ""
+			},//3. Description = null
+			{
 				"brotherhood1", "title1", "", 21.0, "legalName1", "law1", "law2", ConstraintViolationException.class
-			}, {//5.Title = ""
+			},//4. Description = ""
+			{
 				"brotherhood1", "", "descrption1", 21.0, "legalName1", "law1", "law2", ConstraintViolationException.class
-			}, {//6.Not authority
+			},//5. Title = "" 
+			{
 				null, "title1", "descrption1", 21.0, "legalName1", "law1", "law2", IllegalArgumentException.class
-			}, {//7.Not a Brotherhood
+			},//6. Not authority
+			{
 				"member1", "title1", "descrption1", 21.0, "legalName1", "law1", "law2", IllegalArgumentException.class
-			}
+			},//7. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -132,12 +146,15 @@ public class LegalRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (edit)
-	 * Negative cases:
-	 * b)2,3
-	 * c) Sentence coverage
-	 * -save(): 3 tested cases / 3 total cases = 100%
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Edit
+	 * 
+	 * b)Negative cases:
+	 * 2. Not authority
+	 * 3. Not a Brotherhood
+	 * 
+	 * c)Sentence coverage
+	 * -save(): 3 passed cases / 3 total cases = 100%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -147,13 +164,15 @@ public class LegalRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverEditLegalRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood1", "legalRecord1", "title1", "descrption1", 21.0, "legalName1", "law1", "law2", null
-			}, {//2.Not authority
+			},//1. All fine
+			{
 				null, "legalRecord1", "title1", "descrption1", 21.0, "legalName1", "law1", "law2", IllegalArgumentException.class
-			}, {//3.Not a Brotherhood
+			},//2. Not authority
+			{
 				"member1", "legalRecord1", "title1", "descrption1", 21.0, "legalName1", "law1", "law2", IllegalArgumentException.class
-			}
+			},//3. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -186,9 +205,6 @@ public class LegalRecordServiceTest extends AbstractTest {
 			this.legalRecordService.save(legalRecord);
 			this.legalRecordService.flush();
 
-			this.legalRecordService.save(legalRecord);
-			this.legalRecordService.flush();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -202,12 +218,14 @@ public class LegalRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (list)
-	 * Negative cases:
-	 * b)2
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: List
+	 * 
+	 * b)Negative cases:
+	 * 2. Incorrect result
+	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 tested case / 1 total case = 100%
+	 * -findAll(): 1 passed case / 1 total case = 100%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -220,11 +238,11 @@ public class LegalRecordServiceTest extends AbstractTest {
 
 			{
 				1, null
-			//1. All fine
-			}, {
+
+			},//1. All fine 
+			{
 				1651, IllegalArgumentException.class
-			//2. Incorrect result
-			}
+			},//2. Incorrect result
 
 		};
 
@@ -252,12 +270,15 @@ public class LegalRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (delete)
-	 * Negative cases:
-	 * b)2,3
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Delete
+	 * 
+	 * b)Negative cases:
+	 * 2. Not Authority
+	 * 3. Invalid authority
+	 * 
 	 * c) Sentence coverage
-	 * -delete(): 3 tested cases / 5 total cases = 60%
+	 * -delete(): 3 passed cases / 5 total cases = 60%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -270,13 +291,13 @@ public class LegalRecordServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "legalRecord1", null
-			//1. All fine
-			}, {
+			},//1. All fine
+			{
 				null, "legalRecord1", IllegalArgumentException.class
-			//2. Not Authority
-			}, {
+			},//2. Not Authority
+			{
 				"member2", "legalRecord1", IllegalArgumentException.class
-			}
+			},//3. Invalid authority
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -311,5 +332,15 @@ public class LegalRecordServiceTest extends AbstractTest {
 		this.rollbackTransaction();
 
 	}
+
+	/*
+	 * -------Coverage LegalRecordService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * LegalRecord =
+	 */
 
 }

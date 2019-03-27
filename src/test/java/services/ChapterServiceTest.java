@@ -67,7 +67,7 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 4. The email attribute is null
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 2 passed cases / 8 total cases = 25%
+	 * -save(): 2 passed cases / 10 total cases = 20%
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
@@ -141,7 +141,7 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 6 .Email = no pattern
 	 * 
 	 * c) Sentence coverage:
-	 * -save(): 1 passed cases / 8 total cases = 12,5%
+	 * -save(): 1 passed cases / 10 total cases = 10%
 	 * 
 	 * d) Data coverage:
 	 * -Chapter: 5 passed cases / 12 total cases = 41,66667%
@@ -220,7 +220,7 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 2. A Chapter who have an area, self-assing another area
 	 * 
 	 * c) Sentence coverage:
-	 * -save(): 1 passed cases / 8 total cases = 12,5%
+	 * -save(): 1 passed cases / 10 total cases = 10%
 	 * 
 	 * d) Data coverage:
 	 * -Chapter: 0 passed cases / 12 total cases = 0%
@@ -345,12 +345,12 @@ public class ChapterServiceTest extends AbstractTest {
 	 * -------Coverage ChapterService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save() = 50%
+	 * save() = 20%
 	 * findOne() = 100%
 	 * findAll() = 100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Chapter =
+	 * Chapter = 50%
 	 */
 
 }

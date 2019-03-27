@@ -70,7 +70,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -findBrotherhoodsByAreaId = 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -Brotherhood: 0 passed cases / 15 total cases
+	 * -Brotherhood: 0 passed cases / 15 total cases = 0%
 	 */
 
 	@Test
@@ -223,7 +223,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * -Brotherhood: 1 passed cases / 15 total cases = 6,66667%%
+	 * -Brotherhood: 1 passed cases / 15 total cases = 6,66667%
 	 */
 
 	@Test
@@ -357,7 +357,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * findBrotherhoodsByAreaId() = 50%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Brotherhood =
+	 * Brotherhood = 6,66667%
 	 */
 
 }
