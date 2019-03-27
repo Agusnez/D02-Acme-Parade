@@ -134,25 +134,25 @@ public class BrotherhoodServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			{
-				7, null, null
+				8, null, null
 			},//1. All fine
 			{
 				28, null, IllegalArgumentException.class
 			},//2. Wrong return
 			{
-				7, "brotherhood1", null
+				8, "brotherhood1", null
 			},//3. All fine(authenticated brotherhood)
 			{
-				7, "sponsor1", null
+				8, "sponsor1", null
 			},//4. All fine(authenticated sponsor) 
 			{
-				7, "chapter1", null
+				8, "chapter1", null
 			},//5. All fine(authenticated chapter)
 			{
-				7, "member1", null
+				8, "member1", null
 			},//6. All fine(authenticated member)
 			{
-				7, "admin", null
+				8, "admin", null
 			},//7. All fine(authenticated administrator)
 
 		};
