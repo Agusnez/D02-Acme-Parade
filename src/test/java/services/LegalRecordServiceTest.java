@@ -59,8 +59,15 @@ public class LegalRecordServiceTest extends AbstractTest {
 	/*
 	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
-	 * Negative cases:
-	 * b)2,3,4,5,6,7
+	 * 
+	 * b)Negative cases:
+	 * 2. Title = null
+	 * 3. Description = null
+	 * 4. Description = ""
+	 * 5. Title = ""
+	 * 6. Not authority
+	 * 7. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
 	 * -create(): 3 tested cases / 3 total cases = 100%
 	 * 
