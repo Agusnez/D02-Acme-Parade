@@ -98,6 +98,10 @@ public class SponsorshipService {
 		Assert.isTrue(sponsorship.getCreditCard().getExpYear() - 1900 >= now.getYear());
 		Assert.isTrue(sponsorship.getCreditCard().getExpMonth() - 1 >= now.getMonth() || sponsorship.getCreditCard().getExpYear() - 1900 > now.getYear());
 
+		final Collection<String> makes = this.configurationService.findConfiguration().getMakes();
+
+		Assert.isTrue(makes.contains(sponsorship.getCreditCard().getMake()));
+
 		final Sponsorship result = this.sponsorshipRepository.save(sponsorship);
 
 		return result;

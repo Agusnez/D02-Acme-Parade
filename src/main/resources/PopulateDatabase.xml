@@ -3272,7 +3272,7 @@
 	
 	<bean id="creditCard3" class="domain.CreditCard">
 		<property name="holderName" value="Pedro"/>
-		<property name="make" value="MASTERCARD"/>
+		<property name="make" value="MCARD"/>
 		<property name="number" value="1111222233334444"/>
 		<property name="expMonth" value="12"/>
 		<property name="expYear" value="2020"/>
@@ -3290,7 +3290,7 @@
 	
 	<bean id="creditCard5" class="domain.CreditCard">
 		<property name="holderName" value="Sergio"/>
-		<property name="make" value="MASTERCARD"/>
+		<property name="make" value="MCARD"/>
 		<property name="number" value="1111222233334444"/>
 		<property name="expMonth" value="12"/>
 		<property name="expYear" value="2020"/>
