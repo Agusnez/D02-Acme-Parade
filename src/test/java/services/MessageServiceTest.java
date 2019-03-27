@@ -82,11 +82,11 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Not authenticated
 	 * 
 	 * c) Sentence coverage:
-	 * -create3():100%
-	 * -save():1/·=33,3%
+	 * -create3(): 1 passed cases / 1 total cases=100%
+	 * -save():1 passed cases / 5 total cases = 20%
 	 * 
 	 * d) Data coverage:
-	 * -Message:
+	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
 	@Test
 	public void driverExchangeMessage() {
@@ -149,12 +149,10 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Not authenticated actor
 	 * 
 	 * c) Sentence coverage:
-	 * -create3():100%
-	 * -broadcastSystem():66,6%
-	 * -save():1/·=33,3%
+	 * -broadcastSystem(): 2 passed cases / 6 total cases = 33.33333%
 	 * 
 	 * d) Data coverage:
-	 * -Message:
+	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -221,7 +219,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * -NotificationNewParade(): 1 passed cases / 3 total cases = 33.3%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -283,7 +281,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * -NotificationNewEnrolment(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -347,7 +345,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * -NotificationDropOutMember(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -411,7 +409,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * -NotificationDropOutBrotherhood(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -474,7 +472,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * -NotificationRequestStatus(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -531,9 +529,17 @@ public class MessageServiceTest extends AbstractTest {
 	 * -------Coverage MessageService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -create3() =100%
+	 * -save() = 20%
+	 * -broadcastSystem() = 33.33333%
+	 * -NotificationNewParade() = 33.33333%
+	 * -NotificationNewEnrolment() = 100%
+	 * -NotificationDropOutMember() = 100%
+	 * -NotificationDropOutBrotherhood() = 100%
+	 * -NotificationRequestStatus() = 100%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Message =
+	 * Message = 0%
 	 */
 }
