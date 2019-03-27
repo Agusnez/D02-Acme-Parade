@@ -131,7 +131,7 @@ public class ChapterServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-PARADE
-	 * a)(Level B)Requirement 7.1: An actor who is not authenticated must be able to: Register to the system as a chapter
+	 * a)(Level B) Requirement 7.1: An actor who is not authenticated must be able to: Register to the system as a chapter
 	 * 
 	 * b)Negative cases:
 	 * 2. Title = blank

@@ -34,6 +34,8 @@
 	
 	<acme:textbox code="configuration.fare"  path="fare"/>
 	
+	<acme:textbox code="configuration.makes" size="100" path="makes" obligatory="true"/>
+	
 	<acme:submit name="save" code="configuration.save" />
 	
 	<acme:cancel code="configuration.cancel" url="welcome/index.do" />
