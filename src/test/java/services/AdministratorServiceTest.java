@@ -64,7 +64,7 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -Administrator = 0 passed cases / 10 total cases = 0%
+	 * -Administrator: 0 passed cases / 10 total cases = 0%
 	 */
 
 	@Test

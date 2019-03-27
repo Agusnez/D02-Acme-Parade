@@ -78,23 +78,25 @@ public class MessageServiceTest extends AbstractTest {
 	 * ACME-MADRUGA
 	 * a)(Level A)Requirement 26 : Actors can exchange messages
 	 * 
-	 * b)Negative cases:2
-	 * c) Sentence coverage:
-	 * -create3()=100%
-	 * -save()=1/·=33,3%
+	 * b)Negative cases:
+	 * 2. Not authenticated
 	 * 
+	 * c) Sentence coverage:
+	 * -create3():100%
+	 * -save():1/·=33,3%
 	 * 
 	 * d) Data coverage:
+	 * -Message:
 	 */
 	@Test
 	public void driverExchangeMessage() {
 		final Object testingData[][] = {
 			{
 				"member1", "brotherhood1", null
-			},//1.Todo bien
+			},//1. All fine
 			{
 				null, "brotherhood1", AssertionError.class
-			},//1.No está registrado el sender
+			},//2. Not authenticated
 
 		};
 
@@ -147,11 +149,12 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Not authenticated actor
 	 * 
 	 * c) Sentence coverage:
-	 * -create3()=100%
-	 * -broadcastSystem()=66,6%
-	 * -save()=1/·=33,3%
+	 * -create3():100%
+	 * -broadcastSystem():66,6%
+	 * -save():1/·=33,3%
 	 * 
 	 * d) Data coverage:
+	 * -Message:
 	 */
 
 	@Test
@@ -215,7 +218,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
-	 * -NotificationNewParade()= 1 passed cases / 3 total cases = 33.3%
+	 * -NotificationNewParade(): 1 passed cases / 3 total cases = 33.3%
 	 * 
 	 * d) Data coverage:
 	 * 0%
@@ -277,7 +280,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
-	 * -NotificationNewEnrolment()= 1 passed cases / 1 total cases = 100%
+	 * -NotificationNewEnrolment(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
 	 * 0%
@@ -341,7 +344,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Wrong destination
 	 * 
 	 * c)Sentence coverage:
-	 * -NotificationDropOutMember()= 1 passed cases / 1 total cases = 100%
+	 * -NotificationDropOutMember(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
 	 * 0%
@@ -405,7 +408,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
-	 * -NotificationDropOutBrotherhood()= 1 passed cases / 1 total cases = 100%
+	 * -NotificationDropOutBrotherhood(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
 	 * 0%
@@ -468,7 +471,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
-	 * -NotificationRequestStatus()= 1 passed cases / 1 total cases = 100%
+	 * -NotificationRequestStatus(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
 	 * 0%

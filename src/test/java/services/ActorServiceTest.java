@@ -59,7 +59,7 @@ public class ActorServiceTest extends AbstractTest {
 	 * 2. Ban yourself
 	 * 
 	 * c) Sentence coverage
-	 * -banOrUnBanActor() = 2 passed cases / 7 total cases = 28,57%
+	 * -banOrUnBanActor(): 2 passed cases / 7 total cases = 28,57%
 	 * 
 	 * d) Data coverage
 	 * -Actor: 0 passed cases / 10 total cases = 0%
@@ -119,7 +119,7 @@ public class ActorServiceTest extends AbstractTest {
 	 * 2. Unban yourself
 	 * 
 	 * c) Sentence coverage
-	 * -banOrUnBanActor() = 2 passed cases / 6 total cases = 33,33333%
+	 * -banOrUnBanActor(): 2 passed cases / 6 total cases = 33,33333%
 	 * 
 	 * d) Data coverage
 	 * -Segment: 0 passed cases / 4 total cases = 0%

@@ -66,7 +66,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * 2. Wrong result
 	 * 
 	 * c) Sentence coverage:
-	 * -findEnrolmentsByBrotherhoodIdNoPosition()= 1 passed cases / 2 total cases = 50%
+	 * -findEnrolmentsByBrotherhoodIdNoPosition(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage:
 	 * -Enrolment: 0 passed cases / 5 total cases = 0%
@@ -122,7 +122,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * 2. Wrong result
 	 * 
 	 * c) Sentence coverage:
-	 * -findEnrolmentsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
+	 * -findEnrolmentsByBrotherhoodId(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage:
 	 * -Enrolment: 0 passed cases / 5 total cases = 0%
@@ -177,7 +177,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * 2. Wrong brotherhood
 	 * 
 	 * c) Sentence coverage:
-	 * -save() = 2 passed cases / 8 total cases= 25%
+	 * -save(): 2 passed cases / 8 total cases= 25%
 	 * 
 	 * 
 	 * d) Data coverage:
@@ -237,7 +237,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * 2. Wrong actor
 	 * 
 	 * c) Sentence coverage:
-	 * -create()= 2 passed cases / 3 total cases = 66%
+	 * -create(): 2 passed cases / 3 total cases = 66%
 	 * 
 	 * d) Data coverage:
 	 * -Enrolment: 0 passed cases / 5 total cases = 0%
@@ -292,7 +292,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * 2. Wrong actor
 	 * 
 	 * c)Sentence coverage:
-	 * -findEnrolmentsByMemberId()= 2 passed cases / 2 total cases = 50%
+	 * -findEnrolmentsByMemberId(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d)Data coverage:
 	 * -Enrolment: 0 passed cases / 5 total cases = 0%

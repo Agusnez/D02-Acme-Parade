@@ -88,7 +88,6 @@ public class HistoryServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				"brotherhood3", "title1", "descrption1", "http://photo1.com", "http://photo2.com", null
-
 			},//1. All fine
 			{
 				"member1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class

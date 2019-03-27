@@ -67,8 +67,8 @@ public class ProclaimServiceTest extends AbstractTest {
 	 * 2. The expected result is incorrect
 	 * 
 	 * c) Sentence coverage
-	 * -findAll() = 1 passed cases / 2 total cases = 50%
-	 * -save()
+	 * -findAll(): 1 passed cases / 2 total cases = 50%
+	 * -save():
 	 * 
 	 * d) Data coverage
 	 * -Proclaim: 0 passed cases / 3 total cases = 0%
@@ -133,8 +133,8 @@ public class ProclaimServiceTest extends AbstractTest {
 	 * 4. Description = more than 250 characters (251)
 	 * 
 	 * c) Sentence coverage
-	 * create() =
-	 * save() =
+	 * create():
+	 * save():
 	 * 
 	 * d) Data coverage
 	 * -Proclaim: 1 passed cases / 3 total cases = 33.33333%

@@ -279,7 +279,7 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 2. Wrong return
 	 * 
 	 * c) Sentence coverage:
-	 * -findAll()= 2 passed cases / 2 total cases = 100%
+	 * -findAll(): 2 passed cases / 2 total cases = 100%
 	 * 
 	 * d) Data coverage:
 	 * -Chapter: 0 passed cases / 12 total cases = 0%

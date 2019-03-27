@@ -448,10 +448,10 @@ public class RequestServiceTest extends AbstractTest {
 
 			{
 				"member1", "parade1", null
-			}, //1. All fine
+			},//1. All fine
 			{
 				"brotherhood1", "parade1", IllegalArgumentException.class
-			}, //2. Invalid authority
+			},//2. Invalid authority
 
 		};
 

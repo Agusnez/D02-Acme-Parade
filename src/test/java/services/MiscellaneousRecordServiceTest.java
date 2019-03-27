@@ -54,6 +54,7 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 */
 
 	/*
+	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
 	 * 
 	 * b)Negative cases:
@@ -132,6 +133,7 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Edit
 	 * 
 	 * b)Negative cases:
@@ -140,7 +142,6 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 3 passed cases / 8 total cases = 37.5%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -None
@@ -195,6 +196,7 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Delete
 	 * 
 	 * b)Negative cases:
@@ -203,7 +205,6 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -delete(): 3 passed cases / 5 total cases = 60%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -None
@@ -258,6 +259,7 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: List
 	 * 
 	 * b)Negative cases:
@@ -265,7 +267,6 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -findAll(): 1 passed case / 1 total case = 100%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -None

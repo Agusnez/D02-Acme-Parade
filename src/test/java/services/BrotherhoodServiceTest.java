@@ -67,7 +67,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * 2. Area not contain this brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -findBrotherhoodsByAreaId = 1 passed cases / 2 total cases = 50%
+	 * -findBrotherhoodsByAreaId(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Brotherhood: 0 passed cases / 15 total cases = 0%
@@ -122,7 +122,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * 2. Wrong return
 	 * 
 	 * c) Sentence coverage:
-	 * -findAll()= 1 passed cases / 2 total cases = 50%
+	 * -findAll(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage:
 	 * -Brotherhood: 0 passed cases / 15 total cases = 0%

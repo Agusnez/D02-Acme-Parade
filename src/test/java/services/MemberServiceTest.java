@@ -68,7 +68,7 @@ public class MemberServiceTest extends AbstractTest {
 	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * -Chapter: 4 passed cases / 7 total cases = 57%
+	 * -Member: 4 passed cases / 11 total cases = 36,36364%
 	 */
 
 	@Test
@@ -147,7 +147,7 @@ public class MemberServiceTest extends AbstractTest {
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Member: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
