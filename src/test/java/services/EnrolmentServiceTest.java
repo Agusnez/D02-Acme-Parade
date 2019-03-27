@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Enrolment;
+import domain.Position;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -40,6 +41,9 @@ public class EnrolmentServiceTest extends AbstractTest {
 
 	@Autowired
 	private RequestService		requestService;
+
+	@Autowired
+	private PositionService		positionService;
 
 
 	/*
@@ -87,7 +91,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				"brotherhood1", 0, null
-			},//1.All rigth
+			},//1.All fine
 			{
 				"brotherhood1", 14, IllegalArgumentException.class
 			},//1.Wrong result
@@ -141,7 +145,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				"brotherhood1", 2, null
-			},//1.All rigth
+			},//1.All fine
 			{
 				"brotherhood1", 14, IllegalArgumentException.class
 			},//1.Wrong result
@@ -184,8 +188,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * b)Negative cases: Wrong result
 	 * 
 	 * c) Sentence coverage:
-	 * -findEnrolmentsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
-	 * -save() =
+	 * -save() = 2 passed cases / 8 total cases= 25%
 	 * 
 	 * 
 	 * d) Data coverage:
@@ -196,10 +199,10 @@ public class EnrolmentServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				"brotherhood1", "enrolment2", null
-			},//1.All rigth
+			},//1.All fine
 			{
 				"brotherhood1", "enrolment14", IllegalArgumentException.class
-			},//1.Wrong result
+			},//1.Wrong brotherhood
 
 		};
 
@@ -216,7 +219,13 @@ public class EnrolmentServiceTest extends AbstractTest {
 
 			super.authenticate(brotherhood);
 
-			final Enrolment enrolments = this.enrolmentService.findOne(super.getEntityId(enrolment));
+			final Enrolment enrolmentFind = this.enrolmentService.findOne(super.getEntityId(enrolment));
+
+			final Position position = this.positionService.findOne(super.getEntityId("position1"));
+
+			enrolmentFind.setPosition(position);
+
+			this.enrolmentService.save(enrolmentFind);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -230,4 +239,61 @@ public class EnrolmentServiceTest extends AbstractTest {
 
 	}
 
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level C)Requirement 10.3 : Brotherhood manage his/her enrolments (dropOut)
+	 * 
+	 * b)Negative cases: Wrong result
+	 * 
+	 * c) Sentence coverage:
+	 * -save() = 2 passed cases / 8 total cases= 25%
+	 * 
+	 * 
+	 * d) Data coverage:
+	 * 0%
+	 */
+	@Test
+	public void EnrolmentDropOut() {
+		final Object testingData[][] = {
+			{
+				"brotherhood1", "enrolment2", null
+			},//1.All fine
+			{
+				"brotherhood1", "enrolment14", IllegalArgumentException.class
+			},//1.Wrong brotherhood
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEnrolmentDropOut((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	protected void templateEnrolmentDropOut(final String brotherhood, final String enrolment, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+
+			super.authenticate(brotherhood);
+
+			final Enrolment enrolmentFind = this.enrolmentService.findOne(super.getEntityId(enrolment));
+
+			final Position position = this.positionService.findOne(super.getEntityId("position1"));
+
+			enrolmentFind.setPosition(position);
+
+			this.enrolmentService.save(enrolmentFind);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		super.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+
+		this.rollbackTransaction();
+
+	}
 }
