@@ -151,7 +151,7 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * 3. Not a Brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 3 tested cases / 3 total cases = 100%
+	 * -save(): 3 tested cases / 6 total cases = 50%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -220,7 +220,7 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * 2. Incorrect result
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 tested case / 1 total case = 100%
+	 * -findAll(): 1 tested case / 2 total case = 50%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -267,10 +267,13 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * -------Coverage InceptionRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -findAll() = 50%
+	 * -save() = 50%
+	 * -create() = 100%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * InceptionRecord =
+	 * InceptionRecord = 66,66667%
 	 */
 
 }

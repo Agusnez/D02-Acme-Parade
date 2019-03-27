@@ -201,9 +201,9 @@ public class HistoryServiceTest extends AbstractTest {
 	 * -------Coverage FloatService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -findAll(): 1 tested case / 2 total case = 50%
-	 * -create(): 2 tested cases / 3 total cases = 66.67%
-	 * -save(): 1 tested cases / 5 total cases = 20%
+	 * -findAll() = 50%
+	 * -create() = 66.67%
+	 * -save() = 20%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * History = 0%
