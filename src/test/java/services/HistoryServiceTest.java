@@ -57,13 +57,13 @@ public class HistoryServiceTest extends AbstractTest {
 	 * To calculate the data coverage, we have look at
 	 * each object's attributes, we analyse in each one of them
 	 * the domain's restrictions and the business rules
-	 * about the attribute. If we have tested all types of cases
+	 * about the attribute. If we have passed all types of cases
 	 * in a attribute, that is called "proven attribute".
 	 * 
 	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
 	 * 
 	 * ----Note:
-	 * It's clear that if we have tested all cases about a method in a test
+	 * It's clear that if we have passed all cases about a method in a test
 	 * and now It have already had a 100% of coverage, we don't have to
 	 * mention its coverage in other test.
 	 */
@@ -74,8 +74,8 @@ public class HistoryServiceTest extends AbstractTest {
 	 * Negative cases:
 	 * b)2
 	 * c) Sentence coverage
-	 * -create(): 2 tested cases / 3 total cases = 66.67%
-	 * -save(): 1 tested cases / 5 total cases = 20%
+	 * -create(): 2 passed cases / 3 total cases = 66.67%
+	 * -save(): 1 passed cases / 5 total cases = 20%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -153,7 +153,7 @@ public class HistoryServiceTest extends AbstractTest {
 	 * Negative cases:
 	 * b)2
 	 * c) Sentence coverage
-	 * -findAll(): 1 tested case / 2 total case = 50%
+	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
 	 * 
 	 * d) Data coverage

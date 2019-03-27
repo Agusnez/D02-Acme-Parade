@@ -45,13 +45,13 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * To calculate the data coverage, we have look at
 	 * each object's attributes, we analyse in each one of them
 	 * the domain's restrictions and the business rules
-	 * about the attribute. If we have tested all types of cases
+	 * about the attribute. If we have passed all types of cases
 	 * in a attribute, that is called "proven attribute".
 	 * 
 	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
 	 * 
 	 * ----Note:
-	 * It's clear that if we have tested all cases about a method in a test
+	 * It's clear that if we have passed all cases about a method in a test
 	 * and now It have already had a 100% of coverage, we don't have to
 	 * mention its coverage in other test.
 	 */
@@ -69,11 +69,11 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * 7. Not a Brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -create(): 3 tested cases / 3 total cases = 100%
+	 * -create(): 3 passed cases / 3 total cases = 100%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -InceptionRecord: 2 tested cases / 3 total cases = 66.67%
+	 * -InceptionRecord: 2 passed cases / 3 total cases = 66.67%
 	 */
 
 	@Test
@@ -151,7 +151,7 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * 3. Not a Brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 3 tested cases / 6 total cases = 50%
+	 * -save(): 3 passed cases / 6 total cases = 50%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -220,7 +220,7 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * 2. Incorrect result
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 tested case / 2 total case = 50%
+	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
 	 * 
 	 * d) Data coverage

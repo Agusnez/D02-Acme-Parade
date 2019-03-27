@@ -45,13 +45,13 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * To calculate the data coverage, we have look at
 	 * each object's attributes, we analyse in each one of them
 	 * the domain's restrictions and the business rules
-	 * about the attribute. If we have tested all types of cases
+	 * about the attribute. If we have passed all types of cases
 	 * in a attribute, that is called "proven attribute".
 	 * 
 	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
 	 * 
 	 * ----Note:
-	 * It's clear that if we have tested all cases about a method in a test
+	 * It's clear that if we have passed all cases about a method in a test
 	 * and now It have already had a 100% of coverage, we don't have to
 	 * mention its coverage in other test.
 	 */
@@ -69,11 +69,11 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 7. Not a Brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -create(): 3 tested cases / 3 total cases = 100%
+	 * -create(): 3 passed cases / 3 total cases = 100%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -LegalRecord: 2 tested cases / 5 total cases = 40%
+	 * -LegalRecord: 2 passed cases / 5 total cases = 40%
 	 */
 
 	@Test
@@ -154,7 +154,7 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 3. Not a Brotherhood
 	 * 
 	 * c)Sentence coverage
-	 * -save(): 3 tested cases / 3 total cases = 100%
+	 * -save(): 3 passed cases / 3 total cases = 100%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -225,7 +225,7 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 2. Incorrect result
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 tested case / 1 total case = 100%
+	 * -findAll(): 1 passed case / 1 total case = 100%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -278,7 +278,7 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 3. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * -delete(): 3 tested cases / 5 total cases = 60%
+	 * -delete(): 3 passed cases / 5 total cases = 60%
 	 * 
 	 * 
 	 * d) Data coverage
