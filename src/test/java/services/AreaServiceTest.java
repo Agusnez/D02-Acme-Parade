@@ -182,7 +182,7 @@ public class AreaServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -create(): 1 passed cases / 1 total cases = 100%
-	 * -save():
+	 * -save(): 1 passed / 5 total cases = 20%
 	 * 
 	 * d) Data coverage
 	 * -Area: 1 passed cases / 3 total cases = 33,33333%
@@ -249,7 +249,6 @@ public class AreaServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 1 passed cases / 5 total cases = 20%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -Area: 1 passed cases / 3 total cases = 33,33333%
