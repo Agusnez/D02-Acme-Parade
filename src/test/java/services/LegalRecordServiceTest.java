@@ -154,11 +154,11 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 3. Not a Brotherhood
 	 * 
 	 * c)Sentence coverage
-	 * -save(): 3 passed cases / 3 total cases = 100%
+	 * -save(): 3 passed cases / 8 total cases = 37,5%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -LegalRecord: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -225,11 +225,11 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 2. Incorrect result
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 passed case / 1 total case = 100%
+	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -LegalRecord: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -278,11 +278,11 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 3. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * -delete(): 3 passed cases / 5 total cases = 60%
+	 * -delete(): 3 passed cases / 7 total cases = 42,8%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -LegalRecord: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -337,10 +337,14 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * -------Coverage LegalRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -delete() = 42,8%
+	 * -findAll() = 50%
+	 * -save() = 37,5%
+	 * -create() = 100%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * LegalRecord =
+	 * LegalRecord = 40%
 	 */
 
 }

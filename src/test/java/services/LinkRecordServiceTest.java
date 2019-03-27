@@ -70,7 +70,7 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * -create(): 3 passed cases / 3 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -LinkRecord: 2 passed cases / 2 total cases = 100%
+	 * -LinkRecord: 2 passed cases / 3 total cases = 66,66667%
 	 */
 
 	@Test
@@ -155,7 +155,7 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * -save(): 3 passed cases / 8 total cases = 37.5%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -LinkRecord: 0 passed cases / 3 total cases = 0%
 	 */
 
 	@Test
@@ -216,10 +216,10 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * 3. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * -delete(): 3 passed cases / 5 total cases = 60%
+	 * -delete(): 3 passed cases / 6 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -LinkRecord: 0 passed cases / 3 total cases = 0%
 	 */
 
 	@Test
@@ -278,10 +278,10 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * 2. Incorrect result
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 passed case / 1 total case = 100%
+	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -LinkRecord: 0 passed cases / 3 total cases = 0%
 	 */
 
 	@Test
@@ -325,10 +325,14 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * -------Coverage LinkRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -delete() = 50%
+	 * -save() = 37.5%
+	 * -create() = 100%
+	 * -findAll() = 50%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * LinkRecord =
+	 * LinkRecord = 66.66667%
 	 */
 
 }
