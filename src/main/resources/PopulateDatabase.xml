@@ -3224,7 +3224,7 @@
 	<bean id="sponsorship12" class="domain.Sponsorship">
 		<property name="banner" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
 		<property name="targetUrl" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
-		<property name="creditCard" ref="creditCard4"/>
+		<property name="creditCard" ref="creditCard5"/>
 		<property name="activated" value="false"/>
 		<property name="Sponsor" ref="sponsor5"/>
 		<property name="Parade" ref="parade5"/>
@@ -3234,8 +3234,8 @@
 	<bean id="sponsorship13" class="domain.Sponsorship">
 		<property name="banner" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
 		<property name="targetUrl" value="http://www.foxandfiddlecalifornia.com/wp-content/uploads/2018/12/swirly-logo-clip-art-free-vector-4vector-exotic-copyright-logos-simplistic-8.png"/>
-		<property name="creditCard" ref="creditCard4"/>
-		<property name="activated" value="false"/>
+		<property name="creditCard" ref="creditCard5"/>
+		<property name="activated" value="true"/>
 		<property name="Sponsor" ref="sponsor5"/>
 		<property name="Parade" ref="parade8"/>
 		<property name="Cost" value="2.00"/>

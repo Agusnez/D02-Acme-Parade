@@ -23,6 +23,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Brotherhood;
+import domain.Sponsor;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -45,8 +46,8 @@ public class DashboardServiceTest extends AbstractTest {
 	@Autowired
 	private SponsorshipService	sponsorshipService;
 
-	//	@Autowired
-	//	private SponsorService		sponsorService;
+	@Autowired
+	private SponsorService		sponsorService;
 
 	@Autowired
 	private FinderService		finderService;
@@ -165,11 +166,11 @@ public class DashboardServiceTest extends AbstractTest {
 			}, {//Negative
 				"ratioSubmitted", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioOfActiveSponsorships", 0.69231, null
+				"ratioOfActiveSponsorships", 0.76923, null
 			}, {//Negative
 				"ratioOfActiveSponsorships", 111.111, IllegalArgumentException.class
 			}, {
-				"averageActiveSponsorshipsPerSponsor", 1.5, null
+				"averageActiveSponsorshipsPerSponsor", 1.66667, null
 			}, {//Negative
 				"averageActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
 			}, {
@@ -181,7 +182,7 @@ public class DashboardServiceTest extends AbstractTest {
 			}, {//Negative
 				"maxActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
 			}, {
-				"standartDeviationOfActiveSponsorshipsPerSponsor", 1.3844373104863459, null
+				"standartDeviationOfActiveSponsorshipsPerSponsor", 1.2472146745582064, null
 			}, {//Negative
 				"standartDeviationOfActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
 			}, {
@@ -350,16 +351,14 @@ public class DashboardServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-<<<<<<< HEAD
 	@Test
 	public void theSmallestBrotherhoodsTest() {
 		final Object theSmallestBrotherhoodsTest[][] = {
 			{
 				"brotherhood8", null
+			}, {
+				"brotherhood6", IllegalArgumentException.class
 			}
-		//, {
-		//"member1", IllegalArgumentException.class
-		//}
 		};
 
 		for (int i = 0; i < theSmallestBrotherhoodsTest.length; i++)
@@ -377,7 +376,7 @@ public class DashboardServiceTest extends AbstractTest {
 
 			final Collection<Brotherhood> bs = this.brotherhoodService.theSmallestBrotherhoods();
 
-			Assert.isTrue(bs.contains(b));
+			Assert.isTrue(bs.contains(b.getTitle()));
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -390,49 +389,10 @@ public class DashboardServiceTest extends AbstractTest {
 	public void theLargestBrotherhoodsTest() {
 		final Object theLargestBrotherhoodsTest[][] = {
 			{
-=======
-	//	@Test
-	//	public void theSmallestBrotherhoodsTest() {
-	//		final Object theSmallestBrotherhoodsTest[][] = {
-	//			{//only the admin can summon this services
-	//				"admin", null
-	//			}, {
-	//				"member1", IllegalArgumentException.class
-	//			}
-	//		};
-	//
-	//		for (int i = 0; i < theSmallestBrotherhoodsTest.length; i++)
-	//			this.theSmallestBrotherhoodsTemplate(super.getEntityId((String) theSmallestBrotherhoodsTest[i][0]), (Class<?>) theSmallestBrotherhoodsTest[i][1]);
-	//	}
-	//
-	//	// Ancillary methods ------------------------------------------------------
-	//
-	//	protected void theSmallestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
-	//		Class<?> caught;
-	//
-	//		caught = null;
-	//		try {
-	//			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
-	//
-	//			final Collection<Brotherhood> bs = this.brotherhoodService.theSmallestBrotherhoods();
-	//
-	//			Assert.isTrue(bs.contains(b));
-	//
-	//		} catch (final Throwable oops) {
-	//			caught = oops.getClass();
-	//		}
-	//
-	//		this.checkExceptions(expected, caught);
-	//	}
-	//
-	@Test
-	public void theLargestBrotherhoodsTest() {
-		final Object theLargestBrotherhoodsTest[][] = {
-			{//only the admin can summon this services
->>>>>>> ce40505aee42520289ca6b80f03a3dec688c460c
+
 				"brotherhood6", null
 			}, {
-				"member1", IllegalArgumentException.class
+				"brotherhood8", IllegalArgumentException.class
 			}
 		};
 
@@ -451,7 +411,7 @@ public class DashboardServiceTest extends AbstractTest {
 
 			final Collection<Brotherhood> bs = this.brotherhoodService.theLargestBrotherhoods();
 
-			Assert.isTrue(bs.contains(b));
+			Assert.isTrue(bs.contains(b.getTitle()));
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -459,20 +419,19 @@ public class DashboardServiceTest extends AbstractTest {
 
 		this.checkExceptions(expected, caught);
 	}
-<<<<<<< HEAD
 
 	@Test
 	public void largestBrotherhoodsTest() {
 		final Object largestBrotherhoodsTest[][] = {
 			{//only the admin can summon this services
-				"admin", null
+				"brotherhood1", null
 			}, {
-				"member1", IllegalArgumentException.class
+				"brotherhood5", IllegalArgumentException.class
 			}
 		};
 
 		for (int i = 0; i < largestBrotherhoodsTest.length; i++)
-			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) largestBrotherhoodsTest[i][0]), (Class<?>) largestBrotherhoodsTest[i][1]);
+			this.largestBrotherhoodsTemplate(super.getEntityId((String) largestBrotherhoodsTest[i][0]), (Class<?>) largestBrotherhoodsTest[i][1]);
 	}
 
 	// Ancillary methods ------------------------------------------------------
@@ -482,6 +441,9 @@ public class DashboardServiceTest extends AbstractTest {
 
 		caught = null;
 		try {
+
+			super.authenticate("admin");
+
 			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
 
 			final Collection<Brotherhood> bs = this.historyService.largestBrotherhood();
@@ -492,77 +454,43 @@ public class DashboardServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 
+		super.unauthenticate();
+
 		this.checkExceptions(expected, caught);
 	}
-=======
-	//
-	//	@Test
-	//	public void largestBrotherhoodsTest() {
-	//		final Object largestBrotherhoodsTest[][] = {
-	//			{//only the admin can summon this services
-	//				"admin", null
-	//			}, {
-	//				"member1", IllegalArgumentException.class
-	//			}
-	//		};
-	//
-	//		for (int i = 0; i < largestBrotherhoodsTest.length; i++)
-	//			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) largestBrotherhoodsTest[i][0]), (Class<?>) largestBrotherhoodsTest[i][1]);
-	//	}
-	//
-	//	// Ancillary methods ------------------------------------------------------
-	//
-	//	protected void largestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
-	//		Class<?> caught;
-	//
-	//		caught = null;
-	//		try {
-	//			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
-	//
-	//			final Collection<Brotherhood> bs = this.historyService.largestBrotherhood();
-	//
-	//			Assert.isTrue(bs.contains(b));
-	//
-	//		} catch (final Throwable oops) {
-	//			caught = oops.getClass();
-	//		}
-	//
-	//		this.checkExceptions(expected, caught);
-	//	}
->>>>>>> ce40505aee42520289ca6b80f03a3dec688c460c
 
-	//	@Test
-	//	public void top5Test() {
-	//		final Object top5Test[][] = {
-	//			{//only the admin can summon this services
-	//				"admin", null
-	//			}, {
-	//				"member1", IllegalArgumentException.class
-	//			}
-	//		};
-	//
-	//		for (int i = 0; i < top5Test.length; i++)
-	//			this.top5Template(super.getEntityId((String) top5Test[i][0]), (Class<?>) top5Test[i][1]);
-	//	}
-	//
-	//	// Ancillary methods ------------------------------------------------------
-	//
-	//	protected void top5Template(final int sponsorId, final Class<?> expected) {
-	//		Class<?> caught;
-	//
-	//		caught = null;
-	//		try {
-	//			final Sponsor s = this.sponsorService.findOne(sponsorId);
-	//
-	//			final Collection<String> cs = this.sponsorshipService.top5SporsorsActivedSponsorships();
-	//
-	//			Assert.isTrue(cs.contains(s.getName()));
-	//
-	//		} catch (final Throwable oops) {
-	//			caught = oops.getClass();
-	//		}
-	//
-	//		this.checkExceptions(expected, caught);
-	//	}
+	@Test
+	public void top5Test() {
+		final Object top5Test[][] = {
+			{//only the admin can summon this services
+				"sponsor1", null
+			}, {
+				"sponsor6", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < top5Test.length; i++)
+			this.top5Template(super.getEntityId((String) top5Test[i][0]), (Class<?>) top5Test[i][1]);
+	}
+
+	// Ancillary methods ------------------------------------------------------
+
+	protected void top5Template(final int sponsorId, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			final Sponsor s = this.sponsorService.findOne(sponsorId);
+
+			final Collection<String> cs = this.sponsorshipService.top5SporsorsActivedSponsorships();
+
+			Assert.isTrue(cs.contains(s.getName()));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+	}
 
 }
