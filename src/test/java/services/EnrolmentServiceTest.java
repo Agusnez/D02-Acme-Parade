@@ -241,33 +241,33 @@ public class EnrolmentServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10.3 : Brotherhood manage his/her enrolments (dropOut)
+	 * a)(Level C)Requirement 10.3 : Member manage his/her enrolments (create)
 	 * 
-	 * b)Negative cases: Wrong result
+	 * b)Negative cases: Wrong actor
 	 * 
 	 * c) Sentence coverage:
-	 * -save() = 2 passed cases / 8 total cases= 25%
+	 * -create()= 2 passed cases / 3 total cases = 66%
 	 * 
 	 * 
 	 * d) Data coverage:
 	 * 0%
 	 */
 	@Test
-	public void EnrolmentDropOut() {
+	public void EnrolmentsCreateMember() {
 		final Object testingData[][] = {
 			{
-				"brotherhood1", "enrolment2", null
+				"member2", "brotherhood1", null
 			},//1.All fine
 			{
-				"brotherhood1", "enrolment14", IllegalArgumentException.class
-			},//1.Wrong brotherhood
+				"chapter1", "brotherhood1", IllegalArgumentException.class
+			},//1.Wrong actor
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateEnrolmentDropOut((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.templateEnrolmentsCreateMember((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	protected void templateEnrolmentDropOut(final String brotherhood, final String enrolment, final Class<?> expected) {
+	protected void templateEnrolmentsCreateMember(final String member, final String brotherhood, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -275,15 +275,65 @@ public class EnrolmentServiceTest extends AbstractTest {
 		try {
 			this.startTransaction();
 
-			super.authenticate(brotherhood);
+			super.authenticate(member);
 
-			final Enrolment enrolmentFind = this.enrolmentService.findOne(super.getEntityId(enrolment));
+			final Enrolment enrolment = this.enrolmentService.create(super.getEntityId(brotherhood));
 
-			final Position position = this.positionService.findOne(super.getEntityId("position1"));
+			Assert.isTrue(enrolment != null);
 
-			enrolmentFind.setPosition(position);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
 
-			this.enrolmentService.save(enrolmentFind);
+		super.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+
+		this.rollbackTransaction();
+
+	}
+
+	/*
+	 * ACME-MADRUGA
+	 * a)(Level C)Requirement 10.3 : Member manage his/her enrolments (list)
+	 * 
+	 * b)Negative cases: Wrong actor
+	 * 
+	 * c) Sentence coverage:
+	 * -findEnrolmentsByMemberId()= 2 passed cases / 2 total cases = 50%
+	 * 
+	 * 
+	 * d) Data coverage:
+	 * 0%
+	 */
+	@Test
+	public void EnrolmentsListMember() {
+		final Object testingData[][] = {
+			{
+				"member2", null
+			},//1.All fine
+			{
+				"member8", IllegalArgumentException.class
+			},//1.Wrong actor
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEnrolmentsListMember((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+	protected void templateEnrolmentsListMember(final String member, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.startTransaction();
+
+			super.authenticate(member);
+
+			final Collection<Enrolment> enrolments = this.enrolmentService.findEnrolmentsByMemberId(super.getEntityId(member));
+
+			Assert.isTrue(enrolments.size() > 0);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
