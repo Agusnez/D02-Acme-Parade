@@ -53,40 +53,45 @@ public class MemberServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 8 :An actor who is not authenticated must be able to:
-	 * 1. Register to the system as a member.
-	 * b)Negative cases: 2, 3 , 5, 6
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 8.1: An actor who is not authenticated must be able to: Register to the system as a member
+	 * 
+	 * b)Negative cases:
+	 * 2. Name = javaScript
+	 * 3. Name = blank
+	 * 4. Middle name = blank
+	 * 5. Photo = no URL
+	 * 6. Email = no pattern
+	 * 
 	 * c) Sentence coverage:
-	 * -save(): 1 probado / 6 totales = 16,67%
-	 * -create(): 1 probado/1 totales = 100%
+	 * -save(): 1 passed cases / 6 total cases = 16,67%
+	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * -Chapter: 4 probado / 7 totales = 57%
+	 * -Chapter: 4 passed cases / 7 total cases = 57%
 	 */
+
 	@Test
 	public void driverRegisterMember() {
 		final Object testingData[][] = {
 			{
 				"name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56", null
-			},//1.Todo bien
+			},//1. All fine
 			{
 				"<script>alert('hola')</script>", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
-			},//2.Name = html
+			},//2. Name = javaScript
 			{
 				"", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter58", "chapter58", ConstraintViolationException.class
-			},//3.Name = blank
+			},//3. Name = blank
 			{
 				"name1", "", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter59", "chapter59", null
-			},//4.Middle name = blank
+			},//4. Middle name = blank
 			{
 				"name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
-			},//5.Photo = no URL
-
+			},//5. Photo = no URL
 			{
 				"name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
-			},
-		//6.Email = no pattern
+			},//6. Email = no pattern
 
 		};
 
@@ -94,6 +99,7 @@ public class MemberServiceTest extends AbstractTest {
 			this.templateRegisterMember((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
 				(String) testingData[i][7], (String) testingData[i][8], (Class<?>) testingData[i][9]);
 	}
+
 	protected void templateRegisterMember(final String name, final String middleName, final String surname, final String photo, final String email, final String phone, final String address, final String username, final String password,
 		final Class<?> expected) {
 
@@ -131,9 +137,10 @@ public class MemberServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 9: Actor who is authenticated
-	 * 2.Edit personal data
-	 * b) Negative cases: 2
+	 * a)(Level C) Requirement 9.2: Actor who is authenticated: Edit personal data
+	 * 
+	 * b) Negative cases:
+	 * 2. The user who is logged, It's not the same as the user who is being edited
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 2 passed cases / 8 total cases = 25%
@@ -142,6 +149,7 @@ public class MemberServiceTest extends AbstractTest {
 	 * d) Data coverage
 	 * 0%
 	 */
+
 	@Test
 	public void driverEditBrotherhood() {
 		final Object testingData[][] = {
@@ -183,5 +191,15 @@ public class MemberServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 		this.rollbackTransaction();
 	}
+
+	/*
+	 * -------Coverage MemberService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Member =
+	 */
 
 }
