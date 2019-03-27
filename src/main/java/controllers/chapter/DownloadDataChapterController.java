@@ -117,10 +117,10 @@ public class DownloadDataChapterController extends AbstractController {
 			myString += "\r\n\r\n";
 			myString += "Anuncios:\r\n\r\n";
 			for (final Proclaim p : proclaims)
-				myString += "Momento: " + p.getMoment() + " Descripción: " + p.getDescription() + "\r\n";
+				myString += "Momento: " + p.getMoment() + " Descripcion: " + p.getDescription() + "\r\n";
 			myString += "\r\n\r\n";
 			myString += "Area que coordinas:\r\n\r\n";
-			myString += "Nombre: " + c.getArea().getName() + " Imágenes: " + Arrays.toString(c.getArea().getPictures().toArray());
+			myString += "Nombre: " + c.getArea().getName() + " Imagenes: " + Arrays.toString(c.getArea().getPictures().toArray());
 			myString += "\r\n";
 
 			response.setContentType("text/plain");
