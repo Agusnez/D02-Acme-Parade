@@ -368,21 +368,21 @@ public class SponsorshipServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			{
-				"parade5", "sponsorship1", "sponsorship2", "sponsorship6", null
+				"parade5", "sponsorship1", "sponsorship2", "sponsorship6", "sponsorship10", null
 			//1. All fine
 			}, {
-				"parade5", "sponsorship3", "sponsorship4", "sponsorship7", IllegalArgumentException.class
+				"parade5", "sponsorship3", "sponsorship4", "sponsorship7", "sponsorship8", IllegalArgumentException.class
 			//2. Wrong return
 			}
 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateRandomSponsorship((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
+			this.templateRandomSponsorship((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Class<?>) testingData[i][5]);
 
 	}
 
-	protected void templateRandomSponsorship(final String pardeBean, final String sponsorshipBean1, final String sponsorshipBean2, final String sponsorshipBean3, final Class<?> expected) {
+	protected void templateRandomSponsorship(final String pardeBean, final String sponsorshipBean1, final String sponsorshipBean2, final String sponsorshipBean3, final String sponsorshipBean4, final Class<?> expected) {
 
 		Class<?> caught;
 
@@ -398,6 +398,8 @@ public class SponsorshipServiceTest extends AbstractTest {
 			sponsorships.add(s2);
 			final Sponsorship s3 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean3));
 			sponsorships.add(s3);
+			final Sponsorship s4 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean3));
+			sponsorships.add(s4);
 
 			final Sponsorship s = this.sponsorshipService.ramdomSponsorship(parade.getId());
 
