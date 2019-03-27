@@ -135,12 +135,24 @@
 				<value>LOW</value>
 			</list>
 		</property>
+		<property name="makes">
+			<list>
+				<value>VISA</value>
+				<value>MCARD</value>
+				<value>AMEX</value>
+				<value>DINNERS</value>
+				<value>FLY</value>
+			</list>
+		</property>
+		
 		<property name="countryCode" value="+34" />
 		<property name="finderTime" value="1" />
 		<property name="finderResult" value="10" />
-		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones" />
-		<property name="banner" value="https://tinyurl.com/acme-madruga" />
-		<property name="welcomeMessage" value="Welcome to Acme Madrugá, the site to organise your processions" />
+		<property name="welcomeMessageEs" value="¡Bienvenidos a Acme Parade! Tu sitio para organizar desfiles" />
+		<property name="banner" value="https://i.imgur.com/zalKRGo.png" />
+		<property name="welcomeMessage" value="Welcome to Acme Parade, the site to organise your parades" />
+		<property name="vatTax" value="0.21" />
+		<property name="fare" value="0.11" />
 
 	</bean>
 	
