@@ -118,6 +118,7 @@ public class BoxServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-MADRUGÁ
 	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Display
 	 * 
 	 * b) Negative cases:
@@ -173,6 +174,7 @@ public class BoxServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-MADRUGÁ
 	 * a)(Level A) Requirement 27.2: Actors manage their boxes : Create
 	 * 
 	 * b) Negative cases:
@@ -182,7 +184,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -create(): 1 passed cases / 1 total cases = 100%
-	 * -save(): 2 passed cases / 11 total cases = 100%
+	 * -save(): 2 passed cases / 11 total cases = 27,27273%
 	 * 
 	 * d) Data coverage
 	 * -Box: 1 passed cases / 4 total cases = 25%
@@ -320,7 +322,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * 2. Delete by default
 	 * 
 	 * c) Sentence coverage
-	 * -delete(): 3 passed cases / 9 total cases = 33.3%
+	 * -delete(): 3 passed cases / 9 total cases = 33.33333%
 	 * 
 	 * d) Data coverage
 	 * -Box: 0 passed cases / 4 total cases = 0%
@@ -379,7 +381,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * save() = 27,27273%
 	 * findOne() = 100%
 	 * create() = 100%
-	 * delete() = 33.33%
+	 * delete() = 33.33333%
 	 * findAllBoxByActor = 100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:

@@ -136,7 +136,7 @@ public class DashboardServiceTest extends AbstractTest {
 	 * -ratioEmptyFinders() = 1 passed cases / 1 total cases = 100%
 	 * -theSmallestBrotherhoods() = 1 passed / 1 total cases = 100%
 	 * -largestBrotherhood() = 1 passed cases / 1 total cases = 100%
-	 * -top5SporsorsActivedSponsorships() =
+	 * -top5SporsorsActivedSponsorships() = 2 passed cases / 3 total cases = 66,66667%
 	 */
 
 	@Test
@@ -646,7 +646,7 @@ public class DashboardServiceTest extends AbstractTest {
 	 * maxRecordPerHistory() = 33.33333%
 	 * minRecordPerHistory() = 33.33333%
 	 * stddevRecordPerHistory() = 33.33333%
-	 * brotherhoodsMoreThanAverage() =
+	 * brotherhoodsMoreThanAverage() = 33.33333%
 	 * avgParadesCoordinatedByChapters() = 100%
 	 * minParadesCoordinatedByChapters() =
 	 * maxParadesCoordinatedByChapters() =
@@ -680,6 +680,6 @@ public class DashboardServiceTest extends AbstractTest {
 	 * ratioEmptyFinders() = 100%
 	 * theSmallestBrotherhoods() = 100%
 	 * largestBrotherhood() = 100%
-	 * top5SporsorsActivedSponsorships() =
+	 * top5SporsorsActivedSponsorships() = 66,66667%
 	 */
 }
