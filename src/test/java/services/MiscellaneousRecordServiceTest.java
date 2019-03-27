@@ -54,13 +54,18 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (create)
-	 * Negative cases:
-	 * b)2,3,4,5,6,7
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
+	 * 
+	 * b)Negative cases:
+	 * 2. Title = null
+	 * 3. Description = null
+	 * 4. Description = ""
+	 * 5. Title = ""
+	 * 6. Not authority
+	 * 7. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
 	 * -create(): 3 tested cases / 3 total cases = 100%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -MiscellaneousRecord: 2 tested cases / 2 total cases = 100%
@@ -69,21 +74,27 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverCreateMiscellaneousRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood1", "title1", "descrption1", null
-			}, {//2.Title = null
+			},//1. All fine 
+			{
 				"brotherhood1", null, "descrption1", ConstraintViolationException.class
-			}, {//3.Description = null
+			},//2. Title = null
+			{
 				"brotherhood1", "title1", null, ConstraintViolationException.class
-			}, {//4.Description = ""
+			},//3. Description = null
+			{
 				"brotherhood1", "title1", "", ConstraintViolationException.class
-			}, {//5.Title = ""
+			},//4. Description = ""
+			{
 				"brotherhood1", "", "descrption1", ConstraintViolationException.class
-			}, {//6.Not authority
+			},//5. Title = ""
+			{
 				"null", "title1", "descrption1", IllegalArgumentException.class
-			}, {//7.Not a Brotherhood
+			},//6. Not authority
+			{
 				"member1", "title1", "descrption1", IllegalArgumentException.class
-			}
+			},//7. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -121,10 +132,12 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (edit)
-	 * Negative cases:
-	 * b)2,3
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Edit
+	 * 
+	 * b)Negative cases:
+	 * 2. Not authority
+	 * 3. Not a Brotherhood
+	 * 
 	 * c) Sentence coverage
 	 * -save(): 3 tested cases / 8 total cases = 37.5%
 	 * 
@@ -136,13 +149,15 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	@Test
 	public void driverEditMiscellaneousRecord() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood1", "miscellaneousRecord1", "title1", "descrption1", null
-			}, {//2.Not authority
+			},//1. All fine
+			{
 				null, "miscellaneousRecord1", "title1", "descrption1", IllegalArgumentException.class
-			}, {//3.Not a Brotherhood
+			},//2. Not authority
+			{
 				"member1", "miscellaneousRecord1", "title1", "descrption1", IllegalArgumentException.class
-			}
+			},//3. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -180,10 +195,12 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (delete)
-	 * Negative cases:
-	 * b)2,3
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Delete
+	 * 
+	 * b)Negative cases:
+	 * 2. Not Authority
+	 * 3. Invalid authority
+	 * 
 	 * c) Sentence coverage
 	 * -delete(): 3 tested cases / 5 total cases = 60%
 	 * 
@@ -198,13 +215,13 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "miscellaneousRecord1", null
-			//1. All fine
-			}, {
+			},//1. All fine
+			{
 				null, "miscellaneousRecord1", IllegalArgumentException.class
-			//2. Not Authority
-			}, {
+			},//2. Not Authority
+			{
 				"member2", "miscellaneousRecord1", IllegalArgumentException.class
-			}
+			},//3. Invalid authority
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -241,10 +258,11 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (list)
-	 * Negative cases:
-	 * b)2
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: List
+	 * 
+	 * b)Negative cases:
+	 * 2. Incorrect result
+	 * 
 	 * c) Sentence coverage
 	 * -findAll(): 1 tested case / 1 total case = 100%
 	 * 
@@ -259,11 +277,10 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 
 			{
 				3, null
-			//1. All fine
-			}, {
+			},//1. All fine
+			{
 				2867, IllegalArgumentException.class
-			//2. Incorrect result
-			}
+			},//2. Incorrect result
 
 		};
 
@@ -289,5 +306,15 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * -------Coverage MiscellaneousRecordService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * MiscellaneousRecord =
+	 */
 
 }

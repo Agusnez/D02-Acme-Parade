@@ -56,11 +56,11 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 27 :An actor who is authenticated must be able to:
-	 * 1. List his or her social profiles
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 27.1: An actor who is authenticated must be able to: List his or her social profiles
 	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. The social profile not belongs to actor
 	 * 
 	 * c) Sentence coverage
 	 * -findAllByActor()=50%
@@ -76,11 +76,10 @@ public class SocialProfileServiceTest extends AbstractTest {
 
 			{
 				"socialProfile1", "brotherhood1", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"socialProfile5", "brotherhood1", IllegalArgumentException.class
-			//2. El socialProfile no pertenece a la brotherhood
-			}
+			},//2. The social profile not belongs to actor
 
 		};
 
@@ -115,10 +114,14 @@ public class SocialProfileServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 27 :An actor who is authenticated must be able to:
-	 * 1. Create his or her social profiles
+	 * a)(Level A)Requirement 27.1: An actor who is authenticated must be able to: Create his or her social profiles
 	 * 
-	 * b)Negative cases: 2, 3, 4, 5, 6
+	 * b)Negative cases:
+	 * 2. Not authenticated
+	 * 3. Nick = blank
+	 * 4. Nick = not safe html
+	 * 5. SocialName = blank
+	 * 6. SocialName = not safe html
 	 * 
 	 * c) Sentence coverage
 	 * create()=1 passed cases/1 total cases=100%
@@ -135,23 +138,22 @@ public class SocialProfileServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "nick1", "socialName1", "https://www.youtube.com", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				null, "nick1", "socialName1", "https://www.youtube.com", IllegalArgumentException.class
-			//2. Intenta crearlo alguien no autenticado
-			}, {
+			},//2. Not authenticated
+			{
 				"brotherhood1", "", "socialName1", "https://www.youtube.com", ConstraintViolationException.class
-			//3. nick = blank
-			}, {
+			},//3. Nick = blank
+			{
 				"brotherhood1", "<script>alert('hola')</script>", "socialName1", "https://www.youtube.com", ConstraintViolationException.class
-			//4. nick = not safe html
-			}, {
+			},//4. Nick = not safe html
+			{
 				"brotherhood1", "nick1", "", "https://www.youtube.com", ConstraintViolationException.class
-			//5. socialName = blank
-			}, {
+			},//5. SocialName = blank
+			{
 				"brotherhood1", "nick1", "<script>alert('hola')</script>", "https://www.youtube.com", ConstraintViolationException.class
-			//6. socialName = not safe html
-			}
+			},//6. SocialName = not safe html
 
 		};
 
@@ -168,6 +170,8 @@ public class SocialProfileServiceTest extends AbstractTest {
 			if (actor != null)
 				super.authenticate(actor);
 
+			this.startTransaction();
+
 			final SocialProfile socialProfile = this.socialProfileService.create();
 			socialProfile.setNick(nick);
 			socialProfile.setLink(link);
@@ -180,17 +184,20 @@ public class SocialProfileServiceTest extends AbstractTest {
 			super.unauthenticate();
 			Assert.isTrue(socialProfiles.contains(saved));
 
+			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
+
+		this.rollbackTransaction();
+
 		super.checkExceptions(expected, caught);
 
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 27 :An actor who is authenticated must be able to:
-	 * 1. Update his or her social profiles
+	 * ACME-MADRUGÁ
+	 * a)(Level A)Requirement 27.1: An actor who is authenticated must be able to: Update his or her social profiles
 	 * 
 	 * b)Negative cases: 2
 	 * 
@@ -209,11 +216,10 @@ public class SocialProfileServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "socialProfile1", "nick1", null
-			//1. Todo bien
-			}, {
+			},//1. All fine 
+			{
 				"brotherhood1", "socialProfile5", "nick1", IllegalArgumentException.class
-			//3. El SocialProfile no pertenece al brotherhood autenticado
-			}
+			},//3. The social profile not belongs to actor
 
 		};
 
@@ -232,7 +238,7 @@ public class SocialProfileServiceTest extends AbstractTest {
 			final SocialProfile socialProfile = this.socialProfileService.findOne(super.getEntityId(socialProfileId));
 			socialProfile.setNick(nick);
 
-			//this.startTransaction();
+			this.startTransaction();
 			final SocialProfile saved = this.socialProfileService.save(socialProfile);
 			this.socialProfileService.flush();
 
@@ -245,15 +251,15 @@ public class SocialProfileServiceTest extends AbstractTest {
 		}
 
 		super.checkExceptions(expected, caught);
-		//this.rollbackTransaction();
+		this.rollbackTransaction();
 
 	}
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 27 :An actor who is authenticated must be able to:
-	 * 1. Delete his or her social profiles
+	 * ACME-MADRUGÁ
+	 * a)(Level A)Requirement 27.1 :An actor who is authenticated must be able to: Delete his or her social profiles
 	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. The social profile not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
 	 * findOne()=1 passed cases/1 total cases=100%
@@ -270,11 +276,10 @@ public class SocialProfileServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "socialProfile1", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"brotherhood1", "socialProfile5", IllegalArgumentException.class
-			//2. El SocialProfile no pertenece al brotherhood autenticado
-			}
+			},//2. The social profile not belongs to brotherhood
 
 		};
 
@@ -292,7 +297,7 @@ public class SocialProfileServiceTest extends AbstractTest {
 
 			final SocialProfile socialProfile = this.socialProfileService.findOne(super.getEntityId(socialProfileId));
 
-			//this.startTransaction();
+			this.startTransaction();
 			this.socialProfileService.delete(socialProfile);
 			this.socialProfileService.flush();
 
@@ -305,7 +310,7 @@ public class SocialProfileServiceTest extends AbstractTest {
 		}
 
 		super.checkExceptions(expected, caught);
-		//this.rollbackTransaction();
+		this.rollbackTransaction();
 
 	}
 

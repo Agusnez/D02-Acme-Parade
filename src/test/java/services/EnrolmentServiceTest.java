@@ -25,22 +25,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 
 	//The SUT----------------------------------------------------
 	@Autowired
-	private MessageService		messageService;
-
-	@Autowired
-	private ActorService		actorService;
-
-	@Autowired
-	private BoxService			boxService;
-
-	@Autowired
-	private ParadeService		paradeService;
-
-	@Autowired
 	private EnrolmentService	enrolmentService;
-
-	@Autowired
-	private RequestService		requestService;
 
 	@Autowired
 	private PositionService		positionService;
@@ -74,10 +59,11 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10.3 : Brotherhood manage his/her enrolments (list news)
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.3 : Brotherhood manage his/her enrolments: List news
 	 * 
-	 * b)Negative cases: Wrong result
+	 * b)Negative cases:
+	 * 2. Wrong result
 	 * 
 	 * c) Sentence coverage:
 	 * -findEnrolmentsByBrotherhoodIdNoPosition()= 1 passed cases / 2 total cases = 50%
@@ -86,15 +72,16 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
 	public void newEnrolmentsList() {
 		final Object testingData[][] = {
 			{
 				"brotherhood1", 0, null
-			},//1.All fine
+			},//1. All fine
 			{
 				"brotherhood1", 14, IllegalArgumentException.class
-			},//1.Wrong result
+			},//2. Wrong result
 
 		};
 
@@ -128,14 +115,14 @@ public class EnrolmentServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10.3 : Brotherhood manage his/her enrolments (list news)
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.3 : Brotherhood manage his/her enrolments: List already enroled
 	 * 
-	 * b)Negative cases: Wrong result
+	 * b)Negative cases:
+	 * 2. Wrong result
 	 * 
 	 * c) Sentence coverage:
 	 * -findEnrolmentsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
-	 * 
 	 * 
 	 * d) Data coverage:
 	 * 0%
@@ -145,10 +132,10 @@ public class EnrolmentServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				"brotherhood1", 2, null
-			},//1.All fine
+			},//1. All fine
 			{
 				"brotherhood1", 14, IllegalArgumentException.class
-			},//1.Wrong result
+			},//2. Wrong result
 
 		};
 
@@ -182,10 +169,11 @@ public class EnrolmentServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10.3 : Brotherhood manage his/her enrolments (edit)
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.3 : Brotherhood manage his/her enrolments: Edit
 	 * 
-	 * b)Negative cases: Wrong result
+	 * b)Negative cases:
+	 * 2. Wrong brotherhood
 	 * 
 	 * c) Sentence coverage:
 	 * -save() = 2 passed cases / 8 total cases= 25%
@@ -194,15 +182,16 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
 	public void EnrolmentEdit() {
 		final Object testingData[][] = {
 			{
 				"brotherhood1", "enrolment2", null
-			},//1.All fine
+			},//1. All fine
 			{
 				"brotherhood1", "enrolment14", IllegalArgumentException.class
-			},//1.Wrong brotherhood
+			},//2. Wrong brotherhood
 
 		};
 
@@ -240,10 +229,11 @@ public class EnrolmentServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10.3 : Member manage his/her enrolments (create)
+	 * ACME-MADRUGÁ
+	 * a)(Level C)Requirement 10.3 : Member manage his/her enrolments: Create
 	 * 
-	 * b)Negative cases: Wrong actor
+	 * b)Negative cases:
+	 * 2. Wrong actor
 	 * 
 	 * c) Sentence coverage:
 	 * -create()= 2 passed cases / 3 total cases = 66%
@@ -252,15 +242,16 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * d) Data coverage:
 	 * 0%
 	 */
+
 	@Test
 	public void EnrolmentsCreateMember() {
 		final Object testingData[][] = {
 			{
 				"member2", "brotherhood1", null
-			},//1.All fine
+			},//1. All fine
 			{
 				"chapter1", "brotherhood1", IllegalArgumentException.class
-			},//1.Wrong actor
+			},//2. Wrong actor
 
 		};
 
@@ -294,27 +285,29 @@ public class EnrolmentServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10.3 : Member manage his/her enrolments (list)
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.3 : Member manage his/her enrolments: List
 	 * 
-	 * b)Negative cases: Wrong actor
+	 * b)Negative cases:
+	 * 2. Wrong actor
 	 * 
-	 * c) Sentence coverage:
+	 * c)Sentence coverage:
 	 * -findEnrolmentsByMemberId()= 2 passed cases / 2 total cases = 50%
 	 * 
 	 * 
-	 * d) Data coverage:
+	 * d)Data coverage:
 	 * 0%
 	 */
+
 	@Test
 	public void EnrolmentsListMember() {
 		final Object testingData[][] = {
 			{
 				"member2", null
-			},//1.All fine
+			},//1. All fine
 			{
 				"member8", IllegalArgumentException.class
-			},//1.Wrong actor
+			},//2. Wrong actor
 
 		};
 
@@ -346,4 +339,14 @@ public class EnrolmentServiceTest extends AbstractTest {
 		this.rollbackTransaction();
 
 	}
+
+	/*
+	 * -------Coverage EnrolmentService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Enrolment =
+	 */
 }

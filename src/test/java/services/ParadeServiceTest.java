@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Brotherhood;
 import domain.Parade;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,24 +59,27 @@ public class ParadeServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level B)Requirement 2.2:Manage the parades that are published by the brotherhoods in the area that they co-ordinate.
-	 * This includes listing them grouped by status and making decisions on the parades that have status
-	 * submitted. When a parade is rejected by a chapter, the chapter must jot down the reason why.
-	 * Negative cases: 2
+	 * a)(Level B)Requirement 2.2: Chapter manage the parades that are published by the brotherhoods in the area that they co-ordinate.
+	 * 
+	 * b)Negative cases:
+	 * 2. A chapter that no coordinate a parade decides about it
+	 * 
 	 * c) Sentence coverage:
 	 * -save(): 4 passed cases /13 total cases = 30,77%
+	 * 
 	 * d) Data coverage: 0%
 	 */
+
 	@Test
 	public void driverDecideParade() {
 		final Object testingData[][] = {
 
 			{
 				"chapter1", "parade1", "ACCEPTED", null
-			}, {
+			},//1. All fine
+			{
 				"chapter2", "parade1", "REJECTED", IllegalArgumentException.class
-			//2. Un cabildo que no coordina una procession, decide sobre ella.
-			}
+			},//2. A chapter that no coordinate a parade decides about it
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -111,11 +113,12 @@ public class ParadeServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
-	 * 1. Navigate to the parades that a brotherhood organise
-	 * Negative cases:
-	 * b)2. El parade no pertenece a la brotherhood
-	 * 3. El parade es del brotherhood pero no estï¿½ en estado ACCEPTED
+	 * a)(Level A)Requirement 14.1: An actor who is not authenticated must be able to: Navigate to the parades that a brotherhood organise
+	 * 
+	 * b)Negative cases:
+	 * 2. The parade not belongs to brotherhood
+	 * 3. Not accepted parade
+	 * 
 	 * c) Sentence coverage
 	 * findParadeCanBeSeenOfBrotherhoodId()=100%
 	 * 
@@ -129,15 +132,13 @@ public class ParadeServiceTest extends AbstractTest {
 
 			{
 				"parade5", "brotherhood1", null
-			//1. Todo bien
-
-			}, {
+			},//1. All fine
+			{
 				"parade2", "brotherhood1", IllegalArgumentException.class
-			//2. El parade no pertenece a la brotherhood
-			}, {
+			},//2. The parade not belongs to brotherhood
+			{
 				"parade1", "brotherhood1", IllegalArgumentException.class
-			//3. El parade es del brotherhood pero no estï¿½ en estado ACCEPTED
-			}
+			},//3. Not accepted parade
 
 		};
 
@@ -169,10 +170,12 @@ public class ParadeServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level B)Requirement 2 :An actor who is not authenticated must be able to:
-	 * 2. Listing parades that are published by the brotherhoods in the area that they co-ordinate
-	 * Negative cases:
-	 * b)2. El parade no pertenece a la brotherhood
+	 * 
+	 * a)(Level B) Requirement 2.2: An actor who is not authenticated must be able to: Listing parades that are published by the brotherhoods in the area that they co-ordinate
+	 * 
+	 * b)Negative cases:
+	 * 2. The parade not belongs
+	 * 
 	 * c) Sentence coverage
 	 * findParadeCanBeSeenOfBrotherhoodIdForChapter()=100%
 	 * 
@@ -186,12 +189,10 @@ public class ParadeServiceTest extends AbstractTest {
 
 			{
 				"parade5", "brotherhood1", null
-			//1. Todo bien
-
-			}, {
+			},//1. All fine
+			{
 				"parade2", "brotherhood1", IllegalArgumentException.class
-			//2. El parade no pertenece a la brotherhood
-			}
+			},//2. The parade not belongs to brotherhood
 
 		};
 
@@ -221,57 +222,51 @@ public class ParadeServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
-	
+
 	/*
-	 * a) (Level B) Requirement 3. An actor who is authenticated as a brotherhood must be able to:
-	 * 2. Make a copy of one of their parades. When a parade is copied, a new ticker is generated,
-	 *	  its status is cleared, the rejection reason is cleared, and it changes to draft mode.
-	 *	
-	 * b) Negative test case: 1
-	 * 		- Brothehood doesn't own the parade
+	 * ACME-PARADE
+	 * a)(Level B) Requirement 3.2: An actor who is authenticated as a brotherhood must be able to: Make a copy of one of their parades
+	 * 
+	 * b)Negative test case:
+	 * 2. Brothehood doesn't own the parade
 	 * 
 	 * c) Sentence coverage:
-	 * 		- copy() = 100%
+	 * -copy() =
 	 * 
 	 * d) Data coverage: 0%
-	 * 
 	 */
 	@Test
 	public void driverCopyParade() {
 		final Object testingData[][] = {
 
-				{
-					"parade5", "brotherhood1", null
-				//1. OK
+			{
+				"parade5", "brotherhood1", null
 
-				}, {
-					"parade2", "brotherhood1", IllegalArgumentException.class
-				//2. Brothehood doesn't own the parade
-				}
-			};
+			},//1. All fine
+			{
+				"parade2", "brotherhood1", IllegalArgumentException.class
+			},//2. Brothehood doesn't own the parade
+		};
 		for (int i = 0; i < testingData.length; i++)
 			this.templateCopyParade((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	
+
 	protected void templateCopyParade(final String paradeId, final String brotherhoodId, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
-			
+
 			this.authenticate(brotherhoodId);
-			
+
 			final Integer paradeIdInteger = super.getEntityId(paradeId);
-			//final Integer brotherhoodIdInteger = super.getEntityId(brotherhoodId);
 
 			final Parade parade = this.paradeService.findOne(paradeIdInteger);
-			
-			
 
 			final Parade paradeCopy = this.paradeService.copy(paradeIdInteger);
 
 			this.paradeService.flush();
-			
+
 			super.unauthenticate();
 			Assert.isTrue(parade.getTitle().equals(paradeCopy.getTitle()));
 			Assert.isTrue(parade.getDescription().equals(paradeCopy.getDescription()));
@@ -280,27 +275,25 @@ public class ParadeServiceTest extends AbstractTest {
 			Assert.isNull(paradeCopy.getRejectedComment());
 			Assert.isNull(paradeCopy.getStatus());
 			Assert.isTrue(!parade.getTicker().equals(paradeCopy.getTicker()));
-			
-		}catch (final Throwable oops) {
+
+		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
 		super.checkExceptions(expected, caught);
-		
+
 	}
-	
-	//---------------------------------------------------------------------------------------------------------------------------------
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. List their parades
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.2: An actor who is authenticated as a brotherhood must be able to: List their parades
 	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. The parade not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
 	 * -findParadeByBrotherhoodId()=100%
-	 * findOne()=100%
+	 * -findOne()=100%
 	 * 
 	 * d) Data coverage
 	 * 0%
@@ -312,11 +305,10 @@ public class ParadeServiceTest extends AbstractTest {
 
 			{
 				"parade1", "brotherhood1", null
-			//1. Todo bien
-			}, {
+			},//1. All fine 
+			{
 				"parade2", "brotherhood1", IllegalArgumentException.class
-			//2. El parade no pertenece a la brotherhood
-			}
+			},//2. The parade not belongs to brotherhood
 
 		};
 
@@ -350,16 +342,16 @@ public class ParadeServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. Create a Parade
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.2: An actor who is authenticated as a brotherhood must be able to: Create a Parade
 	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * create()=2 passed cases/3 total cases=66.6%
-	 * save()=1 passed cases/14 total cases= 7,14%
-	 * findAll()=1 passed cases/2 total cases=50%
+	 * -create() = 2 passed cases / 3 total cases=66.6%
+	 * -save()=1 passed cases / 14 total cases= 7,14%
+	 * -findAll()=1 passed cases / 2 total cases=50%
 	 * 
 	 * d) Data coverage
 	 * -Parade = 0%
@@ -371,11 +363,10 @@ public class ParadeServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "description1", "title1", "2019/09/25 11:00", true, 5, 5, "190925-KPPRM4", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"chapter1", "description1", "title1", "2019/09/25 11:00", true, 5, 5, "190925-PSPRM4", IllegalArgumentException.class
-			//2. Intenta crearlo un Chapter
-			}
+			},//2. Invalid authority
 
 		};
 
@@ -408,7 +399,7 @@ public class ParadeServiceTest extends AbstractTest {
 			parade.setTicker(ticker);
 
 			final Parade saved = this.paradeService.save(parade);
-			//this.paradeService.flush();
+			this.paradeService.flush();
 
 			final Collection<Parade> parades = this.paradeService.findAll();
 			super.unauthenticate();
@@ -423,11 +414,12 @@ public class ParadeServiceTest extends AbstractTest {
 
 	}
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. Update a Float
+	 * ACME-MADRUGÁ
+	 * a)(Level C)Requirement 10.2: An actor who is authenticated as a brotherhood must be able to: Update a Float
 	 * 
 	 * b)Negative cases:
+	 * 2. Invalid authority
+	 * 3. The parade not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
 	 * findOne()=1 passed cases/1 total cases=100%
@@ -444,14 +436,13 @@ public class ParadeServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "parade16", "description1", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"member1", "parade16", "description1", IllegalArgumentException.class
-			//2. Intenta actualizarlo un member
-			}, {
+			},//2. Invalid authority 
+			{
 				"brotherhood1", "parade2", "description1", IllegalArgumentException.class
-			//3. El parade no pertenece al brotherhood
-			}
+			},//3. The parade not belongs to brotherhood
 
 		};
 
@@ -487,11 +478,12 @@ public class ParadeServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level C)Requirement 10 :An actor who is authenticated as a brotherhood must be able to:
-	 * 2. Delete a Parade
+	 * ACME-MADRUGÁ
+	 * a)(Level C) Requirement 10.2: An actor who is authenticated as a brotherhood must be able to: Delete a Parade
 	 * 
 	 * b)Negative cases:
+	 * 2. Invalid authority
+	 * 3. The parade not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
 	 * findOne()=1 passed cases/1 total cases=100%
@@ -508,14 +500,13 @@ public class ParadeServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "parade16", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"chapter1", "parade16", IllegalArgumentException.class
-			//2. Intenta borrarlo un Chapter
-			}, {
+			},//2. Invalid authority
+			{
 				"brotherhood1", "parade2", IllegalArgumentException.class
-			//3. El parade no pertenece al brotherhood
-			}
+			},//3. The parade not belongs to brotherhood
 
 		};
 
@@ -533,7 +524,7 @@ public class ParadeServiceTest extends AbstractTest {
 
 			final Parade parade = this.paradeService.findOne(super.getEntityId(paradeId));
 
-			//this.startTransaction();
+			this.startTransaction();
 			this.paradeService.delete(parade);
 			this.paradeService.flush();
 
@@ -546,13 +537,12 @@ public class ParadeServiceTest extends AbstractTest {
 		}
 
 		super.checkExceptions(expected, caught);
-		//this.rollbackTransaction();
+		this.rollbackTransaction();
 
 	}
-	//---------------------------------------------------------------------------------------------------------------------------------
 
 	/*
-	 * -------Coverage ChapterService-------
+	 * -------Coverage ParadeService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
 	 * save()=30,77%
