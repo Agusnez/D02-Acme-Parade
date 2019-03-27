@@ -43,7 +43,7 @@ public class DownloadDataAdministratorController {
 
 		if (language == "en") {
 
-			String myString = "Below these lines you can find all the data we have at Acme-Madrugá:\r\n";
+			String myString = "Below these lines you can find all the data we have at Acme-Parade:\r\n";
 
 			final Administrator a = this.administratorService.findByPrincipal();
 			final Collection<SocialProfile> sc = this.socialProfileService.findAllByActor(a.getId());
