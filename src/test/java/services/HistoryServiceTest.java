@@ -75,7 +75,7 @@ public class HistoryServiceTest extends AbstractTest {
 	 * b)2
 	 * c) Sentence coverage
 	 * -create(): 2 tested cases / 3 total cases = 66.67%
-	 * -save(): 1 tested cases / 4 total cases = 25%
+	 * -save(): 1 tested cases / 5 total cases = 20%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -153,7 +153,7 @@ public class HistoryServiceTest extends AbstractTest {
 	 * Negative cases:
 	 * b)2
 	 * c) Sentence coverage
-	 * -findAll(): 1 tested case / 1 total case = 100%
+	 * -findAll(): 1 tested case / 2 total case = 50%
 	 * 
 	 * 
 	 * d) Data coverage
@@ -196,5 +196,17 @@ public class HistoryServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * -------Coverage FloatService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * -findAll() = 50%
+	 * -create() = 66.67%
+	 * -save() = 20%
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * History = 0%
+	 */
 
 }

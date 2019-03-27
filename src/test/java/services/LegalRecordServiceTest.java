@@ -205,9 +205,6 @@ public class LegalRecordServiceTest extends AbstractTest {
 			this.legalRecordService.save(legalRecord);
 			this.legalRecordService.flush();
 
-			this.legalRecordService.save(legalRecord);
-			this.legalRecordService.flush();
-
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
