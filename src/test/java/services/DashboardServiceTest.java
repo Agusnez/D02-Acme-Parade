@@ -198,7 +198,7 @@ public class DashboardServiceTest extends AbstractTest {
 			}, {//Negative
 				"stddevMemberPerBrotherhood", 111.111, IllegalArgumentException.class
 			}, {
-				"membersTenPerCent", 1, null
+				"membersTenPerCent", 1.0, null
 			}, {//Negative
 				"membersTenPerCent", 111.111, IllegalArgumentException.class
 			}, {
@@ -303,37 +303,37 @@ public class DashboardServiceTest extends AbstractTest {
 			else if (method == "standartDeviationOfActiveSponsorshipsPerSponsor")
 				test = this.sponsorshipService.standartDeviationOfActiveSponsorshipsPerSponsor();
 			else if (method == "avgMemberPerBrotherhood")
-				test = Integer.valueOf(this.brotherhoodService.avgMemberPerBrotherhood()) * 1.0;
+				test = Double.valueOf(this.brotherhoodService.avgMemberPerBrotherhood());
 			else if (method == "minMemberPerBrotherhood")
-				test = Integer.valueOf(this.brotherhoodService.minMemberPerBrotherhood()) * 1.0;
+				test = Double.valueOf(this.brotherhoodService.minMemberPerBrotherhood());
 			else if (method == "maxMemberPerBrotherhood")
-				test = Integer.valueOf(this.brotherhoodService.maxMemberPerBrotherhood()) * 1.0;
+				test = Double.valueOf(this.brotherhoodService.maxMemberPerBrotherhood());
 			else if (method == "stddevMemberPerBrotherhood")
-				test = Integer.valueOf(this.brotherhoodService.stddevMemberPerBrotherhood()) * 1.0;
+				test = Double.valueOf(this.brotherhoodService.stddevMemberPerBrotherhood());
 			else if (method == "membersTenPerCent")
 				test = this.memberService.membersTenPerCent().size() * 1.0;
 
 			else if (method == "ratioBrotherhoodPerArea")
-				test = Integer.valueOf(this.areaService.ratioBrotherhoodPerArea()) * 1.0;
+				test = Double.valueOf(this.areaService.ratioBrotherhoodPerArea());
 			else if (method == "countBrotherhoodPerArea")
-				test = Integer.valueOf(this.areaService.countBrotherhoodPerArea()) * 1.0;
+				test = Double.valueOf(this.areaService.countBrotherhoodPerArea());
 			else if (method == "minBrotherhoodPerArea")
-				test = Integer.valueOf(this.areaService.minBrotherhoodPerArea()) * 1.0;
+				test = Double.valueOf(this.areaService.minBrotherhoodPerArea());
 			else if (method == "maxBrotherhoodPerArea")
-				test = Integer.valueOf(this.areaService.maxBrotherhoodPerArea()) * 1.0;
+				test = Double.valueOf(this.areaService.maxBrotherhoodPerArea());
 			else if (method == "avgBrotherhoodPerArea")
-				test = Integer.valueOf(this.areaService.avgBrotherhoodPerArea()) * 1.0;
+				test = Double.valueOf(this.areaService.avgBrotherhoodPerArea());
 			else if (method == "stddevBrotherhoodPerArea")
-				test = Integer.valueOf(this.areaService.stddevBrotherhoodPerArea()) * 1.0;
+				test = Double.valueOf(this.areaService.stddevBrotherhoodPerArea());
 
 			else if (method == "minResultPerFinder")
-				test = Integer.valueOf(this.finderService.minResultPerFinder()) * 1.0;
+				test = Double.valueOf(this.finderService.minResultPerFinder());
 			else if (method == "maxResultPerFinder")
-				test = Integer.valueOf(this.finderService.maxResultPerFinder()) * 1.0;
+				test = Double.valueOf(this.finderService.maxResultPerFinder());
 			else if (method == "avgResultPerFinder")
-				test = Integer.valueOf(this.finderService.avgResultPerFinder()) * 1.0;
+				test = Double.valueOf(this.finderService.avgResultPerFinder());
 			else if (method == "stddevResultPerFinder")
-				test = Integer.valueOf(this.finderService.stddevResultPerFinder()) * 1.0;
+				test = Double.valueOf(this.finderService.stddevResultPerFinder());
 
 			else if (method == "ratioEmptyFinders")
 				test = this.finderService.ratioEmptyFinders();
