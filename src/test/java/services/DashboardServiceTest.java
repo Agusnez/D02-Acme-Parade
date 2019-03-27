@@ -10,6 +10,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -20,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Brotherhood;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -381,39 +384,39 @@ public class DashboardServiceTest extends AbstractTest {
 	//		this.checkExceptions(expected, caught);
 	//	}
 	//
-	//	@Test
-	//	public void theLargestBrotherhoodsTest() {
-	//		final Object theLargestBrotherhoodsTest[][] = {
-	//			{//only the admin can summon this services
-	//				"admin", null
-	//			}, {
-	//				"member1", IllegalArgumentException.class
-	//			}
-	//		};
-	//
-	//		for (int i = 0; i < theLargestBrotherhoodsTest.length; i++)
-	//			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) theLargestBrotherhoodsTest[i][0]), (Class<?>) theLargestBrotherhoodsTest[i][1]);
-	//	}
-	//
-	//	// Ancillary methods ------------------------------------------------------
-	//
-	//	protected void theLargestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
-	//		Class<?> caught;
-	//
-	//		caught = null;
-	//		try {
-	//			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
-	//
-	//			final Collection<Brotherhood> bs = this.brotherhoodService.theLargestBrotherhoods();
-	//
-	//			Assert.isTrue(bs.contains(b));
-	//
-	//		} catch (final Throwable oops) {
-	//			caught = oops.getClass();
-	//		}
-	//
-	//		this.checkExceptions(expected, caught);
-	//	}
+	@Test
+	public void theLargestBrotherhoodsTest() {
+		final Object theLargestBrotherhoodsTest[][] = {
+			{//only the admin can summon this services
+				"brotherhood6", null
+			}, {
+				"member1", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < theLargestBrotherhoodsTest.length; i++)
+			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) theLargestBrotherhoodsTest[i][0]), (Class<?>) theLargestBrotherhoodsTest[i][1]);
+	}
+
+	// Ancillary methods ------------------------------------------------------
+
+	protected void theLargestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
+
+			final Collection<Brotherhood> bs = this.brotherhoodService.theLargestBrotherhoods();
+
+			Assert.isTrue(bs.contains(b));
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+	}
 	//
 	//	@Test
 	//	public void largestBrotherhoodsTest() {
