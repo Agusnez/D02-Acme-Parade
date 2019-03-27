@@ -98,23 +98,23 @@ public class DashboardServiceTest extends AbstractTest {
 	 * 4. Wrong return
 	 * 
 	 * c) Sentence coverage
-	 * -avgRecordPerHistory() =
-	 * -maxRecordPerHistory() =
-	 * -minRecordPerHistory() =
-	 * -stddevRecordPerHistory() =
-	 * -brotherhoodsMoreThanAverage() =
-	 * -avgParadesCoordinatedByChapters() =
+	 * -avgRecordPerHistory() = 1 passed cases / 3 total cases = 33.33333%
+	 * -maxRecordPerHistory() = 1 passed cases / 3 total cases = 33.33333%
+	 * -minRecordPerHistory() = 1 passed cases / 3 total cases = 33.33333%
+	 * -stddevRecordPerHistory() = 1 passed cases / 3 total cases = 33.33333%
+	 * -brotherhoodsMoreThanAverage() = 1 passed cases / 3 total cases = 33.33333%
+	 * -avgParadesCoordinatedByChapters() = 1 passed cases / 1 total cases = 100%
 	 * -minParadesCoordinatedByChapters() =
 	 * -maxParadesCoordinatedByChapters() =
 	 * -stddevParadesCoordinatedByChapters() =
 	 * -chaptersCoordinatesMoreThan10Percent() =
-	 * -ratioAreasNotCoordinatedAnyChapters() =
-	 * -ratioDraftFinalModeParade() =
-	 * -ratioAccepted() =
-	 * -ratioRejected() =
-	 * -ratioSubmitted() =
-	 * -ratioOfActiveSponsorships() =
-	 * -averageActiveSponsorshipsPerSponsor() =
+	 * -ratioAreasNotCoordinatedAnyChapters() = 1 passed cases / 1 total cases = 100%
+	 * -ratioDraftFinalModeParade() = 1 passed cases / 1 total cases = 100%
+	 * -ratioAccepted() = 1 passed cases / 1 total cases = 100%
+	 * -ratioRejected() = 1 passed cases / 1 total cases = 100%
+	 * -ratioSubmitted() = 1 passed cases / 1 total cases = 100%
+	 * -ratioOfActiveSponsorships() = 1 passed cases / total cases = 100%
+	 * -averageActiveSponsorshipsPerSponsor() = 1 passed cases / total cases = 100%
 	 * -minActiveSponsorshipsPerSponsor() =
 	 * -maxActiveSponsorshipsPerSponsor() =
 	 * -standartDeviationOfActiveSponsorshipsPerSponsor() =
@@ -133,9 +133,9 @@ public class DashboardServiceTest extends AbstractTest {
 	 * -maxResultPerFinder() =
 	 * -avgResultPerFinder() =
 	 * -stddevResultPerFinder() =
-	 * -ratioEmptyFinders() =
-	 * -theSmallestBrotherhoods() =
-	 * -largestBrotherhood() =
+	 * -ratioEmptyFinders() = 1 passed cases / 1 total cases = 100%
+	 * -theSmallestBrotherhoods() = 1 passed / 1 total cases = 100%
+	 * -largestBrotherhood() = 1 passed cases / 1 total cases = 100%
 	 * -top5SporsorsActivedSponsorships() =
 	 */
 
@@ -642,21 +642,21 @@ public class DashboardServiceTest extends AbstractTest {
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
 	 * 
-	 * avgRecordPerHistory() =
-	 * maxRecordPerHistory() =
-	 * minRecordPerHistory() =
-	 * stddevRecordPerHistory() =
+	 * avgRecordPerHistory() = 33.33333%
+	 * maxRecordPerHistory() = 33.33333%
+	 * minRecordPerHistory() = 33.33333%
+	 * stddevRecordPerHistory() = 33.33333%
 	 * brotherhoodsMoreThanAverage() =
-	 * avgParadesCoordinatedByChapters() =
+	 * avgParadesCoordinatedByChapters() = 100%
 	 * minParadesCoordinatedByChapters() =
 	 * maxParadesCoordinatedByChapters() =
 	 * stddevParadesCoordinatedByChapters() =
 	 * chaptersCoordinatesMoreThan10Percent() =
-	 * ratioAreasNotCoordinatedAnyChapters() =
-	 * ratioDraftFinalModeParade() =
-	 * ratioAccepted() =
-	 * ratioRejected() =
-	 * ratioSubmitted() =
+	 * ratioAreasNotCoordinatedAnyChapters() = 100%
+	 * ratioDraftFinalModeParade() = 100%
+	 * ratioAccepted() = 100%
+	 * ratioRejected() = 100%
+	 * ratioSubmitted() = 100%
 	 * ratioOfActiveSponsorships() =
 	 * averageActiveSponsorshipsPerSponsor() =
 	 * minActiveSponsorshipsPerSponsor() =
@@ -677,9 +677,9 @@ public class DashboardServiceTest extends AbstractTest {
 	 * maxResultPerFinder() =
 	 * avgResultPerFinder() =
 	 * stddevResultPerFinder() =
-	 * ratioEmptyFinders() =
-	 * theSmallestBrotherhoods() =
-	 * largestBrotherhood() =
+	 * ratioEmptyFinders() = 100%
+	 * theSmallestBrotherhoods() = 100%
+	 * largestBrotherhood() = 100%
 	 * top5SporsorsActivedSponsorships() =
 	 */
 }
