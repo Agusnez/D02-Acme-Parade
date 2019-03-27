@@ -86,25 +86,80 @@ public class DashboardServiceTest extends AbstractTest {
 	 * mention its coverage in other test.
 	 */
 
+	/*
+	 * ACME.MADRUGÁ
+	 * a)(Level C and B) Requirement 12.3 and 22.2: Administrator display a dashboard
+	 * ACME-PARADE
+	 * a)(Level C, B and A) Requirement 4.1, 8.1 and 18.2: Administrator display a dashboard
+	 * 
+	 * b)Negative cases:
+	 * 2. Invalid authority
+	 * 3. Not authenticated
+	 * 4. Wrong return
+	 * 
+	 * c) Sentence coverage
+	 * -avgRecordPerHistory() =
+	 * -maxRecordPerHistory() =
+	 * -minRecordPerHistory() =
+	 * -stddevRecordPerHistory() =
+	 * -brotherhoodsMoreThanAverage() =
+	 * -avgParadesCoordinatedByChapters() =
+	 * -minParadesCoordinatedByChapters() =
+	 * -maxParadesCoordinatedByChapters() =
+	 * -stddevParadesCoordinatedByChapters() =
+	 * -chaptersCoordinatesMoreThan10Percent() =
+	 * -ratioAreasNotCoordinatedAnyChapters() =
+	 * -ratioDraftFinalModeParade() =
+	 * -ratioAccepted() =
+	 * -ratioRejected() =
+	 * -ratioSubmitted() =
+	 * -ratioOfActiveSponsorships() =
+	 * -averageActiveSponsorshipsPerSponsor() =
+	 * -minActiveSponsorshipsPerSponsor() =
+	 * -maxActiveSponsorshipsPerSponsor() =
+	 * -standartDeviationOfActiveSponsorshipsPerSponsor() =
+	 * -avgMemberPerBrotherhood() =
+	 * -minMemberPerBrotherhood() =
+	 * -maxMemberPerBrotherhood() =
+	 * -stddevMemberPerBrotherhood() =
+	 * -membersTenPerCent() =
+	 * -ratioBrotherhoodPerArea() =
+	 * -countBrotherhoodPerArea() =
+	 * -minBrotherhoodPerArea() =
+	 * -maxBrotherhoodPerArea() =
+	 * -avgBrotherhoodPerArea() =
+	 * -stddevBrotherhoodPerArea() =
+	 * -minResultPerFinder() =
+	 * -maxResultPerFinder() =
+	 * -avgResultPerFinder() =
+	 * -stddevResultPerFinder() =
+	 * -ratioEmptyFinders() =
+	 * -theSmallestBrotherhoods() =
+	 * -largestBrotherhood() =
+	 * -top5SporsorsActivedSponsorships() =
+	 */
+
 	@Test
 	public void authorityTest() {
 		final Object authorityTest[][] = {
-			{//only the admin can summon this services
+
+			{
 				"admin", null
-			}, {
+			},//1.All fine
+			{
 				"member1", IllegalArgumentException.class
-			}, {
+			},//2. Invalid authority
+			{
 				"brotherhood1", IllegalArgumentException.class
-			}, {
+			},//2. Invalid authority
+			{
 				null, IllegalArgumentException.class
-			}
+			},//3. Not authenticated
 		};
 
 		for (int i = 0; i < authorityTest.length; i++)
 			this.AuthorityTemplate((String) authorityTest[i][0], (Class<?>) authorityTest[i][1]);
 	}
-
-	// Ancillary methods ------------------------------------------------------
 
 	protected void AuthorityTemplate(final String username, final Class<?> expected) {
 		Class<?> caught;
@@ -127,155 +182,223 @@ public class DashboardServiceTest extends AbstractTest {
 	@Test
 	public void valueTest() {
 		final Object valueTest[][] = {
-			{//2 histories with a total of 9 record = 4.5
+
+			{
 				"avgRecordPerHistory", 4.5, null
-			}, {//Negative
+			},//1. All fine 
+			{
 				"avgRecordPerHistory", 111.111, IllegalArgumentException.class
-			}, {//brotherhood 1 has 8 record in total
+			},//4. Wrong return
+			{
 				"maxRecordPerHistory", 8.0, null
-			}, {//Negative
+			},//1. All fine 
+			{
 				"maxRecordPerHistory", 111.111, IllegalArgumentException.class
-			}, {//brotherhood 2 has only 1 record (the mandatory one)
+			},//4. Wrong return
+			{
 				"minRecordPerHistory", 1.0, null
-			}, {//Negative
+			},//1. All fine 
+			{
 				"minRecordPerHistory", 111.111, IllegalArgumentException.class
-			}, {//sqrt(((8-4.5)^2+(1-4.5)^2)/2) = 3.5
+			},//4. Wrong return
+			{
 				"stddevRecordPerHistory", 3.5, null
-			}, {//Negative
+			},//1. All fine 
+			{
 				"stddevRecordPerHistory", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"brotherhoodsMoreThanAverage", 1.0, null
-			}, {//Negative
+			},//1. All fine 
+			{
 				"brotherhoodsMoreThanAverage", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"avgParadesCoordinatedByChapters", 0.9375, null
-			}, {//Negative
+			},//1. All fine 
+			{
 				"avgParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
-
-			}, {
+			},//4. Wrong return
+			{
 				"minParadesCoordinatedByChapters", 1.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"minParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
-			}, {
-
+			},//4. Wrong return
+			{
 				"maxParadesCoordinatedByChapters", 14.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"maxParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"stddevParadesCoordinatedByChapters", 7.54172421709165, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"stddevParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"chaptersCoordinatesMoreThan10Percent", 1.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"chaptersCoordinatesMoreThan10Percent", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"ratioAreasNotCoordinatedAnyChapters", 0.5, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioAreasNotCoordinatedAnyChapters", 111.111, IllegalArgumentException.class
-			}, {
-
+			},//4. Wrong return
+			{
 				"ratioDraftFinalModeParade", 0.06667, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioDraftFinalModeParade", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"ratioAccepted", 0.4, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioAccepted", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"ratioRejected", 0.2, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioRejected", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"ratioSubmitted", 0.4, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioSubmitted", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"ratioOfActiveSponsorships", 0.76923, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioOfActiveSponsorships", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"averageActiveSponsorshipsPerSponsor", 1.66667, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"averageActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"minActiveSponsorshipsPerSponsor", 0.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"minActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"maxActiveSponsorshipsPerSponsor", 4.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"maxActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"standartDeviationOfActiveSponsorshipsPerSponsor", 1.2472146745582064, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"standartDeviationOfActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"avgMemberPerBrotherhood", 2.125, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"avgMemberPerBrotherhood", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"minMemberPerBrotherhood", 0.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"minMemberPerBrotherhood", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"maxMemberPerBrotherhood", 3.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"maxMemberPerBrotherhood", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"stddevMemberPerBrotherhood", 1.0532687216470449, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"stddevMemberPerBrotherhood", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"membersTenPerCent", 1.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"membersTenPerCent", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"ratioBrotherhoodPerArea", 2.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioBrotherhoodPerArea", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"countBrotherhoodPerArea", 4.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"countBrotherhoodPerArea", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"minBrotherhoodPerArea", 0.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"minBrotherhoodPerArea", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"maxBrotherhoodPerArea", 3.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"maxBrotherhoodPerArea", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"avgBrotherhoodPerArea", 1.75, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"avgBrotherhoodPerArea", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"stddevBrotherhoodPerArea", 1.299038105676658, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"stddevBrotherhoodPerArea", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"minResultPerFinder", 0.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"minResultPerFinder", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"maxResultPerFinder", 0.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"maxResultPerFinder", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"avgResultPerFinder", 0.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"avgResultPerFinder", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"stddevResultPerFinder", 0.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"stddevResultPerFinder", 111.111, IllegalArgumentException.class
-			}, {
+			},//4. Wrong return
+			{
 				"ratioEmptyFinders", 1.0, null
-			}, {//Negative
+			},//1. All fine
+			{
 				"ratioEmptyFinders", 111.111, IllegalArgumentException.class
-
-			}
+			},//4. Wrong return
 		};
 
 		for (int i = 0; i < valueTest.length; i++)
@@ -381,16 +504,15 @@ public class DashboardServiceTest extends AbstractTest {
 		final Object theSmallestBrotherhoodsTest[][] = {
 			{
 				"brotherhood8", null
-			}, {
+			},//1. All fine
+			{
 				"brotherhood6", IllegalArgumentException.class
-			}
+			},//4. Wrong return
 		};
 
 		for (int i = 0; i < theSmallestBrotherhoodsTest.length; i++)
 			this.theSmallestBrotherhoodsTemplate(super.getEntityId((String) theSmallestBrotherhoodsTest[i][0]), (Class<?>) theSmallestBrotherhoodsTest[i][1]);
 	}
-
-	// Ancillary methods ------------------------------------------------------
 
 	protected void theSmallestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
 		Class<?> caught;
@@ -416,16 +538,15 @@ public class DashboardServiceTest extends AbstractTest {
 			{
 
 				"brotherhood6", null
-			}, {
+			},//1. All fine
+			{
 				"brotherhood8", IllegalArgumentException.class
-			}
+			},//4. Wrong return
 		};
 
 		for (int i = 0; i < theLargestBrotherhoodsTest.length; i++)
 			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) theLargestBrotherhoodsTest[i][0]), (Class<?>) theLargestBrotherhoodsTest[i][1]);
 	}
-
-	// Ancillary methods ------------------------------------------------------
 
 	protected void theLargestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
 		Class<?> caught;
@@ -448,18 +569,17 @@ public class DashboardServiceTest extends AbstractTest {
 	@Test
 	public void largestBrotherhoodsTest() {
 		final Object largestBrotherhoodsTest[][] = {
-			{//only the admin can summon this services
+			{
 				"brotherhood1", null
-			}, {
+			},//1. All fine
+			{
 				"brotherhood5", IllegalArgumentException.class
-			}
+			},//4. Wrong return
 		};
 
 		for (int i = 0; i < largestBrotherhoodsTest.length; i++)
 			this.largestBrotherhoodsTemplate(super.getEntityId((String) largestBrotherhoodsTest[i][0]), (Class<?>) largestBrotherhoodsTest[i][1]);
 	}
-
-	// Ancillary methods ------------------------------------------------------
 
 	protected void largestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
 		Class<?> caught;
@@ -487,18 +607,17 @@ public class DashboardServiceTest extends AbstractTest {
 	@Test
 	public void top5Test() {
 		final Object top5Test[][] = {
-			{//only the admin can summon this services
+			{
 				"sponsor1", null
-			}, {
+			},//1. All fine
+			{
 				"sponsor6", IllegalArgumentException.class
-			}
+			},//4. Wrong return
 		};
 
 		for (int i = 0; i < top5Test.length; i++)
 			this.top5Template(super.getEntityId((String) top5Test[i][0]), (Class<?>) top5Test[i][1]);
 	}
-
-	// Ancillary methods ------------------------------------------------------
 
 	protected void top5Template(final int sponsorId, final Class<?> expected) {
 		Class<?> caught;
@@ -518,4 +637,49 @@ public class DashboardServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
+	/*
+	 * -------Coverage Dashboard-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * avgRecordPerHistory() =
+	 * maxRecordPerHistory() =
+	 * minRecordPerHistory() =
+	 * stddevRecordPerHistory() =
+	 * brotherhoodsMoreThanAverage() =
+	 * avgParadesCoordinatedByChapters() =
+	 * minParadesCoordinatedByChapters() =
+	 * maxParadesCoordinatedByChapters() =
+	 * stddevParadesCoordinatedByChapters() =
+	 * chaptersCoordinatesMoreThan10Percent() =
+	 * ratioAreasNotCoordinatedAnyChapters() =
+	 * ratioDraftFinalModeParade() =
+	 * ratioAccepted() =
+	 * ratioRejected() =
+	 * ratioSubmitted() =
+	 * ratioOfActiveSponsorships() =
+	 * averageActiveSponsorshipsPerSponsor() =
+	 * minActiveSponsorshipsPerSponsor() =
+	 * maxActiveSponsorshipsPerSponsor() =
+	 * standartDeviationOfActiveSponsorshipsPerSponsor() =
+	 * avgMemberPerBrotherhood() =
+	 * minMemberPerBrotherhood() =
+	 * maxMemberPerBrotherhood() =
+	 * stddevMemberPerBrotherhood() =
+	 * membersTenPerCent() =
+	 * ratioBrotherhoodPerArea() =
+	 * countBrotherhoodPerArea() =
+	 * minBrotherhoodPerArea() =
+	 * maxBrotherhoodPerArea() =
+	 * avgBrotherhoodPerArea() =
+	 * stddevBrotherhoodPerArea() =
+	 * minResultPerFinder() =
+	 * maxResultPerFinder() =
+	 * avgResultPerFinder() =
+	 * stddevResultPerFinder() =
+	 * ratioEmptyFinders() =
+	 * theSmallestBrotherhoods() =
+	 * largestBrotherhood() =
+	 * top5SporsorsActivedSponsorships() =
+	 */
 }
