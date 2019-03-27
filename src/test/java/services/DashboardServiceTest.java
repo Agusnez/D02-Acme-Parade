@@ -10,8 +10,6 @@
 
 package services;
 
-import java.util.Collection;
-
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -22,8 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Brotherhood;
-import domain.Sponsor;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -46,8 +42,8 @@ public class DashboardServiceTest extends AbstractTest {
 	@Autowired
 	private SponsorshipService	sponsorshipService;
 
-	@Autowired
-	private SponsorService		sponsorService;
+	//	@Autowired
+	//	private SponsorService		sponsorService;
 
 	@Autowired
 	private FinderService		finderService;
@@ -105,175 +101,151 @@ public class DashboardServiceTest extends AbstractTest {
 			{//2 histories with a total of 9 record = 4.5
 				"avgRecordPerHistory", 4.5, null
 			}, {//Negative
-				"avgRecordPerHistory", 0.0, IllegalArgumentException.class
+				"avgRecordPerHistory", 111.111, IllegalArgumentException.class
 			}, {//brotherhood 1 has 8 record in total
 				"maxRecordPerHistory", 8.0, null
 			}, {//Negative
-				"maxRecordPerHistory", 0.0, IllegalArgumentException.class
+				"maxRecordPerHistory", 111.111, IllegalArgumentException.class
 			}, {//brotherhood 2 has only 1 record (the mandatory one)
 				"minRecordPerHistory", 1.0, null
 			}, {//Negative
-				"minRecordPerHistory", 0.0, IllegalArgumentException.class
+				"minRecordPerHistory", 111.111, IllegalArgumentException.class
 			}, {//sqrt(((8-4.5)^2+(1-4.5)^2)/2) = 3.5
 				"stddevRecordPerHistory", 3.5, null
 			}, {//Negative
 				"stddevRecordPerHistory", 111.111, IllegalArgumentException.class
 			}, {
-				"brotherhoodsMoreThanAverage", 111.111, null
+				"brotherhoodsMoreThanAverage", 1.0, null
 			}, {//Negative
 				"brotherhoodsMoreThanAverage", 111.111, IllegalArgumentException.class
 			}, {
-<<<<<<< HEAD
-				"avgParadesCoordinatedByChapters", 0.93333, null
+				"avgParadesCoordinatedByChapters", 0.9375, null
 			}, {//Negative
 				"avgParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
-=======
-				"min", 0.0, IllegalArgumentException.class
-			}, {
-				"stddev", 0.0, IllegalArgumentException.class
-			},
-			//En los siguientes escenarios no hacemos uso de
-			//test negativos porque el error va ser siempre el mismo
-			//(IllegalArgumentException)
-			{
-				"avgParadesCoordinatedByChapters", 0.94118, null
->>>>>>> master
+
 			}, {
 				"minParadesCoordinatedByChapters", 1.0, null
 			}, {//Negative
 				"minParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
 			}, {
-<<<<<<< HEAD
-				"maxParadesCoordinatedByChapters", 13.0, null
+
+				"maxParadesCoordinatedByChapters", 14.0, null
 			}, {//Negative
 				"maxParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
 			}, {
-				"stddevParadesCoordinatedByChapters", 6.966801508530774, null
+				"stddevParadesCoordinatedByChapters", 7.54172421709165, null
 			}, {//Negative
 				"stddevParadesCoordinatedByChapters", 111.111, IllegalArgumentException.class
-=======
-				"maxParadesCoordinatedByChapters", 15.0, null
-			}, {
-				"stddevParadesCoordinatedByChapters", 8.116934552419815, null
->>>>>>> master
 			}, {
 				"chaptersCoordinatesMoreThan10Percent", 1.0, null
 			}, {//Negative
 				"chaptersCoordinatesMoreThan10Percent", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioAreasNotCoordinatedAnyChapters", 0.33333, null
+				"ratioAreasNotCoordinatedAnyChapters", 0.5, null
 			}, {//Negative
 				"ratioAreasNotCoordinatedAnyChapters", 111.111, IllegalArgumentException.class
 			}, {
-<<<<<<< HEAD
-				"ratioDraftFinalModeParade", 0.33333, null
+
+				"ratioDraftFinalModeParade", 0.06667, null
 			}, {//Negative
 				"ratioDraftFinalModeParade", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioAccepted", 0.33333, null
+				"ratioAccepted", 0.4, null
 			}, {//Negative
-				"ratioAccepted", 0.33333, 111.111, IllegalArgumentException.class
+				"ratioAccepted", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioRejected", 0.33333, null
+				"ratioRejected", 0.2, null
 			}, {//Negative
-				"ratioRejected", 0.33333, 111.111, IllegalArgumentException.class
+				"ratioRejected", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioSubmitted", 0.33333, null
+				"ratioSubmitted", 0.4, null
 			}, {//Negative
-				"ratioSubmitted", 0.33333, 111.111, IllegalArgumentException.class
+				"ratioSubmitted", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioOfActiveSponsorships", 111.111, null
+				"ratioOfActiveSponsorships", 0.69231, null
 			}, {//Negative
 				"ratioOfActiveSponsorships", 111.111, IllegalArgumentException.class
 			}, {
-				"averageActiveSponsorshipsPerSponsor", 111.111, null
+				"averageActiveSponsorshipsPerSponsor", 1.5, null
 			}, {//Negative
 				"averageActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
 			}, {
-				"minActiveSponsorshipsPerSponsor", 111.111, null
+				"minActiveSponsorshipsPerSponsor", 0.0, null
 			}, {//Negative
 				"minActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
 			}, {
-				"maxActiveSponsorshipsPerSponsor", 111.111, null
+				"maxActiveSponsorshipsPerSponsor", 4.0, null
 			}, {//Negative
 				"maxActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
 			}, {
-				"standartDeviationOfActiveSponsorshipsPerSponsor", 111.111, null
+				"standartDeviationOfActiveSponsorshipsPerSponsor", 1.3844373104863459, null
 			}, {//Negative
 				"standartDeviationOfActiveSponsorshipsPerSponsor", 111.111, IllegalArgumentException.class
 			}, {
-				"avgMemberPerBrotherhood", 111.111, null
+				"avgMemberPerBrotherhood", 2.125, null
 			}, {//Negative
 				"avgMemberPerBrotherhood", 111.111, IllegalArgumentException.class
 			}, {
-				"minMemberPerBrotherhood", 111.111, null
+				"minMemberPerBrotherhood", 0.0, null
 			}, {//Negative
 				"minMemberPerBrotherhood", 111.111, IllegalArgumentException.class
 			}, {
-				"maxMemberPerBrotherhood", 111.111, null
+				"maxMemberPerBrotherhood", 3.0, null
 			}, {//Negative
 				"maxMemberPerBrotherhood", 111.111, IllegalArgumentException.class
 			}, {
-				"stddevMemberPerBrotherhood", 111.111, null
+				"stddevMemberPerBrotherhood", 1.0532687216470449, null
 			}, {//Negative
 				"stddevMemberPerBrotherhood", 111.111, IllegalArgumentException.class
 			}, {
-				"membersTenPerCent", 111.111, null
+				"membersTenPerCent", 1, null
 			}, {//Negative
 				"membersTenPerCent", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioBrotherhoodPerArea", 111.111, null
+				"ratioBrotherhoodPerArea", 2.0, null
 			}, {//Negative
 				"ratioBrotherhoodPerArea", 111.111, IllegalArgumentException.class
 			}, {
-				"countBrotherhoodPerArea", 111.111, null
+				"countBrotherhoodPerArea", 4.0, null
 			}, {//Negative
 				"countBrotherhoodPerArea", 111.111, IllegalArgumentException.class
 			}, {
-				"minBrotherhoodPerArea", 111.111, null
+				"minBrotherhoodPerArea", 0.0, null
 			}, {//Negative
 				"minBrotherhoodPerArea", 111.111, IllegalArgumentException.class
 			}, {
-				"maxBrotherhoodPerArea", 111.111, null
+				"maxBrotherhoodPerArea", 3.0, null
 			}, {//Negative
 				"maxBrotherhoodPerArea", 111.111, IllegalArgumentException.class
 			}, {
-				"avgBrotherhoodPerArea", 111.111, null
+				"avgBrotherhoodPerArea", 1.75, null
 			}, {//Negative
 				"avgBrotherhoodPerArea", 111.111, IllegalArgumentException.class
 			}, {
-				"stddevBrotherhoodPerArea", 111.111, null
+				"stddevBrotherhoodPerArea", 1.299038105676658, null
 			}, {//Negative
 				"stddevBrotherhoodPerArea", 111.111, IllegalArgumentException.class
 			}, {
-				"minResultPerFinder", 111.111, null
+				"minResultPerFinder", 0.0, null
 			}, {//Negative
 				"minResultPerFinder", 111.111, IllegalArgumentException.class
 			}, {
-				"maxResultPerFinder", 111.111, null
+				"maxResultPerFinder", 0.0, null
 			}, {//Negative
 				"maxResultPerFinder", 111.111, IllegalArgumentException.class
 			}, {
-				"avgResultPerFinder", 111.111, null
+				"avgResultPerFinder", 0.0, null
 			}, {//Negative
 				"avgResultPerFinder", 111.111, IllegalArgumentException.class
 			}, {
-				"stddevResultPerFinder", 111.111, null
+				"stddevResultPerFinder", 0.0, null
 			}, {//Negative
 				"stddevResultPerFinder", 111.111, IllegalArgumentException.class
 			}, {
-				"ratioEmptyFinders", 111.111, null
+				"ratioEmptyFinders", 1.0, null
 			}, {//Negative
 				"ratioEmptyFinders", 111.111, IllegalArgumentException.class
-=======
-				"ratioDraftFinalModeParade", 0.0625, null
-			}, {
-				"ratioAccepted", 0.1875, null
-			}, {
-				"ratioRejected", 0.0625, null
-			}, {
-				"ratioSubmitted", 0.75, null
->>>>>>> master
+
 			}
 		};
 
@@ -331,37 +303,37 @@ public class DashboardServiceTest extends AbstractTest {
 			else if (method == "standartDeviationOfActiveSponsorshipsPerSponsor")
 				test = this.sponsorshipService.standartDeviationOfActiveSponsorshipsPerSponsor();
 			else if (method == "avgMemberPerBrotherhood")
-				test = Double.valueOf(this.brotherhoodService.avgMemberPerBrotherhood());
+				test = Integer.valueOf(this.brotherhoodService.avgMemberPerBrotherhood()) * 1.0;
 			else if (method == "minMemberPerBrotherhood")
-				test = Double.valueOf(this.brotherhoodService.minMemberPerBrotherhood());
+				test = Integer.valueOf(this.brotherhoodService.minMemberPerBrotherhood()) * 1.0;
 			else if (method == "maxMemberPerBrotherhood")
-				test = Double.valueOf(this.brotherhoodService.maxMemberPerBrotherhood());
+				test = Integer.valueOf(this.brotherhoodService.maxMemberPerBrotherhood()) * 1.0;
 			else if (method == "stddevMemberPerBrotherhood")
-				test = Double.valueOf(this.brotherhoodService.stddevMemberPerBrotherhood());
+				test = Integer.valueOf(this.brotherhoodService.stddevMemberPerBrotherhood()) * 1.0;
 			else if (method == "membersTenPerCent")
 				test = this.memberService.membersTenPerCent().size() * 1.0;
 
 			else if (method == "ratioBrotherhoodPerArea")
-				test = Double.valueOf(this.areaService.ratioBrotherhoodPerArea());
+				test = Integer.valueOf(this.areaService.ratioBrotherhoodPerArea()) * 1.0;
 			else if (method == "countBrotherhoodPerArea")
-				test = Double.valueOf(this.areaService.countBrotherhoodPerArea());
+				test = Integer.valueOf(this.areaService.countBrotherhoodPerArea()) * 1.0;
 			else if (method == "minBrotherhoodPerArea")
-				test = Double.valueOf(this.areaService.minBrotherhoodPerArea());
+				test = Integer.valueOf(this.areaService.minBrotherhoodPerArea()) * 1.0;
 			else if (method == "maxBrotherhoodPerArea")
-				test = Double.valueOf(this.areaService.maxBrotherhoodPerArea());
+				test = Integer.valueOf(this.areaService.maxBrotherhoodPerArea()) * 1.0;
 			else if (method == "avgBrotherhoodPerArea")
-				test = Double.valueOf(this.areaService.avgBrotherhoodPerArea());
+				test = Integer.valueOf(this.areaService.avgBrotherhoodPerArea()) * 1.0;
 			else if (method == "stddevBrotherhoodPerArea")
-				test = Double.valueOf(this.areaService.stddevBrotherhoodPerArea());
+				test = Integer.valueOf(this.areaService.stddevBrotherhoodPerArea()) * 1.0;
 
 			else if (method == "minResultPerFinder")
-				test = Double.valueOf(this.finderService.minResultPerFinder());
+				test = Integer.valueOf(this.finderService.minResultPerFinder()) * 1.0;
 			else if (method == "maxResultPerFinder")
-				test = Double.valueOf(this.finderService.maxResultPerFinder());
+				test = Integer.valueOf(this.finderService.maxResultPerFinder()) * 1.0;
 			else if (method == "avgResultPerFinder")
-				test = Double.valueOf(this.finderService.avgResultPerFinder());
+				test = Integer.valueOf(this.finderService.avgResultPerFinder()) * 1.0;
 			else if (method == "stddevResultPerFinder")
-				test = Double.valueOf(this.finderService.stddevResultPerFinder());
+				test = Integer.valueOf(this.finderService.stddevResultPerFinder()) * 1.0;
 
 			else if (method == "ratioEmptyFinders")
 				test = this.finderService.ratioEmptyFinders();
@@ -375,140 +347,140 @@ public class DashboardServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	@Test
-	public void theSmallestBrotherhoodsTest() {
-		final Object theSmallestBrotherhoodsTest[][] = {
-			{//only the admin can summon this services
-				"admin", null
-			}, {
-				"member1", IllegalArgumentException.class
-			}
-		};
+	//	@Test
+	//	public void theSmallestBrotherhoodsTest() {
+	//		final Object theSmallestBrotherhoodsTest[][] = {
+	//			{//only the admin can summon this services
+	//				"admin", null
+	//			}, {
+	//				"member1", IllegalArgumentException.class
+	//			}
+	//		};
+	//
+	//		for (int i = 0; i < theSmallestBrotherhoodsTest.length; i++)
+	//			this.theSmallestBrotherhoodsTemplate(super.getEntityId((String) theSmallestBrotherhoodsTest[i][0]), (Class<?>) theSmallestBrotherhoodsTest[i][1]);
+	//	}
+	//
+	//	// Ancillary methods ------------------------------------------------------
+	//
+	//	protected void theSmallestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
+	//		Class<?> caught;
+	//
+	//		caught = null;
+	//		try {
+	//			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
+	//
+	//			final Collection<Brotherhood> bs = this.brotherhoodService.theSmallestBrotherhoods();
+	//
+	//			Assert.isTrue(bs.contains(b));
+	//
+	//		} catch (final Throwable oops) {
+	//			caught = oops.getClass();
+	//		}
+	//
+	//		this.checkExceptions(expected, caught);
+	//	}
+	//
+	//	@Test
+	//	public void theLargestBrotherhoodsTest() {
+	//		final Object theLargestBrotherhoodsTest[][] = {
+	//			{//only the admin can summon this services
+	//				"admin", null
+	//			}, {
+	//				"member1", IllegalArgumentException.class
+	//			}
+	//		};
+	//
+	//		for (int i = 0; i < theLargestBrotherhoodsTest.length; i++)
+	//			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) theLargestBrotherhoodsTest[i][0]), (Class<?>) theLargestBrotherhoodsTest[i][1]);
+	//	}
+	//
+	//	// Ancillary methods ------------------------------------------------------
+	//
+	//	protected void theLargestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
+	//		Class<?> caught;
+	//
+	//		caught = null;
+	//		try {
+	//			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
+	//
+	//			final Collection<Brotherhood> bs = this.brotherhoodService.theLargestBrotherhoods();
+	//
+	//			Assert.isTrue(bs.contains(b));
+	//
+	//		} catch (final Throwable oops) {
+	//			caught = oops.getClass();
+	//		}
+	//
+	//		this.checkExceptions(expected, caught);
+	//	}
+	//
+	//	@Test
+	//	public void largestBrotherhoodsTest() {
+	//		final Object largestBrotherhoodsTest[][] = {
+	//			{//only the admin can summon this services
+	//				"admin", null
+	//			}, {
+	//				"member1", IllegalArgumentException.class
+	//			}
+	//		};
+	//
+	//		for (int i = 0; i < largestBrotherhoodsTest.length; i++)
+	//			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) largestBrotherhoodsTest[i][0]), (Class<?>) largestBrotherhoodsTest[i][1]);
+	//	}
+	//
+	//	// Ancillary methods ------------------------------------------------------
+	//
+	//	protected void largestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
+	//		Class<?> caught;
+	//
+	//		caught = null;
+	//		try {
+	//			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
+	//
+	//			final Collection<Brotherhood> bs = this.historyService.largestBrotherhood();
+	//
+	//			Assert.isTrue(bs.contains(b));
+	//
+	//		} catch (final Throwable oops) {
+	//			caught = oops.getClass();
+	//		}
+	//
+	//		this.checkExceptions(expected, caught);
+	//	}
 
-		for (int i = 0; i < theSmallestBrotherhoodsTest.length; i++)
-			this.theSmallestBrotherhoodsTemplate(super.getEntityId((String) theSmallestBrotherhoodsTest[i][0]), (Class<?>) theSmallestBrotherhoodsTest[i][1]);
-	}
-
-	// Ancillary methods ------------------------------------------------------
-
-	protected void theSmallestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
-		Class<?> caught;
-
-		caught = null;
-		try {
-			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
-
-			final Collection<Brotherhood> bs = this.brotherhoodService.theSmallestBrotherhoods();
-
-			Assert.isTrue(bs.contains(b));
-
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-
-		this.checkExceptions(expected, caught);
-	}
-
-	@Test
-	public void theLargestBrotherhoodsTest() {
-		final Object theLargestBrotherhoodsTest[][] = {
-			{//only the admin can summon this services
-				"admin", null
-			}, {
-				"member1", IllegalArgumentException.class
-			}
-		};
-
-		for (int i = 0; i < theLargestBrotherhoodsTest.length; i++)
-			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) theLargestBrotherhoodsTest[i][0]), (Class<?>) theLargestBrotherhoodsTest[i][1]);
-	}
-
-	// Ancillary methods ------------------------------------------------------
-
-	protected void theLargestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
-		Class<?> caught;
-
-		caught = null;
-		try {
-			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
-
-			final Collection<Brotherhood> bs = this.brotherhoodService.theLargestBrotherhoods();
-
-			Assert.isTrue(bs.contains(b));
-
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-
-		this.checkExceptions(expected, caught);
-	}
-
-	@Test
-	public void largestBrotherhoodsTest() {
-		final Object largestBrotherhoodsTest[][] = {
-			{//only the admin can summon this services
-				"admin", null
-			}, {
-				"member1", IllegalArgumentException.class
-			}
-		};
-
-		for (int i = 0; i < largestBrotherhoodsTest.length; i++)
-			this.theLargestBrotherhoodsTemplate(super.getEntityId((String) largestBrotherhoodsTest[i][0]), (Class<?>) largestBrotherhoodsTest[i][1]);
-	}
-
-	// Ancillary methods ------------------------------------------------------
-
-	protected void largestBrotherhoodsTemplate(final int brotherhoodId, final Class<?> expected) {
-		Class<?> caught;
-
-		caught = null;
-		try {
-			final Brotherhood b = this.brotherhoodService.findOne(brotherhoodId);
-
-			final Collection<Brotherhood> bs = this.historyService.largestBrotherhood();
-
-			Assert.isTrue(bs.contains(b));
-
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-
-		this.checkExceptions(expected, caught);
-	}
-
-	@Test
-	public void top5Test() {
-		final Object top5Test[][] = {
-			{//only the admin can summon this services
-				"admin", null
-			}, {
-				"member1", IllegalArgumentException.class
-			}
-		};
-
-		for (int i = 0; i < top5Test.length; i++)
-			this.top5Template(super.getEntityId((String) top5Test[i][0]), (Class<?>) top5Test[i][1]);
-	}
-
-	// Ancillary methods ------------------------------------------------------
-
-	protected void top5Template(final int sponsorId, final Class<?> expected) {
-		Class<?> caught;
-
-		caught = null;
-		try {
-			final Sponsor s = this.sponsorService.findOne(sponsorId);
-
-			final Collection<String> cs = this.sponsorshipService.top5SporsorsActivedSponsorships();
-
-			Assert.isTrue(cs.contains(s.getName()));
-
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-
-		this.checkExceptions(expected, caught);
-	}
+	//	@Test
+	//	public void top5Test() {
+	//		final Object top5Test[][] = {
+	//			{//only the admin can summon this services
+	//				"admin", null
+	//			}, {
+	//				"member1", IllegalArgumentException.class
+	//			}
+	//		};
+	//
+	//		for (int i = 0; i < top5Test.length; i++)
+	//			this.top5Template(super.getEntityId((String) top5Test[i][0]), (Class<?>) top5Test[i][1]);
+	//	}
+	//
+	//	// Ancillary methods ------------------------------------------------------
+	//
+	//	protected void top5Template(final int sponsorId, final Class<?> expected) {
+	//		Class<?> caught;
+	//
+	//		caught = null;
+	//		try {
+	//			final Sponsor s = this.sponsorService.findOne(sponsorId);
+	//
+	//			final Collection<String> cs = this.sponsorshipService.top5SporsorsActivedSponsorships();
+	//
+	//			Assert.isTrue(cs.contains(s.getName()));
+	//
+	//		} catch (final Throwable oops) {
+	//			caught = oops.getClass();
+	//		}
+	//
+	//		this.checkExceptions(expected, caught);
+	//	}
 
 }
