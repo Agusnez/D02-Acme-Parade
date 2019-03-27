@@ -63,6 +63,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 */
 
 	/*
+	 * ACME-PARADE
 	 * a) Requirement: Brotherhood manage paths of their parades : List
 	 * 
 	 * b) Negative cases:
@@ -120,6 +121,7 @@ public class SegmentServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a) Requirement: Brotherhood manage paths of their parades : Display
 	 * 
 	 * b) Negative cases:
@@ -175,6 +177,7 @@ public class SegmentServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a) Requirement: Brotherhood manage paths of their parades : Create
 	 * 
 	 * b) Negative cases:
@@ -253,6 +256,7 @@ public class SegmentServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a) Requirement: Brotherhood manage paths of their parades : Edit
 	 * 
 	 * b) Negative cases:
@@ -348,6 +352,7 @@ public class SegmentServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a) Requirement: Brotherhood manage paths of their parades : Delete
 	 * 
 	 * b) Negative cases:
@@ -355,7 +360,6 @@ public class SegmentServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -delete(): 2 passed cases / 3 total cases = 100%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -Segment: 0 passed cases / 6 total cases = 0%

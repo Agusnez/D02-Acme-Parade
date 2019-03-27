@@ -264,9 +264,9 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * -------Coverage InceptionRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -findAll() = 50%
-	 * -save() = 50%
-	 * -create() = 100%
+	 * findAll() = 50%
+	 * save() = 50%
+	 * create() = 100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * InceptionRecord = 66,66667%

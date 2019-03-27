@@ -369,11 +369,10 @@ public class SponsorshipServiceTest extends AbstractTest {
 
 			{
 				"parade5", "sponsorship1", "sponsorship2", "sponsorship6", "sponsorship10", null
-			//1. All fine
-			}, {
+			},//1. All fine 
+			{
 				"parade5", "sponsorship3", "sponsorship4", "sponsorship7", "sponsorship8", IllegalArgumentException.class
-			//2. Wrong return
-			}
+			},//2. Wrong return
 
 		};
 
@@ -418,7 +417,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 	 * a)(Level A) Requirement 18.1: Administrator must be able to: Launch a process that automatically de-activates the sponsorships whose credit cards have expired.
 	 * 
 	 * b) Negative cases:
-	 * 2. 2. Invalid authority
+	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
 	 * -deactivateExpiredCardSponsorships(): 2 passed cases / 5 total cases = 40%
