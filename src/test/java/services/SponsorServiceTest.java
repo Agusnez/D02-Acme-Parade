@@ -26,21 +26,26 @@ public class SponsorServiceTest extends AbstractTest {
 
 
 	/*
-	 * a) Requirement 15.1 : Register as a sponsor
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 15.1: Register as a sponsor
+	 * 
 	 * b) Negative cases:
-	 * 2. El surname introducido es incorrecto (null)
-	 * c)99%?
-	 * d)9,1%
+	 * 2. Surname = null
+	 * 
+	 * c)Sentence coverage:
+	 * 
+	 * d)Data coverage:
 	 */
+
 	@Test
 	public void driverRegisterSponsor() {
 		final Object testingData[][] = {
 			{
 				"name1", "middleName1", "surname1", "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter56", "chapter56", null
-			},//1.Todo bien
+			},//1. All fine
 			{
 				"name1", "middleName1", null, "https://google.com", "email1@gmail.com", "672195205", "address1", "chapter57", "chapter57", ConstraintViolationException.class
-			},//2.Title null
+			},//2. Surname =  null
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -85,21 +90,27 @@ public class SponsorServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a) Requirement: Actor manage his/her profile
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 9.2: Actor manage his/her profile
+	 * 
 	 * b) Negative cases:
-	 * 2. El usuario que está logeado, no es el mismo que el que está editando
-	 * c)99%?
-	 * d)27,27%
+	 * 2. Invalid authenticated
+	 * 
+	 * c)Sentence coverage:
+	 * 
+	 * d)Data coverage:
 	 */
+
 	@Test
 	public void driverEditSponsor() {
 		final Object testingData[][] = {
 
 			{
 				"sponsor1", "sponsor1", "calle 13", "a@a.com", "3333", "middleName", "surname", "name", "http://www.photo.com", "title", null
-			}, {
+			},//1. All fine
+			{
 				"brotherhood1", "sponsor1", "calle 13", "a@a.com", "+34 333 3333", "middleName", "surname", "name", "http://www.photo.com", "title", IllegalArgumentException.class
-			}
+			},//2. Invalid authenticated 
 
 		};
 
@@ -140,4 +151,14 @@ public class SponsorServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 		this.rollbackTransaction();
 	}
+
+	/*
+	 * -------Coverage SponsorService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Sponsor =
+	 */
 }

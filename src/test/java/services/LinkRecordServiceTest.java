@@ -144,7 +144,8 @@ public class LinkRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Edit
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Edit
 	 * 
 	 * b)Negative cases:
 	 * 2. Not authority
@@ -152,7 +153,6 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -save(): 3 tested cases / 7 total cases = 42.85%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -None
@@ -208,6 +208,7 @@ public class LinkRecordServiceTest extends AbstractTest {
 	}
 
 	/*
+	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Delete
 	 * 
 	 * b)Negative cases:
@@ -216,7 +217,6 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -delete(): 3 tested cases / 5 total cases = 60%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -None
@@ -228,7 +228,6 @@ public class LinkRecordServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "linkRecord1", null
-
 			},//1. All fine
 			{
 				null, "linkRecord1", IllegalArgumentException.class
@@ -272,13 +271,14 @@ public class LinkRecordServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (list)
-	 * Negative cases:
-	 * b)2
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: List
+	 * 
+	 * b)Negative cases:
+	 * 2. Incorrect result
+	 * 
 	 * c) Sentence coverage
 	 * -findAll(): 1 tested case / 1 total case = 100%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -None
@@ -290,11 +290,11 @@ public class LinkRecordServiceTest extends AbstractTest {
 
 			{
 				2, null
-			//1. All fine
-			}, {
+
+			},//1. All fine
+			{
 				1651, IllegalArgumentException.class
-			//2. Incorrect result
-			}
+			},//2. Incorrect result
 
 		};
 
@@ -320,5 +320,15 @@ public class LinkRecordServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * -------Coverage LinkRecordService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * LinkRecord =
+	 */
 
 }

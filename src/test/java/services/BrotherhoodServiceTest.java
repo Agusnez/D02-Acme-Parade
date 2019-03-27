@@ -219,7 +219,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * 3. Title = javaScript
 	 * 
 	 * c) Sentence coverage:
-	 * -save(): 1 passed cases / 6 total cases = 16,67%
+	 * -save(): 1 passed cases / 5 total cases = 20%
 	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
@@ -297,7 +297,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * 2. The user who is logged, It's not the same as the user who is being edited
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 2 passed cases / 8 total cases = 25%
+	 * -save(): 2 passed cases / 5 total cases = 40%
 	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
@@ -350,7 +350,11 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -------Coverage BrotherhoodService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * 
+	 * save() = 40%
+	 * findOne() = 50%
+	 * create() = 100%
+	 * findAll() = 50%
+	 * findBrotherhoodsByAreaId() = 50%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Brotherhood =
