@@ -57,19 +57,18 @@ public class FinderServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level B)Requirement 21:An actor who is authenticated as a member must be able to:
-	 * 2. Manage his her finder
+	 * ACME-MADRUGÁ
+	 * a)(Level B) Requirement 21.2: An actor who is authenticated as a member must be able to: Manage his her finder
 	 * 
-	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
 	 * -findFinderByMember()=2 passed cases/3 total cases = 66,67%
 	 * -save()= 2 passed cases/7 total cases = 28,5%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Finder: 0 passed cases / 7 total cases = 0%
 	 */
 
 	@Test
@@ -78,11 +77,10 @@ public class FinderServiceTest extends AbstractTest {
 
 			{
 				"member1", "triana", null
-			//1. Todo bien
-			}, {
+			},//1. All fine
+			{
 				"chapter1", "triana", IllegalArgumentException.class
-			//2. Intenta actualizarlo un Chapter
-			}
+			},//2. Invalid authority
 
 		};
 

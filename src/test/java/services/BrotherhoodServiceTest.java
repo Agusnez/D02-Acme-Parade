@@ -60,15 +60,17 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level A)Requirement 14 :An actor who is not authenticated must be able to:
-	 * 1. Navigate to the brotherhood that have settle in an area
-	 * Negative cases:
-	 * b)2. Area no contiene ese brotherhood
+	 * ACME-MADRUGÁ
+	 * a)(Level A)Requirement 14.1: An actor who is not authenticated must be able to: Navigate to the brotherhood that have settle in an area
+	 * 
+	 * b)Negative cases:
+	 * 2. Area not contain this brotherhood
+	 * 
 	 * c) Sentence coverage
-	 * -findBrotherhoodsByAreaId(areaId)=100%
+	 * -findBrotherhoodsByAreaId = 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Brotherhood: 0 passed cases / 15 total cases
 	 */
 
 	@Test
@@ -77,10 +79,10 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 			{
 				"area1", "brotherhood1", null
-			//1. Todo bien
+			//1. All fine 
 			}, {
 				"area1", "brotherhood3", IllegalArgumentException.class
-			//2. Area no contiene ese brotherhood
+			//2. Area not contain this brotherhood
 			}
 
 		};
@@ -124,7 +126,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -findAll()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage:
-	 * -Brotherhood: 0 passed cases / 10 total cases = 0%
+	 * -Brotherhood: 0 passed cases / 15 total cases = 0%
 	 */
 
 	@Test
@@ -221,8 +223,9 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
-	 * -Brotherhood: 1 passed cases / 10 total cases = 10%
+	 * -Brotherhood: 1 passed cases / 15 total cases = 6,66667%%
 	 */
+
 	@Test
 	public void driverRegisterBrotherhood() {
 		final Object testingData[][] = {
@@ -298,7 +301,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -Brotherhood: 0 passed cases / 10 total cases = 0%
+	 * -Brotherhood: 0 passed cases / 15 total cases = 0%
 	 */
 
 	@Test

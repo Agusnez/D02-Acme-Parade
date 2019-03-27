@@ -364,7 +364,7 @@ public class AreaServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level B) Requirement 20.1: Brotherhood select the area in which it was settled.
+	 * a)(Level B) Requirement 20.1: Brotherhood select the area in which it was settled
 	 * 
 	 * b) Negative cases:
 	 * 2. Not area

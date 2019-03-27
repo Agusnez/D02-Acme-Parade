@@ -111,7 +111,7 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C) Requirement 12.1: An actor who is authenticated as an administrator must be able to: Create user accounts for new administrators.
+	 * a)(Level C) Requirement 12.1: An actor who is authenticated as an administrator must be able to: Create user accounts for new administrators
 	 * 
 	 * b)Negative cases:
 	 * 2. Name = blank

@@ -178,7 +178,7 @@ public class BoxServiceTest extends AbstractTest {
 	 * b) Negative cases:
 	 * 2. Name = null
 	 * 3. Name = blank
-	 * 4.
+	 * 4. Name = default name
 	 * 
 	 * c) Sentence coverage
 	 * -create(): 1 passed cases / 1 total cases = 100%
@@ -203,7 +203,7 @@ public class BoxServiceTest extends AbstractTest {
 			}, //3. Name = blank
 			{
 				"in box", false, null, "member1", IllegalArgumentException.class
-			}, //4. 
+			}, //4. Name = default name
 
 		};
 
