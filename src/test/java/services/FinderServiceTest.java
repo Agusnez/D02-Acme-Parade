@@ -110,4 +110,16 @@ public class FinderServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * -------Finder EnrolmentService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * -findFinderByMember() = 66,67%
+	 * -save() = 28,5%
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Finder = 0%
+	 */
 }

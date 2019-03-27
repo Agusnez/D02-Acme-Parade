@@ -65,7 +65,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * 2. The float not contains the brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -findFloatsByBrotherhoodId()=50%
+	 * -findFloatsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * 0%
@@ -138,7 +138,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * 2. The float not contains the brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -findFloatsByBrotherhoodId()=50%
+	 * -findFloatsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * 0%
@@ -197,12 +197,12 @@ public class FloatServiceTest extends AbstractTest {
 	 * 5. Pictures = no URL
 	 * 
 	 * c) Sentence coverage
-	 * create()=3 passed cases/4 total cases=75%
-	 * save()=1 passed cases/8 total cases= 12,5%
+	 * create()=2 passed cases/3 total cases=66.67%
+	 * save()=1 passed cases/5 total cases= 20%
 	 * findAll()=1 passed cases/2 total cases=50%
 	 * 
 	 * d) Data coverage
-	 * -Float: 3 passed cases / 3 total cases = 100%
+	 * -Float: 3 passed cases / 4 total cases = 75%
 	 */
 
 	@Test
@@ -275,7 +275,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * findOne()=1 passed cases/1 total cases=100%
-	 * save()=1 passed cases/8 total cases= 12,5%
+	 * save()=1 passed cases/5 total cases= 20%
 	 * findAll()=1 passed cases/2 total cases=50%
 	 * 
 	 * d) Data coverage
@@ -344,7 +344,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -findOne() = 1 passed cases / 1 total cases = 100%
 	 * -findAll() = 1 passed cases / 2 total cases = 50%
-	 * -delete()= 1 passed cases / 8 total cases = 12,5%
+	 * -delete()= 3 passed cases / 9 total cases = 33.33%
 	 * 
 	 * d) Data coverage
 	 * 0%
@@ -403,9 +403,14 @@ public class FloatServiceTest extends AbstractTest {
 	 * -------Coverage FloatService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -findOne() = 100%
+	 * -findAll() = 50%
+	 * -delete() = 33.33%
+	 * create() = 66.67%
+	 * save() = 20%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Float =
+	 * Float = 75%
 	 */
 }

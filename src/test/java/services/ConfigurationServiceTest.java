@@ -66,7 +66,7 @@ public class ConfigurationServiceTest extends AbstractTest {
 	 * -findConfiguration(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -Configuration: 2 passed cases / 12 total cases = 16,66667%
+	 * -Configuration: 0 passed cases / 12 total cases = 0%
 	 */
 
 	@Test
@@ -117,4 +117,15 @@ public class ConfigurationServiceTest extends AbstractTest {
 
 		this.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * -------Coverage ConfigurationService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * save() = 25%
+	 * findConfiguration() = 50%
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Configuration = 0%
+	 */
 }
