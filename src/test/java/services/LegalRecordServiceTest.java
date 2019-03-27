@@ -71,7 +71,6 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -create(): 3 passed cases / 3 total cases = 100%
 	 * 
-	 * 
 	 * d) Data coverage
 	 * -LegalRecord: 2 passed cases / 5 total cases = 40%
 	 */
@@ -156,7 +155,6 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * c)Sentence coverage
 	 * -save(): 3 passed cases / 8 total cases = 37,5%
 	 * 
-	 * 
 	 * d) Data coverage
 	 * -LegalRecord: 0 passed cases / 5 total cases = 0%
 	 */
@@ -227,7 +225,6 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
-	 * 
 	 * d) Data coverage
 	 * -LegalRecord: 0 passed cases / 5 total cases = 0%
 	 */
@@ -238,7 +235,6 @@ public class LegalRecordServiceTest extends AbstractTest {
 
 			{
 				1, null
-
 			},//1. All fine 
 			{
 				1651, IllegalArgumentException.class
@@ -279,7 +275,6 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -delete(): 3 passed cases / 7 total cases = 42,8%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -LegalRecord: 0 passed cases / 5 total cases = 0%
@@ -337,11 +332,10 @@ public class LegalRecordServiceTest extends AbstractTest {
 	 * -------Coverage LegalRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -delete() = 42,8%
-	 * -findAll() = 50%
-	 * -save() = 37,5%
-	 * -create() = 100%
-	 * 
+	 * delete() = 42,8%
+	 * findAll() = 50%
+	 * save() = 37,5%
+	 * create() = 100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * LegalRecord = 40%

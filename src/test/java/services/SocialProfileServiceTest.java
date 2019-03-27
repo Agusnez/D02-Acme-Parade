@@ -67,7 +67,7 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 * -findOne()=100%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -SocialProfile: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -113,7 +113,7 @@ public class SocialProfileServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
+	 * ACME-MADRUGÁ
 	 * a)(Level A)Requirement 27.1: An actor who is authenticated must be able to: Create his or her social profiles
 	 * 
 	 * b)Negative cases:
@@ -124,12 +124,12 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 * 6. SocialName = not safe html
 	 * 
 	 * c) Sentence coverage
-	 * create()=1 passed cases/1 total cases=100%
-	 * save()=2 passed cases/4 total cases= 50%
-	 * findAll()=1 passed cases/2 total cases=50%
+	 * -create() = 1 passed cases / 1 total cases =100%
+	 * -save() = 2 passed cases / 4 total cases = 50%
+	 * -findAll() = 1 passed cases / 2 total cases=50%
 	 * 
 	 * d) Data coverage
-	 * -SocialProfile: 2 passed cases / 3 total cases = 75%
+	 * -SocialProfile: 2 passed cases / 4 total cases = 50%
 	 */
 
 	@Test
@@ -199,15 +199,16 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 * ACME-MADRUGÁ
 	 * a)(Level A)Requirement 27.1: An actor who is authenticated must be able to: Update his or her social profiles
 	 * 
-	 * b)Negative cases: 2
+	 * b)Negative cases:
+	 * 2. The social profile not belongs to actor
 	 * 
 	 * c) Sentence coverage
-	 * findOne()=1 passed cases/1 total cases=100%
-	 * save()=2 passed cases/4 total cases= 50%
-	 * findAll()=1 passed cases/2 total cases=50%
+	 * -findOne() = 1 passed cases / 1 total cases = 100%
+	 * -save() = 2 passed cases / 4 total cases = 50%
+	 * -findAll()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -SocialProfile: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -219,7 +220,7 @@ public class SocialProfileServiceTest extends AbstractTest {
 			},//1. All fine 
 			{
 				"brotherhood1", "socialProfile5", "nick1", IllegalArgumentException.class
-			},//3. The social profile not belongs to actor
+			},//2. The social profile not belongs to actor
 
 		};
 
@@ -262,12 +263,12 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 * 2. The social profile not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * findOne()=1 passed cases/1 total cases=100%
-	 * delete()=2 passed cases/4 total cases= 50%
-	 * findAll()=1 passed cases/2 total cases=50%
+	 * findOne() = 1 passed cases / 1 total cases = 100%
+	 * delete() = 2 passed cases / 4 total cases = 50%
+	 * findAll() = 1 passed cases / 2 total cases=50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -SocialProfile: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -313,5 +314,15 @@ public class SocialProfileServiceTest extends AbstractTest {
 		this.rollbackTransaction();
 
 	}
+
+	/*
+	 * -------Coverage SocialProfileService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * SocialProfile =
+	 */
 
 }

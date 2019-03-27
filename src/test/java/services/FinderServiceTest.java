@@ -112,11 +112,11 @@ public class FinderServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * -------Finder EnrolmentService-------
+	 * -------Coverage FinderService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -findFinderByMember() = 66,66667%
-	 * -save() = 28,5%
+	 * findFinderByMember() = 66,66667%
+	 * save() = 28,5%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Finder = 0%

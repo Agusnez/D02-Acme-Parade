@@ -343,11 +343,11 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * -------Coverage EnrolmentService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -findEnrolmentsByMemberId() = 50%
-	 * -create() = 66%
-	 * -save() = 25%
-	 * -findEnrolmentsByBrotherhoodId()= 50%
-	 * -findEnrolmentsByBrotherhoodIdNoPosition() = 50%
+	 * findEnrolmentsByMemberId() = 50%
+	 * create() = 66%
+	 * save() = 25%
+	 * findEnrolmentsByBrotherhoodId()= 50%
+	 * findEnrolmentsByBrotherhoodIdNoPosition() = 50%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Enrolment = 0%

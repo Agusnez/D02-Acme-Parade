@@ -203,9 +203,9 @@ public class HistoryServiceTest extends AbstractTest {
 	 * -------Coverage HistoryService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -findAll() = 50%
-	 * -create() = 66.66667%
-	 * -save() = 20%
+	 * findAll() = 50%
+	 * create() = 66.66667%
+	 * save() = 20%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * History: not applicable

@@ -54,6 +54,7 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 */
 
 	/*
+	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
 	 * b)Negative cases:
 	 * 2. Title = null
@@ -290,7 +291,6 @@ public class LinkRecordServiceTest extends AbstractTest {
 
 			{
 				2, null
-
 			},//1. All fine
 			{
 				1651, IllegalArgumentException.class
@@ -325,11 +325,10 @@ public class LinkRecordServiceTest extends AbstractTest {
 	 * -------Coverage LinkRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -delete() = 50%
-	 * -save() = 37.5%
-	 * -create() = 100%
-	 * -findAll() = 50%
-	 * 
+	 * delete() = 50%
+	 * save() = 37.5%
+	 * create() = 100%
+	 * findAll() = 50%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * LinkRecord = 66.66667%

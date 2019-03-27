@@ -283,11 +283,11 @@ public class AdministratorServiceTest extends AbstractTest {
 	 * -------Coverage AdministratorService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -save() = 40%
-	 * -findOne() = 50%
-	 * -create() = 66.66667%
-	 * -spammer() = 56,25%
-	 * -calculateScore() = 77,8%
+	 * save() = 40%
+	 * findOne() = 50%
+	 * create() = 66.66667%
+	 * spammer() = 56,25%
+	 * calculateScore() = 77,8%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Administrator = 10%
