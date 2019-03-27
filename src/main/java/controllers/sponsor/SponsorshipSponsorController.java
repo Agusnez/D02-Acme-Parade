@@ -131,11 +131,19 @@ public class SponsorshipSponsorController {
 
 			} else {
 
+				final Collection<String> makes = this.configurationService.findConfiguration().getMakes();
+
+				final Map<String, String> makesMap = new HashMap<>();
+
+				for (final String string : makes)
+					makesMap.put(string, string);
+
 				final SponsorshipForm sponsorship = this.sponsorshipService.create(paradeId);
 
 				result = new ModelAndView("sponsorship/edit");
 				result.addObject("sponsorship", sponsorship);
 				result.addObject("banner", banner);
+				result.addObject("makes", makesMap);
 
 			}
 
