@@ -24,7 +24,10 @@
 
 <acme:display code="history.inceptionRecord.description" property="${history.inceptionRecord.description }" />
 
-<acme:display code="history.inceptionRecord.photos" property="${history.inceptionRecord.photos}" />
+<spring:message code="history.inceptionRecord.photos" />: <jstl:out value="${history.inceptionRecord.photos }"></jstl:out><br>
+
+
+
 </jstl:if>
 
 <security:authorize access="hasRole('BROTHERHOOD')">
@@ -51,7 +54,7 @@ requestURI="${requestURI }" class="displaytag">
 	
 	<acme:column property="VATNumber" titleKey="legalRecord.VATNumber" value= "${row1.VATNumber}: "/>
 	
-	<display:column>
+	<display:column titleKey="legalRecord.laws">
 	<jstl:out value="${row1.laws }"></jstl:out>
 	</display:column>
 	
@@ -84,7 +87,9 @@ requestURI="${requestURI }" class="displaytag">
 	
 	<acme:dateFormat titleKey="periodRecord.endYear" pattern="yyyy/MM/dd" value="${row2.endYear}"/>
 	
-	<acme:column property="photos" titleKey="periodRecord.photos" value= "${row2.photos}: "/>
+	<display:column titleKey="periodRecord.photos">
+	<jstl:out value="${row1.laws }"></jstl:out>
+	</display:column>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<jstl:if test="${owner }">

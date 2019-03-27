@@ -12,7 +12,9 @@
 
 	<acme:column property="name" titleKey="area.name" value="${row.name}" />
 	
-	<acme:column property="pictures" titleKey="area.pictures" value="${row.pictures}" />
+	<display:column titleKey="area.pictures">
+	<jstl:out value="${row.pictures }" />
+	</display:column>
 
 	<security:authorize access="hasRole('ADMIN')">
 	<acme:url href="area/administrator/edit.do?areaId=${row.id }" code="area.edit" />

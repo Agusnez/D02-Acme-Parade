@@ -17,7 +17,9 @@
 	
 	<acme:dateFormat titleKey="brotherhood.establishment" pattern="yyyy/MM/dd" value="${row.establishment}"/>
 	
-	<acme:column property="pictures" titleKey="brotherhood.pictures" value= "${row.pictures}: "/>
+	<display:column titleKey="brotherhood.pictures">
+	<jstl:out value="${row.pictures }"/>
+	</display:column>
 	
 	<acme:url href="member/list.do?brotherhoodId=${row.id }" code="brotherhood.members" />
 	

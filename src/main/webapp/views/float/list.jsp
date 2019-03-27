@@ -19,7 +19,9 @@
 	
 	<acme:column property="description" titleKey="float.description" value= "${row.description}: "/>
 	
-	<acme:column property="pictures" titleKey="float.pictures" value= "${row.pictures}: "/>
+	<display:column titleKey="float.pictures">
+	<jstl:out value="${row.pictures }" />
+	</display:column>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
 	<acme:url href="float/brotherhood/edit.do?floatId=${row.id }" code="float.edit" />

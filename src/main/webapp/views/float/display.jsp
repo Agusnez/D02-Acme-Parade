@@ -19,7 +19,7 @@
 
 <acme:display code="float.brotherhood" property="${floatt.brotherhood.title}" />
 
-<acme:display code="float.pictures" property="${floatt.pictures}" />
+<spring:message code="float.pictures" />: <jstl:out value="${floatt.pictures }"/><br>
 
 <acme:button name="back" code="report.back" onclick="javascript: relativeRedir('welcome/index.do');" />
 

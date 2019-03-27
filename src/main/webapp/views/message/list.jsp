@@ -22,7 +22,9 @@
 	
 	<acme:column property="priority" titleKey="message.priority" value= "${row.priority}: "/>
 	
-	<acme:column property="tags" titleKey="message.tags" value= "${row.tags}: "/>
+	<display:column titleKey="message.tags">
+		<jstl:out value="${row.tags }"/>
+	</display:column>
 	
 	<display:column>
 			<a href="message/actor/display.do?messageId=${row.id}&boxId=${boxId}"><spring:message code="message.display"/></a>
