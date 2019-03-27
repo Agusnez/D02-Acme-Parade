@@ -142,6 +142,7 @@ public class ChapterServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage:
 	 * -save(): 1 passed cases / 10 total cases = 10%
+	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage:
 	 * -Chapter: 5 passed cases / 12 total cases = 41,66667%
@@ -165,7 +166,6 @@ public class ChapterServiceTest extends AbstractTest {
 			{
 				"title1", "name1", "middleName1", "surname1", "hola", "email1@gmail.com", "672195205", "address1", "chapter61", "chapter55", ConstraintViolationException.class
 			},//5. Photo = no URL
-
 			{
 				"title1", "name1", "middleName1", "surname1", "https://google.com", "123455666", "672195205", "address1", "chapter64", "chapter64", IllegalArgumentException.class
 			},//6. Email = no pattern
@@ -348,9 +348,10 @@ public class ChapterServiceTest extends AbstractTest {
 	 * save() = 20%
 	 * findOne() = 100%
 	 * findAll() = 100%
+	 * create() = 100%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Chapter = 50%
+	 * Chapter = 41,66667%%
 	 */
 
 }

@@ -71,9 +71,8 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -create(): 3 passed cases / 3 total cases = 100%
 	 * 
-	 * 
 	 * d) Data coverage
-	 * -InceptionRecord: 2 passed cases / 3 total cases = 66.67%
+	 * -InceptionRecord: 2 passed cases / 3 total cases = 66.66667%
 	 */
 
 	@Test
@@ -153,9 +152,8 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -save(): 3 passed cases / 6 total cases = 50%
 	 * 
-	 * 
 	 * d) Data coverage
-	 * -None
+	 * -InceptionRecord: 0 passed cases / 3 total cases = 0%
 	 */
 
 	@Test
@@ -222,9 +220,8 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
-	 * 
 	 * d) Data coverage
-	 * -None
+	 * -InceptionRecord: 0 passed cases / 3 total cases = 0%
 	 */
 
 	@Test
@@ -270,7 +267,6 @@ public class InceptionRecordServiceTest extends AbstractTest {
 	 * -findAll() = 50%
 	 * -save() = 50%
 	 * -create() = 100%
-	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * InceptionRecord = 66,66667%

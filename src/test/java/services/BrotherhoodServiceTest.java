@@ -79,11 +79,10 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 			{
 				"area1", "brotherhood1", null
-			//1. All fine 
-			}, {
+			},//1. All fine 
+			{
 				"area1", "brotherhood3", IllegalArgumentException.class
-			//2. Area not contain this brotherhood
-			}
+			},//2. Area not contain this brotherhood
 
 		};
 

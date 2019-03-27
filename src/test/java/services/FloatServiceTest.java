@@ -68,7 +68,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * -findFloatsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Float: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -141,7 +141,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * -findFloatsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Float: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -187,7 +187,7 @@ public class FloatServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * ACME-MADRUGA
+	 * ACME-MADRUGÁ
 	 * a)(Level C)Requirement 10.1: An actor who is authenticated as a brotherhood must be able to: Create a Float
 	 * 
 	 * b)Negative cases:
@@ -279,7 +279,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * findAll()=1 passed cases/2 total cases=50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Float: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test
@@ -288,15 +288,12 @@ public class FloatServiceTest extends AbstractTest {
 
 			{
 				"brotherhood1", "float4", "description1", null
-
 			},//1. All fine
 			{
 				"chapter1", "float4", "description1", IllegalArgumentException.class
-
 			},//2. Invalid authority
 			{
 				"brotherhood1", "float3", "description1", IllegalArgumentException.class
-
 			},//3. The float not belongs to brotherhood
 
 		};
@@ -347,7 +344,7 @@ public class FloatServiceTest extends AbstractTest {
 	 * -delete()= 3 passed cases / 9 total cases = 33.33%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Float: 0 passed cases / 4 total cases = 0%
 	 */
 
 	@Test

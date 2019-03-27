@@ -64,7 +64,7 @@ public class FinderServiceTest extends AbstractTest {
 	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * -findFinderByMember()=2 passed cases/3 total cases = 66,67%
+	 * -findFinderByMember()=2 passed cases/3 total cases = 66,66667%
 	 * -save()= 2 passed cases/7 total cases = 28,5%
 	 * 
 	 * d) Data coverage
@@ -115,9 +115,8 @@ public class FinderServiceTest extends AbstractTest {
 	 * -------Finder EnrolmentService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -findFinderByMember() = 66,67%
+	 * -findFinderByMember() = 66,66667%
 	 * -save() = 28,5%
-	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Finder = 0%

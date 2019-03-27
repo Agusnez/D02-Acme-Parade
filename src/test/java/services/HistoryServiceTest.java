@@ -69,14 +69,15 @@ public class HistoryServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (create)
-	 * Negative cases:
-	 * b)2
-	 * c) Sentence coverage
-	 * -create(): 2 passed cases / 3 total cases = 66.67%
-	 * -save(): 1 passed cases / 5 total cases = 20%
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1 :An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
 	 * 
+	 * b)Negative cases:
+	 * 2. Not a Brotherhood
+	 * 
+	 * c) Sentence coverage
+	 * -create(): 2 passed cases / 3 total cases = 66.66667%
+	 * -save(): 1 passed cases / 5 total cases = 20%
 	 * 
 	 * d) Data coverage
 	 * -History: not applicable
@@ -85,12 +86,13 @@ public class HistoryServiceTest extends AbstractTest {
 	@Test
 	public void driverCreateHistory() {
 		final Object testingData[][] = {
-			{//1.All fine
+			{
 				"brotherhood3", "title1", "descrption1", "http://photo1.com", "http://photo2.com", null
 
-			}, {//2.Not a Brotherhood
+			},//1. All fine
+			{
 				"member1", "title1", "descrption1", "http://photo1.com", "http://photo2.com", IllegalArgumentException.class
-			}
+			},//2. Not a Brotherhood
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -148,16 +150,17 @@ public class HistoryServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level C)Requirement 3 :An actor who is authenticated as a brotherhood must be able to:
-	 * 1. Manage their history ... (list)
-	 * Negative cases:
-	 * b)2
+	 * ACME-PARADE
+	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: List
+	 * 
+	 * b)Negative cases:
+	 * 2. Incorrect result
+	 * 
 	 * c) Sentence coverage
 	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
-	 * 
 	 * d) Data coverage
-	 * -None
+	 * -History: not applicable
 	 */
 
 	@Test
@@ -166,11 +169,10 @@ public class HistoryServiceTest extends AbstractTest {
 
 			{
 				2, null
-			//1. All fine
-			}, {
+			},//1. All fine
+			{
 				1651, IllegalArgumentException.class
-			//2. Incorrect result
-			}
+			},//2. Incorrect result
 
 		};
 
@@ -198,15 +200,15 @@ public class HistoryServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * -------Coverage FloatService-------
+	 * -------Coverage HistoryService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
 	 * -findAll() = 50%
-	 * -create() = 66.67%
+	 * -create() = 66.66667%
 	 * -save() = 20%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * History = 0%
+	 * History: not applicable
 	 */
 
 }

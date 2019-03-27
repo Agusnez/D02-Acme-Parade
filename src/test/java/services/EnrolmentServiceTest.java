@@ -68,9 +68,8 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * c) Sentence coverage:
 	 * -findEnrolmentsByBrotherhoodIdNoPosition()= 1 passed cases / 2 total cases = 50%
 	 * 
-	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Enrolment: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -88,6 +87,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.templateNewEnrolmentsList((String) testingData[i][0], (Integer) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
+
 	protected void templateNewEnrolmentsList(final String brotherhood, final Integer size, final Class<?> expected) {
 
 		Class<?> caught;
@@ -125,8 +125,9 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * -findEnrolmentsByBrotherhoodId()= 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Enrolment: 0 passed cases / 5 total cases = 0%
 	 */
+
 	@Test
 	public void EnrolmentsList() {
 		final Object testingData[][] = {
@@ -180,7 +181,7 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * 
 	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Enrolment: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -238,9 +239,8 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * c) Sentence coverage:
 	 * -create()= 2 passed cases / 3 total cases = 66%
 	 * 
-	 * 
 	 * d) Data coverage:
-	 * 0%
+	 * -Enrolment: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -294,9 +294,8 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * c)Sentence coverage:
 	 * -findEnrolmentsByMemberId()= 2 passed cases / 2 total cases = 50%
 	 * 
-	 * 
 	 * d)Data coverage:
-	 * 0%
+	 * -Enrolment: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -349,7 +348,6 @@ public class EnrolmentServiceTest extends AbstractTest {
 	 * -save() = 25%
 	 * -findEnrolmentsByBrotherhoodId()= 50%
 	 * -findEnrolmentsByBrotherhoodIdNoPosition() = 50%
-	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Enrolment = 0%
