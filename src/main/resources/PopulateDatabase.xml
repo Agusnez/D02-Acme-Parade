@@ -2928,6 +2928,15 @@
 				<value>LOW</value>
 			</list>
 		</property>
+		<property name="makes">
+			<list>
+				<value>VISA</value>
+				<value>MCARD</value>
+				<value>AMEX</value>
+				<value>DINNERS</value>
+				<value>FLY</value>
+			</list>
+		</property>
 		
 		<property name="countryCode" value="+34" />
 		<property name="finderTime" value="1" />
