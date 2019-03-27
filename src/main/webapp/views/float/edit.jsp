@@ -19,7 +19,7 @@
 
 	<acme:textarea code="float.description" path="description" obligatory="true"/>
 	
-    <acme:textbox code="float.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.___,https://___.___,..." path="pictures"/>
+    <acme:textbox code="float.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://www.___.com,https://www.____.com,..." path="pictures"/>
 
 	
 	<acme:submit name="save" code="float.save" />

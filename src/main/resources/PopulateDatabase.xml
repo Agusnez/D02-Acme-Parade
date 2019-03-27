@@ -3009,8 +3009,8 @@
 		<property name="description" value="description1" />
 		<property name="photos">
 			<list>
-				<value>photo1.com</value>
-				<value>photo2.com</value>
+				<value>http://www.photo1.com</value>
+				<value>www.photo2.com</value>
 			</list>
 		</property>
 	</bean>
@@ -3020,8 +3020,8 @@
 		<property name="description" value="description2" />
 		<property name="photos">
 			<list>
-				<value>photo3.com</value>
-				<value>photo4.com</value>
+				<value>http://www.photo3.com</value>
+				<value>http://www.photo4.com</value>
 			</list>
 		</property>
 	</bean>
@@ -3050,8 +3050,8 @@
 		<property name="endYear" value="1915/01/10" />
 		<property name="photos">
 			<list>
-				<value>photo1.com</value>
-				<value>photo2.com</value>
+				<value>http://www.photo1.com</value>
+				<value>http://www.photo2.com</value>
 			</list>
 		</property>
 	</bean>

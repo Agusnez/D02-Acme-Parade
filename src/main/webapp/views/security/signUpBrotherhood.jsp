@@ -12,7 +12,7 @@
 	
 	<acme:textbox code="actor.titlee" path="title" obligatory="true"/>
 	
-	<acme:textbox code="brotherhood.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http(s)://____.___,http(s)://___.___,..." path="pictures" obligatory="true"/>
+	<acme:textbox code="brotherhood.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http(s)://www.____.com,http(s)://www.___.com,..." path="pictures" obligatory="true"/>
 	
 	<acme:textbox code="brotherhood.establishment" path="establishment" placeholder="yyyy/MM/dd" obligatory="true"/>
 	
@@ -22,7 +22,7 @@
 	
 	<acme:textbox code="actor.surname" path="surname" obligatory="true"/>
 	
-	<acme:textbox code="actor.photo" path="photo" />
+	<acme:textbox code="actor.photo" path="photo" size="100"/>
 	
 	<acme:textbox code="actor.email" path="email" obligatory="true" size="35" placeholder="_@_._ / _<_@_._>" pattern="^[\\w]+@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+|(([\\w]\\s)*[\\w])+<\\w+@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+>$"/>
 	

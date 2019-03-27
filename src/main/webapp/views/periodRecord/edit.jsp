@@ -25,7 +25,7 @@
 	
 	<acme:textbox code="periodRecord.endYear" path="endYear" obligatory="true"/>
 	
-	<acme:textbox code="periodRecord.photos" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.___,https://___.___,..." path="photos" obligatory="false"/>
+	<acme:textbox code="periodRecord.photos" size="100"  pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://www.___.com,https://www.___.com,..." path="photos" obligatory="false"/>
 	
 	<acme:submit name="save" code="periodRecord.save" />
 		

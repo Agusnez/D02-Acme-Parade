@@ -21,7 +21,7 @@
 	
 	<acme:textbox code="linkRecord.description" path="description" obligatory="true"/>
 	
-	<acme:textbox code="linkRecord.link" path="link" obligatory="true"/>
+	<acme:textbox code="linkRecord.link" size="100" path="link" obligatory="true"/>
 	
 
 	<acme:submit name="save" code="linkRecord.save" />

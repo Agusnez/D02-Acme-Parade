@@ -28,7 +28,7 @@
 	
 	<acme:textbox path="socialName" code="socialProfile.socialName" obligatory="true"/>
 	
-	<acme:textbox path="link" code="socialProfile.link" size="50" obligatory="true" placeholder="http(s)://"/>
+	<acme:textbox path="link" code="socialProfile.link" size="100" obligatory="true" placeholder="http(s)://"/>
 	
 	<acme:submit name="save" code="socialProfile.save"/>
 	

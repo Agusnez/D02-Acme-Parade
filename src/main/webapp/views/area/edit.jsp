@@ -16,7 +16,7 @@
 	
 	<acme:textbox code="area.name" path="name" obligatory="true"/>
 	
-	<acme:textbox code="area.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.___,https://___.___,..." path="pictures" obligatory="true"/>
+	<acme:textbox code="area.pictures" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.com,https://___.com,..." path="pictures" obligatory="true"/>
 	
 	<jstl:if test="${area.id != 0 && empty area.brotherhoods}">
 	<acme:submit name="save" code="save" />

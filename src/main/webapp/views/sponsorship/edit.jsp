@@ -16,9 +16,9 @@
 	<form:hidden path="paradeId" />
 	
 	
-	<acme:textbox code="sponsorship.banner" path="banner" obligatory="true"/>
+	<acme:textbox code="sponsorship.banner" size="100" path="banner" obligatory="true"/>
 	
-	<acme:textbox code="sponsorship.targetUrl" path="targetUrl" obligatory="true"/>
+	<acme:textbox code="sponsorship.targetUrl" size="100" path="targetUrl" obligatory="true"/>
 	
 	<acme:textbox code="sponsorship.creditCard.holderName" path="creditCard.holderName" obligatory="true"/>
 	

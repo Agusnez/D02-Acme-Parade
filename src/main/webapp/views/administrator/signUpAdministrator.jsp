@@ -21,7 +21,7 @@
 
 	<acme:textbox code="actor.surname" path="surname" obligatory="true"/>
 
-	<acme:textbox code="actor.photo" path="photo" />
+	<acme:textbox code="actor.photo" path="photo" size="100"/>
 
 	<acme:textbox code="actor.email" path="email" obligatory="true" size="35" placeholder="_@_._ / _<_@_._> / _@ / _<_@>" pattern="^[\\w]+@((?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]+){0,1}|(([\\w]\\s)*[\\w])+<\\w+@((?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]+){0,1}>"/>	
 

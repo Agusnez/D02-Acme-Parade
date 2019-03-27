@@ -43,9 +43,8 @@ public class HistoryBrotherhoodController extends AbstractController {
 
 		final Brotherhood find = this.brotherhoodService.findOne(brotherhoodId);
 
-		if (this.brotherhoodService.findByPrincipal().getId() == brotherhoodId){
+		if (this.brotherhoodService.findByPrincipal().getId() == brotherhoodId)
 			owner = true;
-		}
 		if (find == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
@@ -63,20 +62,4 @@ public class HistoryBrotherhoodController extends AbstractController {
 
 	}
 
-	//Auxuliar
-
-	//	@RequestMapping(value = "/aux", method = RequestMethod.GET)
-	//	public ModelAndView aux() {
-	//		ModelAndView result;
-	//		Boolean existHistory;
-	//
-	//		existHistory = this.historyService.securityHistory();
-	//
-	//		if (existHistory)
-	//			result = new ModelAndView("redirect:display.do");
-	//		else
-	//			result = new ModelAndView("redirect:/inceptionRecord/brotherhood/create.do");
-	//
-	//		return result;
-	//	}
 }

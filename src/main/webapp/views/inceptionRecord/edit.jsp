@@ -21,7 +21,7 @@
 	
 	<acme:textbox code="inceptionRecord.description" path="description" obligatory="true"/>
 	
-	<acme:textbox code="inceptionRecord.photos" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://____.___,https://___.___,..." path="photos" obligatory="true"/>
+	<acme:textbox code="inceptionRecord.photos" size="100" pattern="^http(s*)://(?:[a-zA-Z0-9-]+[\\.\\:]{0,1})+([a-zA-Z/]+)*(,http(s*)://(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]+)*$" placeholder="http://www.___.com,https://www.___.com,..." path="photos" obligatory="true"/>
 	
 	<jstl:if test="${inceptionRecord.id==0}">
 	<acme:submit name="save1" code="inceptionRecord.save1" />

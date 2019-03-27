@@ -24,7 +24,7 @@
 	
 	<acme:textbox code="actor.surname" path="surname" obligatory="true"/>
 	
-	<acme:textbox code="actor.photo" path="photo" />
+	<acme:textbox code="actor.photo" path="photo" size="100"/>
 	
 <jstl:choose>
 	<jstl:when test="${authority=='administrator' }">
@@ -39,7 +39,7 @@
 	<acme:textbox code="actor.phone" path="phone" id="phone" onblur="javascript: checkPhone();"/>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<acme:textbox code="brotherhood.pictures" path="pictures" obligatory="true"/>
+		<acme:textbox code="brotherhood.pictures" size="100" path="pictures" placeholder="http(s)://www.___.com,http(s)://www.___.com,..." obligatory="true"/>
 		<acme:textbox code="brotherhood.establishment" path="establishment" placeholder="yyyy/MM/dd" obligatory="true"/>
 	</security:authorize> 
 	
