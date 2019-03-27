@@ -61,7 +61,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level A)Requirement 14.1: An actor who is not authenticated must be able to: Navigate to the brotherhood that have settle in an area
+	 * a)(Level A) Requirement 14.1: An actor who is not authenticated must be able to: Navigate to the brotherhood that have settle in an area
 	 * 
 	 * b)Negative cases:
 	 * 2. Area not contain this brotherhood
@@ -116,7 +116,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 8.2 and 9.1 :An actor who is not authenticated must be able to: List the brotherhoods in the system.
+	 * a)(Level C) Requirement 8.2 and 9.1 :An actor who is not authenticated must be able to: List the brotherhoods in the system.
 	 * An actor who is authenticated must be able to: Do the same as an actor who is not authenticated, but register to the system.
 	 * 
 	 * b)Negative cases:
@@ -291,7 +291,7 @@ public class BrotherhoodServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level C)Requirement 9.2: Actor who is authenticated: Edit personal data
+	 * a)(Level C) Requirement 9.2: Actor who is authenticated: Edit personal data
 	 * 
 	 * b) Negative cases:
 	 * 2. The user who is logged, It's not the same as the user who is being edited
@@ -345,5 +345,15 @@ public class BrotherhoodServiceTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 		this.rollbackTransaction();
 	}
+
+	/*
+	 * -------Coverage BrotherhoodService-------
+	 * 
+	 * ----TOTAL SENTENCE COVERAGE:
+	 * 
+	 * 
+	 * ----TOTAL DATA COVERAGE:
+	 * Brotherhood =
+	 */
 
 }
