@@ -7,6 +7,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -181,6 +182,9 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 				result = this.createEditModelAndView(enrolment, null);
 			else
 				try {
+
+					Assert.isTrue(enrolment.getPosition() != null);
+
 					final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
 
 					final Collection<Member> members = brotherhood.getMembers();
