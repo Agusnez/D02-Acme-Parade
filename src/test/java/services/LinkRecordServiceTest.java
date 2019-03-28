@@ -56,6 +56,7 @@ public class LinkRecordServiceTest extends AbstractTest {
 	/*
 	 * ACME-PARADE
 	 * a)(Level C) Requirement 3.1: An actor who is authenticated as a brotherhood must be able to: Manage their history: Create
+	 * 
 	 * b)Negative cases:
 	 * 2. Title = null
 	 * 3. Description = null

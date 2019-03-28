@@ -200,7 +200,6 @@ public class MemberServiceTest extends AbstractTest {
 	 * -findOne() = 100%
 	 * -create() = 100%
 	 * 
-	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Member = 36,36364%
 	 */

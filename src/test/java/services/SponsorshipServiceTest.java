@@ -397,8 +397,10 @@ public class SponsorshipServiceTest extends AbstractTest {
 			sponsorships.add(s2);
 			final Sponsorship s3 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean3));
 			sponsorships.add(s3);
-			final Sponsorship s4 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean3));
+			final Sponsorship s4 = this.sponsorshipService.findOne(super.getEntityId(sponsorshipBean4));
 			sponsorships.add(s4);
+
+			this.startTransaction();
 
 			final Sponsorship s = this.sponsorshipService.ramdomSponsorship(parade.getId());
 
@@ -407,6 +409,8 @@ public class SponsorshipServiceTest extends AbstractTest {
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
+
+		this.rollbackTransaction();
 
 		super.checkExceptions(expected, caught);
 
