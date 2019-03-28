@@ -104,39 +104,40 @@ public class DashboardServiceTest extends AbstractTest {
 	 * -stddevRecordPerHistory() = 1 passed cases / 3 total cases = 33.33333%
 	 * -brotherhoodsMoreThanAverage() = 1 passed cases / 3 total cases = 33.33333%
 	 * -avgParadesCoordinatedByChapters() = 1 passed cases / 1 total cases = 100%
-	 * -minParadesCoordinatedByChapters() =
-	 * -maxParadesCoordinatedByChapters() =
-	 * -stddevParadesCoordinatedByChapters() =
-	 * -chaptersCoordinatesMoreThan10Percent() =
+	 * -minParadesCoordinatedByChapters() = 2 passed cases / 6 total cases = 33.33333%
+	 * -maxParadesCoordinatedByChapters() = 2 passed cases / 6 total cases = 33.33333%
+	 * -stddevParadesCoordinatedByChapters() = 2 passed cases / 5 total cases = 40%
+	 * -chaptersCoordinatesMoreThan10Percent() = 2 passed cases / 6 total cases = 33.33333%
 	 * -ratioAreasNotCoordinatedAnyChapters() = 1 passed cases / 1 total cases = 100%
 	 * -ratioDraftFinalModeParade() = 1 passed cases / 1 total cases = 100%
 	 * -ratioAccepted() = 1 passed cases / 1 total cases = 100%
 	 * -ratioRejected() = 1 passed cases / 1 total cases = 100%
 	 * -ratioSubmitted() = 1 passed cases / 1 total cases = 100%
-	 * -ratioOfActiveSponsorships() = 1 passed cases / total cases = 100%
-	 * -averageActiveSponsorshipsPerSponsor() = 1 passed cases / total cases = 100%
-	 * -minActiveSponsorshipsPerSponsor() =
-	 * -maxActiveSponsorshipsPerSponsor() =
-	 * -standartDeviationOfActiveSponsorshipsPerSponsor() =
-	 * -avgMemberPerBrotherhood() =
-	 * -minMemberPerBrotherhood() =
-	 * -maxMemberPerBrotherhood() =
-	 * -stddevMemberPerBrotherhood() =
-	 * -membersTenPerCent() =
-	 * -ratioBrotherhoodPerArea() =
-	 * -countBrotherhoodPerArea() =
-	 * -minBrotherhoodPerArea() =
-	 * -maxBrotherhoodPerArea() =
-	 * -avgBrotherhoodPerArea() =
-	 * -stddevBrotherhoodPerArea() =
-	 * -minResultPerFinder() =
-	 * -maxResultPerFinder() =
-	 * -avgResultPerFinder() =
-	 * -stddevResultPerFinder() =
+	 * -ratioOfActiveSponsorships() = 1 passed cases / 1 total cases = 100%
+	 * -averageActiveSponsorshipsPerSponsor() = 1 passed cases / 1 total cases = 100%
+	 * -minActiveSponsorshipsPerSponsor() = 2 passed cases / 5 total cases = 40%
+	 * -maxActiveSponsorshipsPerSponsor() = 2 passed cases / 5 total cases = 40%
+	 * -standartDeviationOfActiveSponsorshipsPerSponsor() = 2 passed cases / 5 total cases = 40%
+	 * -avgMemberPerBrotherhood() = 4 passed cases / 7 total cases = 57.14%
+	 * -minMemberPerBrotherhood() = 4 passed cases / 7 total cases = 57.14%
+	 * -maxMemberPerBrotherhood() = 4 passed cases / 7 total cases = 57.14%
+	 * -stddevMemberPerBrotherhood() = 4 passed cases / 7 total cases = 57.14%
+	 * -membersTenPerCent() = 5 passed cases / 10 total cases = 50%
+	 * -ratioBrotherhoodPerArea() = 3 passed cases / 5 total cases = 60%
+	 * -countBrotherhoodPerArea() = 2 passed cases / 2 total cases = 100%
+	 * -minBrotherhoodPerArea() = 4 passed cases / 7 total cases = 57.14%
+	 * -maxBrotherhoodPerArea() = 4 passed cases / 7 total cases = 57.14%
+	 * -avgBrotherhoodPerArea() = 4 passed cases / 7 total cases = 57.14%
+	 * -stddevBrotherhoodPerArea() = 4 passed cases / 7 total cases = 57.14%
+	 * -minResultPerFinder() = 4 passed cases / 7 total cases = 57.14%
+	 * -maxResultPerFinder() = 4 passed cases / 7 total cases = 57.14%
+	 * -avgResultPerFinder() = 4 passed cases / 7 total cases = 57.14%
+	 * -stddevResultPerFinder() = 4 passed cases / 7 total cases = 57.14%
 	 * -ratioEmptyFinders() = 1 passed cases / 1 total cases = 100%
 	 * -theSmallestBrotherhoods() = 1 passed / 1 total cases = 100%
-	 * -largestBrotherhood() = 1 passed cases / 1 total cases = 100%
-	 * -top5SporsorsActivedSponsorships() = 2 passed cases / 3 total cases = 66,66667%
+	 * -thelargestBrotherhood() = 1 passed cases / 1 total cases = 100%
+	 * -largestBrotherhood() = 1 passed cases / 3 total cases = 33.33333%
+	 * -top5SporsorsActivedSponsorships() = 2 passed cases / 2 total cases = 100%
 	 */
 
 	@Test
@@ -679,7 +680,8 @@ public class DashboardServiceTest extends AbstractTest {
 	 * stddevResultPerFinder() =
 	 * ratioEmptyFinders() = 100%
 	 * theSmallestBrotherhoods() = 100%
-	 * largestBrotherhood() = 100%
+	 * thelargestBrotherhood() = 100%
+	 * largestBrotherhood() = 33.33333%
 	 * top5SporsorsActivedSponsorships() = 66,66667%
 	 */
 }

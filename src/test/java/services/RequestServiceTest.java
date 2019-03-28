@@ -554,13 +554,13 @@ public class RequestServiceTest extends AbstractTest {
 	 * -------Coverage RequestService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -findPendingRequestsByBrotherhoodId() = 50%
-	 * -findFinalRequestsByBrotherhoodId() = 50%
-	 * -findOne() = 50%
-	 * -save() = 50%
-	 * -findRequestsByMemberId() = 50%
-	 * -create() = 33.33333%
-	 * -delete() = 40%
+	 * findPendingRequestsByBrotherhoodId() = 50%
+	 * findFinalRequestsByBrotherhoodId() = 50%
+	 * findOne() = 50%
+	 * save() = 50%
+	 * findRequestsByMemberId() = 50%
+	 * create() = 33.33333%
+	 * delete() = 40%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Request = 33,33333%
