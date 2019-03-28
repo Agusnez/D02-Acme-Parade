@@ -200,7 +200,7 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 
 					this.messageService.NotificationNewEnrolment(enrolment);
 
-					result = new ModelAndView("redirect:/welcome/index.do");
+					result = new ModelAndView("redirect:/enrolment/brotherhood/list.do");
 				} catch (final Throwable oops) {
 					result = this.createEditModelAndView(enrolment, "enrolment.commit.error");
 
@@ -291,6 +291,7 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 		result.addObject("positions", positions);
 		result.addObject("banner", banner);
 		result.addObject("messageError", object);
+		result.addObject("type", "newEnrolment");
 		result.addObject("language", LocaleContextHolder.getLocale().getLanguage());
 
 		return result;

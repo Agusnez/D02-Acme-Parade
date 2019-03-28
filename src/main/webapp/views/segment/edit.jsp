@@ -18,7 +18,7 @@
 		<form:hidden path="paradeId" />
 	</jstl:if>	
 	
-	<h3><spring:message code="segment.date"/>${moment}</h3>
+	<h3><spring:message code="segment.date"/> ${moment}</h3>
 	<br/>
 	
 	<jstl:if test="${complete}">
