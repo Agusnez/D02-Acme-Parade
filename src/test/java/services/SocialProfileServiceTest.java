@@ -63,8 +63,8 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 * 2. The social profile not belongs to actor
 	 * 
 	 * c) Sentence coverage
-	 * -findAllByActor()=50%
-	 * -findOne()=100%
+	 * -findAllByActor()= 1 passed cases / 2 total cases = 50%
+	 * -findOne()= 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
 	 * -SocialProfile: 0 passed cases / 4 total cases = 0%
@@ -319,10 +319,16 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 * -------Coverage SocialProfileService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -findAllByActor() = 50%
+	 * -findOne() = 100%
+	 * -create() =100%
+	 * -save() = 75%
+	 * -findAll() =50%
+	 * delete() = 50%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * SocialProfile =
+	 * SocialProfile = 50%
 	 */
 
 }

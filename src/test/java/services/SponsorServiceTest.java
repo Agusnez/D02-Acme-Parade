@@ -26,6 +26,33 @@ public class SponsorServiceTest extends AbstractTest {
 
 
 	/*
+	 * ----CALCULATE SENTENCE COVERAGE----
+	 * To calculate the sentence coverage, we have to look at each "service's method"
+	 * we are testing and we have to analyse its composition (if, for, Assert...) and Asserts.
+	 * Then, we calculate the number of total cases which our code can execute. The equation will be:
+	 * 
+	 * (nº passed cases / nº total cases)*100 = coverage(%)
+	 * 
+	 * In the end of the class, we conclude with the total coverage of the service's methods
+	 * which means the service's coverage.
+	 * 
+	 * 
+	 * ----CALCULATE DATA COVERAGE----
+	 * To calculate the data coverage, we have look at
+	 * each object's attributes, we analyse in each one of them
+	 * the domain's restrictions and the business rules
+	 * about the attribute. If we have tested all types of cases
+	 * in a attribute, that is called "proven attribute".
+	 * 
+	 * (nº proven attributes/ nº total attributes)*100 = coverage(%)
+	 * 
+	 * ----Note:
+	 * It's clear that if we have tested all cases about a method in a test
+	 * and now It have already had a 100% of coverage, we don't have to
+	 * mention its coverage in other test.
+	 */
+
+	/*
 	 * ACME-PARADE
 	 * a)(Level A) Requirement 15.1: Register as a sponsor
 	 * 
@@ -33,8 +60,11 @@ public class SponsorServiceTest extends AbstractTest {
 	 * 2. Surname = null
 	 * 
 	 * c)Sentence coverage:
+	 * create(); 1 passed cases / 1 total cases = 100%
+	 * save(): 1 passed cases / 5 total cases = 20%
 	 * 
 	 * d)Data coverage:
+	 * Sponsor: 1 passed cases / 10 total cases = 10%
 	 */
 
 	@Test
@@ -97,8 +127,11 @@ public class SponsorServiceTest extends AbstractTest {
 	 * 2. Invalid authenticated
 	 * 
 	 * c)Sentence coverage:
+	 * findOne(): 1 passed cases / 2 total cases = 50%
+	 * save() 2 passed cases / 5 total cases = 40%
 	 * 
 	 * d)Data coverage:
+	 * sponsor: 0 passed cases / 10 total cases = 0%
 	 */
 
 	@Test
@@ -156,9 +189,12 @@ public class SponsorServiceTest extends AbstractTest {
 	 * -------Coverage SponsorService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * create() = 100%
+	 * save() = 40%
+	 * findOne() = 50%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Sponsor =
+	 * Sponsor = 10%
 	 */
 }

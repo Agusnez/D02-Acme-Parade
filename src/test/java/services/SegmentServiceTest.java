@@ -73,7 +73,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 * -findByParade(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -Segment: 0 passed cases / 4 total cases = 0%
+	 * -Segment: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -131,7 +131,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -Segment: 0 passed cases / 4 total cases = 0%
+	 * -Segment: 0 passed cases / 6 total cases = 0%
 	 */
 
 	@Test
@@ -187,7 +187,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 * 5. The destination is null
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 1 passed cases / 13 total cases = 7,69%%
+	 * -save(): 1 passed cases / 12 total cases = 8.33333%%
 	 * -create(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
@@ -266,7 +266,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 * 5. Time origin = null
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 2 passed cases / 13 total cases = 40%
+	 * -save(): 3 passed cases / 12 total cases = 25%
 	 * -findOne: 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
@@ -359,7 +359,7 @@ public class SegmentServiceTest extends AbstractTest {
 	 * 2. Not last segment
 	 * 
 	 * c) Sentence coverage
-	 * -delete(): 2 passed cases / 3 total cases = 100%
+	 * -delete(): 2 passed cases / 3 total cases = 66.66666%
 	 * 
 	 * d) Data coverage
 	 * -Segment: 0 passed cases / 6 total cases = 0%
@@ -411,10 +411,11 @@ public class SegmentServiceTest extends AbstractTest {
 	 * -------Coverage SegmentService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save() = 23,07%
-	 * findOne() = 100%
-	 * create() = 100%
-	 * delete() = 100%
+	 * -findByParade() = 100%
+	 * -findOne() = 100%
+	 * -save(): 1 passed cases / 12 total cases = 25%
+	 * -create() = 100%
+	 * -delete() = 66.66666%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Segment = 50%

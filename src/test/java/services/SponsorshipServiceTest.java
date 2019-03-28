@@ -235,7 +235,7 @@ public class SponsorshipServiceTest extends AbstractTest {
 	 * -create(): 6 passed cases / 6 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * -Sponsorship: 0 passed cases / 4 total cases = 0%s
+	 * -Sponsorship: 0 passed cases / 4 total cases = 0%
 	 */
 	@Test
 	public void driverCreateSponsorship() {
