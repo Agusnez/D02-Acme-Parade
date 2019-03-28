@@ -1516,14 +1516,14 @@
 	
 	<bean id="request7" class="domain.Request">
 		<property name="status" value="PENDING" />
-		<property name="parade" ref="parade1" />
+		<property name="parade" ref="parade4" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
 	<bean id="request8" class="domain.Request">
 		<property name="status" value="REJECTED" />
 		<property name="comment" value="A rejected request" />
-		<property name="parade" ref="parade1" />
+		<property name="parade" ref="parade4" />
 		<property name="member" ref="member1"/>
 	</bean>
 	
