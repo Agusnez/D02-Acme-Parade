@@ -144,7 +144,7 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * -save(): 3 passed cases / 8 total cases = 37.5%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -MiscellaneousRecord: 0 passed cases / 2 total cases = 0%
 	 */
 
 	@Test
@@ -204,10 +204,10 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * 3. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * -delete(): 3 passed cases / 5 total cases = 60%
+	 * -delete(): 3 passed cases / 6 total cases = 50%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -MiscellaneousRecord: 0 passed cases / 2 total cases = 0%
 	 */
 
 	@Test
@@ -266,10 +266,10 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * 2. Incorrect result
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 passed case / 1 total case = 100%
+	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -MiscellaneousRecord: 0 passed cases / 2 total cases = 0%
 	 */
 
 	@Test
@@ -312,10 +312,14 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * -------Coverage MiscellaneousRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -create() = 100%
+	 * -save() = 37.5%
+	 * -delete() = 50%
+	 * -findAll() = 50%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * MiscellaneousRecord =
+	 * MiscellaneousRecord = 100%
 	 */
 
 }

@@ -156,11 +156,11 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * 3. Not a Brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -save(): 3 passed cases / 9 total cases = 33.34%
+	 * -save(): 3 passed cases / 9 total cases = 33.33333%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -PeriodRecord: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -228,11 +228,11 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * 2. Incorrect result
 	 * 
 	 * c) Sentence coverage
-	 * -findAll(): 1 passed case / 1 total case = 100%
+	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -PeriodRecord: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -280,11 +280,11 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * 3. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * -delete(): 3 passed cases / 5 total cases = 60%
+	 * -delete(): 3 passed cases / 6 total cases = 50%
 	 * 
 	 * 
 	 * d) Data coverage
-	 * -None
+	 * -PeriodRecord: 0 passed cases / 5 total cases = 0%
 	 */
 
 	@Test
@@ -354,10 +354,14 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * -------Coverage PeriodRecordService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
+	 * -create() = 100%
+	 * -save() = 33.33333%
+	 * -findAll() = 50%
+	 * -delete() = 50%
 	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * PeriodRecord =
+	 * PeriodRecord = 40%
 	 */
 
 }

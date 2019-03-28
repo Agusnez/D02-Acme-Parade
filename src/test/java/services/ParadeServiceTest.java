@@ -68,6 +68,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * -save(): 4 passed cases /13 total cases = 30,77%
 	 * 
 	 * d) Data coverage: 0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
@@ -120,10 +121,10 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 3. Not accepted parade
 	 * 
 	 * c) Sentence coverage
-	 * findParadeCanBeSeenOfBrotherhoodId()=100%
+	 * findParadeCanBeSeenOfBrotherhoodId()= 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
@@ -177,10 +178,10 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 2. The parade not belongs
 	 * 
 	 * c) Sentence coverage
-	 * findParadeCanBeSeenOfBrotherhoodIdForChapter()=100%
+	 * findParadeCanBeSeenOfBrotherhoodIdForChapter()=1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
@@ -231,9 +232,10 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 2. Brothehood doesn't own the parade
 	 * 
 	 * c) Sentence coverage:
-	 * -copy() =
+	 * -copy() = 1 passed cases / 2 total cases = 50%
 	 * 
-	 * d) Data coverage: 0%
+	 * d) Data coverage:
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 	@Test
 	public void driverCopyParade() {
@@ -292,11 +294,11 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 2. The parade not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -findParadeByBrotherhoodId()=100%
-	 * -findOne()=100%
+	 * -findParadeByBrotherhoodId() 1 passed cases / 1 total cases =100%
+	 * -findOne() 1 passed cases / 1 total cases =100%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
@@ -352,9 +354,10 @@ public class ParadeServiceTest extends AbstractTest {
 	 * -create() = 2 passed cases / 3 total cases=66.6%
 	 * -save()=1 passed cases / 14 total cases= 7,14%
 	 * -findAll()=1 passed cases / 2 total cases=50%
+	 * findOne()=1 passed cases/1 total cases=100%
 	 * 
 	 * d) Data coverage
-	 * -Parade = 0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
@@ -427,7 +430,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 * findAll()=1 passed cases/2 total cases=50%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
@@ -488,10 +491,10 @@ public class ParadeServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * findOne()=1 passed cases/1 total cases=100%
 	 * findAll()=1 passed cases/2 total cases=50%
-	 * delete()=1 passed cases/8 total cases= 12,5%
+	 * delete()=4 passed cases/12 total cases= 33.33333%
 	 * 
 	 * d) Data coverage
-	 * 0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 	@Test
@@ -545,12 +548,18 @@ public class ParadeServiceTest extends AbstractTest {
 	 * -------Coverage ParadeService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save()=30,77%
-	 * findParadeCanBeSeenOfBrotherhoodIdForChapter()=100%
-	 * findParadeCanBeSeenOfBrotherhoodId()=100%
+	 * -save() = 30,77%
+	 * findParadeCanBeSeenOfBrotherhoodId() = 100%
+	 * findParadeCanBeSeenOfBrotherhoodIdForChapter() = 100%
+	 * copy() = 50%
+	 * findParadeByBrotherhoodId() =100%
+	 * findOne() =100%
+	 * create() =66.6%
+	 * findAll() =50%
+	 * delete()= 33.33333%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Parade=0%
+	 * -Parade: 0 passed cases / 11 total cases = 0%
 	 */
 
 }
