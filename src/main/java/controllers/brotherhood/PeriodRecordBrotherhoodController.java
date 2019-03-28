@@ -17,6 +17,7 @@ import services.ConfigurationService;
 import services.HistoryService;
 import services.PeriodRecordService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.History;
 import domain.PeriodRecord;
 
@@ -44,12 +45,21 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		final PeriodRecord periodRecord;
-		periodRecord = this.periodRecordService.create();
+		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
+		final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
+		if (history != null) {
 
-		result = this.createEditModelAndView(periodRecord);
+			final PeriodRecord periodRecord;
+			periodRecord = this.periodRecordService.create();
 
+			result = this.createEditModelAndView(periodRecord);
+
+		} else {
+			result = new ModelAndView("misc/notHistory");
+			result.addObject("banner", banner);
+		}
 		return result;
 	}
 
@@ -120,9 +130,9 @@ public class PeriodRecordBrotherhoodController extends AbstractController {
 		if (periodRecordFind == null) {
 			result = new ModelAndView("misc/notExist");
 			result.addObject("banner", banner);
-		} else if (history.getBrotherhood().getId() != this.brotherhoodService.findByPrincipal().getId()){
+		} else if (history.getBrotherhood().getId() != this.brotherhoodService.findByPrincipal().getId())
 			result = new ModelAndView("redirect:/welcome/index.do");
-		}else {
+		else {
 			final int id = history.getBrotherhood().getId();
 			try {
 				this.periodRecordService.delete(periodRecordFind);

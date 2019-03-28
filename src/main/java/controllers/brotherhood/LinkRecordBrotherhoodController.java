@@ -17,6 +17,7 @@ import services.ConfigurationService;
 import services.HistoryService;
 import services.LinkRecordService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.History;
 import domain.LinkRecord;
 
@@ -45,14 +46,24 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 	public ModelAndView create() {
 		final ModelAndView result;
 
-		final LinkRecord linkRecord;
-		linkRecord = this.linkRecordService.create();
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		result = this.createEditModelAndView(linkRecord);
+		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
+		final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
+		if (history != null) {
+
+			final LinkRecord linkRecord;
+			linkRecord = this.linkRecordService.create();
+
+			result = this.createEditModelAndView(linkRecord);
+
+		} else {
+			result = new ModelAndView("misc/notHistory");
+			result.addObject("banner", banner);
+		}
 
 		return result;
 	}
-
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

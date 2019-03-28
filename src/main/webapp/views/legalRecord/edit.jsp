@@ -25,7 +25,7 @@
 	
 	<acme:textbox code="legalRecord.VATNumber" path="VATNumber" obligatory="true" placeholder="0.0" pattern="^([0-9]){0,}\.([0-9]){0,}$"/>
 	
-	<acme:textbox code="legalRecord.laws" size="100" path="laws" obligatory="false"/>
+	<acme:textbox code="legalRecord.laws" size="100" path="laws" obligatory="true"/>
 
 	<acme:submit name="save" code="legalRecord.save" />
 	

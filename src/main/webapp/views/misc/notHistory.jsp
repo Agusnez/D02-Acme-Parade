@@ -5,18 +5,10 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<p><spring:message code="alreadyEnrol.message" /></p>
 
-<jstl:if test="${numOfDeactivations > 0}">
-<p><spring:message code="sponsorship.success.begin" /> <jstl:out value="${numOfDeactivations}" /> <spring:message code="sponsorship.success.end" /></p>
-
-</jstl:if>
-
-<jstl:if test="${numOfDeactivations == 0}">
-<p><spring:message code="sponsorship.success.empty" /></p>
-
-<acme:button name="back" code="actor.back" onclick="javascript: relativeRedir('welcome/index.do');" />
-
-</jstl:if>
+<p><a href="<spring:url value='/' />"><spring:message code="notExistHistory.return" /></a><p>

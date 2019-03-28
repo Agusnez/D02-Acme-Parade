@@ -19,6 +19,7 @@ import services.ConfigurationService;
 import services.HistoryService;
 import services.LegalRecordService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.History;
 import domain.LegalRecord;
 
@@ -46,15 +47,23 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		final LegalRecord legalRecord;
-		legalRecord = this.legalRecordService.create();
+		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
+		final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
+		if (history != null) {
+			final LegalRecord legalRecord;
+			legalRecord = this.legalRecordService.create();
 
-		result = this.createEditModelAndView(legalRecord);
+			result = this.createEditModelAndView(legalRecord);
+
+		} else {
+			result = new ModelAndView("misc/notHistory");
+			result.addObject("banner", banner);
+		}
 
 		return result;
 	}
-
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)

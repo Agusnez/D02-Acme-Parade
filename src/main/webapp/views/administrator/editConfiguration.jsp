@@ -14,13 +14,13 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<acme:textbox code="configuration.spamWords" size="100" path="spamWords" obligatory="true"/>
+	<acme:textbox code="configuration.spamWords" size="100" path="spamWords"/>
 
-	<acme:textbox code="configuration.banner" size="100" path="banner" obligatory="true"/>
+	<acme:textbox code="configuration.banner" size="100" path="banner"/>
 
-	<acme:textbox code="configuration.positiveWords" size="100" path="positiveWords" obligatory="true"/>
+	<acme:textbox code="configuration.positiveWords" size="100" path="positiveWords"/>
 	
-	<acme:textbox code="configuration.negativeWords" size="100" path="negativeWords" obligatory="true"/>
+	<acme:textbox code="configuration.negativeWords" size="100" path="negativeWords"/>
 	
 	<acme:textbox code="configuration.countryCode" path="countryCode" obligatory="true"/>
 	

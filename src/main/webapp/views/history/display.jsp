@@ -88,7 +88,7 @@ requestURI="${requestURI }" class="displaytag">
 	<acme:dateFormat titleKey="periodRecord.endYear" pattern="yyyy/MM/dd" value="${row2.endYear}"/>
 	
 	<display:column titleKey="periodRecord.photos">
-	<jstl:out value="${row1.laws }"></jstl:out>
+	<jstl:out value="${row2.photos }"></jstl:out>
 	</display:column>
 	
 	<security:authorize access="hasRole('BROTHERHOOD')">

@@ -1050,7 +1050,7 @@
 		<property name="title" value="parade11" />
 		<property name="description" value="Procesión de la madruga de la Semana santa" />
 		<property name="organisationMoment" value="2019/12/12 15:00" />
-		<property name="ticker" value="190423-CVDM5" />
+		<property name="ticker" value="190423-CVDEM5" />
 		<property name="maxColumn" value="3" />
 		<property name="maxRow" value="10" />
 		<property name="brotherhood">
