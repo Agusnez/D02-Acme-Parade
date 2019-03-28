@@ -326,7 +326,6 @@ public class SocialProfileServiceTest extends AbstractTest {
 	 * -findAll() =50%
 	 * delete() = 50%
 	 * 
-	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * SocialProfile = 50%
 	 */

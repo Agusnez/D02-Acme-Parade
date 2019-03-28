@@ -60,11 +60,11 @@ public class SponsorServiceTest extends AbstractTest {
 	 * 2. Surname = null
 	 * 
 	 * c)Sentence coverage:
-	 * create(); 1 passed cases / 1 total cases = 100%
-	 * save(): 1 passed cases / 5 total cases = 20%
+	 * -create(); 1 passed cases / 1 total cases = 100%
+	 * -save(): 1 passed cases / 5 total cases = 20%
 	 * 
 	 * d)Data coverage:
-	 * Sponsor: 1 passed cases / 10 total cases = 10%
+	 * -Sponsor: 1 passed cases / 10 total cases = 10%
 	 */
 
 	@Test
@@ -127,11 +127,11 @@ public class SponsorServiceTest extends AbstractTest {
 	 * 2. Invalid authenticated
 	 * 
 	 * c)Sentence coverage:
-	 * findOne(): 1 passed cases / 2 total cases = 50%
-	 * save() 2 passed cases / 5 total cases = 40%
+	 * -findOne(): 1 passed cases / 2 total cases = 50%
+	 * -save() 2 passed cases / 5 total cases = 40%
 	 * 
 	 * d)Data coverage:
-	 * sponsor: 0 passed cases / 10 total cases = 0%
+	 * -Sponsor: 0 passed cases / 10 total cases = 0%
 	 */
 
 	@Test
@@ -192,7 +192,6 @@ public class SponsorServiceTest extends AbstractTest {
 	 * create() = 100%
 	 * save() = 40%
 	 * findOne() = 50%
-	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Sponsor = 10%
