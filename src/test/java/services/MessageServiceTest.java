@@ -75,8 +75,8 @@ public class MessageServiceTest extends AbstractTest {
 	 */
 
 	/*
-	 * ACME-MADRUGA
-	 * a)(Level A)Requirement 26 : Actors can exchange messages
+	 * ACME-MADRUGÁ
+	 * a)(Level A) Requirement 26: Actors can exchange messages
 	 * 
 	 * b)Negative cases:
 	 * 2. Not authenticated
@@ -88,6 +88,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * d) Data coverage:
 	 * -Message: 0 passed cases / 6 total cases = 0%
 	 */
+
 	@Test
 	public void driverExchangeMessage() {
 		final Object testingData[][] = {
@@ -216,7 +217,7 @@ public class MessageServiceTest extends AbstractTest {
 	 * 2. Wrong destination
 	 * 
 	 * c) Sentence coverage:
-	 * -NotificationNewParade(): 1 passed cases / 3 total cases = 33.3%
+	 * -NotificationNewParade(): 1 passed cases / 3 total cases = 33.33333%
 	 * 
 	 * d) Data coverage:
 	 * -Message: 0 passed cases / 6 total cases = 0%
@@ -272,7 +273,7 @@ public class MessageServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level A) Requirement 32 : System notifications (new enrolment)
+	 * a)(Level A) Requirement 32: System notifications (new enrolment)
 	 * 
 	 * b)Negative cases:
 	 * 2. Wrong destination
@@ -400,7 +401,7 @@ public class MessageServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level A)Requirement 32 : System notifications (dropOut brotherhood)
+	 * a)(Level A) Requirement 32: System notifications (dropOut brotherhood)
 	 * 
 	 * b)Negative cases:
 	 * 2. Wrong destination
@@ -463,7 +464,7 @@ public class MessageServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a)(Level A) Requirement 32 : System notifications (request status)
+	 * a)(Level A) Requirement 32: System notifications (request status)
 	 * 
 	 * b)Negative cases:
 	 * 2. Wrong destination
