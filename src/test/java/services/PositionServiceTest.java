@@ -177,7 +177,7 @@ public class PositionServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -create(): 1 passed cases / 1 total cases = 100%
-	 * -save(): 1 passed cases / 1 total cases = 100%
+	 * -save(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Position: 1 passed cases / 2 total cases = 50%
@@ -240,8 +240,8 @@ public class PositionServiceTest extends AbstractTest {
 	 * 3. Spanish name = blank
 	 * 
 	 * c) Sentence coverage
-	 * -findOne(): 1 passed cases / 1 total cases = 100%
-	 * -save(): 1 passed cases / 1 total cases = 100%
+	 * -findOne(): 1 passed cases / 2 total cases = 50%
+	 * -save(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Position: 1 passed cases / 2 total cases = 50%
@@ -303,7 +303,7 @@ public class PositionServiceTest extends AbstractTest {
 	 * 2. Used position
 	 * 
 	 * c) Sentence coverage
-	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -findOne(): 1 passed cases / 2 total cases = 50%
 	 * -delete(): 2 passed cases / 4 total cases = 50%
 	 * 
 	 * d) Data coverage
@@ -356,14 +356,14 @@ public class PositionServiceTest extends AbstractTest {
 	 * -------Coverage PositionService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save() = 100%
-	 * findOne() = 100%
-	 * findAll() = 100%
+	 * save() = 50%
+	 * findOne() = 50%
+	 * findAll() = 33.33333%
 	 * create() = 100%
 	 * delete() = 50%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
-	 * Position = 100%%
+	 * Position = 100%
 	 */
 
 }

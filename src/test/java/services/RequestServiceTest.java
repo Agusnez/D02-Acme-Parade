@@ -197,7 +197,7 @@ public class RequestServiceTest extends AbstractTest {
 	 * 2. Comment = JavaScript
 	 * 
 	 * c) Sentence coverage
-	 * -save():
+	 * -save(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Request: 1 passed cases / 6 total cases = 16,66667%
@@ -257,7 +257,7 @@ public class RequestServiceTest extends AbstractTest {
 	 * 3. Row number = too big number
 	 * 
 	 * c) Sentence coverage
-	 * -save():
+	 * -save(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Request: 1 passed cases / 6 total cases = 16,66667%
@@ -554,12 +554,13 @@ public class RequestServiceTest extends AbstractTest {
 	 * -------Coverage RequestService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * save() =
-	 * findPendingRequestsByBrotherhoodId() = 50%
-	 * findFinalRequestsByBrotherhoodId =
-	 * findOne() =
-	 * create() =
-	 * delete() = 40%
+	 * -findPendingRequestsByBrotherhoodId() = 50%
+	 * -findFinalRequestsByBrotherhoodId() = 50%
+	 * -findOne() = 50%
+	 * -save() = 50%
+	 * -findRequestsByMemberId() = 50%
+	 * -create() = 33.33333%
+	 * -delete() = 40%
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * Request = 33,33333%
