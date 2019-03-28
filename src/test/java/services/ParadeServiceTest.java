@@ -59,6 +59,7 @@ public class ParadeServiceTest extends AbstractTest {
 	 */
 
 	/*
+	 * ACME-PARADE
 	 * a)(Level B)Requirement 2.2: Chapter manage the parades that are published by the brotherhoods in the area that they co-ordinate.
 	 * 
 	 * b)Negative cases:
@@ -114,14 +115,15 @@ public class ParadeServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * a)(Level A)Requirement 14.1: An actor who is not authenticated must be able to: Navigate to the parades that a brotherhood organise
+	 * ACME-PARADE
+	 * a)(Level A) Requirement 14.1: An actor who is not authenticated must be able to: Navigate to the parades that a brotherhood organise
 	 * 
 	 * b)Negative cases:
 	 * 2. The parade not belongs to brotherhood
 	 * 3. Not accepted parade
 	 * 
 	 * c) Sentence coverage
-	 * findParadeCanBeSeenOfBrotherhoodId()= 1 passed cases / 1 total cases = 100%
+	 * findParadeCanBeSeenOfBrotherhoodId(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
 	 * -Parade: 0 passed cases / 11 total cases = 0%
@@ -171,14 +173,14 @@ public class ParadeServiceTest extends AbstractTest {
 	}
 
 	/*
-	 * 
+	 * ACME-PARADE
 	 * a)(Level B) Requirement 2.2: An actor who is not authenticated must be able to: Listing parades that are published by the brotherhoods in the area that they co-ordinate
 	 * 
 	 * b)Negative cases:
 	 * 2. The parade not belongs
 	 * 
 	 * c) Sentence coverage
-	 * findParadeCanBeSeenOfBrotherhoodIdForChapter()=1 passed cases / 1 total cases = 100%
+	 * findParadeCanBeSeenOfBrotherhoodIdForChapter(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
 	 * -Parade: 0 passed cases / 11 total cases = 0%
@@ -294,8 +296,8 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 2. The parade not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * -findParadeByBrotherhoodId() 1 passed cases / 1 total cases =100%
-	 * -findOne() 1 passed cases / 1 total cases =100%
+	 * -findParadeByBrotherhoodId(): 1 passed cases / 1 total cases = 100%
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
 	 * 
 	 * d) Data coverage
 	 * -Parade: 0 passed cases / 11 total cases = 0%
@@ -351,10 +353,10 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 2. Invalid authority
 	 * 
 	 * c) Sentence coverage
-	 * -create() = 2 passed cases / 3 total cases=66.6%
-	 * -save()=1 passed cases / 14 total cases= 7,14%
-	 * -findAll()=1 passed cases / 2 total cases=50%
-	 * findOne()=1 passed cases/1 total cases=100%
+	 * -create(): 2 passed cases / 3 total cases = 66.66667%
+	 * -save(): 1 passed cases / 14 total cases = 7,14%
+	 * -findAll(): 1 passed cases / 2 total cases = 50%
+	 * -findOne(): 1 passed cases/1 total cases = 100%
 	 * 
 	 * d) Data coverage
 	 * -Parade: 0 passed cases / 11 total cases = 0%
@@ -425,9 +427,9 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 3. The parade not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * findOne()=1 passed cases/1 total cases=100%
-	 * save()=2 passed cases/14 total cases= 14,28%
-	 * findAll()=1 passed cases/2 total cases=50%
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -save(): 2 passed cases / 14 total cases = 14,28%
+	 * -findAll(): 1 passed cases / 2 total cases = 50%
 	 * 
 	 * d) Data coverage
 	 * -Parade: 0 passed cases / 11 total cases = 0%
@@ -489,9 +491,9 @@ public class ParadeServiceTest extends AbstractTest {
 	 * 3. The parade not belongs to brotherhood
 	 * 
 	 * c) Sentence coverage
-	 * findOne()=1 passed cases/1 total cases=100%
-	 * findAll()=1 passed cases/2 total cases=50%
-	 * delete()=4 passed cases/12 total cases= 33.33333%
+	 * -findOne(): 1 passed cases / 1 total cases = 100%
+	 * -findAll(): 1 passed cases / 2 total cases = 50%
+	 * -delete(): 4 passed cases / 12 total cases = 33.33333%
 	 * 
 	 * d) Data coverage
 	 * -Parade: 0 passed cases / 11 total cases = 0%
@@ -548,13 +550,13 @@ public class ParadeServiceTest extends AbstractTest {
 	 * -------Coverage ParadeService-------
 	 * 
 	 * ----TOTAL SENTENCE COVERAGE:
-	 * -save() = 30,77%
+	 * save() = 30,77%
 	 * findParadeCanBeSeenOfBrotherhoodId() = 100%
 	 * findParadeCanBeSeenOfBrotherhoodIdForChapter() = 100%
 	 * copy() = 50%
 	 * findParadeByBrotherhoodId() =100%
 	 * findOne() =100%
-	 * create() =66.6%
+	 * create() =66.66667%
 	 * findAll() =50%
 	 * delete()= 33.33333%
 	 * 

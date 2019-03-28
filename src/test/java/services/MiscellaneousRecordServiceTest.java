@@ -317,7 +317,6 @@ public class MiscellaneousRecordServiceTest extends AbstractTest {
 	 * -delete() = 50%
 	 * -findAll() = 50%
 	 * 
-	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * MiscellaneousRecord = 100%
 	 */
