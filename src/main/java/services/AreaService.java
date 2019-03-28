@@ -65,9 +65,6 @@ public class AreaService {
 		Assert.notNull(area);
 		Assert.isTrue(area.getName() != "");
 		Assert.notEmpty(area.getPictures());
-		if (area.getId() == 0) {
-
-		}
 
 		this.checkPictures(area.getPictures());
 		final Area result = this.areaRepository.save(area);

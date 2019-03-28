@@ -46,10 +46,13 @@ public class ParadeChapterController extends AbstractController {
 	public ModelAndView list() {
 		final ModelAndView result;
 		final Chapter chapter = this.chapterService.findByPrincipal();
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		if (chapter.getArea() == null)
+		if (chapter.getArea() == null) {
 			result = new ModelAndView("misc/noArea");
-		else {
+			result.addObject("banner", banner);
+
+		} else {
 
 			final Collection<Parade> parades = new ArrayList<>();
 
@@ -57,8 +60,6 @@ public class ParadeChapterController extends AbstractController {
 			//Cuidado que el area puede ser null
 			for (final Brotherhood brotherhood : brotherhoods)
 				parades.addAll(this.paradeService.findParadeCanBeSeenOfBrotherhoodIdForChapter(brotherhood.getId()));
-
-			final String banner = this.configurationService.findConfiguration().getBanner();
 
 			result = new ModelAndView("parade/list");
 			result.addObject("parades", parades);

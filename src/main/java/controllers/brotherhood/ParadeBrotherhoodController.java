@@ -142,15 +142,15 @@ public class ParadeBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
-
+		final String banner = this.configurationService.findConfiguration().getBanner();
 		final Brotherhood b;
 		b = this.brotherhoodService.findByPrincipal();
 
-		if (b.getArea() == null)
+		if (b.getArea() == null) {
 			result = new ModelAndView("misc/noArea");
-		else {
+			result.addObject("banner", banner);
+		} else {
 			final Parade parade = this.paradeService.create();
-			final String banner = this.configurationService.findConfiguration().getBanner();
 
 			result = new ModelAndView("parade/edit");
 			result.addObject("parade", parade);

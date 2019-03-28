@@ -17,6 +17,7 @@ import services.ConfigurationService;
 import services.HistoryService;
 import services.MiscellaneousRecordService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.History;
 import domain.MiscellaneousRecord;
 
@@ -44,11 +45,19 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;
+		final String banner = this.configurationService.findConfiguration().getBanner();
 
-		final MiscellaneousRecord miscellaneousRecord;
-		miscellaneousRecord = this.miscellaneousRecordService.create();
+		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
+		final History history = this.historyService.findByBrotherhoodId(brotherhood.getId());
+		if (history != null) {
+			final MiscellaneousRecord miscellaneousRecord;
+			miscellaneousRecord = this.miscellaneousRecordService.create();
 
-		result = this.createEditModelAndView(miscellaneousRecord);
+			result = this.createEditModelAndView(miscellaneousRecord);
+		} else {
+			result = new ModelAndView("misc/notHistory");
+			result.addObject("banner", banner);
+		}
 
 		return result;
 	}
