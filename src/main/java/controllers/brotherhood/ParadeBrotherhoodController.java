@@ -222,16 +222,21 @@ public class ParadeBrotherhoodController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Parade parade, final BindingResult binding) {
+	public ModelAndView delete(Parade parade, final BindingResult binding) {
 		ModelAndView result;
 
-		try {
-			this.paradeService.delete(parade);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(parade, "parade.commit.error");
-		}
+		parade = this.paradeService.findOne(parade.getId());
+		final Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
 
+		if (parade.getBrotherhood().getId() == brotherhood.getId())
+			try {
+				this.paradeService.delete(parade);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(parade, "parade.commit.error");
+			}
+		else
+			result = new ModelAndView("redirect:/welcome/index.do");
 		return result;
 	}
 
