@@ -57,7 +57,7 @@ public class PositionServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Administrator manage the catalogue of positions: List
+	 * a)(Level C) Requirement 12.2: Administrator manage the catalogue of positions: List
 	 * 
 	 * b) Negative cases:
 	 * 2. Wrong return
@@ -113,7 +113,7 @@ public class PositionServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Administrator manage the catalogue of positions: Display
+	 * a)(Level C) Requirement 12.2: Administrator manage the catalogue of positions: Display
 	 * 
 	 * b) Negative cases:
 	 * 2. Not position
@@ -169,7 +169,7 @@ public class PositionServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Administrator manage the catalogue of positions: Create
+	 * a)(Level C) Requirement 12.2: Administrator manage the catalogue of positions: Create
 	 * 
 	 * b) Negative cases:
 	 * 2. English name = null
@@ -233,7 +233,7 @@ public class PositionServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Administrator manage the catalogue of positions: Edit
+	 * a)(Level C) Requirement 12.2: Administrator manage the catalogue of positions: Edit
 	 * 
 	 * b) Negative cases:
 	 * 2. Spanish name = null
@@ -297,7 +297,7 @@ public class PositionServiceTest extends AbstractTest {
 
 	/*
 	 * ACME-MADRUGÁ
-	 * a) Requirement: Administrator manage the catalogue of positions: Delete
+	 * a)(Level C) Requirement 12.2: Administrator manage the catalogue of positions: Delete
 	 * 
 	 * b) Negative cases:
 	 * 2. Used position

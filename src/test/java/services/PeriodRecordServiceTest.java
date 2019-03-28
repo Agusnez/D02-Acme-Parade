@@ -158,7 +158,6 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -save(): 3 passed cases / 9 total cases = 33.33333%
 	 * 
-	 * 
 	 * d) Data coverage
 	 * -PeriodRecord: 0 passed cases / 5 total cases = 0%
 	 */
@@ -230,7 +229,6 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * c) Sentence coverage
 	 * -findAll(): 1 passed case / 2 total case = 50%
 	 * 
-	 * 
 	 * d) Data coverage
 	 * -PeriodRecord: 0 passed cases / 5 total cases = 0%
 	 */
@@ -281,7 +279,6 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage
 	 * -delete(): 3 passed cases / 6 total cases = 50%
-	 * 
 	 * 
 	 * d) Data coverage
 	 * -PeriodRecord: 0 passed cases / 5 total cases = 0%
@@ -358,7 +355,6 @@ public class PeriodRecordServiceTest extends AbstractTest {
 	 * -save() = 33.33333%
 	 * -findAll() = 50%
 	 * -delete() = 50%
-	 * 
 	 * 
 	 * ----TOTAL DATA COVERAGE:
 	 * PeriodRecord = 40%
